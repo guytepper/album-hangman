@@ -8,7 +8,7 @@ import * as Utils from './Utils';
 function initGame() {
   const ALBUM_NAME = 'Stadium Arcadium';
   const ALBUM_NAME_ARR = [...ALBUM_NAME];
-  const HIDDEN_LETTERS_ARRAY = Utils.createHiddenArray(ALBUM_NAME_ARR);
+  const HIDDEN_LETTERS_ARRAY = Utils.createUnderscoresArr(ALBUM_NAME_ARR);
 
   return {
     ALBUM_NAME,

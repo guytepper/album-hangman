@@ -12,7 +12,7 @@ function isAlphabetical(str) {
  * Create an array of empty underscores according to
  * the album name letters.
  */
-function createHiddenArray(name) {
+function createUnderscoresArr(name) {
    let hiddenArray = name.map(letter => {
      if (isAlphabetical(letter)) {
        return '_'
@@ -23,4 +23,4 @@ function createHiddenArray(name) {
    return hiddenArray;
  }
 
- export { isAlphabetical, createHiddenArray }
+ export { isAlphabetical, createUnderscoresArr }
