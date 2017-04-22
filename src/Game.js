@@ -3,7 +3,7 @@ import './Game.css';
 import * as Utils from './Utils';
 
 /**
- * ......
+ * .....FIND A BETTER PLACE?.....
  */
 function initGame() {
   const ALBUM_NAME = 'Stadium Arcadium';
@@ -25,7 +25,11 @@ class Game extends Component {
   render() {
     return (
       <div>
-        <code><pre>{ JSON.stringify(this.state.HIDDEN_LETTERS_ARRAY, null, 4) }</pre></code>
+        <code>
+          <pre>
+            { JSON.stringify(this.state.HIDDEN_LETTERS_ARRAY, null, 4) }
+          </pre>
+        </code>
       </div>
     );
   }
