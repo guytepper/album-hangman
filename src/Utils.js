@@ -1,11 +1,4 @@
 /**
- * Convert an album name to array of it's letters
- */
-function albumNameToArray(name) {
-  return [...name];
-}
-
-/**
  * Check if a string is an alphabetical character
  */
 function isAlphabetical(str) {
@@ -30,4 +23,4 @@ function createHiddenArray(name) {
    return hiddenArray;
  }
 
- export { albumNameToArray, isAlphabetical, createHiddenArray }
+ export { isAlphabetical, createHiddenArray }
