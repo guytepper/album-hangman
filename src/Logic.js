@@ -27,12 +27,15 @@ function getIndiciesOfLetter(letter, word) {
 }
 
 /**
- * Replaces underscore with the guessed letter
+ * Replaces underscore with the guessed letter,
+ * using the indicies of that letter in the word.
  */
-function replaceUnderscore(letter) {
-
+function replaceUnderscore(arr, letter, indicies) {
+  indicies.forEach(index => arr[index] = letter);
+  return arr;
 }
 
 export {
-  getIndiciesOfLetter
+  getIndiciesOfLetter,
+  replaceUnderscore
 }
