@@ -9,7 +9,7 @@ function UserGuess(letter) {
  * Checks if a letter exists in the word
  */
 function isInWord(letter, word) {
-
+  return word.indexOf(letter) > -1;
 }
 
 /**
@@ -36,6 +36,7 @@ function replaceUnderscore(arr, letter, indicies) {
 }
 
 export {
+  isInWord,
   getIndiciesOfLetter,
   replaceUnderscore
 }
