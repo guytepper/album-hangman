@@ -16,7 +16,14 @@ function isInWord(letter, word) {
  * Returns the indicies of the letter in the string
  */
 function getIndiciesOfLetter(letter, word) {
+  let indices = [];
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === letter) {
+      indices.push(i);
+    }
+  }
 
+  return indices;
 }
 
 /**
@@ -24,4 +31,8 @@ function getIndiciesOfLetter(letter, word) {
  */
 function replaceUnderscore(letter) {
 
+}
+
+export {
+  getIndiciesOfLetter
 }
