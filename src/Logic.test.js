@@ -1,13 +1,15 @@
 import {
-  isInWord,
+  letterInWord,
   getIndiciesOfLetter,
   replaceUnderscore
 } from './Logic'
 
+
+
 it('checks if a letter exists in a word', () => {
   const letter = 'a';
   const word = 'abc';
-  expect(isInWord(letter, word)).toBe(true);
+  expect(letterInWord(letter, word)).toBe(true);
 })
 
 it('returns all indicies of letter in word', () => {

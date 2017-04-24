@@ -17,6 +17,7 @@ function initGame() {
   }
 }
 import Word from './Word';
+import { keyboardPress } from './Logic';
 
 class Game extends Component {
   constructor () {
@@ -38,6 +39,7 @@ class Game extends Component {
   componentDidMount() {
     const gameObj = initGame();
     this.setState(gameObj);
+    window.addEventListener('keydown', keyboardPress);
   }
 }
 

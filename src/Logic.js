@@ -28,8 +28,18 @@ function replaceUnderscore(arr, letter, indicies) {
   return arr;
 }
 
+function keyboardPress(e) {
+  console.log('asd');
+  const keyCode = e.charCode || e.which;
+  if ( (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) ) {
+    const char = String.fromCharCode(keyCode);
+
+  }
+}
+
 export {
   letterInWord,
   getIndiciesOfLetter,
   replaceUnderscore,
+  keyboardPress
 }
