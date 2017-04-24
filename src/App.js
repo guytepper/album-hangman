@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './Game.css';
-import * as Utils from './Utils';
+import './App.css';
 import Word from './Word';
-import Logic from './Logic';
+import { Game } from './Game';
 
 class App extends Component {
   constructor () {
@@ -22,11 +21,11 @@ class App extends Component {
     );
   }
   componentDidMount() {
-    const gameObj = new Logic();
+    const gameObj = new Game();
     console.log(gameObj);
     this.setState(gameObj);
     // window.addEventListener('keydown', keyboardPress);
   }
 }
 
-export default Game;
+export default App;
