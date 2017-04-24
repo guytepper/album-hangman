@@ -16,6 +16,7 @@ function initGame() {
     HIDDEN_LETTERS_ARRAY
   }
 }
+import Word from './Word';
 
 class Game extends Component {
   constructor () {
@@ -30,6 +31,7 @@ class Game extends Component {
             { JSON.stringify(this.state.HIDDEN_LETTERS_ARRAY, null, 4) }
           </pre>
         </code>
+        <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
       </div>
     );
   }
