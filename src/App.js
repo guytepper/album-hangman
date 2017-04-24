@@ -1,25 +1,10 @@
 import React, { Component } from 'react';
 import './Game.css';
 import * as Utils from './Utils';
-
-/**
- * .....FIND A BETTER PLACE?.....
- */
-function initGame() {
-  const ALBUM_NAME = 'Stadium Arcadium';
-  const ALBUM_NAME_ARR = [...ALBUM_NAME];
-  const HIDDEN_LETTERS_ARRAY = Utils.createUnderscoresArr(ALBUM_NAME_ARR);
-
-  return {
-    ALBUM_NAME,
-    ALBUM_NAME_ARR,
-    HIDDEN_LETTERS_ARRAY
-  }
-}
 import Word from './Word';
-import { keyboardPress } from './Logic';
+import Logic from './Logic';
 
-class Game extends Component {
+class App extends Component {
   constructor () {
     super();
     this.state = {};
@@ -37,9 +22,10 @@ class Game extends Component {
     );
   }
   componentDidMount() {
-    const gameObj = initGame();
+    const gameObj = new Logic();
+    console.log(gameObj);
     this.setState(gameObj);
-    window.addEventListener('keydown', keyboardPress);
+    // window.addEventListener('keydown', keyboardPress);
   }
 }
 
