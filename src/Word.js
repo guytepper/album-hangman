@@ -5,18 +5,12 @@ const wordStyle = {
 };
 
 
-class Word extends React.Component {
-  constructor (props) {
-    super(props);
-  }
-
-  render () {
-    return (
-      <h1 style={ wordStyle }>
-        { this.props.hiddenLetters }
-      </h1>
-    );
-  }
+function Word(props) {
+  return (
+    <h1 style={ wordStyle }>
+      { props.hiddenLetters }
+    </h1>
+  );
 }
 
 export default Word;
