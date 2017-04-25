@@ -7,6 +7,12 @@ class App extends Component {
   constructor () {
     super();
     this.state = {};
+    this.updateHiddenWords = this.updateHiddenWords.bind(this);
+  }
+  updateHiddenWords (newHiddenWords) {
+    this.setState({
+      HIDDEN_WORDS: newHiddenWords
+    })
   }
   render() {
     return (
@@ -21,10 +27,9 @@ class App extends Component {
     );
   }
   componentDidMount() {
-    const gameObj = new Game();
-    console.log(gameObj);
+    // Pass
+    const gameObj = new Game(this.updateHiddenWords);
     this.setState(gameObj);
-    // window.addEventListener('keydown', keyboardPress);
   }
 }
 

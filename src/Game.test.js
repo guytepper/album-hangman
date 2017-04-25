@@ -2,7 +2,7 @@ import {
   letterInWord,
   getIndiciesOfLetter,
   replaceUnderscore
-} from './Logic'
+} from './Game'
 
 
 
