@@ -5,10 +5,12 @@ import {
   createUnderscoresArr,
   replaceUnderscores,
   letterInWord,
-  getIndiciesOfLetter
+  letterInArray,
+  getIndiciesOfLetter,
 } from './Utils';
 import Word from './Word';
 
+// Temporary constants
 const ALBUM_NAME = 'Stadium Arcadium'.toUpperCase();
 const ALBUM_NAME_ARR = [...ALBUM_NAME];
 const HIDDEN_LETTERS_ARRAY = createUnderscoresArr(ALBUM_NAME_ARR);
@@ -21,25 +23,36 @@ class App extends Component {
       ALBUM_NAME_ARR,
       HIDDEN_LETTERS_ARRAY,
       GUESSED_LETTERS: [],
+      LIVES: 4,
     }
     this.keyboardPress = this.keyboardPress.bind(this);
   }
   keyboardPress (e) {
     const word = this.state.ALBUM_NAME;
+    const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
     const keyCode = e.charCode || e.which;
-    if ( isKeyCodeAlphabetical(keyCode) ) { // TODO: Move to helper function
-      const char = String.fromCharCode(keyCode);
-      if ( this.state.GUESSED_LETTERS.indexOf(char) === -1 ) {
-        this.state.GUESSED_LETTERS.push(char);
-        if ( letterInWord(word, char) ) {
-          const indicies = getIndiciesOfLetter(word, char);
-          const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, char, indicies);
+    
+    if ( isKeyCodeAlphabetical(keyCode) ) {
+      const letter = String.fromCharCode(keyCode);
+
+      if ( !letterInArray(GUESSED_LETTERS, letter) ) {
+        this.setState({
+          GUESSED_LETTERS: GUESSED_LETTERS.concat([letter])
+        });
+
+        if ( letterInWord(word, letter) ) {
+          // Get the indicies of the letter in the word
+          const indicies = getIndiciesOfLetter(word, letter);
+          // Update the hidden letters array, according to the indicies
+          const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, letter, indicies);
           this.setState({
             HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
           });
         }
         else {
-          console.log('Wrong guess');
+          this.setState({
+            LIVES: this.state.LIVES - 1
+          })
         }
       }
       else {
@@ -53,12 +66,13 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <code>
           <pre>
-            { JSON.stringify(this.state.HIDDEN_LETTERS_ARRAY, null, 4) }
+            { JSON.stringify(this.state.GUESSED_LETTERS, null, 4) }
           </pre>
         </code>
-        <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
+        <h3>{ this.state.LIVES }</h3>
       </div>
     );
   }

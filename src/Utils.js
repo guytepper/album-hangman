@@ -35,6 +35,13 @@ function createUnderscoresArr(name) {
  }
 
  /**
+  * Checks if a letter exists in an array
+  */
+  function letterInArray (arr, letter) {
+    return arr.indexOf(letter) > -1
+  }
+
+ /**
   * Returns the indicies of the letter in the string
   */
  function getIndiciesOfLetter (word, letter) {
@@ -63,5 +70,6 @@ function createUnderscoresArr(name) {
     createUnderscoresArr,
     replaceUnderscores,
     letterInWord,
+    letterInArray,
     getIndiciesOfLetter,
   }
