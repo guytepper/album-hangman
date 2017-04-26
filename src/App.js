@@ -9,22 +9,30 @@ import {
 import Word from './Word';
 
 const ALBUM_NAME = 'Stadium Arcadium'.toUpperCase();
-const ALBUM_NAME_ARR = [...this.ALBUM_NAME];
-const HIDDEN_LETTERS_ARRAY = createUnderscoresArr(this.ALBUM_NAME_ARR);
+const ALBUM_NAME_ARR = [...ALBUM_NAME];
+const HIDDEN_LETTERS_ARRAY = createUnderscoresArr(ALBUM_NAME_ARR);
 
 class App extends Component {
   constructor () {
     super();
+    this.state = {
+      ALBUM_NAME,
+      ALBUM_NAME_ARR,
+      HIDDEN_LETTERS_ARRAY
+    }
     this.keyboardPress = this.keyboardPress.bind(this);
   }
   keyboardPress (e) {
-    const word = this.ALBUM_NAME;
+    const word = this.state.ALBUM_NAME;
     const keyCode = e.charCode || e.which;
     if ( (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) ) { // TODO: Move to helper function
       const char = String.fromCharCode(keyCode);
       if ( letterInWord(word, char) ) {
         const indicies = getIndiciesOfLetter(word, char);
-        this.HIDDEN_LETTERS_ARRAY = replaceUnderscores(this.HIDDEN_LETTERS_ARRAY, char, indicies);
+        const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, char, indicies);
+        this.setState({
+          HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
+        });
       }
     }
   }
