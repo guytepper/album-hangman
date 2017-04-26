@@ -26,7 +26,7 @@ function createUnderscoresArr(name) {
  }
 
  /**
-  * Checks if a letter exists in the word
+  * Checks if a letter exists in a word
   */
  function letterInWord (word, letter) {
    return word.indexOf(letter) > -1;
