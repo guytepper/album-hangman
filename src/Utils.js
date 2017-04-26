@@ -8,7 +8,9 @@ function isAlphabetical(str) {
   return false;
 }
 
-
+function isKeyCodeAlphabetical(keyCode) {
+  return (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122)
+}
 
 /**
  * Create an array of empty underscores according to
@@ -57,6 +59,7 @@ function createUnderscoresArr(name) {
 
  export {
     isAlphabetical,
+    isKeyCodeAlphabetical,
     createUnderscoresArr,
     replaceUnderscores,
     letterInWord,

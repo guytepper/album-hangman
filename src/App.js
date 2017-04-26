@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {
+  isKeyCodeAlphabetical,
   createUnderscoresArr,
   replaceUnderscores,
   letterInWord,
@@ -26,7 +27,7 @@ class App extends Component {
   keyboardPress (e) {
     const word = this.state.ALBUM_NAME;
     const keyCode = e.charCode || e.which;
-    if ( (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) ) { // TODO: Move to helper function
+    if ( isKeyCodeAlphabetical(keyCode) ) { // TODO: Move to helper function
       const char = String.fromCharCode(keyCode);
       if ( this.state.GUESSED_LETTERS.indexOf(char) === -1 ) {
         this.state.GUESSED_LETTERS.push(char);
