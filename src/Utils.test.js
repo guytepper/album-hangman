@@ -1,7 +1,8 @@
 import {
   isAlphabetical,
   isKeyCodeAlphabetical,
-  createUnderscoresArr
+  createUnderscoresArr,
+  getIndiciesOfLetter
 } from './Utils';
 
 it('detects if a string is alphabetical', () => {
@@ -30,3 +31,9 @@ it('create an array of underscored according to album name', () => {
     '_'
   ])
 })
+
+it('finds indicies of letters in a word', () => {
+  const word = 'Hello World!';
+  const letter = 'o';
+  expect(getIndiciesOfLetter(word, letter)).toEqual([4, 7]);
+});
