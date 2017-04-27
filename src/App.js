@@ -27,6 +27,7 @@ class App extends Component {
     }
     this.keyboardPress = this.keyboardPress.bind(this);
   }
+
   keyboardPress (e) {
     const word = this.state.ALBUM_NAME;
     const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
@@ -41,10 +42,9 @@ class App extends Component {
         });
 
         if ( letterInWord(word, letter) ) {
-          // Get the indicies of the letter in the word
           const indicies = getIndiciesOfLetter(word, letter);
-          // Update the hidden letters array, according to the indicies
           const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, letter, indicies);
+          
           this.setState({
             HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
           });
@@ -60,9 +60,11 @@ class App extends Component {
       }
     }
   }
+
   componentDidMount() {
     window.addEventListener('keydown', this.keyboardPress);
   }
+
   render() {
     return (
       <div>
