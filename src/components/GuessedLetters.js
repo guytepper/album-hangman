@@ -10,7 +10,7 @@ function GuessedLetters(props) {
     <div>
       <h3>Guessed Letters: { 
         props.letters.map(letter => {
-          return <span style={ letterStyle }>{ letter }</span>
+          return <span key={ letter } style={ letterStyle }>{ letter }</span>
         })
       }</h3>
       
