@@ -1,19 +1,20 @@
 import React from 'react'
 
-const artworkStyle = {
+function Artwork (props) {
+  // Reduce bluriness for each wrong guess
+  const blur = props.lives * 10;
+  
+  const artworkStyle = {
   margin: '10px auto',
   width: '300px',
   height: '300px',
   backgroundColor: 'grey',
-  filter: 'blur(30px)'
-
+  filter: `blur(${blur}px)`,
+  transition: 'filter .5s ease-in-out'
 };
 
-
-function Artwork (props) {
-  
   return (
-     <img style={ artworkStyle } src='./Stadiumarcadium.jpg' />
+     <img style={ artworkStyle } src='./Stadiumarcadium.jpg' alt=""/>
   );
 }
 
