@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import './App.css';
 
 import Artwork from './components/Artwork';
@@ -23,6 +25,7 @@ class App extends Component {
   constructor () {
     super();
     this.state = {
+      ALBUM_IMG: null,
       ALBUM_NAME,
       ALBUM_NAME_ARR,
       HIDDEN_LETTERS_ARRAY,
@@ -66,6 +69,13 @@ class App extends Component {
   }
 
   componentDidMount() {
+    axios.get('http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=Dobida&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json')
+      .then(response => {
+        this.setState({
+          ALBUM_IMG: response.data.topalbums.album[10].image[3]['#text']
+        });
+      })
+
     window.addEventListener('keydown', this.keyboardPress);
   }
 
@@ -73,7 +83,7 @@ class App extends Component {
     return (
       <div className='app'>
         <h1>Album Hangman</h1>
-        <Artwork />
+        <Artwork img={ this.state.ALBUM_IMG } />
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>

@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Artwork (props) {
+  console.log(props.img);
   // Reduce bluriness for each wrong guess
   const blur = props.lives * 10;
   
@@ -14,7 +15,7 @@ function Artwork (props) {
 };
 
   return (
-     <img style={ artworkStyle } src='./Stadiumarcadium.jpg' alt=""/>
+     <img style={ artworkStyle } src={ props.img } alt=""/>
   );
 }
 
