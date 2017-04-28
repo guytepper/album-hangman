@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Word from './components/Word';
+import GuessedLetters from './components/GuessedLetters';
 import {
   isKeyCodeAlphabetical,
   createUnderscoresArr,
@@ -9,7 +10,6 @@ import {
   letterInArray,
   getIndiciesOfLetter,
 } from './Utils';
-import Word from './Word';
 
 // Temporary constants
 const ALBUM_NAME = 'Stadium Arcadium'.toUpperCase();
@@ -68,14 +68,12 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='app'>
+        <h1>Album Hangman</h1>
+        <div className='album-pic'></div>
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
-        <code>
-          <pre>
-            { JSON.stringify(this.state.GUESSED_LETTERS, null, 4) }
-          </pre>
-        </code>
-        <h3>{ this.state.LIVES }</h3>
+        <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
+        <h3>Lives: { this.state.LIVES }</h3>
       </div>
     );
   }
