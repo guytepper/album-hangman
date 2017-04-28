@@ -70,7 +70,7 @@ class App extends Component {
     return (
       <div className='app'>
         <h1>Album Hangman</h1>
-        <div className='album-pic'></div>
+        <div className='album-artwork'></div>
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
