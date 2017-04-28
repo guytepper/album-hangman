@@ -25,13 +25,11 @@ class App extends Component {
   constructor () {
     super();
     this.state = {
-      ALBUM_IMG: null,
-      ALBUM_NAME,
-      ALBUM_NAME_ARR,
-      HIDDEN_LETTERS_ARRAY,
       GUESSED_LETTERS: [],
-      LIVES: 4,
+      LIVES: 4
     }
+    
+    // this.setAlbum = this.setAlbum.bind(this);
     this.keyboardPress = this.keyboardPress.bind(this);
   }
 
@@ -68,13 +66,26 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  setAlbum () {
     axios.get('http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=Dobida&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json')
       .then(response => {
+        const album = response.data.topalbums.album[10];
+        const ALBUM_NAME = album.name.toUpperCase();
+        const ALBUM_NAME_ARR = [...ALBUM_NAME];
+        const ALBUM_IMG = album.image[3]['#text'];
+        const HIDDEN_LETTERS_ARRAY = createUnderscoresArr(ALBUM_NAME_ARR);
+
         this.setState({
-          ALBUM_IMG: response.data.topalbums.album[10].image[3]['#text']
+          ALBUM_NAME,
+          ALBUM_NAME_ARR,
+          HIDDEN_LETTERS_ARRAY,
+          ALBUM_IMG
         });
       })
+  }
+
+  componentDidMount() {
+    this.setAlbum();
 
     window.addEventListener('keydown', this.keyboardPress);
   }
@@ -83,7 +94,7 @@ class App extends Component {
     return (
       <div className='app'>
         <h1>Album Hangman</h1>
-        <Artwork img={ this.state.ALBUM_IMG } />
+        <Artwork lives={ this.state.LIVES } img={ this.state.ALBUM_IMG } />
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
