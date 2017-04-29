@@ -16,11 +16,6 @@ import {
   getIndiciesOfLetter,
 } from './Utils';
 
-// Temporary constants
-const ALBUM_NAME = 'Stadium Arcadium'.toUpperCase();
-const ALBUM_NAME_ARR = [...ALBUM_NAME];
-const HIDDEN_LETTERS_ARRAY = createUnderscoresArr(ALBUM_NAME_ARR);
-
 class App extends Component {
   constructor () {
     super();
@@ -91,11 +86,6 @@ class App extends Component {
   }
 
   render() {
-    let winMessage;
-    if ( this.state.HIDDEN_LETTERS_ARRAY.indexOf('_') === -1 ) {
-      winMessage = <h1>You won!</h1>
-    }
-    
     return (
       <div className='app'>
         <h1>Album Hangman</h1>
