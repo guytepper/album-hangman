@@ -6,6 +6,7 @@ import './App.css';
 import Artwork from './components/Artwork';
 import Word from './components/Word';
 import GuessedLetters from './components/GuessedLetters';
+import Keyboard from './components/Keyboard';
 
 import {
   isKeyCodeAlphabetical,
@@ -86,6 +87,10 @@ class App extends Component {
   }
 
   render() {
+    if (!this.state.ALBUM_NAME) {
+      return <h1 className='app'>Loading..</h1>
+    }
+
     return (
       <div className='app'>
         <h1>Album Hangman</h1>
@@ -93,6 +98,7 @@ class App extends Component {
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
+        <Keyboard />
       </div>
     );
   }
