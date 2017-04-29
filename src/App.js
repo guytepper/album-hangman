@@ -91,6 +91,11 @@ class App extends Component {
   }
 
   render() {
+    let winMessage;
+    if ( this.state.HIDDEN_LETTERS_ARRAY.indexOf('_') === -1 ) {
+      winMessage = <h1>You won!</h1>
+    }
+    
     return (
       <div className='app'>
         <h1>Album Hangman</h1>
