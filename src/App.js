@@ -30,35 +30,39 @@ class App extends Component {
   }
 
   keyboardPress (e) {
-    const word = this.state.ALBUM_NAME;
-    const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
     const keyCode = e.charCode || e.which;
     
     if ( isKeyCodeAlphabetical(keyCode) ) {
       const letter = String.fromCharCode(keyCode);
+      this.letterGuess(letter);
+    }
+  }
 
-      if ( !letterInArray(GUESSED_LETTERS, letter) ) {
+  letterGuess (letter) {
+    const word = this.state.ALBUM_NAME;
+    const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
+
+    if ( !letterInArray(GUESSED_LETTERS, letter) ) {
+      this.setState({
+        GUESSED_LETTERS: GUESSED_LETTERS.concat([letter])
+      });
+
+      if ( letterInWord(word, letter) ) {
+        const indicies = getIndiciesOfLetter(word, letter);
+        const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, letter, indicies);
+        
         this.setState({
-          GUESSED_LETTERS: GUESSED_LETTERS.concat([letter])
+          HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
         });
-
-        if ( letterInWord(word, letter) ) {
-          const indicies = getIndiciesOfLetter(word, letter);
-          const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, letter, indicies);
-          
-          this.setState({
-            HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
-          });
-        }
-        else {
-          this.setState({
-            LIVES: this.state.LIVES - 1
-          })
-        }
       }
       else {
-        console.log('Already guessed..');
+        this.setState({
+          LIVES: this.state.LIVES - 1
+        })
       }
+    }
+    else {
+      console.log('Already guessed..');
     }
   }
 
@@ -98,7 +102,7 @@ class App extends Component {
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
-        <Keyboard />
+        <Keyboard letterGuess={ this.letterGuess }/>
       </div>
     );
   }
