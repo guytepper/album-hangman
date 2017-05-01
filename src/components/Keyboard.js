@@ -4,38 +4,52 @@ const keyboardStyle = {
 
 };
 
-const ROW_ONE = 'abcdefghijklm'.split('')
-const ROW_TWO = 'nopqrstuvwxyz'.split('')
+const ROW_ONE = 'ABCDEFGHIJKLM'.split('')
+const ROW_TWO = 'NOPQRSTUVWXYZ'.split('')
 
-function Button (props) {
-  return (
-    <button>{ props.letter }</button>
-  )
-}
+class Keyboard extends React.Component {
+  constructor() {
+    super()
+    // this.handlePress = this.handlePress.bind(this);
+    this.getButton = this.getButton.bind(this);
+    this.getKeyboardRow = this.getKeyboardRow.bind(this);
+  }
 
-function getKeyboardRow (row) {
-  return (
-    <div>
-      {
-        row.map(letter => {
-          return <Button letter={letter} key={letter} />;
-        })
-      }      
-    </div>
-  )
-}
+  handlePress(letter) {
+    this.props.onPress(letter);
+  }
 
-function Keyboard (props) {
+  getButton (letter) {
+    return (
+      <button key={letter} onClick={ this.handlePress.bind(this, letter) } >
+        { letter }
+      </button>
+    )
+  }
 
-  return (
-    <div className='keyboard'>
+  getKeyboardRow (row) {
+    return (
       <div>
         {
-          [ROW_ONE, ROW_TWO].map(getKeyboardRow)        
-        }
-      </div>      
-    </div>
-  );
+          row.map(letter => {
+            return this.getButton(letter)
+          })
+        }      
+      </div>
+    )
+  }
+
+  render () {
+    return (
+      <div className='keyboard'>
+        <div>
+          {
+            [ROW_ONE, ROW_TWO].map(this.getKeyboardRow)   
+          }
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Keyboard;

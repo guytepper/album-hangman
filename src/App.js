@@ -27,6 +27,7 @@ class App extends Component {
     
     // this.setAlbum = this.setAlbum.bind(this);
     this.keyboardPress = this.keyboardPress.bind(this);
+    this.letterGuess = this.letterGuess.bind(this);
   }
 
   keyboardPress (e) {
@@ -102,7 +103,7 @@ class App extends Component {
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
-        <Keyboard letterGuess={ this.letterGuess }/>
+        <Keyboard onPress={ this.letterGuess }/>
       </div>
     );
   }
