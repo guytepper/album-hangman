@@ -29,7 +29,7 @@ class Keyboard extends React.Component {
 
   getKeyboardRow (row) {
     return (
-      <div>
+      <div key={row}>
         {
           row.map(letter => {
             return this.getButton(letter)
