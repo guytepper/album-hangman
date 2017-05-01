@@ -22,7 +22,8 @@ class App extends Component {
     super();
     this.state = {
       GUESSED_LETTERS: [],
-      LIVES: 4
+      LIVES: 4,
+      GAME_END: false
     }
     
     // this.setAlbum = this.setAlbum.bind(this);
@@ -39,6 +40,16 @@ class App extends Component {
     }
   }
 
+<<<<<<< HEAD
+=======
+  userWin () {
+    if (this.state.HIDDEN_LETTERS_ARRAY.indexOf('_') === -1) {
+      return true;
+    }
+    return false;
+  }
+
+>>>>>>> add-keyboard-functionality
   letterGuess (letter) {
     const word = this.state.ALBUM_NAME;
     const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
@@ -65,6 +76,16 @@ class App extends Component {
     else {
       console.log('Already guessed..');
     }
+<<<<<<< HEAD
+=======
+
+    if ( this.userWin() ) {
+      this.setState({
+        GAME_END: true,
+        GAME_WIN: true
+      })
+    }
+>>>>>>> add-keyboard-functionality
   }
 
   setAlbum () {
@@ -99,11 +120,15 @@ class App extends Component {
     return (
       <div className='app'>
         <h1>Album Hangman</h1>
-        <Artwork lives={ this.state.LIVES } img={ this.state.ALBUM_IMG } />
+        <Artwork lives={ this.state.LIVES } img={ this.state.ALBUM_IMG } GAME_END={this.state.GAME_END}/>
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
+<<<<<<< HEAD
         <Keyboard onPress={ this.letterGuess }/>
+=======
+        <Keyboard onPress={ this.letterGuess } />
+>>>>>>> add-keyboard-functionality
       </div>
     );
   }
