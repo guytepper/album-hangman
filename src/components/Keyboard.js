@@ -1,41 +1,39 @@
 import React from 'react'
+import './Keyboard.css';
 
-const keyboardStyle = {
+const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
-};
+class Keyboard extends React.Component {
+  constructor() {
+    super()
+    this.getButton = this.getButton.bind(this);
+  }
 
-const ROW_ONE = 'abcdefghijklm'.split('')
-const ROW_TWO = 'nopqrstuvwxyz'.split('')
+  handlePress(letter) {
+    this.props.onPress(letter);
+  }
 
-function Button (props) {
-  return (
-    <button>{ props.letter }</button>
-  )
-}
+  getButton (letter) {
+    return (
+      <button key={letter}
+              onClick={this.handlePress.bind(this, letter)}
+              className='keyboard-btn' >
+        { letter }
+      </button>
+    )
+  }
 
-function getKeyboardRow (row) {
-  return (
-    <div>
-      {
-        row.map(letter => {
-          return <Button letter={letter} key={letter} />;
-        })
-      }      
-    </div>
-  )
-}
-
-function Keyboard (props) {
-
-  return (
-    <div className='keyboard'>
-      <div>
-        {
-          [ROW_ONE, ROW_TWO].map(getKeyboardRow)        
-        }
-      </div>      
-    </div>
-  );
+  render () {
+    return (
+      <div className='keyboard'>
+        <div>
+          {
+            LETTERS.map(letter => this.getButton(letter))
+          }
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Keyboard;
