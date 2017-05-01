@@ -26,7 +26,6 @@ class App extends Component {
       GAME_END: false
     }
     
-    // this.setAlbum = this.setAlbum.bind(this);
     this.keyboardPress = this.keyboardPress.bind(this);
     this.letterGuess = this.letterGuess.bind(this);
   }
@@ -51,12 +50,15 @@ class App extends Component {
     const word = this.state.ALBUM_NAME;
     const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
 
+    // Check if user already guessed the letter
     if ( !letterInArray(GUESSED_LETTERS, letter) ) {
       this.setState({
         GUESSED_LETTERS: GUESSED_LETTERS.concat([letter])
       });
 
+      // Check if letter exists in word
       if ( letterInWord(word, letter) ) {
+        // Show the guessed letter in the underscores array
         const indicies = getIndiciesOfLetter(word, letter);
         const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, letter, indicies);
         
@@ -64,14 +66,13 @@ class App extends Component {
           HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
         });
       }
+
+      // Wrong guess
       else {
         this.setState({
           LIVES: this.state.LIVES - 1
         })
       }
-    }
-    else {
-      console.log('Already guessed..');
     }
 
     if ( this.userWin() ) {
