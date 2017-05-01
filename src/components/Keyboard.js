@@ -1,18 +1,11 @@
 import React from 'react'
 
-const keyboardStyle = {
-
-};
-
-const ROW_ONE = 'ABCDEFGHIJKLM'.split('')
-const ROW_TWO = 'NOPQRSTUVWXYZ'.split('')
+const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 class Keyboard extends React.Component {
   constructor() {
     super()
-    // this.handlePress = this.handlePress.bind(this);
     this.getButton = this.getButton.bind(this);
-    this.getKeyboardRow = this.getKeyboardRow.bind(this);
   }
 
   handlePress(letter) {
@@ -21,21 +14,11 @@ class Keyboard extends React.Component {
 
   getButton (letter) {
     return (
-      <button key={letter} onClick={ this.handlePress.bind(this, letter) } >
+      <button key={letter}
+              onClick={this.handlePress.bind(this, letter)}
+              className='keyboard-btn' >
         { letter }
       </button>
-    )
-  }
-
-  getKeyboardRow (row) {
-    return (
-      <div key={row}>
-        {
-          row.map(letter => {
-            return this.getButton(letter)
-          })
-        }      
-      </div>
     )
   }
 
@@ -44,7 +27,7 @@ class Keyboard extends React.Component {
       <div className='keyboard'>
         <div>
           {
-            [ROW_ONE, ROW_TWO].map(this.getKeyboardRow)   
+            LETTERS.map(letter => this.getButton(letter))
           }
         </div>
       </div>
