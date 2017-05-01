@@ -1,4 +1,5 @@
 import React from 'react'
+import './Keyboard.css';
 
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 

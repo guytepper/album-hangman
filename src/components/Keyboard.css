@@ -1,0 +1,12 @@
+.keyboard {
+  display: flex;
+}
+
+.keyboard-btn {
+  margin: 2px;
+  padding: 8px 16px;
+  min-width: 35px;
+  background-color: #E6E6E6;
+  border: transparent;
+  border-radius: 2px;
+}
