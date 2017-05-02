@@ -64,6 +64,10 @@ function createUnderscoresArr(name) {
    return arr;
  }
 
+ function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
  export {
     isAlphabetical,
     isKeyCodeAlphabetical,
@@ -72,4 +76,5 @@ function createUnderscoresArr(name) {
     letterInWord,
     letterInArray,
     getIndiciesOfLetter,
+    getRandomInt
   }
