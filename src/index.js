@@ -13,11 +13,9 @@ import './index.css';
 ReactDOM.render(
   <Router>
     <div>
-      
-      <Route path={'/'} component={Landing} />
-      <Router path={'/game/:username'} component={App} />
+      <Route exact path={'/'} component={Landing} />
+      <Route path={'/game/:username'} component={App} />
     </div>
-  </Router>
-  ,
+  </Router>,
   document.getElementById('root')
 );

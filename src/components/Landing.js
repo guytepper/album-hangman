@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 class Landing extends React.Component {
     constructor () {
@@ -21,6 +22,9 @@ class Landing extends React.Component {
         <div>
           <h1>Album Hangman</h1>
           <input onChange={this.handleUsernameChange} value={this.state.username} type='text' placeholder='Last.FM Username' />
+          <Link to="/game/Dobida">
+            asd
+          </Link>
           <button>Let's play 🤡</button>
         </div>
       )

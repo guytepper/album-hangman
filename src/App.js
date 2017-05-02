@@ -18,14 +18,15 @@ import {
 } from './Utils';
 
 class App extends Component {
-  constructor () {
+  constructor (props) {
     super();
+    this.username = props.match.params.username;
     this.state = {
       GUESSED_LETTERS: [],
       LIVES: 4,
       GAME_END: false
     }
-    
+
     this.keyboardPress = this.keyboardPress.bind(this);
     this.letterGuess = this.letterGuess.bind(this);
   }
@@ -84,7 +85,7 @@ class App extends Component {
   }
 
   setAlbum () {
-    axios.get('http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=Dobida&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json')
+    axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${this.username}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`)
       .then(response => {
         const album = response.data.topalbums.album[10];
         const ALBUM_NAME = album.name.toUpperCase();
