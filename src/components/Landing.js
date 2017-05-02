@@ -21,7 +21,7 @@ class Landing extends React.Component {
         <div>
           <h1>Album Hangman</h1>
           <input onChange={this.handleUsernameChange} value={this.state.username} type='text' placeholder='Last.FM Username' />
-          <button>Let's play! 🤡</button>
+          <button>Let's play 🤡</button>
         </div>
       )
     }
