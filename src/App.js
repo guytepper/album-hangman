@@ -30,6 +30,7 @@ class App extends Component {
 
     this.keyboardPress = this.keyboardPress.bind(this);
     this.letterGuess = this.letterGuess.bind(this);
+    this.restartGame = this.restartGame.bind(this);
   }
 
   keyboardPress (e) {
@@ -103,6 +104,15 @@ class App extends Component {
       })
   }
 
+  restartGame () {
+    this.state = {
+      GUESSED_LETTERS: [],
+      LIVES: 4,
+      GAME_END: false
+    };
+    this.setAlbum();
+  }
+
   componentDidMount() {
     this.setAlbum();
     window.addEventListener('keydown', this.keyboardPress);
@@ -113,6 +123,14 @@ class App extends Component {
       return <h1 className='app'>Loading..</h1>
     }
 
+    let PlayAgain = null;
+    if (this.state.GAME_END) {
+      PlayAgain = 
+        <button onClick={this.restartGame} >
+          Play Again
+        </button>
+    }
+
     return (
       <div className='app'>
         <h1>Album Hangman</h1>
@@ -120,6 +138,7 @@ class App extends Component {
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
+        { PlayAgain }
         {/*<Keyboard onPress={ this.letterGuess } />*/}
       </div>
     );
