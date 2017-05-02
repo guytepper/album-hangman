@@ -103,7 +103,6 @@ class App extends Component {
 
   componentDidMount() {
     this.setAlbum();
-
     window.addEventListener('keydown', this.keyboardPress);
   }
 
@@ -119,7 +118,7 @@ class App extends Component {
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
-        <Keyboard onPress={ this.letterGuess } />
+        {/*<Keyboard onPress={ this.letterGuess } />*/}
       </div>
     );
   }
