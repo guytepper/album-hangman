@@ -112,7 +112,7 @@ class App extends Component {
     window.addEventListener('keydown', this.keyboardPress);
   }
 
-  playAgain () {
+  playAgainBtn () {
     if (this.state.GAME_END) {
       return (
         <button onClick={this.startNewGame} >
@@ -153,7 +153,7 @@ class App extends Component {
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
         <h1>{ gameEndMessage }</h1>
-        { this.playAgain() }
+        { this.playAgainBtn() }
         {/*<Keyboard onPress={ this.handleLetterGuess } />*/}
       </div>
     );
