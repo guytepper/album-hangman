@@ -22,12 +22,6 @@ class App extends Component {
   constructor (props) {
     super();
     this.username = props.match.params.username;
-    this.state = {
-      GUESSED_LETTERS: [],
-      LIVES: 4,
-      GAME_END: false
-    }
-
     this.keyboardPress = this.keyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
