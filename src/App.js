@@ -86,7 +86,7 @@ class App extends Component {
     }
   }
 
-  setAlbum () {
+  setNewAlbum () {
     axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${this.username}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`)
       .then(response => {
         const album = response.data.topalbums.album[getRandomInt(0, 50)];
