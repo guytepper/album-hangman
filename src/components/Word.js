@@ -1,7 +1,7 @@
 import React from 'react'
 
 const wordStyle = {
-  letterSpacing: '3px'
+  letterSpacing: '5px'
 };
 
 
