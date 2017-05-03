@@ -21,6 +21,7 @@ import {
 class App extends Component {
   constructor (props) {
     super();
+    this.state = {};
     this.username = props.match.params.username;
     this.keyboardPress = this.keyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
@@ -36,7 +37,7 @@ class App extends Component {
     }
   }
 
-  isaAlbumNameGuessed () {
+  isAlbumNameGuessed () {
     if (this.state.HIDDEN_LETTERS_ARRAY.indexOf('_') === -1) {
       return true;
     }
@@ -72,7 +73,7 @@ class App extends Component {
       }
     }
 
-    if ( this.isaAlbumNameGuessed() ) {
+    if ( this.isAlbumNameGuessed() ) {
       this.setState({
         GAME_END: true,
         GAME_WIN: true
@@ -139,7 +140,7 @@ class App extends Component {
       gameEndMessage = 'You lost.';
     }
 
-    if (this.isaAlbumNameGuessed()) {
+    if (this.isAlbumNameGuessed()) {
       gameEndMessage = 'You won!';
     }
     
