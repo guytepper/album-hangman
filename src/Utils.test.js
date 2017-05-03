@@ -5,7 +5,7 @@ import {
   isKeyCodeAlphabetical,
   createUnderscoresArr,
   getIndiciesOfLetter,
-  replaceUnderscoresת
+  replaceUnderscores,
   getRandomInt
 } from './Utils';
 
