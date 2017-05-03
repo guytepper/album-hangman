@@ -29,8 +29,8 @@ class App extends Component {
     }
 
     this.keyboardPress = this.keyboardPress.bind(this);
-    this.letterGuess = this.letterGuess.bind(this);
-    this.restartGame = this.restartGame.bind(this);
+    this.handleLetterGuess = this.handleLetterGuess.bind(this);
+    this.startNewGame = this.startNewGame.bind(this);
   }
 
   keyboardPress (e) {
@@ -38,18 +38,18 @@ class App extends Component {
     
     if ( isKeyCodeAlphabetical(keyCode) ) {
       const letter = String.fromCharCode(keyCode);
-      this.letterGuess(letter);
+      this.handleLetterGuess(letter);
     }
   }
 
-  userWin () {
+  isaAlbumNameGuessed () {
     if (this.state.HIDDEN_LETTERS_ARRAY.indexOf('_') === -1) {
       return true;
     }
     return false;
   }
 
-  letterGuess (letter) {
+  handleLetterGuess (letter) {
     const word = this.state.ALBUM_NAME;
     const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
 
@@ -78,7 +78,7 @@ class App extends Component {
       }
     }
 
-    if ( this.userWin() ) {
+    if ( this.isaAlbumNameGuessed() ) {
       this.setState({
         GAME_END: true,
         GAME_WIN: true
@@ -87,7 +87,7 @@ class App extends Component {
   }
 
   setNewAlbum () {
-    axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${this.username}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`)
+    axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${this.username}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
       .then(response => {
         const album = response.data.topalbums.album[getRandomInt(0, 50)];
         const ALBUM_NAME = album.name.toUpperCase();
@@ -102,6 +102,9 @@ class App extends Component {
           ALBUM_IMG
         });
       })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   startNewGame () {
@@ -110,14 +113,14 @@ class App extends Component {
       LIVES: 4,
       GAME_END: false
     };
-    this.startNewGame();
+    this.setNewAlbum();
     window.addEventListener('keydown', this.keyboardPress);
   }
 
   playAgain () {
     if (this.state.GAME_END) {
       return (
-        <button onClick={this.restartGame} >
+        <button onClick={this.startNewGame} >
           Play Again
         </button>
       )
@@ -142,7 +145,7 @@ class App extends Component {
       gameEndMessage = 'You lost.';
     }
 
-    if (this.userWin()) {
+    if (this.isaAlbumNameGuessed()) {
       gameEndMessage = 'You won!';
     }
     
@@ -156,7 +159,7 @@ class App extends Component {
         <h3>Lives: { this.state.LIVES }</h3>
         <h1>{ gameEndMessage }</h1>
         { this.playAgain() }
-        {/*<Keyboard onPress={ this.letterGuess } />*/}
+        {/*<Keyboard onPress={ this.handleLetterGuess } />*/}
       </div>
     );
   }
