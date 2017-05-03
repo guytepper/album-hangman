@@ -48,7 +48,7 @@ class App extends Component {
     const word = this.state.ALBUM_NAME;
     const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
 
-    // Check if user already guessed the letter
+    // Check if user had already guessed the letter
     if ( !letterInArray(GUESSED_LETTERS, letter) ) {
       this.setState({
         GUESSED_LETTERS: GUESSED_LETTERS.concat([letter])
@@ -56,7 +56,7 @@ class App extends Component {
 
       // Check if letter exists in word
       if ( letterInWord(word, letter) ) {
-        // Show the guessed letter in the underscores array
+        // Replace the guessed letter in the underscores array
         const indicies = getIndiciesOfLetter(word, letter);
         const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, letter, indicies);
         
