@@ -104,13 +104,13 @@ class App extends Component {
       })
   }
 
-  restartGame () {
+  startNewGame () {
     this.state = {
       GUESSED_LETTERS: [],
       LIVES: 4,
       GAME_END: false
     };
-    this.setAlbum();
+    this.startNewGame();
     window.addEventListener('keydown', this.keyboardPress);
   }
 
@@ -126,8 +126,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setAlbum();
-    window.addEventListener('keydown', this.keyboardPress);
+    this.startNewGame();
   }
 
   render() {
