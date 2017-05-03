@@ -19,10 +19,10 @@ import {
 } from './Utils';
 
 class App extends Component {
-  constructor (props) {
+  constructor ({ match }) {
     super();
     this.state = {};
-    this.username = props.match.params.username;
+    this.username = match.params.username;
     this.keyboardPress = this.keyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
