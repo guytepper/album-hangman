@@ -5,7 +5,8 @@ import {
   isKeyCodeAlphabetical,
   createUnderscoresArr,
   getIndiciesOfLetter,
-  replaceUnderscores
+  replaceUnderscores,
+  getRandomInt
 } from './Utils';
 
 it('detects if a string is alphabetical', () => {
@@ -65,4 +66,10 @@ it('replaces underscores in the array with the supplied letter', () => {
   expect(replaceUnderscores(underscoresArr, letter, indicies)).toEqual([
     '_', '_', 'o', 'o', '_'
   ])
+})
+
+it('gets a random integer', () => {
+  let num = getRandomInt(0, 20);
+  expect(num).toBeGreaterThanOrEqual(0);
+  expect(num).toBeLessThanOrEqual(20);
 })

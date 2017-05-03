@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 class Landing extends React.Component {
     constructor () {
       super();
       this.state = {
-        username: ''        
+        username: ''       
       };
 
       this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -21,7 +22,9 @@ class Landing extends React.Component {
         <div>
           <h1>Album Hangman</h1>
           <input onChange={this.handleUsernameChange} value={this.state.username} type='text' placeholder='Last.FM Username' />
-          <button>Let's play! 🤡</button>
+          <Link to={`/game/${this.state.username}`}>
+            <button>Let's play 🤡</button>
+          </Link>
         </div>
       )
     }
