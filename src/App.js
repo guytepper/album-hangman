@@ -111,6 +111,18 @@ class App extends Component {
       GAME_END: false
     };
     this.setAlbum();
+    window.addEventListener('keydown', this.keyboardPress);
+  }
+
+  playAgain () {
+    if (this.state.GAME_END) {
+      return (
+        <button onClick={this.restartGame} >
+          Play Again
+        </button>
+      )
+    }
+    return null;
   }
 
   componentDidMount() {
@@ -123,13 +135,18 @@ class App extends Component {
       return <h1 className='app'>Loading..</h1>
     }
 
-    let PlayAgain = null;
-    if (this.state.GAME_END) {
-      PlayAgain = 
-        <button onClick={this.restartGame} >
-          Play Again
-        </button>
+    let gameEndMessage = '';
+
+    if (this.state.LIVES === 0) {
+      this.state.GAME_END = true;
+      window.removeEventListener('keydown', this.keyboardPress);
+      gameEndMessage = 'You lost.';
     }
+
+    if (this.userWin()) {
+      gameEndMessage = 'You won!';
+    }
+    
 
     return (
       <div className='app'>
@@ -138,7 +155,8 @@ class App extends Component {
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
         <h3>Lives: { this.state.LIVES }</h3>
-        { PlayAgain }
+        <h1>{ gameEndMessage }</h1>
+        { this.playAgain() }
         {/*<Keyboard onPress={ this.letterGuess } />*/}
       </div>
     );
