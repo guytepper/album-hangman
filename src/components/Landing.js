@@ -20,7 +20,6 @@ class Landing extends React.Component {
     render () {
       return (
         <div>
-          <h1>Album Hangman</h1>
           <input onChange={this.handleUsernameChange} value={this.state.username} type='text' placeholder='Last.FM Username' />
           <Link to={`/game/${this.state.username}`}>
             <button>Let's play 🤡</button>

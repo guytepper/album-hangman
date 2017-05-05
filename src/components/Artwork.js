@@ -15,7 +15,7 @@ function Artwork (props) {
     backgroundColor: 'grey',
     filter: `blur(${blur}px)`,
     transition: 'filter .5s ease-in-out'
-  };
+ };
 
   return (
      <img style={ artworkStyle } src={ props.img } alt=""/>

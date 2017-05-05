@@ -146,8 +146,7 @@ class App extends Component {
     
 
     return (
-      <div className='app'>
-        <h1>Album Hangman</h1>
+      <div className='game'>
         <Artwork lives={ this.state.LIVES } img={ this.state.ALBUM_IMG } GAME_END={this.state.GAME_END}/>
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <GuessedLetters letters={ this.state.GUESSED_LETTERS } />

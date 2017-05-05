@@ -12,9 +12,12 @@ import './index.css';
 
 ReactDOM.render(
   <Router>
-    <div>
-      <Route exact path={'/'} component={Landing} />
-      <Route path={'/game/:username'} component={App} />
+    <div className='app'>
+      <h1>Album Hangman</h1>
+      <div className='container'>
+        <Route exact path={'/'} component={Landing} />
+        <Route path={'/game/:username'} component={App} />
+      </div>
     </div>
   </Router>,
   document.getElementById('root')
