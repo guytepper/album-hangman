@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import '../assets/buttons.css';
+import './Landing.css';
 
 class Landing extends React.Component {
     constructor () {
@@ -19,12 +21,12 @@ class Landing extends React.Component {
 
     render () {
       return (
-        <div>
-          <input onChange={this.handleUsernameChange} value={this.state.username} type='text' placeholder='Last.FM Username' />
+        <form className='landing'>
+          <input onChange={this.handleUsernameChange} value={this.state.username} className='landing-username' type='text' placeholder='Last.FM Username' />
           <Link to={`/game/${this.state.username}`}>
-            <button>Let's play 🤡</button>
+            <button className='landing-btn button-success pure-button'>Let's play! 🤡</button>
           </Link>
-        </div>
+        </form>
       )
     }
 }

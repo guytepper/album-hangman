@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import './App.css';
+import './assets/buttons.css';
 
 import Artwork from './components/Artwork';
 import Word from './components/Word';
@@ -109,7 +110,7 @@ class App extends Component {
   playAgainBtn () {
     if (this.state.GAME_END) {
       return (
-        <button onClick={this.startNewGame} >
+        <button onClick={this.startNewGame} className='pure-button pure-button-primary'>
           Play Again
         </button>
       )

@@ -10,8 +10,8 @@ function Artwork (props) {
 
   const artworkStyle = {
     margin: '10px auto',
-    width: '300px',
-    height: '300px',
+    width: '250px',
+    height: '250px',
     backgroundColor: 'grey',
     filter: `blur(${blur}px)`,
     transition: 'filter .5s ease-in-out'
