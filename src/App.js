@@ -7,6 +7,7 @@ import Artwork from './components/Artwork';
 import Word from './components/Word';
 import GuessedLetters from './components/GuessedLetters';
 import Keyboard from './components/Keyboard';
+import Hearts from './components/Hearts';
 
 import {
   isKeyCodeAlphabetical,
@@ -149,8 +150,10 @@ class App extends Component {
       <div className='game'>
         <Artwork lives={ this.state.LIVES } img={ this.state.ALBUM_IMG } GAME_END={this.state.GAME_END}/>
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
-        <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
-        <h3>Lives: { this.state.LIVES }</h3>
+        <div className='game-stats'>
+          <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
+          <Hearts lives={ this.state.LIVES } />
+        </div>
         <h1>{ gameEndMessage }</h1>
         { this.playAgainBtn() }
         {/*<Keyboard onPress={ this.handleLetterGuess } />*/}
