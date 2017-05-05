@@ -31,7 +31,7 @@ function Hearts ({ lives }) {
       <CSSTransitionGroup 
           transitionName="fade"
           transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}>
+          transitionLeaveTimeout={450}>
       {
         hearts.map(heart => heart)
       }

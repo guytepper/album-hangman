@@ -73,13 +73,6 @@ class App extends Component {
         })
       }
     }
-
-    if ( this.isAlbumNameGuessed() ) {
-      this.setState({
-        GAME_END: true,
-        GAME_WIN: true
-      })
-    }
   }
 
   setNewAlbum () {
@@ -142,6 +135,8 @@ class App extends Component {
     }
 
     if (this.isAlbumNameGuessed()) {
+      this.state.GAME_END = true;
+      this.state.GAME_WIN = true;
       gameEndMessage = 'You won!';
     }
     

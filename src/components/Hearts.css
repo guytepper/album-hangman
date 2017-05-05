@@ -23,7 +23,7 @@
 }
 
 .fade-leave {
-  animation: 0.5s zoomOut ease-out;
+  animation: 500ms zoomOut ease-out;
 }
 
 
