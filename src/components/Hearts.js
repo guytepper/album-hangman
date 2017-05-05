@@ -1,7 +1,10 @@
 import React from 'react'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup' // ES6
+import './Hearts.css';
 
 const heartsContainerStyle = {
-  display: 'flex'
+  display: 'flex',
+  height: 25
 }
 
 const heartStyle = {
@@ -15,15 +18,26 @@ function Hearts ({ lives }) {
   
   // For each live, display an heart icon
   for (let i = 0; i < lives; i++) { 
-    hearts.push(<img className='heart' style={heartStyle} src='/heart.svg' key={i} alt='' />);
+    hearts.push(
+      <img className='heart' 
+           style={heartStyle} 
+           src='/heart.svg'
+           key={i} alt='' />
+    );
   }
 
   return (
     <div style={ heartsContainerStyle }>
+      <CSSTransitionGroup 
+          transitionName="fade"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}>
       {
         hearts.map(heart => heart)
       }
-    </div>);
+      </ CSSTransitionGroup>
+    </div>
+  );
 
 }
 
