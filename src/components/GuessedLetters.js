@@ -5,11 +5,11 @@ const letterStyle = {
 };
 
 
-function GuessedLetters(props) {
+function GuessedLetters({ letters }) {
   return (
     <div>
       <h3>Guessed Letters: { 
-        props.letters.map(letter => {
+        letters.map(letter => {
           return <span key={ letter } style={ letterStyle }>{ letter }</span>
         })
       }</h3>
