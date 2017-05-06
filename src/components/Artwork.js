@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Artwork (props) {
+function Artwork ({ lives, GAME_END, img }) {
   // Reduce bluriness for each wrong guess
-  let blur = props.lives * 10;
+  let blur = lives * 10;
   
-  if ( props.GAME_END ) {
+  if ( GAME_END ) {
     blur = 0;
   }
 
@@ -18,7 +18,7 @@ function Artwork (props) {
  };
 
   return (
-     <img style={ artworkStyle } src={ props.img } alt=""/>
+     <img style={ artworkStyle } src={ img } alt=""/>
   );
 }
 
