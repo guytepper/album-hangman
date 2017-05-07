@@ -127,8 +127,6 @@ class App extends Component {
       return <h1 className='app'>Loading..</h1>
     }
 
-    let gameEndMessage = '';
-
     if (this.state.LIVES === 0) {
       this.state.GAME_END = true;
       this.state.GAME_LOST = true;
