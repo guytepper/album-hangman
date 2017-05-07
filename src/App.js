@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import './App.css';
 import './assets/buttons.css';
@@ -11,6 +10,7 @@ import Keyboard from './components/Keyboard';
 import Hearts from './components/Hearts';
 
 import {
+  getAlbum,
   isKeyCodeAlphabetical,
   createUnderscoresArr,
   replaceUnderscores,
@@ -32,18 +32,11 @@ class App extends Component {
 
   keyboardPress (e) {
     const keyCode = e.charCode || e.which;
-    
+
     if ( isKeyCodeAlphabetical(keyCode) ) {
       const letter = String.fromCharCode(keyCode);
       this.handleLetterGuess(letter);
     }
-  }
-
-  isAlbumNameGuessed () {
-    if (this.state.HIDDEN_LETTERS_ARRAY.indexOf('_') === -1) {
-      return true;
-    }
-    return false;
   }
 
   handleLetterGuess (letter) {
@@ -61,7 +54,7 @@ class App extends Component {
         // Replace the guessed letter in the underscores array
         const indicies = getIndiciesOfLetter(word, letter);
         const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, letter, indicies);
-        
+
         this.setState({
           HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
         });
@@ -76,25 +69,19 @@ class App extends Component {
     }
   }
 
-  setNewAlbum () {
-    axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${this.username}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
-      .then(response => {
-        const album = response.data.topalbums.album[getRandomInt(0, 50)];
-        const ALBUM_NAME = album.name.toUpperCase();
-        const ALBUM_NAME_ARR = [...ALBUM_NAME];
-        const ALBUM_IMG = album.image[3]['#text'];
-        const HIDDEN_LETTERS_ARRAY = createUnderscoresArr(ALBUM_NAME_ARR);
+  isAlbumNameGuessed () {
+    if (this.state.HIDDEN_LETTERS_ARRAY.indexOf('_') === -1) {
+      return true;
+    }
+    return false;
+  }
 
-        this.setState({
-          ALBUM_NAME,
-          ALBUM_NAME_ARR,
-          HIDDEN_LETTERS_ARRAY,
-          ALBUM_IMG
-        });
+  setNewAlbum () {
+    getAlbum(this.username)
+      .then(albumInfo => {
+        this.setState(albumInfo);
       })
-      .catch(err => {
-        console.log(err);
-      })
+      .catch(err => console.log(err));
   }
 
   startNewGame () {
@@ -103,8 +90,21 @@ class App extends Component {
       LIVES: 4,
       GAME_END: false
     };
+
     this.setNewAlbum();
     window.addEventListener('keydown', this.keyboardPress);
+  }
+
+  gameEndMessage() {
+    if ( this.state.GAME_WIN === true ) {
+      return <h1>'You won!'</h1>;
+    }
+    
+    if ( this.state.GAME_LOST === true) {
+      return <h1>'You lost.'</h1>;
+    }
+    
+    return '';
   }
 
   playAgainBtn () {
@@ -131,16 +131,15 @@ class App extends Component {
 
     if (this.state.LIVES === 0) {
       this.state.GAME_END = true;
-      window.removeEventListener('keydown', this.keyboardPress);
-      gameEndMessage = 'You lost.';
+      this.state.GAME_LOST = true;
+      window.removeEventListener('keydown', this.keyboardPress);      
     }
 
     if (this.isAlbumNameGuessed()) {
       this.state.GAME_END = true;
       this.state.GAME_WIN = true;
-      gameEndMessage = 'You won!';
     }
-    
+
 
     return (
       <div className='game'>
@@ -150,7 +149,7 @@ class App extends Component {
           <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
           <Hearts lives={ this.state.LIVES } />
         </div>
-        <h1>{ gameEndMessage }</h1>
+        { this.gameEndMessage() }
         { this.playAgainBtn() }
         {/*<Keyboard onPress={ this.handleLetterGuess } />*/}
       </div>

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 /**
  * Check if a string is an alphabetical character
  */
@@ -64,8 +66,37 @@ function createUnderscoresArr(name) {
    return arr;
  }
 
+ /**
+  * Get a random number between min & max.
+  */
  function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+/**
+ * Get album information from the Last.FM API, 
+ * using the provided user information.
+ */
+function getAlbum(username) {
+  console.log('hi')
+  return new Promise((resolve, reject) => {
+    axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
+      .then(response => {
+        const album = response.data.topalbums.album[getRandomInt(0, 50)];
+        const ALBUM_NAME = album.name.toUpperCase();
+        const ALBUM_NAME_ARR = [...ALBUM_NAME];
+        const ALBUM_IMG = album.image[3]['#text'];
+        const HIDDEN_LETTERS_ARRAY = createUnderscoresArr(ALBUM_NAME_ARR);
+
+        resolve({
+          ALBUM_NAME,
+          ALBUM_NAME_ARR,
+          HIDDEN_LETTERS_ARRAY,
+          ALBUM_IMG
+        });
+      })
+      .catch(err => reject(err))
+  })
 }
 
  export {
@@ -76,5 +107,6 @@ function createUnderscoresArr(name) {
     letterInWord,
     letterInArray,
     getIndiciesOfLetter,
-    getRandomInt
+    getRandomInt,
+    getAlbum
   }
