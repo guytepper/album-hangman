@@ -23,7 +23,9 @@ import {
 class App extends Component {
   constructor ({ match }) {
     super();
-    this.state = {};
+    this.state = {
+      LOADING_ALBUM: true
+    };
     this.username = match.params.username;
     this.keyboardPress = this.keyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
@@ -33,7 +35,9 @@ class App extends Component {
   keyboardPress (e) {
     const keyCode = e.charCode || e.which;
 
-    if ( isKeyCodeAlphabetical(keyCode) && this.state.GAME_END != true ) {
+    if ( isKeyCodeAlphabetical(keyCode) &&
+         this.state.GAME_END != true &&
+         this.state.LOADING_ALBUM == false) {
       const letter = String.fromCharCode(keyCode);
       this.handleLetterGuess(letter);
     }
