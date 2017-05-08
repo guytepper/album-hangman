@@ -1,8 +1,14 @@
 .keyboard {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid gainsboro;
 }
 
 .keyboard-btn {
+  flex: 1;
   margin: 2px;
   padding: 8px 16px;
   min-width: 35px;

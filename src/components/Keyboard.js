@@ -26,11 +26,9 @@ class Keyboard extends React.Component {
   render () {
     return (
       <div className='keyboard'>
-        <div>
           {
             LETTERS.map(letter => this.getButton(letter))
           }
-        </div>
       </div>
     );
   }

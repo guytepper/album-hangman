@@ -169,7 +169,7 @@ class App extends Component {
         </div>
         { this.gameEndMessage() }
         { this.playAgainBtn() }
-        {/*<Keyboard onPress={ this.handleLetterGuess } />*/}
+        <Keyboard onPress={ this.handleLetterGuess } />
       </div>
     );
   }
