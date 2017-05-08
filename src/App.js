@@ -101,11 +101,11 @@ class App extends Component {
 
   gameEndMessage() {
     if ( this.state.GAME_WIN === true ) {
-      return <h1>'You won!'</h1>;
+      return <h1>You won! 🎉</h1>;
     }
     
     if ( this.state.GAME_LOST === true) {
-      return <h1>'You lost.'</h1>;
+      return <h1>You lost. 🤧</h1>;
     }
     
     return '';
