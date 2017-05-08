@@ -33,7 +33,7 @@ class App extends Component {
   keyboardPress (e) {
     const keyCode = e.charCode || e.which;
 
-    if ( isKeyCodeAlphabetical(keyCode) ) {
+    if ( isKeyCodeAlphabetical(keyCode) && this.state.GAME_END != true ) {
       const letter = String.fromCharCode(keyCode);
       this.handleLetterGuess(letter);
     }
@@ -92,7 +92,6 @@ class App extends Component {
     };
 
     this.setNewAlbum();
-    window.addEventListener('keydown', this.keyboardPress);
   }
 
   gameEndMessage() {
@@ -120,6 +119,7 @@ class App extends Component {
 
   componentDidMount() {
     this.startNewGame();
+    window.addEventListener('keydown', this.keyboardPress);
   }
 
   render() {
@@ -130,7 +130,6 @@ class App extends Component {
     if (this.state.LIVES === 0) {
       this.state.GAME_END = true;
       this.state.GAME_LOST = true;
-      window.removeEventListener('keydown', this.keyboardPress);      
     }
 
     if (this.isAlbumNameGuessed()) {
