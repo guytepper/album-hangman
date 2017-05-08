@@ -114,12 +114,14 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  startNewGame () {
-    this.state = {
+  startNewGame () {    
+    this.setState({
       GUESSED_LETTERS: [],
       LIVES: 4,
-      GAME_END: false
-    };
+      GAME_END: false,
+      GAME_WIN: false,
+      GAME_LOSE: false
+    });
 
     this.setNewAlbum();
   }
