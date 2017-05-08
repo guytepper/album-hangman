@@ -37,6 +37,11 @@ class App extends Component {
       const letter = String.fromCharCode(keyCode);
       this.handleLetterGuess(letter);
     }
+
+    // Restart game on enter press when the game ends
+    if (keyCode === 13 && this.state.GAME_END === true) {
+      this.startNewGame();
+    }
   }
 
   handleLetterGuess (letter) {
