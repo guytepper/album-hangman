@@ -76,6 +76,20 @@ class App extends Component {
         })
       }
     }
+
+    if (this.state.LIVES === 0) {
+      this.setState({
+        GAME_END: true,
+        GAME_LOSE: true
+      })
+    }
+
+    if (this.isAlbumNameGuessed()) {
+      this.setState({
+        GAME_END: true,
+        GAME_WIN: true
+      })
+    }
   }
 
   isAlbumNameGuessed () {
@@ -86,9 +100,16 @@ class App extends Component {
   }
 
   setNewAlbum () {
-    getAlbum(this.username)
+    this.setState({
+      LOADING_ALBUM: true
+    });
+
+    getAlbum(this.username)    
       .then(albumInfo => {
-        this.setState(albumInfo);
+        this.setState({
+          LOADING_ALBUM: false,
+          ...albumInfo
+        });
       })
       .catch(err => console.log(err));
   }
@@ -108,7 +129,7 @@ class App extends Component {
       return <h1>You won! 🎉</h1>;
     }
     
-    if ( this.state.GAME_LOST === true) {
+    if ( this.state.GAME_LOSE === true) {
       return <h1>You lost. 🤧</h1>;
     }
     
@@ -116,7 +137,7 @@ class App extends Component {
   }
 
   playAgainBtn () {
-    if (this.state.GAME_END) {
+    if (this.state.GAME_END === true) {
       return (
         <button onClick={this.startNewGame} className='pure-button pure-button-primary'>
           Play Again
@@ -135,17 +156,6 @@ class App extends Component {
     if (!this.state.ALBUM_NAME) {
       return <h1 className='app'>Loading..</h1>
     }
-
-    if (this.state.LIVES === 0) {
-      this.state.GAME_END = true;
-      this.state.GAME_LOST = true;
-    }
-
-    if (this.isAlbumNameGuessed()) {
-      this.state.GAME_END = true;
-      this.state.GAME_WIN = true;
-    }
-
 
     return (
       <div className='game'>
