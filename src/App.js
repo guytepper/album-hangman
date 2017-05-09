@@ -27,12 +27,12 @@ class App extends Component {
       LOADING_ALBUM: true
     };
     this.username = match.params.username;
-    this.keyboardPress = this.keyboardPress.bind(this);
+    this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
   }
 
-  keyboardPress (e) {
+  handleKeyboardPress (e) {
     const keyCode = e.charCode || e.which;
 
     if ( isKeyCodeAlphabetical(keyCode) &&
@@ -77,14 +77,14 @@ class App extends Component {
       }
     }
 
+    // Check for game lose / win
     if (this.state.LIVES === 0) {
       this.setState({
         GAME_END: true,
         GAME_LOSE: true
       })
     }
-
-    if (this.isAlbumNameGuessed()) {
+    else if (this.isAlbumNameGuessed()) {
       this.setState({
         GAME_END: true,
         GAME_WIN: true
@@ -151,7 +151,7 @@ class App extends Component {
 
   componentDidMount() {
     this.startNewGame();
-    window.addEventListener('keydown', this.keyboardPress);
+    window.addEventListener('keydown', this.handleKeyboardPress);
   }
 
   render() {
