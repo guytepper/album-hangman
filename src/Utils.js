@@ -77,9 +77,9 @@ function createUnderscoresArr(name) {
  * Get album information from the Last.FM API, 
  * using the provided user information.
  */
-function getAlbum(username) {
+function getAlbum(username, period = 'overall') {
   return new Promise((resolve, reject) => {
-    axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
+    axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
       .then(response => {
         const album = response.data.topalbums.album[getRandomInt(0, 50)];
         const ALBUM_NAME = album.name.toUpperCase();

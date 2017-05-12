@@ -27,6 +27,7 @@ class App extends Component {
       LOADING_ALBUM: true
     };
     this.username = match.params.username;
+    this.period = match.params.period;
     this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
@@ -106,7 +107,7 @@ class App extends Component {
       LOADING_ALBUM: true
     });
 
-    getAlbum(this.username)    
+    getAlbum(this.username, this.period)    
       .then(albumInfo => {
         this.setState({
           LOADING_ALBUM: false,
