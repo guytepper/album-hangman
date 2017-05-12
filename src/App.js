@@ -35,11 +35,13 @@ class App extends Component {
   handleKeyboardPress (e) {
     const keyCode = e.charCode || e.which;
 
-    if ( isKeyCodeAlphabetical(keyCode) &&
-         this.state.GAME_END != true &&
-         this.state.LOADING_ALBUM == false) {
-      const letter = String.fromCharCode(keyCode);
-      this.handleLetterGuess(letter);
+    // Checks if the game is in active state
+    if ( this.state.GAME_END === false && this.state.LOADING_ALBUM === false ) {
+      // Checks if the pressed key is alphabetical
+      if ( isKeyCodeAlphabetical(keyCode) ) {
+        const letter = String.fromCharCode(keyCode);
+        this.handleLetterGuess(letter);
+      }
     }
 
     // Restart game on enter press when the game ends
