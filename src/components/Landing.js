@@ -55,8 +55,8 @@ class Landing extends React.Component {
             </label>
           </div>
 
-          <Link to={`/game/${this.state.username}`}>
-            <button className='landing-btn button-success pure-button'>Let's play! 🤡</button>
+          <Link to={`/game/${this.state.username}/${this.state.period}`}>
+            <button className='landing-btn button-success pure-button' disabled={!this.state.username}>Let's play! 🤡</button>
           </Link>
         </form>
       )
