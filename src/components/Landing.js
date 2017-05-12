@@ -7,15 +7,23 @@ class Landing extends React.Component {
     constructor () {
       super();
       this.state = {
-        username: ''      
+        username: '',
+        period: '12month'     
       };
 
       this.handleUsernameChange = this.handleUsernameChange.bind(this);
+      this.handlePeriodChange = this.handlePeriodChange.bind(this);
     }
 
     handleUsernameChange(event) {
       this.setState({
         username: event.target.value
+      })
+    }
+
+    handlePeriodChange(event) {
+      this.setState({
+        period: event.target.value
       })
     }
 
@@ -26,23 +34,23 @@ class Landing extends React.Component {
 
           <div className='landing-period'>            
             <label>
-              <input type="radio" name="period" className="pure-radio" value="12 Month" checked />
+              <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="12month" checked={this.state.period === '12month'} />
               12 Months
             </label>
             <label>
-              <input type="radio" name="period" className="pure-radio" value="6 Month" />
+              <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="6month" checked={this.state.period === '6month'}/>
               6 Months
             </label>
             <label>
-              <input type="radio" name="period" className="pure-radio" value="6 Month" />
+              <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="3month" checked={this.state.period === '3month'}/>
               3 Months
             </label>
             <label>
-              <input type="radio" name="period" className="pure-radio" value="6 Month" />
+              <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="1month" checked={this.state.period === '1month'}/>
               1 Month
             </label>
             <label>
-              <input type="radio" name="period" className="pure-radio" value="6 Month" />
+              <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="overall" checked={this.state.period === 'overall'}/>
               All Time
             </label>
           </div>
