@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/guytepper/album-hangman.svg?branch=master)](https://travis-ci.org/guytepper/album-hangman)
+
 Hangman game, using the Last.FM API.
 
 ## Installation
