@@ -32,9 +32,7 @@ function Hearts ({ lives }) {
           transitionName="fade"
           transitionEnterTimeout={500}
           transitionLeaveTimeout={450}>
-      {
-        hearts.map(heart => heart)
-      }
+      { hearts }
       </ CSSTransitionGroup>
     </div>
   );
