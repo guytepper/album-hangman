@@ -70,10 +70,7 @@ class App extends Component {
         this.setState({
           HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
         });
-      }
-
-      // Wrong guess
-      else {
+      } else {
         this.setState({
           LIVES: this.state.LIVES - 1
         })
