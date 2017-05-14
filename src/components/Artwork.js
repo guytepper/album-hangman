@@ -1,11 +1,8 @@
 import React from 'react'
 
-function Artwork ({ lives, GAME_END, img }) {
-  // Reduce bluriness for each wrong guess
-  let blur = lives * 10;
-  
-  if ( GAME_END ) {
-    blur = 0;
+function Artwork ({ img, blurLevel, GAME_END }) {
+  if (GAME_END) {
+    blurLevel = 0;
   }
 
   const artworkStyle = {
@@ -13,7 +10,7 @@ function Artwork ({ lives, GAME_END, img }) {
     width: '250px',
     height: '250px',
     backgroundColor: 'grey',
-    filter: `blur(${blur}px)`,
+    filter: `blur(${blurLevel}px)`,
     transition: 'filter .5s ease-in-out'
  };
 

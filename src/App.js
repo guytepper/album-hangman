@@ -163,7 +163,7 @@ class App extends Component {
 
     return (
       <div className='game'>
-        <Artwork lives={ this.state.LIVES } img={ this.state.ALBUM_IMG } GAME_END={this.state.GAME_END}/>
+        <Artwork img={ this.state.ALBUM_IMG } blurLevel={ this.state.LIVES * 10 } GAME_END={this.state.GAME_END}/>
         <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
         <div className='game-stats'>
           <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
