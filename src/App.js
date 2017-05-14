@@ -61,7 +61,7 @@ class App extends Component {
     } 
     else {
       this.setState({
-        GUESSED_LETTERS: GUESSED_LETTERS.concat([letter])
+        GUESSED_LETTERS: GUESSED_LETTERS.concat(letter)
       });
       // Check if letter exists in word
       if ( letterInWord(word, letter) ) {
