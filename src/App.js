@@ -12,12 +12,10 @@ import Hearts from './components/Hearts';
 import {
   getAlbum,
   isKeyCodeAlphabetical,
-  createUnderscoresArr,
   replaceUnderscores,
   letterInWord,
   letterInArray,
-  getIndiciesOfLetter,
-  getRandomInt
+  getIndiciesOfLetter
 } from './Utils';
 
 class App extends Component {
