@@ -17,7 +17,7 @@ class Keyboard extends React.Component {
     return (
       <button key={letter}
               onClick={this.handlePress.bind(this, letter)}
-              className='keyboard-btn' >
+              className='keyboard-btn'>
         { letter }
       </button>
     )

@@ -35,9 +35,9 @@ class App extends Component {
     const keyCode = e.charCode || e.which;
 
     // Checks if the game is in active state
-    if ( this.state.GAME_END === false && this.state.LOADING_ALBUM === false ) {
+    if (this.state.GAME_END === false && this.state.LOADING_ALBUM === false) {
       // Checks if the pressed key is alphabetical
-      if ( isKeyCodeAlphabetical(keyCode) ) {
+      if (isKeyCodeAlphabetical(keyCode)) {
         const letter = String.fromCharCode(keyCode);
         this.handleLetterGuess(letter);
       }
