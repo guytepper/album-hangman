@@ -54,13 +54,15 @@ class App extends Component {
   handleLetterGuess (letter) {
     const word = this.state.ALBUM_NAME;
     const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
-
+    
     // Check if user had already guessed the letter
-    if ( !letterInArray(GUESSED_LETTERS, letter) ) {
+    if (letterInArray(GUESSED_LETTERS, letter)) {
+      return;
+    } 
+    else {
       this.setState({
         GUESSED_LETTERS: GUESSED_LETTERS.concat([letter])
       });
-
       // Check if letter exists in word
       if ( letterInWord(word, letter) ) {
         // Replace the guessed letter in the underscores array
@@ -75,7 +77,7 @@ class App extends Component {
           LIVES: this.state.LIVES - 1
         })
       }
-    }
+    } 
 
     // Check for game lose / win
     if (this.state.LIVES === 0) {
