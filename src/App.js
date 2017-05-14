@@ -58,6 +58,7 @@ class App extends Component {
       return;
     } 
     else {
+      // Add the letter to the guessed letter array
       this.setState({
         guessedLetters: guessedLetters.concat(letter)
       });
