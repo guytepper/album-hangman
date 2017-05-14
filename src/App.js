@@ -129,19 +129,19 @@ class App extends Component {
   }
 
   gameEndMessage() {
-    if ( this.state.GAME_WIN === true ) {
+    if (this.state.GAME_WIN) {
       return <h1>You won! 🎉</h1>;
     }
     
-    if ( this.state.GAME_LOSE === true) {
+    if (this.state.GAME_LOSE) {
       return <h1>You lost. 🤧</h1>;
     }
     
-    return '';
+    return null;
   }
 
   playAgainBtn () {
-    if (this.state.GAME_END === true) {
+    if (this.state.GAME_END) {
       return (
         <button onClick={this.startNewGame} className='pure-button pure-button-primary'>
           Play Again
