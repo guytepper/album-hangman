@@ -22,7 +22,7 @@ class App extends Component {
   constructor ({ match }) {
     super();
     this.state = {
-      LOADING_ALBUM: true
+      loadingAlbum: true
     };
     this.username = match.params.username;
     this.period = match.params.period;
@@ -35,7 +35,7 @@ class App extends Component {
     const keyCode = e.charCode || e.which;
 
     // Checks if the game is in active state
-    if (this.state.GAME_END === false && this.state.LOADING_ALBUM === false) {
+    if (this.state.gameEnd === false && this.state.loadingAlbum === false) {
       // Checks if the pressed key is alphabetical
       if (isKeyCodeAlphabetical(keyCode)) {
         const letter = String.fromCharCode(keyCode);
@@ -44,56 +44,56 @@ class App extends Component {
     }
 
     // Restart game on enter press when the game ends
-    if (keyCode === 13 && this.state.GAME_END) {
+    if (keyCode === 13 && this.state.gameEnd) {
       this.startNewGame();
     }
   }
 
   handleLetterGuess (letter) {
-    const word = this.state.ALBUM_NAME;
-    const GUESSED_LETTERS = this.state.GUESSED_LETTERS;
+    const word = this.state.albumName;
+    const guessedLetters = this.state.guessedLetters;
     
     // Check if user had already guessed the letter
-    if (letterInArray(GUESSED_LETTERS, letter)) {
+    if (letterInArray(guessedLetters, letter)) {
       return;
     } 
     else {
       this.setState({
-        GUESSED_LETTERS: GUESSED_LETTERS.concat(letter)
+        guessedLetters: guessedLetters.concat(letter)
       });
       // Check if letter exists in word
       if ( letterInWord(word, letter) ) {
         // Replace the guessed letter in the underscores array
         const indicies = getIndiciesOfLetter(word, letter);
-        const newHiddenLettersArr = replaceUnderscores(this.state.HIDDEN_LETTERS_ARRAY, letter, indicies);
+        const newHiddenLettersArr = replaceUnderscores(this.state.hiddenLettersArr, letter, indicies);
 
         this.setState({
-          HIDDEN_LETTERS_ARRAY: newHiddenLettersArr
+          hiddenLettersArr: newHiddenLettersArr
         });
       } else {
         this.setState({
-          LIVES: this.state.LIVES - 1
+          lives: this.state.lives - 1
         })
       }
     } 
 
     // Check for game lose / win
-    if (this.state.LIVES === 0) {
+    if (this.state.lives === 0) {
       this.setState({
-        GAME_END: true,
-        GAME_LOSE: true
+        gameEnd: true,
+        gameLose: true
       })
     }
     else if (this.isAlbumNameGuessed()) {
       this.setState({
-        GAME_END: true,
-        GAME_WIN: true
+        gameEnd: true,
+        gameWin: true
       })
     }
   }
 
   isAlbumNameGuessed () {
-    if (this.state.HIDDEN_LETTERS_ARRAY.indexOf('_') === -1) {
+    if (this.state.hiddenLettersArr.indexOf('_') === -1) {
       return true;
     }
     return false;
@@ -101,13 +101,13 @@ class App extends Component {
 
   setNewAlbum () {
     this.setState({
-      LOADING_ALBUM: true
+      loadingAlbum: true
     });
 
     getAlbum(this.username, this.period)    
       .then(albumInfo => {
         this.setState({
-          LOADING_ALBUM: false,
+          loadingAlbum: false,
           ...albumInfo
         });
       })
@@ -116,22 +116,22 @@ class App extends Component {
 
   startNewGame () {    
     this.setState({
-      GUESSED_LETTERS: [],
-      LIVES: 4,
-      GAME_END: false,
-      GAME_WIN: false,
-      GAME_LOSE: false
+      guessedLetters: [],
+      lives: 4,
+      gameEnd: false,
+      gameWin: false,
+      gameLose: false
     });
 
     this.setNewAlbum();
   }
 
   gameEndMessage() {
-    if (this.state.GAME_WIN) {
+    if (this.state.gameWin) {
       return <h1>You won! 🎉</h1>;
     }
     
-    if (this.state.GAME_LOSE) {
+    if (this.state.gameLose) {
       return <h1>You lost. 🤧</h1>;
     }
     
@@ -139,7 +139,7 @@ class App extends Component {
   }
 
   playAgainBtn () {
-    if (this.state.GAME_END) {
+    if (this.state.gameEnd) {
       return (
         <button onClick={this.startNewGame} className='pure-button pure-button-primary'>
           Play Again
@@ -155,17 +155,17 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.ALBUM_NAME) {
+    if (!this.state.albumName) {
       return <h1 className='app'>Loading..</h1>
     }
 
     return (
       <div className='game'>
-        <Artwork img={ this.state.ALBUM_IMG } blurLevel={ this.state.LIVES * 10 } GAME_END={this.state.GAME_END}/>
-        <Word hiddenLetters={ this.state.HIDDEN_LETTERS_ARRAY } />
+        <Artwork img={ this.state.ALBUM_IMG } blurLevel={ this.state.lives * 10 } gameEnd={this.state.gameEnd}/>
+        <Word hiddenLetters={ this.state.hiddenLettersArr } />
         <div className='game-stats'>
-          <GuessedLetters letters={ this.state.GUESSED_LETTERS } />
-          <Hearts lives={ this.state.LIVES } />
+          <GuessedLetters letters={ this.state.guessedLetters } />
+          <Hearts lives={ this.state.lives } />
         </div>
         { this.gameEndMessage() }
         { this.playAgainBtn() }
