@@ -5,10 +5,10 @@ const wordStyle = {
 };
 
 
-function Word(props) {
+function Word({ hiddenLetters }) {
   return (
     <h1 style={ wordStyle }>
-      { props.hiddenLetters }
+      { hiddenLetters }
     </h1>
   );
 }
