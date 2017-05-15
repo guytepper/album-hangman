@@ -18,3 +18,8 @@ it('recives props correctly', () => {
 it('renders blurred artwork', () => {
   expect(artwork.style.filter).toEqual('blur(3px)');
 })
+
+it('displays the artwork unblurred when the game ends', () => {
+  wrapper.setProps({ gameEnd: true });
+  expect(artwork.style.filter).toEqual('blur(0px)');
+})
