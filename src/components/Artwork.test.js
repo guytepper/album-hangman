@@ -9,12 +9,6 @@ const gameEnd = false;
 const wrapper = mount(<Artwork albumImg={ artworkUrl } blurLevel={blurLevel} gameEnd={gameEnd} />);
 const artwork = wrapper.find('img').get(0);
 
-it('recives props correctly', () => {
-  expect(wrapper.props().albumImg).toEqual(artworkUrl);
-  expect(wrapper.props().blurLevel).toEqual(blurLevel);
-  expect(wrapper.props().gameEnd).toEqual(gameEnd);
-});
-
 it('renders blurred artwork', () => {
   expect(artwork.style.filter).toEqual('blur(3px)');
 })
