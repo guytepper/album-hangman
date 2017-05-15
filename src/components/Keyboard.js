@@ -1,7 +1,7 @@
 import React from 'react'
 import './Keyboard.css';
 
-const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 class Keyboard extends React.Component {
   constructor() {
@@ -27,7 +27,7 @@ class Keyboard extends React.Component {
     return (
       <div className='keyboard'>
           {
-            LETTERS.map(letter => this.getButton(letter))
+            letters.map(letter => this.getButton(letter))
           }
       </div>
     );

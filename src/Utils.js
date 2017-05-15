@@ -84,16 +84,17 @@ function getAlbum(username, period = 'overall') {
   return axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
     .then(response => {
       const album = response.data.topalbums.album[getRandomInt(0, 50)];
-      const ALBUM_NAME = album.name.toUpperCase();
-      const ALBUM_NAME_ARR = [...ALBUM_NAME];
-      const ALBUM_IMG = album.image[3]['#text'];
-      const HIDDEN_LETTERS_ARRAY = createUnderscoresArr(ALBUM_NAME_ARR);
+      const albumName = album.name.toUpperCase();
+      const albumNameArr = [...albumName];
+      const albumImg = album.image[3]['#text'];
+      const hiddenLettersArr = createUnderscoresArr(albumNameArr);
 
       return {
-        ALBUM_NAME,
-        ALBUM_NAME_ARR,
-        HIDDEN_LETTERS_ARRAY,
-        ALBUM_IMG
+        album,
+        albumName,
+        albumNameArr,
+        albumImg,
+        hiddenLettersArr
       };
     })
 }

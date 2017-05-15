@@ -62,7 +62,7 @@ class App extends Component {
         guessedLetters: guessedLetters.concat(letter)
       });
       // Check if letter exists in word
-      if ( letterInWord(word, letter) ) {
+      if (letterInWord(word, letter)) {
         // Replace the guessed letter in the underscores array
         const indicies = getIndiciesOfLetter(word, letter);
         const newHiddenLettersArr = replaceUnderscores(this.state.hiddenLettersArr, letter, indicies);
@@ -161,7 +161,7 @@ class App extends Component {
 
     return (
       <div className='game'>
-        <Artwork img={ this.state.ALBUM_IMG } blurLevel={ this.state.lives * 10 } gameEnd={this.state.gameEnd}/>
+        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.state.gameEnd}/>
         <Word hiddenLetters={ this.state.hiddenLettersArr } />
         <div className='game-stats'>
           <GuessedLetters letters={ this.state.guessedLetters } />
