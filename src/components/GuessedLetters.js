@@ -8,12 +8,14 @@ const letterStyle = {
 function GuessedLetters({ letters }) {
   return (
     <div>
-      <h3>Guessed Letters: { 
-        letters.map(letter => {
-          return <span key={ letter } style={ letterStyle }>{ letter }</span>
-        })
-      }</h3>
-      
+      <h3>
+        Guessed Letters:
+        {
+          letters.map(letter => {
+            return <span key={ letter } style={ letterStyle } className="guessed-letter">{ letter }</span>
+          })
+        }
+      </h3>      
     </div>
   );
 }
