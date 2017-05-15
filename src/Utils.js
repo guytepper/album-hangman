@@ -10,6 +10,9 @@ function isAlphabetical(str) {
   return false;
 }
 
+/**
+ * Checks if the pressed key is alphabetical
+ */ 
 function isKeyCodeAlphabetical(keyCode) {
   return (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122)
 }
