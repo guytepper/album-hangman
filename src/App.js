@@ -35,7 +35,7 @@ class App extends Component {
     const keyCode = e.charCode || e.which;
 
     // Checks if the game is in active state
-    if (this.state.gameEnd === false && this.state.loadingAlbum === false) {
+    if (this.gameEnd() === false && this.state.loadingAlbum === false) {
       // Checks if the pressed key is alphabetical
       if (isKeyCodeAlphabetical(keyCode)) {
         const letter = String.fromCharCode(keyCode);
@@ -44,7 +44,7 @@ class App extends Component {
     }
 
     // Restart game on enter press when the game ends
-    if (keyCode === 13 && this.state.gameEnd) {
+    if (keyCode === 13 && this.gameEnd()) {
       this.startNewGame();
     }
   }
@@ -75,21 +75,19 @@ class App extends Component {
           lives: this.state.lives - 1
         })
       }
-    } 
+    }    
+  }
 
-    // Check for game lose / win
-    if (this.state.lives === 0) {
-      this.setState({
-        gameEnd: true,
-        gameLose: true
-      })
-    }
-    else if (this.isAlbumNameGuessed()) {
-      this.setState({
-        gameEnd: true,
-        gameWin: true
-      })
-    }
+  gameWin () {
+    return this.isAlbumNameGuessed();
+  }
+
+  gameLose () {
+    return this.state.lives === 0;
+  }
+
+  gameEnd () {
+    return this.gameWin() || this.gameLose();
   }
 
   isAlbumNameGuessed () {
@@ -118,20 +116,17 @@ class App extends Component {
     this.setState({
       guessedLetters: [],
       lives: 4,
-      gameEnd: false,
-      gameWin: false,
-      gameLose: false
     });
 
     this.setNewAlbum();
   }
 
   gameEndMessage() {
-    if (this.state.gameWin) {
+    if (this.gameWin()) {
       return <h1>You won! 🎉</h1>;
     }
     
-    if (this.state.gameLose) {
+    if (this.gameLose()) {
       return <h1>You lost. 🤧</h1>;
     }
     
@@ -139,7 +134,7 @@ class App extends Component {
   }
 
   playAgainBtn () {
-    if (this.state.gameEnd) {
+    if (this.gameEnd()) {
       return (
         <button onClick={this.startNewGame} className='pure-button pure-button-primary'>
           Play Again
@@ -161,7 +156,7 @@ class App extends Component {
 
     return (
       <div className='game'>
-        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.state.gameEnd}/>
+        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.gameEnd()}/>
         <Word hiddenLetters={ this.state.hiddenLettersArr } />
         <div className='game-stats'>
           <GuessedLetters letters={ this.state.guessedLetters } />
