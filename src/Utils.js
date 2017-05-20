@@ -26,6 +26,8 @@ function createUnderscoresArr(name) {
      if (isAlphabetical(letter)) {
        return '_'
      }
+     // In case the character is non-alphabetical (such as '!'), 
+     // use it instead of hiding it.
      return letter;
    })
 
