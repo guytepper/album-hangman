@@ -44,7 +44,7 @@ class App extends Component {
     }
 
     // Restart game on enter press when the game ends
-    if (keyCode === 13 && this.state.gameEnd) {
+    if (keyCode === 13 && this.gameEnd()) {
       this.startNewGame();
     }
   }
