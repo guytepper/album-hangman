@@ -14,6 +14,8 @@ const heartStyle = {
 }
 
 function Hearts ({ lives }) {
+  if (lives === 0) return null;
+  
   let hearts = [];  
 
   // For each live, display an heart icon
