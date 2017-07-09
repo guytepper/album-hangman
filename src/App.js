@@ -148,6 +148,10 @@ class App extends Component {
   componentDidMount() {
     this.startNewGame();
     window.addEventListener('keydown', this.handleKeyboardPress);
+    window.ga('set', 'page', );
+    window.ga('send', 'pageview', window.location.pathname);
+  }
+
   }
 
   render() {
