@@ -152,6 +152,9 @@ class App extends Component {
     window.ga('send', 'pageview', window.location.pathname);
   }
 
+  componentWillUnmount() {
+    // Remove event listener on page redirection.      
+    window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
   render() {
