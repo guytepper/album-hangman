@@ -27,6 +27,11 @@ class Landing extends React.Component {
     })
   }
 
+  componentDidMount() {
+    window.ga('set', 'page');
+    window.ga('send', 'pageview', window.location.pathname);
+  }
+
   render () {
     return (
       <form className='landing'>

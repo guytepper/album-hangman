@@ -148,6 +148,15 @@ class App extends Component {
   componentDidMount() {
     this.startNewGame();
     window.addEventListener('keydown', this.handleKeyboardPress);
+    if (window.ga) {
+      window.ga('set', 'page');
+      window.ga('send', 'pageview', window.location.pathname);
+    }
+  }
+
+  componentWillUnmount() {
+    // Remove event listener on page redirection.      
+    window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
   render() {
