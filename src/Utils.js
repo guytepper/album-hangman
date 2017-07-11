@@ -86,7 +86,9 @@ function getAlbum(username, period = 'overall') {
   return axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
     .then(response => {
       if (response.data.error) throw response.data.message;
-      const album = response.data.topalbums.album[getRandomInt(0, 50)];
+      const albumsArr = response.data.topalbums.album; // array of albums
+      if (response.data.topalbums.album.length === 0) throw 'No albums found for the time period';
+      const album = album[getRandomInt(0, 50)];
       const albumName = album.name.toUpperCase();
       const albumNameArr = [...albumName];
       const albumImg = album.image[3]['#text'];
