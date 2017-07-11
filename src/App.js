@@ -130,11 +130,11 @@ class App extends Component {
 
   gameEndMessage() {
     if (this.gameWin()) {
-      return <h1 className="game-status-msg">You won! 🎉</h1>;
+      return <h1 className="game-status-msg">You won! <span role="img" aria-label="Party Popper">🎉</span></h1>;
     }
     
     if (this.gameLose()) {
-      return <h1 className="game-status-msg">You lost. 🤧</h1>;
+      return <h1 className="game-status-msg">You lost. <span role="img" aria-label="Sneezing">🤧</span></h1>;
     }
     
     return null;
@@ -171,7 +171,7 @@ class App extends Component {
         <div>
           <h1>{ this.state.error }.</h1>
           <Link to={'/'}>
-            <button className='pure-button-primary pure-button'>Try again? 👹</button>
+            <button className='pure-button-primary pure-button'>Try again? <span role="img" aria-label="Ogre">👹</span></button>
           </Link>
         </div>
       );

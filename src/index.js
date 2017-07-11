@@ -18,8 +18,8 @@ ReactDOM.render(
         <Route path={'/game/:username/:period?'} component={App} />
       </div>
       <footer>
-        <a href='https://github.com/guytepper/album-hangman' target='_blank'>
-          <img src='/github.svg' alt='View on GitHub' target='_blank' className='github-icon' />
+        <a href='https://github.com/guytepper/album-hangman'>
+          <img src='/github.svg' alt='View on GitHub' className='github-icon' />
         </a>      
       </footer>
     </div>

@@ -13,7 +13,8 @@
     "enzyme": "^2.8.2",
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
-    "react-scripts": "0.9.5"
+    "react-scripts": "1.0.10",
+    "react-test-renderer": "^15.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
