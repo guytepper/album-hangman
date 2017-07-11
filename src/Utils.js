@@ -85,10 +85,9 @@ function createUnderscoresArr(name) {
 function getAlbum(username, period = 'overall') {
   return axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
     .then(response => {
-      if (response.data.error) throw response.data.message;
+      if (response.data.error) return Promise.reject(response.data.message);
       const albumsArr = response.data.topalbums.album; // array of albums
-      if (response.data.topalbums.album.length === 0) throw 'No albums found for the time period';
-      const album = album[getRandomInt(0, 50)];
+      if (response.data.topalbums.album.length === 0) return Promise.reject('No albums found for the time period');
       const album = albumsArr[getRandomInt(0, 50)];
       const albumName = album.name.toUpperCase();
       const albumNameArr = [...albumName];
