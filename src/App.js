@@ -124,11 +124,11 @@ class App extends Component {
 
   gameEndMessage() {
     if (this.gameWin()) {
-      return <h1>You won! 🎉</h1>;
+      return <h1 className="game-status-msg">You won! 🎉</h1>;
     }
     
     if (this.gameLose()) {
-      return <h1>You lost. 🤧</h1>;
+      return <h1 className="game-status-msg">You lost. 🤧</h1>;
     }
     
     return null;
