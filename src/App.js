@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './App.css';
 import './assets/buttons.css';
@@ -22,7 +23,8 @@ class App extends Component {
   constructor ({ match }) {
     super();
     this.state = {
-      loadingAlbum: true
+      loadingAlbum: true,
+      error: null
     };
     this.username = match.params.username;
     this.period = match.params.period;
@@ -104,13 +106,17 @@ class App extends Component {
     });
 
     getAlbum(this.username, this.period)    
-      .then(albumInfo => {
+      .then(albumInfo => {        
         this.setState({
           loadingAlbum: false,
           ...albumInfo
         });
-      })
-      .catch(err => console.log(err));
+      })      
+      .catch(err => {
+        this.setState({
+          error: err
+        })
+      });
   }
 
   startNewGame () {    
@@ -160,6 +166,17 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.error) {
+      return (
+        <div>
+          <h1>{ this.state.error }.</h1>
+          <Link to={'/'}>
+            <button className='landing-btn button-primary pure-button'>Try again? 👹</button>
+          </Link>
+        </div>
+      );
+    }
+
     if (!this.state.albumName) {
       return <h1 className='app'>Loading..</h1>
     }
