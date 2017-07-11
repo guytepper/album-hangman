@@ -18,12 +18,6 @@
   box-sizing: border-box;
 }
 
-.landing-btn {
-  width: 200px;
-  height: auto;
-  color: white;
-}
-
 .landing-period {
   display: flex;
   flex-direction: column;
