@@ -171,7 +171,7 @@ class App extends Component {
         <div>
           <h1>{ this.state.error }.</h1>
           <Link to={'/'}>
-            <button className='button-primary pure-button'>Try again? 👹</button>
+            <button className='pure-button-primary pure-button'>Try again? 👹</button>
           </Link>
         </div>
       );
