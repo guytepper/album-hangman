@@ -89,6 +89,7 @@ function getAlbum(username, period = 'overall') {
       const albumsArr = response.data.topalbums.album; // array of albums
       if (response.data.topalbums.album.length === 0) throw 'No albums found for the time period';
       const album = album[getRandomInt(0, 50)];
+      const album = albumsArr[getRandomInt(0, 50)];
       const albumName = album.name.toUpperCase();
       const albumNameArr = [...albumName];
       const albumImg = album.image[3]['#text'];
