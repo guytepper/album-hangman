@@ -61,7 +61,7 @@ class Landing extends React.Component {
           </label>
         </div>
 
-        <Link to={`/game/${this.state.username}/${this.state.period}`}>
+        <Link to={`/game/${this.state.username}/${this.state.period}`} style={!this.state.username ? {pointerEvents: "none"} : null}>
           <button className='button-success pure-button' disabled={!this.state.username}>Let's play! <span role="img" aria-label="Clown">🤡</span></button>
         </Link>
       </form>
