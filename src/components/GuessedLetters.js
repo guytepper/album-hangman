@@ -9,7 +9,7 @@ function GuessedLetters({ letters }) {
   return (
     <div>
       <h3>
-        Guessed Letters:
+        Guessed Letters:&nbsp;
         {
           letters.map(letter => {
             return <span key={ letter } style={ letterStyle } className="guessed-letter">{ letter }</span>
