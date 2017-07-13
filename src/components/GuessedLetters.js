@@ -1,6 +1,7 @@
 import React from 'react'
 
 const letterStyle = {
+  fontWeight: 'normal',
   letterSpacing: '3px',
 };
 
