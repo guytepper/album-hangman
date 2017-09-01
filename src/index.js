@@ -17,7 +17,7 @@ ReactDOM.render(
       <div className='container'>
         <Switch>
           <Route path={'/game/:username/:period?/:isHardMode?'} component={App} />
-          <Route path='/' component={Landing} />
+          <Route path={'/:username?/:period?/:isHardMode?'} component={Landing} />
         </Switch>
       </div>
       <footer>

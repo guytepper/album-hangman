@@ -4,12 +4,13 @@ import '../assets/buttons.css';
 import './Landing.css';
 
 class Landing extends React.Component {
-  constructor () {
+  constructor ({match}) {
     super();
+    console.log(match);
     this.state = {
-      username: '',
-      period: '12month',
-      isHardMode : false
+      username: match.params.username,
+      period: (!match.params.period?'12month': match.params.period),
+      isHardMode : (match.params.isHardMode === 'true')
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);

@@ -171,7 +171,7 @@ class App extends Component {
       return (
         <div>
           <h1>{ this.state.error }.</h1>
-          <Link to={'/'}>
+          <Link to={`/${this.username}/${this.period}/${this.state.isHardMode}`}>
             <button className='pure-button-primary pure-button'>Try again? <span role="img" aria-label="Ogre">👹</span></button>
           </Link>
         </div>
@@ -193,7 +193,7 @@ class App extends Component {
         { this.gameEndMessage() }
         { this.playAgainBtn() }
         <Keyboard onPress={ this.handleLetterGuess } />
-        <Link className='game-change-settings-link' to={'/'}>Settings</Link>
+        <Link className='game-change-settings-link' to={`/${this.username}/${this.period}/${this.state.isHardMode}`}>Settings</Link>
       </div>
     );
   }
