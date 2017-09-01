@@ -189,11 +189,11 @@ class App extends Component {
         <div className='game-stats'>
           <GuessedLetters letters={ this.state.guessedLetters } />
           <Hearts lives={ this.state.lives } />
-        </div
+        </div>
         { this.gameEndMessage() }
         { this.playAgainBtn() }
         <Keyboard onPress={ this.handleLetterGuess } />
-        <Link className='game-change-settings-link' to={`/`}>Settings</Link>
+        <Link className='game-change-settings-link' to={'/'}>Settings</Link>
       </div>
     );
   }
