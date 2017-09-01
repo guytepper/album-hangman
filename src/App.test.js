@@ -11,3 +11,14 @@ it('renders without crashing', () => {
     }
   }}/>, div);
 });
+
+it('renders without artworks and without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App match={{
+    params: {
+      username: 'avicooli',
+      period: 'overall',
+      hideArtwork: 'hard'
+    }
+  }}/>, div);
+});

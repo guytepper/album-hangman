@@ -28,6 +28,8 @@
   display: flex;
 }
 
-.langing-hard-mode {
+.landing-advanced-options {
+  display: flex;
+  flex-direction: column;
   margin: 10px;
 }

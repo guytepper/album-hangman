@@ -16,8 +16,8 @@ ReactDOM.render(
       <h1>Album Hangman</h1>
       <div className='container'>
         <Switch>
-          <Route path={'/game/:username/:period?/:isHardMode?'} component={App} />
-          <Route path={'/:username?/:period?/:isHardMode?'} component={Landing} />
+          <Route path={'/game/:username/:period?/:hideArtwork?'} component={App} />
+          <Route path={'/:username?/:period?/:hideArtwork?'} component={Landing} />
         </Switch>
       </div>
       <footer>

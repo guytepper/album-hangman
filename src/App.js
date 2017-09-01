@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-import './App.css';
-import './assets/buttons.css';
+import "./App.css";
+import "./assets/buttons.css";
 
-import Artwork from './components/Artwork';
-import Word from './components/Word';
-import GuessedLetters from './components/GuessedLetters';
-import Keyboard from './components/Keyboard';
-import Hearts from './components/Hearts';
+import Artwork from "./components/Artwork";
+import Word from "./components/Word";
+import GuessedLetters from "./components/GuessedLetters";
+import Keyboard from "./components/Keyboard";
+import Hearts from "./components/Hearts";
 
 import {
   getAlbum,
@@ -17,24 +17,25 @@ import {
   letterInWord,
   letterInArray,
   getIndiciesOfLetter
-} from './Utils';
+} from "./Utils";
 
 class App extends Component {
-  constructor ({ match }) {
+  constructor({ match }) {
     super();
+    let _hideArtWork = match.params.hideArtwork === "hard";
     this.state = {
       loadingAlbum: true,
       error: null,
-      isHardMode: (match.params.isHardMode === 'hard')
+      hideArtwork: _hideArtWork
     };
     this.username = match.params.username;
-    this.period = match.params.period;
+    this.period = (!match.params.period ? '12month' : match.params.period);
     this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
   }
 
-  handleKeyboardPress (e) {
+  handleKeyboardPress(e) {
     const keyCode = e.charCode || e.which;
 
     // Checks if the game is in active state
@@ -52,15 +53,14 @@ class App extends Component {
     }
   }
 
-  handleLetterGuess (letter) {
+  handleLetterGuess(letter) {
     const word = this.state.albumName;
     const guessedLetters = this.state.guessedLetters;
 
     // Check if user had already guessed the letter
     if (letterInArray(guessedLetters, letter)) {
       return;
-    }
-    else {
+    } else {
       // Add the letter to the guessed letter array
       this.setState({
         guessedLetters: guessedLetters.concat(letter)
@@ -69,7 +69,11 @@ class App extends Component {
       if (letterInWord(word, letter)) {
         // Replace the guessed letter in the underscores array
         const indicies = getIndiciesOfLetter(word, letter);
-        const newHiddenLettersArr = replaceUnderscores(this.state.hiddenLettersArr, letter, indicies);
+        const newHiddenLettersArr = replaceUnderscores(
+          this.state.hiddenLettersArr,
+          letter,
+          indicies
+        );
 
         this.setState({
           hiddenLettersArr: newHiddenLettersArr
@@ -77,31 +81,31 @@ class App extends Component {
       } else {
         this.setState({
           lives: this.state.lives - 1
-        })
+        });
       }
     }
   }
 
-  gameWin () {
+  gameWin() {
     return this.isAlbumNameGuessed();
   }
 
-  gameLose () {
+  gameLose() {
     return this.state.lives === 0;
   }
 
-  gameEnd () {
+  gameEnd() {
     return this.gameWin() || this.gameLose();
   }
 
-  isAlbumNameGuessed () {
-    if (this.state.hiddenLettersArr.indexOf('_') === -1) {
+  isAlbumNameGuessed() {
+    if (this.state.hiddenLettersArr.indexOf("_") === -1) {
       return true;
     }
     return false;
   }
 
-  setNewAlbum () {
+  setNewAlbum() {
     this.setState({
       loadingAlbum: true
     });
@@ -116,14 +120,14 @@ class App extends Component {
       .catch(err => {
         this.setState({
           error: err
-        })
+        });
       });
   }
 
-  startNewGame () {
+  startNewGame() {
     this.setState({
       guessedLetters: [],
-      lives: 4,
+      lives: 4
     });
 
     this.setNewAlbum();
@@ -131,69 +135,111 @@ class App extends Component {
 
   gameEndMessage() {
     if (this.gameWin()) {
-      return <h1 className="game-status-msg">You won! <span role="img" aria-label="Party Popper">🎉</span></h1>;
+      return (
+        <h1 className="game-status-msg">
+          You won!{" "}
+          <span role="img" aria-label="Party Popper">
+            🎉
+          </span>
+        </h1>
+      );
     }
 
     if (this.gameLose()) {
-      return <h1 className="game-status-msg">You lost. <span role="img" aria-label="Sneezing">🤧</span></h1>;
+      return (
+        <h1 className="game-status-msg">
+          You lost.{" "}
+          <span role="img" aria-label="Sneezing">
+            🤧
+          </span>
+        </h1>
+      );
     }
 
     return null;
   }
 
-  playAgainBtn () {
+  playAgainBtn() {
     if (this.gameEnd()) {
       return (
-        <button onClick={this.startNewGame} className='pure-button pure-button-primary'>
+        <button
+          onClick={this.startNewGame}
+          className="pure-button pure-button-primary"
+        >
           Play Again
         </button>
-      )
+      );
     }
     return null;
   }
 
   componentDidMount() {
     this.startNewGame();
-    window.addEventListener('keydown', this.handleKeyboardPress);
+    window.addEventListener("keydown", this.handleKeyboardPress);
     if (window.ga) {
-      window.ga('set', 'page');
-      window.ga('send', 'pageview', window.location.pathname);
+      window.ga("set", "page");
+      window.ga("send", "pageview", window.location.pathname);
     }
   }
 
   componentWillUnmount() {
     // Remove event listener on page redirection.
-    window.removeEventListener('keydown', this.handleKeyboardPress);
+    window.removeEventListener("keydown", this.handleKeyboardPress);
   }
 
   render() {
     if (this.state.error) {
       return (
         <div>
-          <h1>{ this.state.error }.</h1>
-          <Link to={`/${this.username}/${this.period}/${this.state.isHardMode}`}>
-            <button className='pure-button-primary pure-button'>Try again? <span role="img" aria-label="Ogre">👹</span></button>
+          <h1>{this.state.error}.</h1>
+          <Link
+            to={`/${this.username}/${this.period}/${this.state.hideArtwork}`}
+          >
+            <button className="pure-button-primary pure-button">
+              Try again?{" "}
+              <span role="img" aria-label="Ogre">
+                👹
+              </span>
+            </button>
           </Link>
         </div>
       );
     }
 
     if (!this.state.albumName) {
-      return <h1 className='app'>Loading..</h1>
+      return <h1 className="app">Loading..</h1>;
     }
 
     return (
-      <div className='game'>
-        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.gameEnd()} hidden={this.state.isHardMode}/>
-        <Word hiddenLetters={ this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr } />
-        <div className='game-stats'>
-          <GuessedLetters letters={ this.state.guessedLetters } />
-          <Hearts lives={ this.state.lives } />
+      <div className="game">
+        <Artwork
+          img={this.state.albumImg}
+          blurLevel={this.state.lives * 10}
+          gameEnd={this.gameEnd()}
+          hidden={this.state.hideArtwork}
+        />
+        <Word
+          hiddenLetters={
+            this.gameEnd() ? (
+              this.state.albumNameArr
+            ) : (
+              this.state.hiddenLettersArr
+            )
+          }
+        />
+        <div className="game-stats">
+          <GuessedLetters letters={this.state.guessedLetters} />
+          <Hearts lives={this.state.lives} />
         </div>
-        { this.gameEndMessage() }
-        { this.playAgainBtn() }
-        <Keyboard onPress={ this.handleLetterGuess } />
-        <Link className='game-change-settings-link' to={`/${this.username}/${this.period}/${this.state.isHardMode}`}>Settings</Link>
+        {this.gameEndMessage()}
+        {this.playAgainBtn()}
+        <Keyboard onPress={this.handleLetterGuess} />
+        <Link
+          className="game-change-settings-link"
+          to={`/${this.username}/${this.period}/${this.state.hideArtwork}`}
+        >
+          Settings
+        </Link>
       </div>
     );
   }
