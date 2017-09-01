@@ -14,13 +14,13 @@ ReactDOM.render(
     <div className='app'>
       <h1>Album Hangman</h1>
       <div className='container'>
-        <Route exact path={'/'} component={Landing} />
-        <Route path={'/game/:username/:period?'} component={App} />
+        <Route exact path='/' component={Landing} />
+        <Route path={'/game/:username/:period?/:isHardMode?'} component={App} />
       </div>
       <footer>
         <a href='https://github.com/guytepper/album-hangman'>
           <img src='/github.svg' alt='View on GitHub' className='github-icon' />
-        </a>      
+        </a>
       </footer>
     </div>
   </Router>,

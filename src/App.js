@@ -24,7 +24,8 @@ class App extends Component {
     super();
     this.state = {
       loadingAlbum: true,
-      error: null
+      error: null,
+      isHardMode: (match.params.isHardMode === 'hard')
     };
     this.username = match.params.username;
     this.period = match.params.period;
@@ -54,11 +55,11 @@ class App extends Component {
   handleLetterGuess (letter) {
     const word = this.state.albumName;
     const guessedLetters = this.state.guessedLetters;
-    
+
     // Check if user had already guessed the letter
     if (letterInArray(guessedLetters, letter)) {
       return;
-    } 
+    }
     else {
       // Add the letter to the guessed letter array
       this.setState({
@@ -78,7 +79,7 @@ class App extends Component {
           lives: this.state.lives - 1
         })
       }
-    }    
+    }
   }
 
   gameWin () {
@@ -105,13 +106,13 @@ class App extends Component {
       loadingAlbum: true
     });
 
-    getAlbum(this.username, this.period)    
-      .then(albumInfo => {        
+    getAlbum(this.username, this.period)
+      .then(albumInfo => {
         this.setState({
           loadingAlbum: false,
           ...albumInfo
         });
-      })      
+      })
       .catch(err => {
         this.setState({
           error: err
@@ -119,7 +120,7 @@ class App extends Component {
       });
   }
 
-  startNewGame () {    
+  startNewGame () {
     this.setState({
       guessedLetters: [],
       lives: 4,
@@ -132,11 +133,11 @@ class App extends Component {
     if (this.gameWin()) {
       return <h1 className="game-status-msg">You won! <span role="img" aria-label="Party Popper">🎉</span></h1>;
     }
-    
+
     if (this.gameLose()) {
       return <h1 className="game-status-msg">You lost. <span role="img" aria-label="Sneezing">🤧</span></h1>;
     }
-    
+
     return null;
   }
 
@@ -161,7 +162,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    // Remove event listener on page redirection.      
+    // Remove event listener on page redirection.
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
@@ -183,15 +184,16 @@ class App extends Component {
 
     return (
       <div className='game'>
-        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.gameEnd()}/>
+        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.gameEnd()} hidden={this.state.isHardMode}/>
         <Word hiddenLetters={ this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr } />
         <div className='game-stats'>
           <GuessedLetters letters={ this.state.guessedLetters } />
           <Hearts lives={ this.state.lives } />
-        </div>
+        </div
         { this.gameEndMessage() }
         { this.playAgainBtn() }
         <Keyboard onPress={ this.handleLetterGuess } />
+        <Link className='game-change-settings-link' to={`/`}>Settings</Link>
       </div>
     );
   }
