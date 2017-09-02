@@ -34,7 +34,7 @@ class Landing extends React.Component {
 
   handleHideArtworkChange(event) {
     this.setState({
-      hideArtwork: event.target.value
+      hideArtwork: event.target.checked
     });
   }
 
@@ -121,7 +121,7 @@ class Landing extends React.Component {
               type="checkbox"
               onChange={this.handleHideArtworkChange}
               name="hideArtwork"
-              defaultChecked={this.state.hideArtwork}
+              checked={this.state.hideArtwork}
             />
             Hide Artwork
           </label>
