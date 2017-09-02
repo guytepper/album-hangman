@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../assets/buttons.css";
-import "./Landing.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../assets/buttons.css';
+import './Landing.css';
 
 class Landing extends React.Component {
   constructor({ match }) {
@@ -39,8 +39,8 @@ class Landing extends React.Component {
   }
 
   componentDidMount() {
-    window.ga("set", "page");
-    window.ga("send", "pageview", window.location.pathname);
+    window.ga('set', 'page');
+    window.ga('send', 'pageview', window.location.pathname);
   }
 
   render() {
@@ -55,7 +55,7 @@ class Landing extends React.Component {
           autoFocus
         />
 
-        <div className="landing-period">
+        <div className='landing-period'>
           <u>Period</u>
           <label>
             <input
@@ -138,7 +138,7 @@ class Landing extends React.Component {
             className="button-success pure-button"
             disabled={!this.state.username}
           >
-            Let's play!{" "}
+            Let's play!
             <span role="img" aria-label="Clown">
               🤡
             </span>

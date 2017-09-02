@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-import "./App.css";
-import "./assets/buttons.css";
+import './App.css';
+import './assets/buttons.css';
 
-import Artwork from "./components/Artwork";
-import Word from "./components/Word";
-import GuessedLetters from "./components/GuessedLetters";
-import Keyboard from "./components/Keyboard";
-import Hearts from "./components/Hearts";
+import Artwork from './components/Artwork';
+import Word from './components/Word';
+import GuessedLetters from './components/GuessedLetters';
+import Keyboard from './components/Keyboard';
+import Hearts from './components/Hearts';
 
 import {
   getAlbum,
@@ -17,12 +17,12 @@ import {
   letterInWord,
   letterInArray,
   getIndiciesOfLetter
-} from "./Utils";
+} from './Utils';
 
 class App extends Component {
   constructor({ match }) {
     super();
-    let _hideArtWork = match.params.hideArtwork === "hard";
+    let _hideArtWork = match.params.hideArtwork === 'hard';
     this.state = {
       loadingAlbum: true,
       error: null,
@@ -99,7 +99,7 @@ class App extends Component {
   }
 
   isAlbumNameGuessed() {
-    if (this.state.hiddenLettersArr.indexOf("_") === -1) {
+    if (this.state.hiddenLettersArr.indexOf('_') === -1) {
       return true;
     }
     return false;
@@ -136,9 +136,9 @@ class App extends Component {
   gameEndMessage() {
     if (this.gameWin()) {
       return (
-        <h1 className="game-status-msg">
-          You won!{" "}
-          <span role="img" aria-label="Party Popper">
+        <h1 className='game-status-msg'>
+          You won!{' '}
+          <span role='img' aria-label='Party Popper'>
             🎉
           </span>
         </h1>
@@ -147,9 +147,9 @@ class App extends Component {
 
     if (this.gameLose()) {
       return (
-        <h1 className="game-status-msg">
-          You lost.{" "}
-          <span role="img" aria-label="Sneezing">
+        <h1 className='game-status-msg'>
+          You lost.{' '}
+          <span role='img' aria-label='Sneezing'>
             🤧
           </span>
         </h1>
@@ -164,7 +164,7 @@ class App extends Component {
       return (
         <button
           onClick={this.startNewGame}
-          className="pure-button pure-button-primary"
+          className='pure-button pure-button-primary'
         >
           Play Again
         </button>
@@ -175,16 +175,16 @@ class App extends Component {
 
   componentDidMount() {
     this.startNewGame();
-    window.addEventListener("keydown", this.handleKeyboardPress);
+    window.addEventListener('keydown', this.handleKeyboardPress);
     if (window.ga) {
-      window.ga("set", "page");
-      window.ga("send", "pageview", window.location.pathname);
+      window.ga('set', 'page');
+      window.ga('send', 'pageview', window.location.pathname);
     }
   }
 
   componentWillUnmount() {
     // Remove event listener on page redirection.
-    window.removeEventListener("keydown", this.handleKeyboardPress);
+    window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
   render() {
@@ -195,9 +195,9 @@ class App extends Component {
           <Link
             to={`/${this.username}/${this.period}/${this.state.hideArtwork}`}
           >
-            <button className="pure-button-primary pure-button">
-              Try again?{" "}
-              <span role="img" aria-label="Ogre">
+            <button className='pure-button-primary pure-button'>
+              Try again?{' '}
+              <span role='img' aria-label='Ogre'>
                 👹
               </span>
             </button>
@@ -207,11 +207,11 @@ class App extends Component {
     }
 
     if (!this.state.albumName) {
-      return <h1 className="app">Loading..</h1>;
+      return <h1 className='app'>Loading..</h1>;
     }
 
     return (
-      <div className="game">
+      <div className='game'>
         <Artwork
           img={this.state.albumImg}
           blurLevel={this.state.lives * 10}
@@ -227,7 +227,7 @@ class App extends Component {
             )
           }
         />
-        <div className="game-stats">
+        <div className='game-stats'>
           <GuessedLetters letters={this.state.guessedLetters} />
           <Hearts lives={this.state.lives} />
         </div>
@@ -235,7 +235,7 @@ class App extends Component {
         {this.playAgainBtn()}
         <Keyboard onPress={this.handleLetterGuess} />
         <Link
-          className="game-change-settings-link"
+          className='game-change-settings-link'
           to={`/${this.username}/${this.period}/${this.state.hideArtwork}`}
         >
           Settings
