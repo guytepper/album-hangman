@@ -5,11 +5,6 @@ function Artwork({ img, blurLevel, gameEnd, hidden }) {
     blurLevel = 0;
   }
 
-  // Make the last guess a bit harder
-  if (blurLevel === 10) {
-    blurLevel = 17;
-  }
-
   const artworkStyle = {
     margin: '10px auto',
     width: '250px',
