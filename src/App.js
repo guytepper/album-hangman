@@ -19,6 +19,9 @@ import {
   getIndiciesOfLetter
 } from './Utils';
 
+// How many bad albm name fails in a row are allowed?
+const ALBUM_FAIL_COUNT_MAX = 10;
+
 class App extends Component {
   constructor ({ match }) {
     super();
