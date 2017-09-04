@@ -186,7 +186,7 @@ class App extends Component {
     if (this.state.error) {
       return (
         <div>
-          <h1>{ this.state.error }.</h1>
+          <h1>{ this.state.error }</h1>
           <Link to={'/'}>
             <button className='pure-button-primary pure-button'>Try again? <span role="img" aria-label="Ogre">👹</span></button>
           </Link>
