@@ -105,8 +105,9 @@ class App extends Component {
       loadingAlbum: true
     });
 
-    getAlbum(this.username, this.period)    
-      .then(albumInfo => {        
+    getAlbum(this.username, this.period)
+      .then(albumInfo => {
+        // Make sure there are letters to unfold, if not, try reloading an album
         this.setState({
           loadingAlbum: false,
           ...albumInfo
