@@ -34,6 +34,8 @@ class App extends Component {
     this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
+    // count how many times user failed to provide a valid album name
+    this.albumFailCount = 0;
   }
 
   handleKeyboardPress (e) {
@@ -111,6 +113,17 @@ class App extends Component {
     getAlbum(this.username, this.period)
       .then(albumInfo => {
         // Make sure there are letters to unfold, if not, try reloading an album
+        if (albumInfo.hiddenLettersArr.indexOf('_') === -1){
+          this.albumFailCount++;
+          if(this.albumFailCount < ALBUM_FAIL_COUNT_MAX) return this.setNewAlbum();
+          else
+          {
+            this.albumFailCount = 0;
+            this.setState({ error: "Couldn't find any English album names :'{" });
+            return;
+          }
+        }
+        this.albumFailCount = 0;
         this.setState({
           loadingAlbum: false,
           ...albumInfo
