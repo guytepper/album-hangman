@@ -130,6 +130,8 @@ class App extends Component {
         });
       })      
       .catch(err => {
+        // Api errors usualy missing a period, if so append it for better UX
+        err = ( err.endsWith('.') ? err : err + '.' );
         this.setState({
           error: err
         })
