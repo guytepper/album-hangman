@@ -19,6 +19,9 @@ import {
   getIndiciesOfLetter
 } from './Utils';
 
+// How many bad albm name fails in a row are allowed?
+const ALBUM_FAIL_COUNT_MAX = 10;
+
 class App extends Component {
   constructor ({ match }) {
     super();
@@ -31,6 +34,8 @@ class App extends Component {
     this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
+    // count how many times user failed to provide a valid album name
+    this.albumFailCount = 0;
   }
 
   handleKeyboardPress (e) {
@@ -94,7 +99,7 @@ class App extends Component {
   }
 
   isAlbumNameGuessed () {
-    if (this.state.hiddenLettersArr.indexOf('_') === -1) {
+    if (this.state.hiddenLettersArr && this.state.hiddenLettersArr.indexOf('_') === -1) {
       return true;
     }
     return false;
@@ -105,14 +110,28 @@ class App extends Component {
       loadingAlbum: true
     });
 
-    getAlbum(this.username, this.period)    
-      .then(albumInfo => {        
+    getAlbum(this.username, this.period)
+      .then(albumInfo => {
+        // Make sure there are letters to unfold, if not, try reloading an album
+        if (albumInfo.hiddenLettersArr.indexOf('_') === -1){
+          this.albumFailCount++;
+          if(this.albumFailCount < ALBUM_FAIL_COUNT_MAX) return this.setNewAlbum();
+          else
+          {
+            this.albumFailCount = 0;
+            this.setState({ error: "Couldn't find any English album names :'{" });
+            return;
+          }
+        }
+        this.albumFailCount = 0;
         this.setState({
           loadingAlbum: false,
           ...albumInfo
         });
       })      
       .catch(err => {
+        // Api errors usualy missing a period, if so append it for better UX
+        err = err.endsWith('.') ? err : err + '.';
         this.setState({
           error: err
         })
@@ -169,7 +188,7 @@ class App extends Component {
     if (this.state.error) {
       return (
         <div>
-          <h1>{ this.state.error }.</h1>
+          <h1>{ this.state.error }</h1>
           <Link to={'/'}>
             <button className='pure-button-primary pure-button'>Try again? <span role="img" aria-label="Ogre">👹</span></button>
           </Link>
