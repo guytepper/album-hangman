@@ -60,7 +60,7 @@ class App extends Component {
       return;
     } 
     else {
-      // Add the letter to the guessed letter array
+      // Add the letter to the guessed letters array
       this.setState({
         guessedLetters: guessedLetters.concat(letter)
       });
@@ -117,7 +117,7 @@ class App extends Component {
         });
       })      
       .catch(err => {
-        // Api errors usualy missing a period, if so append it for better UX
+        // Last.FM API errors usualy missing a period, if so append it for better UX
         err = err.endsWith('.') ? err : err + '.';
         this.setState({
           error: err
@@ -167,7 +167,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    // Remove event listener on page redirection.      
+    // Remove event listener on page redirection
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
