@@ -19,9 +19,6 @@ import {
   getIndiciesOfLetter
 } from './Utils';
 
-// How many bad albm name fails in a row are allowed?
-const ALBUM_FAIL_COUNT_MAX = 10;
-
 class App extends Component {
   constructor ({ match }) {
     super();
@@ -34,8 +31,6 @@ class App extends Component {
     this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
-    // count how many times user failed to provide a valid album name
-    this.albumFailCount = 0;
   }
 
   handleKeyboardPress (e) {
@@ -112,18 +107,10 @@ class App extends Component {
 
     getAlbum(this.username, this.period)
       .then(albumInfo => {
-        // Make sure there are letters to unfold, if not, try reloading an album
-        if (albumInfo.hiddenLettersArr.indexOf('_') === -1){
-          this.albumFailCount++;
-          if(this.albumFailCount < ALBUM_FAIL_COUNT_MAX) return this.setNewAlbum();
-          else
-          {
-            this.albumFailCount = 0;
-            this.setState({ error: "Couldn't find any English album names :'{" });
-            return;
-          }
+        // Make sure there are letters to unfold, if not try reloading a new album
+        if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
+          return this.setNewAlbum();
         }
-        this.albumFailCount = 0;
         this.setState({
           loadingAlbum: false,
           ...albumInfo
