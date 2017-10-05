@@ -20,7 +20,7 @@ function Artwork ({ img, blurLevel, gameEnd }) {
  };
 
   return (
-     <img style={ artworkStyle } src={ img } alt=""/>
+     <img style={ artworkStyle } src={ img } alt="" draggable={false}/>
   );
 }
 
