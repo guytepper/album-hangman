@@ -22,3 +22,4 @@ it('renders without artworks and without crashing', () => {
     }
   }}/>, div);
 });
+

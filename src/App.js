@@ -100,6 +100,7 @@ class App extends Component {
 
   isAlbumNameGuessed() {
     if (this.state.hiddenLettersArr.indexOf('_') === -1) {
+    if (this.state.hiddenLettersArr && this.state.hiddenLettersArr.indexOf('_') === -1) {
       return true;
     }
     return false;
@@ -112,12 +113,18 @@ class App extends Component {
 
     getAlbum(this.username, this.period)
       .then(albumInfo => {
+        // Make sure there are letters to unfold, if not try reloading a new album
+        if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
+          return this.setNewAlbum();
+        }
         this.setState({
           loadingAlbum: false,
           ...albumInfo
         });
       })
       .catch(err => {
+        // Last.FM API errors usualy missing a period, if so append it for better UX
+        err = err.endsWith('.') ? err : err + '.';
         this.setState({
           error: err
         });
@@ -183,7 +190,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    // Remove event listener on page redirection.
+    // Remove event listener on page redirection
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
