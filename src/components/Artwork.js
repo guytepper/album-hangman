@@ -20,7 +20,13 @@ function Artwork ({ img, blurLevel, gameEnd }) {
  };
 
   return (
-     <img style={ artworkStyle } src={ img } alt="" draggable={false}/>
+     <img
+        style={ artworkStyle }
+        src={ img }
+        alt=""
+        draggable={false}
+        onContextMenu = { (e) => e.preventDefault() }
+      />
   );
 }
 
