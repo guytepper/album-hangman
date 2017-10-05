@@ -23,3 +23,12 @@ it('renders without artworks and without crashing', () => {
   }}/>, div);
 });
 
+it('Hebrew listener renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App match={{
+    params: {
+      username: 'yanmusic',
+      period: '12month'
+    }
+  }}/>, div);
+});

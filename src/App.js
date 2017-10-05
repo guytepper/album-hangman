@@ -99,7 +99,6 @@ class App extends Component {
   }
 
   isAlbumNameGuessed() {
-    if (this.state.hiddenLettersArr.indexOf('_') === -1) {
     if (this.state.hiddenLettersArr && this.state.hiddenLettersArr.indexOf('_') === -1) {
       return true;
     }
