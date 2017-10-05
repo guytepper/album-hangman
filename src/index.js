@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom'
 
 import App from './App';
@@ -14,13 +15,15 @@ ReactDOM.render(
     <div className='app'>
       <h1>Album Hangman</h1>
       <div className='container'>
-        <Route exact path={'/'} component={Landing} />
-        <Route path={'/game/:username/:period?'} component={App} />
+        <Switch>
+          <Route path={'/game/:username/:period?/:hideArtwork?'} component={App} />
+          <Route path={'/:username?/:period?/:hideArtwork?'} component={Landing} />
+        </Switch>
       </div>
       <footer>
         <a href='https://github.com/guytepper/album-hangman'>
           <img src='/github.svg' alt='View on GitHub' className='github-icon' />
-        </a>      
+        </a>
       </footer>
     </div>
   </Router>,
