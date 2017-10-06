@@ -191,7 +191,12 @@ class App extends Component {
 
     return (
       <div className='game'>
-        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.gameEnd()}/>
+        <Artwork
+          img={ this.state.albumImg }
+          blurLevel={ this.state.lives * 10 }
+          gameEnd={ this.gameEnd() }
+          hidden={ this.state.hideArtwork }
+        />
         <Word hiddenLetters={ this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr } />
         <div className='game-stats'>
           <GuessedLetters letters={ this.state.guessedLetters } />
