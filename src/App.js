@@ -22,9 +22,11 @@ import {
 class App extends Component {
   constructor ({ match }) {
     super();
+    let _hideArtWork = match.params.hideArtwork === 'hard';
     this.state = {
       loadingAlbum: true,
-      error: null
+      error: null,
+      hideArtwork: _hideArtWork
     };
     this.username = match.params.username;
     this.period = match.params.period;
