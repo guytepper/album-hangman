@@ -42,6 +42,9 @@ class Landing extends React.Component {
   }
 
   render () {
+    let dest = `/game/${this.state.username}/${this.state.period}`;
+    if(this.state.hideArtwork) dest += '/hard';
+
     return (
       <form className='landing'>
         <input onChange={this.handleUsernameChange} value={this.state.username} className='landing-username' type='text' placeholder='Last.FM Username' autoFocus />
@@ -70,7 +73,6 @@ class Landing extends React.Component {
           </label>
         </div>
 
-        <Link to={`/game/${this.state.username}/${this.state.period}`} style={!this.state.username ? {pointerEvents: "none"} : null}>
         <div className="landing-period">
           <u>Advanced</u>
           <label>
@@ -83,6 +85,7 @@ class Landing extends React.Component {
             Hide Artwork
           </label>
         </div>
+        <Link to={dest} style={!this.state.username ? {pointerEvents: "none"} : null}>
           <button className='button-success pure-button' disabled={!this.state.username}>Let's play! <span role="img" aria-label="Clown">🤡</span></button>
         </Link>
       </form>
