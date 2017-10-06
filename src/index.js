@@ -15,7 +15,7 @@ ReactDOM.render(
       <h1>Album Hangman</h1>
       <div className='container'>
         <Route exact path={'/'} component={Landing} />
-        <Route path={'/game/:username/:period?'} component={App} />
+        <Route path={'/game/:username/:period?/:hideArtwork?'} component={App} />
       </div>
       <footer>
         <a href='https://github.com/guytepper/album-hangman'>
