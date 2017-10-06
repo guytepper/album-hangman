@@ -15,6 +15,7 @@ class Landing extends React.Component {
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePeriodChange = this.handlePeriodChange.bind(this);
+    this.handleHideArtworkChange = this.handleHideArtworkChange.bind(this);
   }
 
   handleUsernameChange(event) {
@@ -27,6 +28,12 @@ class Landing extends React.Component {
     this.setState({
       period: event.target.value
     })
+  }
+
+  handleHideArtworkChange(event) {
+    this.setState({
+      hideArtwork: event.target.checked
+    });
   }
 
   componentDidMount() {
