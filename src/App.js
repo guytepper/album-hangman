@@ -205,6 +205,7 @@ class App extends Component {
         { this.gameEndMessage() }
         { this.playAgainBtn() }
         <Keyboard onPress={ this.handleLetterGuess } />
+        <Link className='game-change-settings-link' to='/'>Settings</Link>
       </div>
     );
   }

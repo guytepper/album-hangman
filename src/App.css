@@ -7,3 +7,10 @@
 .game-status-msg {
   margin-top: 0;
 }
+
+.game-change-settings-link{
+  font-size: 12px;
+  display: block;
+  padding: 10px 0 10px;
+  margin-bottom: -25px;
+}
