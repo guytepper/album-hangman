@@ -49,7 +49,7 @@ class Landing extends React.Component {
       <form className='landing'>
         <input onChange={this.handleUsernameChange} value={this.state.username} className='landing-username' type='text' placeholder='Last.FM Username' autoFocus />
 
-        <div className='landing-period'>
+        <div className='landing-section'>
           <u>Period</u>
           <label>
             <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="12month" checked={this.state.period === '12month'} />
@@ -73,7 +73,7 @@ class Landing extends React.Component {
           </label>
         </div>
 
-        <div className="landing-period">
+        <div className="landing-section">
           <u>Advanced</u>
           <label>
             <input
