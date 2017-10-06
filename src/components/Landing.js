@@ -4,7 +4,7 @@ import '../assets/buttons.css';
 import './Landing.css';
 
 class Landing extends React.Component {
-  constructor () {
+  constructor ({ match }) {
     super();
     let _hideArtwork = match.params.hideArtwork === "true";
     this.state = {
