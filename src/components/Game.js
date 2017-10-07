@@ -20,14 +20,14 @@ import {
 } from '../Utils';
 
 class Game extends Component {
-  constructor ({ match }) {
+  constructor (props) {
     super();
     this.state = {
       loadingAlbum: true,
       error: null
     };
-    this.username = match.params.username;
-    this.period = match.params.period;
+    this.username = props.username || props.match.params.username;
+    this.period = props.period || props.match.params.period;
     this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
