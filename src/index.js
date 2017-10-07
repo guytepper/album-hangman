@@ -5,7 +5,7 @@ import {
   Route
 } from 'react-router-dom'
 
-import App from './App';
+import Game from './components/Game';
 import Landing from './components/Landing';
 import './index.css';
 
@@ -15,7 +15,7 @@ ReactDOM.render(
       <h1>Album Hangman</h1>
       <div className='container'>
         <Route exact path={'/'} component={Landing} />
-        <Route path={'/game/:username/:period?'} component={App} />
+        <Route path={'/game/:username/:period?'} component={Game} />
       </div>
       <footer>
         <a href='https://github.com/guytepper/album-hangman'>

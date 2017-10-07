@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import './App.css';
-import './assets/buttons.css';
+import './Game.css';
+import '../assets/buttons.css';
 
-import Artwork from './components/Artwork';
-import Word from './components/Word';
-import GuessedLetters from './components/GuessedLetters';
-import Keyboard from './components/Keyboard';
-import Hearts from './components/Hearts';
+import Artwork from './Artwork';
+import Word from './Word';
+import GuessedLetters from './GuessedLetters';
+import Keyboard from './Keyboard';
+import Hearts from './Hearts';
 
 import {
   getAlbum,
@@ -17,9 +17,9 @@ import {
   letterInWord,
   letterInArray,
   getIndiciesOfLetter
-} from './Utils';
+} from '../Utils';
 
-class App extends Component {
+class Game extends Component {
   constructor ({ match }) {
     super();
     this.state = {
@@ -203,4 +203,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Game;
