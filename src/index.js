@@ -23,7 +23,7 @@ class App extends Component{
       { path: GAME_PATH });
     this.state = {
       username: this.match ? this.match.params.username : '',
-      period: this.match? this.match.params.period : ''
+      period: this.match ? this.match.params.period : ''
     }
   }
 
