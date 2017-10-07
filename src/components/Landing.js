@@ -6,11 +6,10 @@ import './Landing.css';
 class Landing extends React.Component {
   constructor ({ match }) {
     super();
-    let _hideArtwork = match.params.hideArtwork === "true";
     this.state = {
       username: '',
       period: '12month',
-      hideArtwork: _hideArtwork
+      hideArtwork: false
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
