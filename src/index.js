@@ -21,10 +21,9 @@ class App extends Component{
     const history = createHistory();
     this.match = matchPath(history.location.pathname,
       { path: GAME_PATH });
-
     this.state = {
-      username: this.match.params.username,
-      period: this.match.params.period
+      username: this.match ? this.match.params.username : '',
+      period: this.match? this.match.params.period : ''
     }
   }
 
