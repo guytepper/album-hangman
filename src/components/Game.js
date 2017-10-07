@@ -22,7 +22,7 @@ import {
 class Game extends Component {
   constructor (props) {
     super();
-    let _hideArtWork = props.match.params.hideArtwork === 'hard';
+    let _hideArtWork = props.hideArtwork || props.match.params.hideArtwork === 'hard';
     this.state = {
       loadingAlbum: true,
       error: null,

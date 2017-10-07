@@ -11,7 +11,7 @@ import Game from './components/Game';
 import Landing from './components/Landing';
 import './index.css';
 
-const GAME_PATH = '/game/:username?/:period?';
+const GAME_PATH = '/game/:username?/:period?/:hideArtwork?';
 
 class App extends Component{
   constructor(props){
@@ -19,18 +19,22 @@ class App extends Component{
 
     // Match current path to keep username and period in state
     const history = createHistory();
-    this.match = matchPath(history.location.pathname,
-      { path: GAME_PATH });
+    this.match = matchPath(history.location.pathname, { path: GAME_PATH });
     this.state = {
       username: this.match ? this.match.params.username : '',
-      period: this.match ? this.match.params.period : ''
+      period: this.match ? this.match.params.period : '',
+      hideArtwork: this.match ? this.match.params.hideArtwork === 'hard' : false
     }
 
     this.handleLandingOnSubmit = this.handleLandingOnSubmit.bind(this);
   }
 
   handleLandingOnSubmit(settings){
-    this.setState({username: settings.username, period: settings.period});
+    this.setState({
+      username: settings.username,
+      period: settings.period,
+      hideArtwork: settings.hideArtwork
+    });
   }
 
   render(){
@@ -44,6 +48,7 @@ class App extends Component{
               <Landing
                 username={this.state.username}
                 period={this.state.period}
+                hideArtwork={this.state.hideArtwork}
                 onSubmit={this.handleLandingOnSubmit}
                 {...props}
               />
@@ -55,6 +60,7 @@ class App extends Component{
               <Game
                 username={this.state.username}
                 period={this.state.period}
+                hideArtwork={this.state.hideArtwork}
                 {...props}
               />
             }

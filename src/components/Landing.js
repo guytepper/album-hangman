@@ -9,7 +9,7 @@ class Landing extends React.Component {
     this.state = {
       username: props.username || '',
       period: props.period || '12month',
-      hideArtwork: props.hideArtwork || false
+      hideArtwork: props.hideArtwork
     };
 
     this.props = props;
@@ -43,8 +43,11 @@ class Landing extends React.Component {
   }
 
   handleLetsPlayButtonClick(e) {
-    this.props.onSubmit({username: this.state.username,
-       period: this.state.period});
+    this.props.onSubmit({
+      username: this.state.username,
+      period: this.state.period,
+      hideArtwork: this.state.hideArtwork
+    });
   }
 
   render () {
