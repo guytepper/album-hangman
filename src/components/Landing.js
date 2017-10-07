@@ -11,6 +11,7 @@ class Landing extends React.Component {
       period: props.period || '12month'     
     };
 
+    this.props = props;
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePeriodChange = this.handlePeriodChange.bind(this);
   }
