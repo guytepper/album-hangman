@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import createHistory from 'history/createBrowserHistory'
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  matchPath
 } from 'react-router-dom'
 
 import Game from './components/Game';
 import Landing from './components/Landing';
 import './index.css';
 
+const GAME_PATH = '/game/:username?/:period?';
+
 class App extends Component{
   constructor(props){
     super(props);
 
+    // Match current path to keep username and period in state
+    const history = createHistory();
+    this.match = matchPath(history.location.pathname,
+      { path: GAME_PATH });
+
     this.state = {
-      username: "",
-      period: ""
+      username: this.match.params.username,
+      period: this.match.params.period
     }
   }
 
@@ -26,7 +35,7 @@ class App extends Component{
         <div className='container'>
           <Route exact path={'/'} component={Landing} />
           <Route
-            path={'/game/:username?/:period?'}
+            path={GAME_PATH}
             component={props=>
               <Game
                 username={this.state.username}
