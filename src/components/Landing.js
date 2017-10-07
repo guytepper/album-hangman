@@ -6,11 +6,10 @@ import './Landing.css';
 class Landing extends React.Component {
   constructor ({ match }) {
     super();
-    let _hideArtwork = match.params.hideArtwork === "true";
     this.state = {
       username: '',
       period: '12month',
-      hideArtwork: _hideArtwork
+      hideArtwork: false
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -43,13 +42,13 @@ class Landing extends React.Component {
 
   render () {
     let dest = `/game/${this.state.username}/${this.state.period}`;
-    if(this.state.hideArtwork) dest += '/hard';
+    if (this.state.hideArtwork) dest += '/hard';
 
     return (
       <form className='landing'>
         <input onChange={this.handleUsernameChange} value={this.state.username} className='landing-username' type='text' placeholder='Last.FM Username' autoFocus />
 
-        <div className='landing-section'>
+        <div className='game-option'>
           <u>Period</u>
           <label>
             <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="12month" checked={this.state.period === '12month'} />
@@ -73,7 +72,7 @@ class Landing extends React.Component {
           </label>
         </div>
 
-        <div className="landing-section">
+        <div className="game-option">
           <u>Advanced</u>
           <label>
             <input
