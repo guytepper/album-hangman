@@ -32,7 +32,16 @@ class App extends Component{
       <div className='app'>
         <h1>Album Hangman</h1>
         <div className='container'>
-          <Route exact path={'/'} component={Landing} />
+          <Route
+            exact path={'/'}
+            component={props=>
+              <Landing
+                username={this.state.username}
+                period={this.state.period}
+                {...props}
+              />
+            }
+          />
           <Route
             path={GAME_PATH}
             component={props=>
