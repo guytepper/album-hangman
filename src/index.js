@@ -25,7 +25,15 @@ class App extends Component{
         <h1>Album Hangman</h1>
         <div className='container'>
           <Route exact path={'/'} component={Landing} />
-          <Route path={'/game/:username/:period?'} component={Game} />
+          <Route
+            path={'/game/:username?/:period?'}
+            component={props=>
+              <Game
+                username={this.state.username}
+                period={this.state.period}
+                {...props}
+              />}
+          />
         </div>
         <footer>
           <a href='https://github.com/guytepper/album-hangman'>
