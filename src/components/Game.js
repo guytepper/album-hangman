@@ -22,9 +22,11 @@ import {
 class Game extends Component {
   constructor (props) {
     super();
+    let _hideArtWork = props.match.params.hideArtwork === 'hard';
     this.state = {
       loadingAlbum: true,
-      error: null
+      error: null,
+      hideArtwork: _hideArtWork
     };
     this.username = props.username || props.match.params.username;
     this.period = props.period || props.match.params.period;
@@ -54,11 +56,11 @@ class Game extends Component {
   handleLetterGuess (letter) {
     const word = this.state.albumName;
     const guessedLetters = this.state.guessedLetters;
-    
+
     // Check if user had already guessed the letter
     if (letterInArray(guessedLetters, letter)) {
       return;
-    } 
+    }
     else {
       // Add the letter to the guessed letters array
       this.setState({
@@ -78,7 +80,7 @@ class Game extends Component {
           lives: this.state.lives - 1
         })
       }
-    }    
+    }
   }
 
   gameWin () {
@@ -115,7 +117,7 @@ class Game extends Component {
           loadingAlbum: false,
           ...albumInfo
         });
-      })      
+      })
       .catch(err => {
         // Last.FM API errors usualy missing a period, if so append it for better UX
         err = err.endsWith('.') ? err : err + '.';
@@ -125,7 +127,7 @@ class Game extends Component {
       });
   }
 
-  startNewGame () {    
+  startNewGame () {
     this.setState({
       guessedLetters: [],
       lives: 4,
@@ -138,11 +140,11 @@ class Game extends Component {
     if (this.gameWin()) {
       return <h1 className="game-status-msg">You won! <span role="img" aria-label="Party Popper">🎉</span></h1>;
     }
-    
+
     if (this.gameLose()) {
       return <h1 className="game-status-msg">You lost. <span role="img" aria-label="Sneezing">🤧</span></h1>;
     }
-    
+
     return null;
   }
 
@@ -189,7 +191,12 @@ class Game extends Component {
 
     return (
       <div className='game'>
-        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.gameEnd()}/>
+        <Artwork
+          img={ this.state.albumImg }
+          blurLevel={ this.state.lives * 10 }
+          gameEnd={ this.gameEnd() }
+          hidden={ this.state.hideArtwork }
+        />
         <Word hiddenLetters={ this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr } />
         <div className='game-stats'>
           <GuessedLetters letters={ this.state.guessedLetters } />
@@ -198,6 +205,7 @@ class Game extends Component {
         { this.gameEndMessage() }
         { this.playAgainBtn() }
         <Keyboard onPress={ this.handleLetterGuess } />
+        <Link className='game-change-settings-link' to='/'>Settings</Link>
       </div>
     );
   }

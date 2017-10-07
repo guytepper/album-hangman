@@ -8,13 +8,15 @@ class Landing extends React.Component {
     super(props);
     this.state = {
       username: props.username || '',
-      period: props.period || '12month'     
+      period: props.period || '12month',
+      hideArtwork: props.hideArtwork || false
     };
 
     this.props = props;
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePeriodChange = this.handlePeriodChange.bind(this);
     this.handleLetsPlayButtonClick = this.handleLetsPlayButtonClick.bind(this);
+    this.handleHideArtworkChange = this.handleHideArtworkChange.bind(this);
   }
 
   handleUsernameChange(event) {
@@ -29,6 +31,12 @@ class Landing extends React.Component {
     })
   }
 
+  handleHideArtworkChange(event) {
+    this.setState({
+      hideArtwork: event.target.checked
+    });
+  }
+
   componentDidMount() {
     window.ga('set', 'page');
     window.ga('send', 'pageview', window.location.pathname);
@@ -40,11 +48,14 @@ class Landing extends React.Component {
   }
 
   render () {
+    let dest = `/game/${this.state.username}/${this.state.period}`;
+    if (this.state.hideArtwork) dest += '/hard';
+
     return (
       <form className='landing'>
         <input onChange={this.handleUsernameChange} value={this.state.username} className='landing-username' type='text' placeholder='Last.FM Username' autoFocus />
 
-        <div className='landing-period'>
+        <div className='game-option'>
           <u>Period</u>
           <label>
             <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="12month" checked={this.state.period === '12month'} />
@@ -68,7 +79,19 @@ class Landing extends React.Component {
           </label>
         </div>
 
-        <Link to={`/game/${this.state.username}/${this.state.period}`}  onClick={this.handleLetsPlayButtonClick}  style={!this.state.username ? {pointerEvents: "none"} : null}>
+        <div className="game-option">
+          <u>Advanced</u>
+          <label>
+            <input
+              type="checkbox"
+              onChange={this.handleHideArtworkChange}
+              name="hideArtwork"
+              checked={this.state.hideArtwork}
+            />
+            Hide Artwork
+          </label>
+        </div>
+        <Link to={dest} onClick={this.handleLetsPlayButtonClick} style={!this.state.username ? {pointerEvents: "none"} : null}>
           <button className='button-success pure-button' disabled={!this.state.username}>Let's play! <span role="img" aria-label="Clown">🤡</span></button>
         </Link>
       </form>
