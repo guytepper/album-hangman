@@ -14,6 +14,7 @@ class Landing extends React.Component {
     this.props = props;
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePeriodChange = this.handlePeriodChange.bind(this);
+    this.handleLetsPlayButtonClick = this.handleLetsPlayButtonClick.bind(this);
   }
 
   handleUsernameChange(event) {
@@ -31,6 +32,11 @@ class Landing extends React.Component {
   componentDidMount() {
     window.ga('set', 'page');
     window.ga('send', 'pageview', window.location.pathname);
+  }
+
+  handleLetsPlayButtonClick(e) {
+    this.props.onSubmit({username: this.state.username,
+       period: this.state.period});
   }
 
   render () {
@@ -62,7 +68,7 @@ class Landing extends React.Component {
           </label>
         </div>
 
-        <Link to={`/game/${this.state.username}/${this.state.period}`} style={!this.state.username ? {pointerEvents: "none"} : null}>
+        <Link to={`/game/${this.state.username}/${this.state.period}`}  onClick={this.handleLetsPlayButtonClick}  style={!this.state.username ? {pointerEvents: "none"} : null}>
           <button className='button-success pure-button' disabled={!this.state.username}>Let's play! <span role="img" aria-label="Clown">🤡</span></button>
         </Link>
       </form>
