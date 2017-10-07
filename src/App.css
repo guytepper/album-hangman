@@ -8,9 +8,9 @@
   margin-top: 0;
 }
 
-.game-change-settings-link{
-  font-size: 12px;
+.game-change-settings-link {
   display: block;
   padding: 10px 0 10px;
   margin-bottom: -25px;
+  font-size: 12px;
 }
