@@ -4,11 +4,11 @@ import '../assets/buttons.css';
 import './Landing.css';
 
 class Landing extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
-      username: '',
-      period: '12month'     
+      username: props.username || '',
+      period: props.period || '12month'     
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
