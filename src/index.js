@@ -49,7 +49,8 @@ class App extends Component{
                 username={this.state.username}
                 period={this.state.period}
                 {...props}
-              />}
+              />
+            }
           />
         </div>
         <footer>
