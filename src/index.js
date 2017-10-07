@@ -25,6 +25,12 @@ class App extends Component{
       username: this.match ? this.match.params.username : '',
       period: this.match ? this.match.params.period : ''
     }
+
+    this.handleLandingOnSubmit = this.handleLandingOnSubmit.bind(this);
+  }
+
+  handleLandingOnSubmit(settings){
+    this.setState({username: settings.username, period: settings.period});
   }
 
   render(){
@@ -38,6 +44,7 @@ class App extends Component{
               <Landing
                 username={this.state.username}
                 period={this.state.period}
+                onSubmit={this.handleLandingOnSubmit}
                 {...props}
               />
             }
