@@ -42,7 +42,7 @@ class Landing extends React.Component {
 
   render () {
     let dest = `/game/${this.state.username}/${this.state.period}`;
-    if(this.state.hideArtwork) dest += '/hard';
+    if (this.state.hideArtwork) dest += '/hard';
 
     return (
       <form className='landing'>
