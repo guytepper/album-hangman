@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Artwork ({ img, blurLevel, gameEnd }) {
+function Artwork ({ img, blurLevel, gameEnd, hidden }) {
   if (gameEnd) {
     blurLevel = 0;
   }
@@ -20,7 +20,12 @@ function Artwork ({ img, blurLevel, gameEnd }) {
  };
 
   return (
-     <img style={ artworkStyle } src={ img } alt="" draggable={false}/>
+     <img
+        style={hidden ? { display: 'none' } : artworkStyle}
+        src={ img }
+        alt=""
+        draggable={false}
+    />
   );
 }
 

@@ -22,9 +22,11 @@ import {
 class App extends Component {
   constructor ({ match }) {
     super();
+    let _hideArtWork = match.params.hideArtwork === 'hard';
     this.state = {
       loadingAlbum: true,
-      error: null
+      error: null,
+      hideArtwork: _hideArtWork
     };
     this.username = match.params.username;
     this.period = match.params.period;
@@ -189,7 +191,12 @@ class App extends Component {
 
     return (
       <div className='game'>
-        <Artwork img={ this.state.albumImg } blurLevel={ this.state.lives * 10 } gameEnd={this.gameEnd()}/>
+        <Artwork
+          img={ this.state.albumImg }
+          blurLevel={ this.state.lives * 10 }
+          gameEnd={ this.gameEnd() }
+          hidden={ this.state.hideArtwork }
+        />
         <Word hiddenLetters={ this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr } />
         <div className='game-stats'>
           <GuessedLetters letters={ this.state.guessedLetters } />
@@ -198,6 +205,7 @@ class App extends Component {
         { this.gameEndMessage() }
         { this.playAgainBtn() }
         <Keyboard onPress={ this.handleLetterGuess } />
+        <Link className='game-change-settings-link' to='/'>Settings</Link>
       </div>
     );
   }

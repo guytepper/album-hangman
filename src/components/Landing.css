@@ -18,12 +18,12 @@
   box-sizing: border-box;
 }
 
-.landing-period {
+.game-option {
   display: flex;
   flex-direction: column;
   margin: 10px 0;
 }
 
-.landing-period label {
+.game-option label {
   display: flex;
 }
