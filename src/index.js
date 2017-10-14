@@ -25,17 +25,9 @@ class App extends Component{
       period: this.match ? this.match.params.period : '',
       hideArtwork: this.match ? this.match.params.hideArtwork === 'hard' : false
     }
-
-    this.handleLandingOnSubmit = this.handleLandingOnSubmit.bind(this);
   }
 
-  handleLandingOnSubmit(settings){
-    this.setState({
-      username: settings.username,
-      period: settings.period,
-      hideArtwork: settings.hideArtwork
-    });
-  }
+  handleSettingUpated = (name, value) => this.setState({ [name]: value });
 
   render(){
     return (<Router>
@@ -49,7 +41,7 @@ class App extends Component{
                 username={this.state.username}
                 period={this.state.period}
                 hideArtwork={this.state.hideArtwork}
-                onSubmit={this.handleLandingOnSubmit}
+                onSettingUpated={this.handleSettingUpated}
                 {...props}
               />
             }
