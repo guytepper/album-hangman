@@ -120,7 +120,8 @@ class App extends Component {
       })      
       .catch(err => {
         // Last.FM API errors usualy missing a period, if so append it for better UX
-        err = err.endsWith('.') ? err : err + '.';
+        if(typeof err === 'string')
+          err = err.endsWith('.') ? err : err + '.';
         this.setState({
           error: err
         })
