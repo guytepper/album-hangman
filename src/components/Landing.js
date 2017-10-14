@@ -4,29 +4,7 @@ import '../assets/buttons.css';
 import './Landing.css';
 
 class Landing extends React.Component {
-  constructor (props) {
 
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePeriodChange = this.handlePeriodChange.bind(this);
-    this.handleHideArtworkChange = this.handleHideArtworkChange.bind(this);
-  }
-
-  handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value
-    })
-  }
-
-  handlePeriodChange(event) {
-    this.setState({
-      period: event.target.value
-    })
-  }
-
-  handleHideArtworkChange(event) {
-    this.setState({
-      hideArtwork: event.target.checked
-    });
   // Wrap change hanlder to keep parent code as independent as possible
   handleChange = event => {
     this.props.onSettingUpated(`${event.target.name}`,
