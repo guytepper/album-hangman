@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import './App.css';
-import './assets/buttons.css';
+import './Game.css';
+import '../assets/buttons.css';
 
-import Artwork from './components/Artwork';
-import Word from './components/Word';
-import GuessedLetters from './components/GuessedLetters';
-import Keyboard from './components/Keyboard';
-import Hearts from './components/Hearts';
+import Artwork from './Artwork';
+import Word from './Word';
+import GuessedLetters from './GuessedLetters';
+import Keyboard from './Keyboard';
+import Hearts from './Hearts';
 
 import {
   getAlbum,
@@ -17,19 +17,19 @@ import {
   letterInWord,
   letterInArray,
   getIndiciesOfLetter
-} from './Utils';
+} from '../Utils';
 
-class App extends Component {
-  constructor ({ match }) {
+class Game extends Component {
+  constructor (props) {
     super();
-    let _hideArtWork = match.params.hideArtwork === 'hard';
+    let _hideArtWork = props.hideArtwork || props.match.params.hideArtwork === 'hard';
     this.state = {
       loadingAlbum: true,
       error: null,
       hideArtwork: _hideArtWork
     };
-    this.username = match.params.username;
-    this.period = match.params.period;
+    this.username = props.username || props.match.params.username;
+    this.period = props.period || props.match.params.period;
     this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
     this.handleLetterGuess = this.handleLetterGuess.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
@@ -56,11 +56,11 @@ class App extends Component {
   handleLetterGuess (letter) {
     const word = this.state.albumName;
     const guessedLetters = this.state.guessedLetters;
-    
+
     // Check if user had already guessed the letter
     if (letterInArray(guessedLetters, letter)) {
       return;
-    } 
+    }
     else {
       // Add the letter to the guessed letters array
       this.setState({
@@ -80,7 +80,7 @@ class App extends Component {
           lives: this.state.lives - 1
         })
       }
-    }    
+    }
   }
 
   gameWin () {
@@ -117,17 +117,18 @@ class App extends Component {
           loadingAlbum: false,
           ...albumInfo
         });
-      })      
+      })
       .catch(err => {
         // Last.FM API errors usualy missing a period, if so append it for better UX
-        err = err.endsWith('.') ? err : err + '.';
+        if(typeof err === 'string')
+          err = err.endsWith('.') ? err : err + '.';
         this.setState({
           error: err
         })
       });
   }
 
-  startNewGame () {    
+  startNewGame () {
     this.setState({
       guessedLetters: [],
       lives: 4,
@@ -140,11 +141,11 @@ class App extends Component {
     if (this.gameWin()) {
       return <h1 className="game-status-msg">You won! <span role="img" aria-label="Party Popper">🎉</span></h1>;
     }
-    
+
     if (this.gameLose()) {
       return <h1 className="game-status-msg">You lost. <span role="img" aria-label="Sneezing">🤧</span></h1>;
     }
-    
+
     return null;
   }
 
@@ -211,4 +212,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Game;
