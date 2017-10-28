@@ -7,9 +7,10 @@ it('renders without crashing', () => {
   ReactDOM.render(<App match={{
     params: {
       username: 'Dobida',
-      period: 'overall'
-    }
-  }}/>, div);
+      period: 'overall',
+    },
+  }}
+  />, div);
 });
 
 
@@ -18,9 +19,10 @@ it('Hebrew listener renders without crashing', () => {
   ReactDOM.render(<App match={{
     params: {
       username: 'yanmusic',
-      period: '12month'
-    }
-  }}/>, div);
+      period: '12month',
+    },
+  }}
+  />, div);
 });
 
 it('renders without artworks and without crashing', () => {
@@ -29,7 +31,8 @@ it('renders without artworks and without crashing', () => {
     params: {
       username: 'avicooli',
       period: 'overall',
-      hideArtwork: 'hard'
-    }
-  }}/>, div);
+      hideArtwork: 'hard',
+    },
+  }}
+  />, div);
 });

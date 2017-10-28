@@ -16,17 +16,17 @@ import {
   replaceUnderscores,
   letterInWord,
   letterInArray,
-  getIndiciesOfLetter
+  getIndiciesOfLetter,
 } from './Utils';
 
 class App extends Component {
-  constructor ({ match }) {
+  constructor({ match }) {
     super();
-    let _hideArtWork = match.params.hideArtwork === 'hard';
+    const _hideArtWork = match.params.hideArtwork === 'hard';
     this.state = {
       loadingAlbum: true,
       error: null,
-      hideArtwork: _hideArtWork
+      hideArtwork: _hideArtWork,
     };
     this.username = match.params.username;
     this.period = match.params.period;
@@ -35,7 +35,47 @@ class App extends Component {
     this.startNewGame = this.startNewGame.bind(this);
   }
 
-  handleKeyboardPress (e) {
+  componentDidMount() {
+    this.startNewGame();
+    window.addEventListener('keydown', this.handleKeyboardPress);
+    if (window.ga) {
+      window.ga('set', 'page');
+      window.ga('send', 'pageview', window.location.pathname);
+    }
+  }
+
+  componentWillUnmount() {
+    // Remove event listener on page redirection
+    window.removeEventListener('keydown', this.handleKeyboardPress);
+  }
+
+  setNewAlbum() {
+    this.setState({
+      loadingAlbum: true,
+    });
+
+    getAlbum(this.username, this.period)
+      .then((albumInfo) => {
+        // Make sure there are letters to unfold, if not try reloading a new album
+        if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
+          return this.setNewAlbum();
+        }
+        this.setState({
+          loadingAlbum: false,
+          ...albumInfo,
+        });
+      })
+      .catch((err) => {
+        // Last.FM API errors usualy missing a period, if so append it for better UX
+        const error = err.endsWith('.') ? err : `${err}.`;
+        this.setState({
+          error,
+        });
+      });
+  }
+
+
+  handleKeyboardPress(e) {
     const keyCode = e.charCode || e.which;
 
     // Checks if the game is in active state
@@ -53,14 +93,13 @@ class App extends Component {
     }
   }
 
-  handleLetterGuess (letter) {
-    const word = this.state.albumName;
-    const guessedLetters = this.state.guessedLetters;
-    
+  handleLetterGuess(letter) {
+    const { guessedLetters, albumName: word } = this.state;
+
     // Check if user had already guessed the letter
     if (letterInArray(guessedLetters, letter)) {
       return;
-    } 
+    }
     else {
       // Add the letter to the guessed letters array
       this.setState({
@@ -80,54 +119,29 @@ class App extends Component {
           lives: this.state.lives - 1
         })
       }
-    }    
+    }
   }
 
-  gameWin () {
+  gameWin() {
     return this.isAlbumNameGuessed();
   }
 
-  gameLose () {
+  gameLose() {
     return this.state.lives === 0;
   }
 
-  gameEnd () {
+  gameEnd() {
     return this.gameWin() || this.gameLose();
   }
 
-  isAlbumNameGuessed () {
+  isAlbumNameGuessed() {
     if (this.state.hiddenLettersArr && this.state.hiddenLettersArr.indexOf('_') === -1) {
       return true;
     }
     return false;
   }
 
-  setNewAlbum () {
-    this.setState({
-      loadingAlbum: true
-    });
-
-    getAlbum(this.username, this.period)
-      .then(albumInfo => {
-        // Make sure there are letters to unfold, if not try reloading a new album
-        if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
-          return this.setNewAlbum();
-        }
-        this.setState({
-          loadingAlbum: false,
-          ...albumInfo
-        });
-      })      
-      .catch(err => {
-        // Last.FM API errors usualy missing a period, if so append it for better UX
-        err = err.endsWith('.') ? err : err + '.';
-        this.setState({
-          error: err
-        })
-      });
-  }
-
-  startNewGame () {    
+  startNewGame() {
     this.setState({
       guessedLetters: [],
       lives: 4,
@@ -140,37 +154,23 @@ class App extends Component {
     if (this.gameWin()) {
       return <h1 className="game-status-msg">You won! <span role="img" aria-label="Party Popper">🎉</span></h1>;
     }
-    
+
     if (this.gameLose()) {
       return <h1 className="game-status-msg">You lost. <span role="img" aria-label="Sneezing">🤧</span></h1>;
     }
-    
+
     return null;
   }
 
-  playAgainBtn () {
+  playAgainBtn() {
     if (this.gameEnd()) {
       return (
-        <button onClick={this.startNewGame} className='pure-button pure-button-primary'>
+        <button onClick={this.startNewGame} className="pure-button pure-button-primary">
           Play Again
         </button>
-      )
+      );
     }
     return null;
-  }
-
-  componentDidMount() {
-    this.startNewGame();
-    window.addEventListener('keydown', this.handleKeyboardPress);
-    if (window.ga) {
-      window.ga('set', 'page');
-      window.ga('send', 'pageview', window.location.pathname);
-    }
-  }
-
-  componentWillUnmount() {
-    // Remove event listener on page redirection
-    window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
   render() {
@@ -178,34 +178,34 @@ class App extends Component {
       return (
         <div>
           <h1>{ this.state.error }</h1>
-          <Link to={'/'}>
-            <button className='pure-button-primary pure-button'>Try again? <span role="img" aria-label="Ogre">👹</span></button>
+          <Link to="/">
+            <button className="pure-button-primary pure-button">Try again? <span role="img" aria-label="Ogre">👹</span></button>
           </Link>
         </div>
       );
     }
 
     if (!this.state.albumName) {
-      return <h1 className='app'>Loading..</h1>
+      return <h1 className="app">Loading..</h1>;
     }
 
     return (
-      <div className='game'>
+      <div className="game">
         <Artwork
-          img={ this.state.albumImg }
-          blurLevel={ this.state.lives * 10 }
-          gameEnd={ this.gameEnd() }
-          hidden={ this.state.hideArtwork }
+          img={this.state.albumImg}
+          blurLevel={this.state.lives * 10}
+          gameEnd={this.gameEnd()}
+          hidden={this.state.hideArtwork}
         />
-        <Word hiddenLetters={ this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr } />
-        <div className='game-stats'>
-          <GuessedLetters letters={ this.state.guessedLetters } />
-          <Hearts lives={ this.state.lives } />
+        <Word hiddenLetters={this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr} />
+        <div className="game-stats">
+          <GuessedLetters letters={this.state.guessedLetters} />
+          <Hearts lives={this.state.lives} />
         </div>
         { this.gameEndMessage() }
         { this.playAgainBtn() }
-        <Keyboard onPress={ this.handleLetterGuess } />
-        <Link className='game-change-settings-link' to='/'>Settings</Link>
+        <Keyboard onPress={this.handleLetterGuess} />
+        <Link className="game-change-settings-link" to="/">Settings</Link>
       </div>
     );
   }

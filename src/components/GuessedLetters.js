@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const letterStyle = {
   fontWeight: 'normal',
@@ -12,11 +12,11 @@ function GuessedLetters({ letters }) {
       <h3>
         Guessed Letters:&nbsp;
         {
-          letters.map(letter => {
-            return <span key={ letter } style={ letterStyle } className="guessed-letter">{ letter }</span>
-          })
+          letters.map(letter => (
+            <span key={letter} style={letterStyle} className="guessed-letter">{ letter }</span>
+          ))
         }
-      </h3>      
+      </h3>
     </div>
   );
 }

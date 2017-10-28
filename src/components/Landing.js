@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/buttons.css';
 import './Landing.css';
 
 class Landing extends React.Component {
-  constructor ({ match }) {
+  constructor({ match }) {
     super();
     this.state = {
       username: '',
       period: '12month',
-      hideArtwork: false
+      hideArtwork: false,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -17,57 +17,58 @@ class Landing extends React.Component {
     this.handleHideArtworkChange = this.handleHideArtworkChange.bind(this);
   }
 
-  handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value
-    })
-  }
-
-  handlePeriodChange(event) {
-    this.setState({
-      period: event.target.value
-    })
-  }
-
-  handleHideArtworkChange(event) {
-    this.setState({
-      hideArtwork: event.target.checked
-    });
-  }
-
   componentDidMount() {
     window.ga('set', 'page');
     window.ga('send', 'pageview', window.location.pathname);
   }
 
-  render () {
+  handleUsernameChange(event) {
+    this.setState({
+      username: event.target.value,
+    });
+  }
+
+  handlePeriodChange(event) {
+    this.setState({
+      period: event.target.value,
+    });
+  }
+
+  handleHideArtworkChange(event) {
+    this.setState({
+      hideArtwork: event.target.checked,
+    });
+  }
+
+
+  render() {
     let dest = `/game/${this.state.username}/${this.state.period}`;
     if (this.state.hideArtwork) dest += '/hard';
 
     return (
-      <form className='landing'>
-        <input onChange={this.handleUsernameChange} value={this.state.username} className='landing-username' type='text' placeholder='Last.FM Username' autoFocus />
+      <form className="landing">
+        <input onChange={this.handleUsernameChange} value={this.state.username} className="landing-username" type="text" placeholder="Last.FM Username" autoFocus />
 
-        <div className='game-option'>
+        <div className="game-option">
           <u>Period</u>
           <label>
             <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="12month" checked={this.state.period === '12month'} />
             12 Months
           </label>
           <label>
-            <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="6month" checked={this.state.period === '6month'}/>
+            <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="6month" checked={this.state.period === '6month'} />
             6 Months
           </label>
           <label>
-            <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="3month" checked={this.state.period === '3month'}/>
+            <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="3month" checked={this.state.period === '3month'} />
             3 Months
           </label>
           <label>
-            <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="1month" checked={this.state.period === '1month'}/>
+            <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="1month" checked={this.state.period === '1month'} />
             1 Month
           </label>
           <label>
-            <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="overall" checked={this.state.period === 'overall'}/>
+            <input type="radio" onChange={this.handlePeriodChange} name="period" className="pure-radio" value="overall" checked={this.state.period === 'overall'} />
             All Time
           </label>
         </div>
@@ -84,11 +85,11 @@ class Landing extends React.Component {
             Hide Artwork
           </label>
         </div>
-        <Link to={dest} style={!this.state.username ? {pointerEvents: "none"} : null}>
-          <button className='button-success pure-button' disabled={!this.state.username}>Let's play! <span role="img" aria-label="Clown">🤡</span></button>
+        <Link to={dest} style={!this.state.username ? { pointerEvents: 'none' } : null}>
+          <button className="button-success pure-button" disabled={!this.state.username}>Let's play! <span role="img" aria-label="Clown">🤡</span></button>
         </Link>
       </form>
-    )
+    );
   }
 }
 

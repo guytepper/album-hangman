@@ -6,14 +6,14 @@ const artworkUrl = 'https://lastfm-img2.akamaized.net/i/u/300x300/e7de85bfdb0141
 const blurLevel = 3;
 const gameEnd = false;
 
-const wrapper = mount(<Artwork albumImg={ artworkUrl } blurLevel={blurLevel} gameEnd={gameEnd} />);
+const wrapper = mount(<Artwork albumImg={artworkUrl} blurLevel={blurLevel} gameEnd={gameEnd} />);
 const artwork = wrapper.find('img').get(0);
 
 it('renders blurred artwork', () => {
   expect(artwork.style.filter).toEqual('blur(3px)');
-})
+});
 
 it('displays the artwork unblurred when the game ends', () => {
   wrapper.setProps({ gameEnd: true });
   expect(artwork.style.filter).toEqual('blur(0px)');
-})
+});

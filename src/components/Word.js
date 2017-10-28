@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 const wordStyle = {
-  letterSpacing: '5px'
+  letterSpacing: '5px',
 };
 
 
 function Word({ hiddenLetters }) {
   return (
-    <h1 style={ wordStyle }>
+    <h1 style={wordStyle}>
       { hiddenLetters }
     </h1>
   );
