@@ -22,17 +22,14 @@ import {
 class App extends Component {
   constructor({ match }) {
     super();
-    const _hideArtWork = match.params.hideArtwork === 'hard';
+    const hideArtwork = match.params.hideArtwork === 'hard';
     this.state = {
       loadingAlbum: true,
       error: null,
-      hideArtwork: _hideArtWork
+      hideArtwork
     };
     this.username = match.params.username;
     this.period = match.params.period;
-    this.handleKeyboardPress = this.handleKeyboardPress.bind(this);
-    this.handleLetterGuess = this.handleLetterGuess.bind(this);
-    this.startNewGame = this.startNewGame.bind(this);
   }
 
   componentDidMount() {
@@ -74,7 +71,7 @@ class App extends Component {
       });
   }
 
-  handleKeyboardPress(e) {
+  handleKeyboardPress = e => {
     const keyCode = e.charCode || e.which;
 
     // Checks if the game is in active state
@@ -90,9 +87,9 @@ class App extends Component {
     if (keyCode === 13 && this.gameEnd()) {
       this.startNewGame();
     }
-  }
+  };
 
-  handleLetterGuess(letter) {
+  handleLetterGuess = letter => {
     const { guessedLetters, albumName: word } = this.state;
 
     // Check if user had already guessed the letter
@@ -122,7 +119,7 @@ class App extends Component {
         });
       }
     }
-  }
+  };
 
   gameWin() {
     return this.isAlbumNameGuessed();
@@ -143,14 +140,14 @@ class App extends Component {
     return false;
   }
 
-  startNewGame() {
+  startNewGame = () => {
     this.setState({
       guessedLetters: [],
       lives: 4
     });
 
     this.setNewAlbum();
-  }
+  };
 
   gameEndMessage() {
     if (this.gameWin()) {

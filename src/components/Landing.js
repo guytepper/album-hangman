@@ -4,41 +4,29 @@ import '../assets/buttons.css';
 import './Landing.css';
 
 class Landing extends React.Component {
-  constructor({ match }) {
-    super();
-    this.state = {
-      username: '',
-      period: '12month',
-      hideArtwork: false
-    };
+  state = {
+    username: '',
+    period: '12month',
+    hideArtwork: false
+  };
 
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePeriodChange = this.handlePeriodChange.bind(this);
-    this.handleHideArtworkChange = this.handleHideArtworkChange.bind(this);
-  }
-
-  componentDidMount() {
-    window.ga('set', 'page');
-    window.ga('send', 'pageview', window.location.pathname);
-  }
-
-  handleUsernameChange(event) {
+  handleUsernameChange = event => {
     this.setState({
       username: event.target.value
     });
-  }
+  };
 
-  handlePeriodChange(event) {
+  handlePeriodChange = event => {
     this.setState({
       period: event.target.value
     });
-  }
+  };
 
-  handleHideArtworkChange(event) {
+  handleHideArtworkChange = event => {
     this.setState({
       hideArtwork: event.target.checked
     });
-  }
+  };
 
   render() {
     let dest = `/game/${this.state.username}/${this.state.period}`;
