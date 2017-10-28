@@ -26,4 +26,10 @@
 
 .game-option label {
   display: flex;
+  align-items: center;
+}
+
+.game-option-radio,
+.game-option-checkbox {
+  margin-right: 6px;
 }
