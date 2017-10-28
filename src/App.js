@@ -107,7 +107,11 @@ class App extends Component {
       if (letterInWord(word, letter)) {
         // Replace the guessed letter in the underscores array
         const indicies = getIndiciesOfLetter(word, letter);
-        const newHiddenLettersArr = replaceUnderscores(this.state.hiddenLettersArr, letter, indicies);
+        const newHiddenLettersArr = replaceUnderscores(
+          this.state.hiddenLettersArr,
+          letter,
+          indicies
+        );
 
         this.setState({
           hiddenLettersArr: newHiddenLettersArr
@@ -214,7 +218,9 @@ class App extends Component {
           gameEnd={this.gameEnd()}
           hidden={this.state.hideArtwork}
         />
-        <Word hiddenLetters={this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr} />
+        <Word
+          hiddenLetters={this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr}
+        />
         <div className="game-stats">
           <GuessedLetters letters={this.state.guessedLetters} />
           <Hearts lives={this.state.lives} />
