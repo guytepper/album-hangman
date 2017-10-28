@@ -6,5 +6,4 @@ const wrapper = mount(<Hearts lives={3} />);
 
 it('renders hearts according to lives', () => {
   expect(wrapper.find('.heart').length).toEqual(3);
-})
-
+});

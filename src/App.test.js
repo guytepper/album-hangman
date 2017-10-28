@@ -4,35 +4,46 @@ import App from './App';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App match={{
-    params: {
-      username: 'Dobida',
-      period: 'overall',
-    },
-  }}
-  />, div);
+  ReactDOM.render(
+    <App
+      match={{
+        params: {
+          username: 'Dobida',
+          period: 'overall'
+        }
+      }}
+    />,
+    div
+  );
 });
-
 
 it('Hebrew listener renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App match={{
-    params: {
-      username: 'yanmusic',
-      period: '12month',
-    },
-  }}
-  />, div);
+  ReactDOM.render(
+    <App
+      match={{
+        params: {
+          username: 'yanmusic',
+          period: '12month'
+        }
+      }}
+    />,
+    div
+  );
 });
 
 it('renders without artworks and without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App match={{
-    params: {
-      username: 'avicooli',
-      period: 'overall',
-      hideArtwork: 'hard',
-    },
-  }}
-  />, div);
+  ReactDOM.render(
+    <App
+      match={{
+        params: {
+          username: 'avicooli',
+          period: 'overall',
+          hideArtwork: 'hard'
+        }
+      }}
+    />,
+    div
+  );
 });

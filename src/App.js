@@ -16,7 +16,7 @@ import {
   replaceUnderscores,
   letterInWord,
   letterInArray,
-  getIndiciesOfLetter,
+  getIndiciesOfLetter
 } from './Utils';
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
     this.state = {
       loadingAlbum: true,
       error: null,
-      hideArtwork: _hideArtWork,
+      hideArtwork: _hideArtWork
     };
     this.username = match.params.username;
     this.period = match.params.period;
@@ -51,29 +51,28 @@ class App extends Component {
 
   setNewAlbum() {
     this.setState({
-      loadingAlbum: true,
+      loadingAlbum: true
     });
 
     getAlbum(this.username, this.period)
-      .then((albumInfo) => {
+      .then(albumInfo => {
         // Make sure there are letters to unfold, if not try reloading a new album
         if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
           return this.setNewAlbum();
         }
         this.setState({
           loadingAlbum: false,
-          ...albumInfo,
+          ...albumInfo
         });
       })
-      .catch((err) => {
+      .catch(err => {
         // Last.FM API errors usualy missing a period, if so append it for better UX
         const error = err.endsWith('.') ? err : `${err}.`;
         this.setState({
-          error,
+          error
         });
       });
   }
-
 
   handleKeyboardPress(e) {
     const keyCode = e.charCode || e.which;
@@ -99,8 +98,7 @@ class App extends Component {
     // Check if user had already guessed the letter
     if (letterInArray(guessedLetters, letter)) {
       return;
-    }
-    else {
+    } else {
       // Add the letter to the guessed letters array
       this.setState({
         guessedLetters: guessedLetters.concat(letter)
@@ -117,7 +115,7 @@ class App extends Component {
       } else {
         this.setState({
           lives: this.state.lives - 1
-        })
+        });
       }
     }
   }
@@ -144,7 +142,7 @@ class App extends Component {
   startNewGame() {
     this.setState({
       guessedLetters: [],
-      lives: 4,
+      lives: 4
     });
 
     this.setNewAlbum();
@@ -152,11 +150,25 @@ class App extends Component {
 
   gameEndMessage() {
     if (this.gameWin()) {
-      return <h1 className="game-status-msg">You won! <span role="img" aria-label="Party Popper">🎉</span></h1>;
+      return (
+        <h1 className="game-status-msg">
+          You won!{' '}
+          <span role="img" aria-label="Party Popper">
+            🎉
+          </span>
+        </h1>
+      );
     }
 
     if (this.gameLose()) {
-      return <h1 className="game-status-msg">You lost. <span role="img" aria-label="Sneezing">🤧</span></h1>;
+      return (
+        <h1 className="game-status-msg">
+          You lost.{' '}
+          <span role="img" aria-label="Sneezing">
+            🤧
+          </span>
+        </h1>
+      );
     }
 
     return null;
@@ -177,9 +189,14 @@ class App extends Component {
     if (this.state.error) {
       return (
         <div>
-          <h1>{ this.state.error }</h1>
+          <h1>{this.state.error}</h1>
           <Link to="/">
-            <button className="pure-button-primary pure-button">Try again? <span role="img" aria-label="Ogre">👹</span></button>
+            <button className="pure-button-primary pure-button">
+              Try again?{' '}
+              <span role="img" aria-label="Ogre">
+                👹
+              </span>
+            </button>
           </Link>
         </div>
       );
@@ -202,10 +219,12 @@ class App extends Component {
           <GuessedLetters letters={this.state.guessedLetters} />
           <Hearts lives={this.state.lives} />
         </div>
-        { this.gameEndMessage() }
-        { this.playAgainBtn() }
+        {this.gameEndMessage()}
+        {this.playAgainBtn()}
         <Keyboard onPress={this.handleLetterGuess} />
-        <Link className="game-change-settings-link" to="/">Settings</Link>
+        <Link className="game-change-settings-link" to="/">
+          Settings
+        </Link>
       </div>
     );
   }

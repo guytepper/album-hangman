@@ -22,7 +22,7 @@ function isKeyCodeAlphabetical(keyCode) {
  * the album name letters.
  */
 function createUnderscoresArr(name) {
-  const hiddenArray = name.map((letter) => {
+  const hiddenArray = name.map(letter => {
     if (isAlphabetical(letter)) {
       return '_';
     }
@@ -67,7 +67,7 @@ function getIndiciesOfLetter(word, letter) {
   * using the indicies of that letter in the word.
   */
 function replaceUnderscores(arr, letter, indicies) {
-  indicies.forEach(index => arr[index] = letter);
+  indicies.forEach(index => (arr[index] = letter));
   return arr;
 }
 
@@ -83,8 +83,12 @@ function getRandomInt(min, max) {
  * using the provided user information.
  */
 function getAlbum(username, period = 'overall') {
-  return axios.get(`http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`, { timeout: 5000 })
-    .then((response) => {
+  return axios
+    .get(
+      `http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`,
+      { timeout: 5000 }
+    )
+    .then(response => {
       if (response.data.error) return Promise.reject(response.data.message);
       const albumsArr = response.data.topalbums.album; // array of albums
       if (response.data.topalbums.album.length === 0) return Promise.reject('No albums found for the time period');
@@ -99,7 +103,7 @@ function getAlbum(username, period = 'overall') {
         albumName,
         albumNameArr,
         albumImg,
-        hiddenLettersArr,
+        hiddenLettersArr
       };
     });
 }
@@ -113,5 +117,5 @@ export {
   letterInArray,
   getIndiciesOfLetter,
   getRandomInt,
-  getAlbum,
+  getAlbum
 };

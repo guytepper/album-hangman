@@ -8,4 +8,3 @@ const wrapper = mount(<Word hiddenLetters={hiddenLettersArr} />);
 it('renders the letters correctly', () => {
   expect(wrapper.text()).toEqual('_U____');
 });
-

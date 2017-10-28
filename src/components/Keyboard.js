@@ -12,11 +12,7 @@ class Keyboard extends React.Component {
 
   getButton(letter) {
     return (
-      <button
-        key={letter}
-        onClick={() => this.handlePress(letter)}
-        className="keyboard-btn"
-      >
+      <button key={letter} onClick={() => this.handlePress(letter)} className="keyboard-btn">
         {letter}
       </button>
     );
@@ -27,13 +23,7 @@ class Keyboard extends React.Component {
   }
 
   render() {
-    return (
-      <div className="keyboard">
-        {
-            letters.map(letter => this.getButton(letter))
-          }
-      </div>
-    );
+    return <div className="keyboard">{letters.map(letter => this.getButton(letter))}</div>;
   }
 }
 
