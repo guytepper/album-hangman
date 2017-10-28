@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import './App.css';
+import './Game.css';
 import './assets/buttons.css';
 
 import Artwork from './components/Artwork';
@@ -19,7 +19,7 @@ import {
   getIndiciesOfLetter
 } from './Utils';
 
-class App extends Component {
+class Game extends Component {
   constructor({ match }) {
     super();
     const hideArtwork = match.params.hideArtwork === 'hard';
@@ -233,4 +233,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Game;

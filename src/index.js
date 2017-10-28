@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import App from './App';
+import Game from './Game';
 import Landing from './components/Landing';
 import './index.css';
 
@@ -12,7 +12,7 @@ ReactDOM.render(
       <h1>Album Hangman</h1>
       <div className="container">
         <Route exact path="/" component={Landing} />
-        <Route path="/game/:username/:period?/:hideArtwork?" component={App} />
+        <Route path="/game/:username/:period?/:hideArtwork?" component={Game} />
       </div>
       <footer>
         <a href="https://github.com/guytepper/album-hangman">
