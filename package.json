@@ -11,6 +11,11 @@
   "devDependencies": {
     "axios": "^0.16.1",
     "enzyme": "^2.8.2",
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
     "react-addons-test-utils": "^15.5.1",
     "react-scripts": "1.0.10",
     "react-test-renderer": "^15.6.1"
