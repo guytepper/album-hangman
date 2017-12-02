@@ -7,7 +7,7 @@ import {
   getIndiciesOfLetter,
   replaceUnderscores,
   getRandomInt
-} from './Utils';
+} from './index';
 
 it('detects if a string is alphabetical', () => {
   const alphabetical = 'A';

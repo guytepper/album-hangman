@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Game.css';
-import './assets/buttons.css';
+import '../../assets/buttons.css';
 
-import Artwork from './components/Artwork';
-import Word from './components/Word';
-import GuessedLetters from './components/GuessedLetters';
-import Keyboard from './components/Keyboard';
-import Hearts from './components/Hearts';
+import Artwork from '../../components/Artwork';
+import Word from '../../components/Word';
+import GuessedLetters from '../../components/GuessedLetters';
+import Keyboard from '../../components/Keyboard';
+import Hearts from '../../components/Hearts';
 
 import {
   getAlbum,
@@ -17,7 +17,7 @@ import {
   letterInWord,
   letterInArray,
   getIndiciesOfLetter
-} from './Utils';
+} from '../../utils';
 
 class Game extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../assets/buttons.css';
+import '../../assets/buttons.css';
 import './Landing.css';
 
 function Landing(props) {

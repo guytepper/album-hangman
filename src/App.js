@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Game from './Game';
-import Landing from './components/Landing';
+import Game from './views/Game';
+import Landing from './views/Landing';
 
 class App extends Component {
   state = {
