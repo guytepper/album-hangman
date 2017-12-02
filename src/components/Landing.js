@@ -4,8 +4,6 @@ import '../assets/buttons.css';
 import './Landing.css';
 
 function Landing(props) {
-  console.log(props);
-
   return (
     <form className="landing">
       <input
