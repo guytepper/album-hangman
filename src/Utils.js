@@ -91,7 +91,8 @@ function getAlbum(username, period = 'overall') {
     .then(response => {
       if (response.data.error) return Promise.reject(response.data.message);
       const albumsArr = response.data.topalbums.album; // array of albums
-      if (response.data.topalbums.album.length === 0) return Promise.reject('No albums found for the time period');
+      if (response.data.topalbums.album.length === 0)
+        return Promise.reject('No albums found for the time period');
       const album = albumsArr[getRandomInt(0, 50)];
       const albumName = album.name.toUpperCase();
       const albumNameArr = [...albumName];
@@ -105,7 +106,8 @@ function getAlbum(username, period = 'overall') {
         albumImg,
         hiddenLettersArr
       };
-    });
+    })
+    .catch(err => console.error(err));
 }
 
 export {

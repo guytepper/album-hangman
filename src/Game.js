@@ -20,16 +20,18 @@ import {
 } from './Utils';
 
 class Game extends Component {
-  constructor({ match }) {
-    super();
-    const hideArtwork = match.params.hideArtwork === 'hard';
+  constructor(props) {
+    super(props);
     this.state = {
       loadingAlbum: true,
       error: null,
-      hideArtwork
+      guessedLetters: [],
+      lives: 4
     };
-    this.username = match.params.username;
-    this.period = match.params.period;
+    const { match } = props;
+    this.username = props.username || match.params.username;
+    this.period = props.period || match.params.period;
+    this.hideArtwork = props.hideArtwork;
   }
 
   componentDidMount() {
@@ -64,7 +66,7 @@ class Game extends Component {
       })
       .catch(err => {
         // Last.FM API errors usualy missing a period, if so append it for better UX
-        const error = err.endsWith('.') ? err : `${err}.`;
+        const error = `${err}.`;
         this.setState({
           error
         });
@@ -213,7 +215,7 @@ class Game extends Component {
           img={this.state.albumImg}
           blurLevel={this.state.lives * 10}
           gameEnd={this.gameEnd()}
-          hidden={this.state.hideArtwork}
+          hidden={this.hideArtwork}
         />
         <Word
           hiddenLetters={this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr}
