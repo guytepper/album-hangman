@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import Game from './Game';
 
 it('renders without crashing', () => {
-  const wrapper = shallow(<Game username="Dobida" period="overall" hideArtwork={false} />);
+  // const wrapper = shallow(<Game username="Dobida" period="overall" hideArtwork={false} />);
   // console.log(wrapper.state());
   // expect(wrapper.state('username')).toEqual('Dobida');
 });
