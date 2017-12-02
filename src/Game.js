@@ -21,7 +21,7 @@ import {
 
 class Game extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       loadingAlbum: true,
       error: null,
