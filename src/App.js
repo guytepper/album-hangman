@@ -12,21 +12,15 @@ class App extends Component {
   };
 
   updateSetting = (prop, val) => {
-    this.setState({
-      [prop]: val
-    });
+    this.setState({ [prop]: val });
   };
 
   handlePeriodChange = event => {
-    this.setState({
-      period: event.target.value
-    });
+    this.setState({ period: event.target.value });
   };
 
   handleHideArtworkChange = event => {
-    this.setState({
-      hideArtwork: event.target.checked
-    });
+    this.setState({ hideArtwork: event.target.checked });
   };
 
   render() {
