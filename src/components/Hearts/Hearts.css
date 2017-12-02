@@ -1,3 +1,14 @@
+.hearts-container {
+  display: flex;
+  height: 25px;
+}
+
+.heart {
+  width: 25px;
+  height: 25px;
+  margin: 0 2.5px;
+}
+
 @keyframes zoomOut {
   from {
     opacity: 1;
@@ -24,15 +35,4 @@
 
 .fade-leave {
   animation: 500ms zoomOut ease-out;
-}
-
-.hearts-container {
-  display: flex;
-  height: 25px;
-}
-
-.heart {
-  width: 25px;
-  height: 25px;
-  margin: 0 2.5px;
 }
