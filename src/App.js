@@ -15,14 +15,6 @@ class App extends Component {
     this.setState({ [prop]: val });
   };
 
-  handlePeriodChange = event => {
-    this.setState({ period: event.target.value });
-  };
-
-  handleHideArtworkChange = event => {
-    this.setState({ hideArtwork: event.target.checked });
-  };
-
   render() {
     return (
       <Router>
