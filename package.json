@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "enzyme-adapter-react-16": "^1.0.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.1.1",
@@ -12,9 +11,9 @@
   "devDependencies": {
     "axios": "^0.16.1",
     "enzyme": "^3.1.0",
-    "react-addons-test-utils": "^15.5.1",
+    "enzyme-adapter-react-16": "^1.0.2",
     "react-scripts": "1.0.10",
-    "react-test-renderer": "^15.6.1",
+    "react-test-renderer": "^16.0.0",
     "stylelint": "^8.2.0",
     "stylelint-config-idiomatic-order": "^5.0.0"
   },
