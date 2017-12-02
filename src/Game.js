@@ -48,29 +48,28 @@ class Game extends Component {
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
-  setNewAlbum() {
+  async setNewAlbum() {
     this.setState({
       loadingAlbum: true
     });
 
-    getAlbum(this.username, this.period)
-      .then(albumInfo => {
-        // Make sure there are letters to unfold, if not try reloading a new album
-        if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
-          return this.setNewAlbum();
-        }
-        this.setState({
-          loadingAlbum: false,
-          ...albumInfo
-        });
-      })
-      .catch(err => {
-        // Last.FM API errors usualy missing a period, if so append it for better UX
-        const error = `${err}.`;
-        this.setState({
-          error
-        });
+    try {
+      const albumInfo = await getAlbum(this.username, this.period);
+
+      // Make sure there are letters to unfold, if not try reloading a new album
+      if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
+        return this.setNewAlbum();
+      }
+
+      this.setState({
+        loadingAlbum: false,
+        ...albumInfo
       });
+    } catch (err) {
+      this.setState({
+        error: `${err}.`
+      });
+    }
   }
 
   handleKeyboardPress = e => {
@@ -92,7 +91,7 @@ class Game extends Component {
   };
 
   handleLetterGuess = letter => {
-    const { guessedLetters, albumName: word } = this.state;
+    const { guessedLetters, hiddenLettersArr, albumName: word } = this.state;
 
     // Check if user had already guessed the letter
     if (letterInArray(guessedLetters, letter)) {
@@ -106,11 +105,7 @@ class Game extends Component {
       if (letterInWord(word, letter)) {
         // Replace the guessed letter in the underscores array
         const indicies = getIndiciesOfLetter(word, letter);
-        const newHiddenLettersArr = replaceUnderscores(
-          this.state.hiddenLettersArr,
-          letter,
-          indicies
-        );
+        const newHiddenLettersArr = replaceUnderscores(hiddenLettersArr, letter, indicies);
 
         this.setState({
           hiddenLettersArr: newHiddenLettersArr
