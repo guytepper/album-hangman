@@ -35,22 +35,22 @@ function createUnderscoresArr(name) {
 }
 
 /**
-  * Checks if a letter exists in a word
-  */
+ * Checks if a letter exists in a word
+ */
 function letterInWord(word, letter) {
   return word.indexOf(letter) > -1;
 }
 
 /**
-  * Checks if a letter exists in an array
-  */
+ * Checks if a letter exists in an array
+ */
 function letterInArray(arr, letter) {
   return arr.indexOf(letter) > -1;
 }
 
 /**
-  * Returns the indicies of the letter in the string
-  */
+ * Returns the indicies of the letter in the string
+ */
 function getIndiciesOfLetter(word, letter) {
   const indices = [];
   for (let i = 0; i < word.length; i++) {
@@ -63,17 +63,17 @@ function getIndiciesOfLetter(word, letter) {
 }
 
 /**
-  * Replaces underscore with the guessed letter,
-  * using the indicies of that letter in the word.
-  */
+ * Replaces underscore with the guessed letter,
+ * using the indicies of that letter in the word.
+ */
 function replaceUnderscores(arr, letter, indicies) {
   indicies.forEach(index => (arr[index] = letter));
   return arr;
 }
 
 /**
-  * Get a random number between min & max.
-  */
+ * Get a random number between min & max.
+ */
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
