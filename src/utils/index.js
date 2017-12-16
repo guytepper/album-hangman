@@ -85,7 +85,7 @@ function getRandomInt(min, max) {
 function getAlbum(username, period = 'overall') {
   return axios
     .get(
-      `http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`,
+      `https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`,
       { timeout: 5000 }
     )
     .then(response => {
