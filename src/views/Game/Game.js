@@ -49,9 +49,7 @@ class Game extends Component {
   }
 
   async setNewAlbum() {
-    this.setState({
-      loadingAlbum: true
-    });
+    this.setState({ loadingAlbum: true });
 
     try {
       const albumInfo = await getAlbum(this.username, this.period);
@@ -61,14 +59,9 @@ class Game extends Component {
         return this.setNewAlbum();
       }
 
-      this.setState({
-        loadingAlbum: false,
-        ...albumInfo
-      });
+      this.setState({ loadingAlbum: false, ...albumInfo });
     } catch (err) {
-      this.setState({
-        error: `${err}.`
-      });
+      this.setState({ error: `${err}.` });
     }
   }
 
