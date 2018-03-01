@@ -54,7 +54,7 @@ class Game extends Component {
     try {
       const albumInfo = await getAlbum(this.username, this.period);
 
-      // Make sure there are letters to unfold, if not try reloading a new album
+      // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
       if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
         return this.setNewAlbum();
       }
