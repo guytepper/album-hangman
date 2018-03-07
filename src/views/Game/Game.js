@@ -20,19 +20,16 @@ import {
 } from '../../utils';
 
 class Game extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loadingAlbum: true,
-      error: null,
-      guessedLetters: [],
-      lives: 4
-    };
-    const { match } = props;
-    this.username = props.username || match.params.username;
-    this.period = props.period || match.params.period;
-    this.hideArtwork = props.hideArtwork;
-  }
+  state = {
+    loadingAlbum: true,
+    error: null,
+    guessedLetters: [],
+    lives: 4
+  };
+
+  username = this.props.username || this.props.match.params.username;
+  period = this.props.period || this.props.match.params.period;
+  hideArtwork = this.props.hideArtwork;
 
   componentDidMount() {
     this.startNewGame();
