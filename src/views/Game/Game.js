@@ -24,8 +24,6 @@ class Game extends Component {
   state = {
     loadingAlbum: true,
     error: null,
-    guessedLetters: [],
-    lives: 4,
     currentGame: {}
   };
 
@@ -66,81 +64,31 @@ class Game extends Component {
   }
 
   handleKeyboardPress = e => {
+    const { currentGame, loadingAlbum } = this.state;
     const keyCode = e.charCode || e.which;
 
     // Checks if the game is in active state
-    if (this.gameEnd() === false && this.state.loadingAlbum === false) {
+    if (currentGame.status === 'IN_PROGRESS' && loadingAlbum === false) {
       // Checks if the pressed key is alphabetical
       if (isKeyCodeAlphabetical(keyCode)) {
         const letter = String.fromCharCode(keyCode);
-        this.handleLetterGuess(letter);
+        currentGame.guess(letter);
       }
     }
 
     // Restart game on enter press when the game ends
-    if (keyCode === 13 && this.gameEnd()) {
+    if (keyCode === 13 && currentGame.status !== 'IN_PROGRESS') {
       this.startNewGame();
     }
   };
 
-  handleLetterGuess = letter => {
-    const { guessedLetters, hiddenLettersArr, albumName: word } = this.state;
-
-    // Check if user had already guessed the letter
-    if (letterInArray(guessedLetters, letter)) {
-      return;
-    } else {
-      // Add the letter to the guessed letters array
-      this.setState({
-        guessedLetters: guessedLetters.concat(letter)
-      });
-      // Check if letter exists in word
-      if (letterInWord(word, letter)) {
-        // Replace the guessed letter in the underscores array
-        const indicies = getIndiciesOfLetter(word, letter);
-        const newHiddenLettersArr = replaceUnderscores(hiddenLettersArr, letter, indicies);
-
-        this.setState({
-          hiddenLettersArr: newHiddenLettersArr
-        });
-      } else {
-        this.setState({
-          lives: this.state.lives - 1
-        });
-      }
-    }
-  };
-
-  gameWin() {
-    return this.isAlbumNameGuessed();
-  }
-
-  gameLose() {
-    return this.state.lives === 0;
-  }
-
-  gameEnd() {
-    return this.gameWin() || this.gameLose();
-  }
-
-  isAlbumNameGuessed() {
-    if (this.state.hiddenLettersArr && this.state.hiddenLettersArr.indexOf('_') === -1) {
-      return true;
-    }
-    return false;
-  }
-
   startNewGame = () => {
-    this.setState({
-      guessedLetters: [],
-      lives: 4
-    });
-
     this.setNewAlbum();
   };
 
   gameEndMessage() {
-    if (this.gameWin()) {
+    const { currentGame } = this.state;
+    if (currentGame.status === 'WON') {
       return (
         <h1 className="game-status-msg">
           You won!{' '}
@@ -151,7 +99,7 @@ class Game extends Component {
       );
     }
 
-    if (this.gameLose()) {
+    if (currentGame.status === 'LOST') {
       return (
         <h1 className="game-status-msg">
           You lost.{' '}
@@ -166,7 +114,8 @@ class Game extends Component {
   }
 
   playAgainBtn() {
-    if (this.gameEnd()) {
+    const { currentGame } = this.state;
+    if (currentGame.status !== 'IN_PROGRESS') {
       return (
         <button onClick={this.startNewGame} className="pure-button pure-button-primary">
           Play Again
@@ -193,7 +142,7 @@ class Game extends Component {
       );
     }
 
-    if (!this.state.albumName) {
+    if (!this.state.loadingAlbum) {
       return <h1 className="app">Loading..</h1>;
     }
 
