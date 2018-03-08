@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Hangman from 'hangman-game-engine';
 
 import './Game.css';
 import '../../assets/buttons.css';
@@ -24,7 +25,8 @@ class Game extends Component {
     loadingAlbum: true,
     error: null,
     guessedLetters: [],
-    lives: 4
+    lives: 4,
+    currentGame: {}
   };
 
   username = this.props.username || this.props.match.params.username;
@@ -50,13 +52,14 @@ class Game extends Component {
 
     try {
       const albumInfo = await getAlbum(this.username, this.period);
+      const currentGame = new Hangman(albumInfo.albumName);
 
       // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
-      if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
+      if (currentGame.hiddenWord.indexOf('_') === -1) {
         return this.setNewAlbum();
       }
 
-      this.setState({ loadingAlbum: false, ...albumInfo });
+      this.setState({ currentGame, loadingAlbum: false });
     } catch (err) {
       this.setState({ error: `${err}.` });
     }
