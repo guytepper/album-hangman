@@ -17,6 +17,7 @@ class Game extends Component {
   state = {
     loadingAlbum: true,
     error: null,
+    currentAlbum: {},
     currentGame: {}
   };
 
