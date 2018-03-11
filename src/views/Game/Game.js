@@ -50,14 +50,14 @@ class Game extends Component {
 
     try {
       const albumInfo = await getAlbum(this.username, this.period);
-      const currentGame = new Hangman(albumInfo.albumName);
+      const currentGame = new Hangman(albumInfo.name);
 
       // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
       if (currentGame.hiddenWord.indexOf('_') === -1) {
         return this.setNewAlbum();
       }
 
-      this.setState({ currentGame, loadingAlbum: false });
+      this.setState({ currentGame, currentAlbum: albumInfo, loadingAlbum: false });
     } catch (err) {
       this.setState({ error: `${err}.` });
     }
@@ -149,7 +149,7 @@ class Game extends Component {
     return (
       <div className="game">
         <Artwork
-          img={this.state.albumImg}
+          img={this.state.currentAlbum.image}
           blurLevel={this.state.lives * 10}
           gameEnd={this.gameEnd()}
           hidden={this.hideArtwork}

@@ -94,13 +94,13 @@ function getAlbum(username, period = 'overall') {
       if (response.data.topalbums.album.length === 0)
         return Promise.reject('No albums found for the time period');
       const album = albumsArr[getRandomInt(0, 50)];
-      const albumName = album.name;
-      const albumImg = album.image[3]['#text'];
+      const name = album.name;
+      const image = album.image[3]['#text'];
 
       return {
         album,
-        albumName,
-        albumImg
+        name,
+        image
       };
     })
     .catch(err => console.error(err));
