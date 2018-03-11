@@ -136,7 +136,7 @@ class Game extends Component {
       );
     }
 
-    if (!this.state.loadingAlbum) {
+    if (this.state.loadingAlbum) {
       return <h1 className="app">Loading..</h1>;
     }
 
