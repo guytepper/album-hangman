@@ -11,14 +11,7 @@ import GuessedLetters from '../../components/GuessedLetters';
 import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
 
-import {
-  getAlbum,
-  isKeyCodeAlphabetical,
-  replaceUnderscores,
-  letterInWord,
-  letterInArray,
-  getIndiciesOfLetter
-} from '../../utils';
+import { getAlbum, isKeyCodeAlphabetical } from '../../utils';
 
 class Game extends Component {
   state = {
