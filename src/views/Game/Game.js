@@ -53,7 +53,7 @@ class Game extends Component {
 
       this.setState({ currentGame, currentAlbum: albumInfo, loadingAlbum: false });
     } catch (err) {
-      this.setState({ error: `${err}.` });
+      this.setState({ error: err.message });
     }
   }
 
