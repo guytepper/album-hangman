@@ -64,6 +64,7 @@ class Game extends Component {
     if (isKeyCodeAlphabetical(keyCode) && this.isGameActive()) {
       const letter = String.fromCharCode(keyCode);
       currentGame.guess(letter);
+      this.forceUpdate();
     }
 
     // Restart game on enter press when the game ends
@@ -77,6 +78,7 @@ class Game extends Component {
 
     if (this.isGameActive) {
       currentGame.guess(letter);
+      this.forceUpdate();
     }
   };
 
