@@ -130,7 +130,7 @@ class Game extends Component {
   };
 
   gameEnd = () => {
-    return this.state.currentGame !== 'IN_PROGRESS';
+    return this.state.currentGame.status !== 'IN_PROGRESS';
   };
 
   render() {
@@ -165,7 +165,7 @@ class Game extends Component {
         <Word hiddenLetters={this.state.currentGame.hiddenWord} />
         <div className="game-stats">
           <GuessedLetters letters={this.state.currentGame.guessedLetters} />
-          <Hearts lives={4} />
+          <Hearts lives={4 - this.state.currentGame.failedGuesses} />
         </div>
         {this.gameEndMessage()}
         {this.playAgainBtn()}
