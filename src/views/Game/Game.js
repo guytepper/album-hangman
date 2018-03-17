@@ -158,7 +158,7 @@ class Game extends Component {
       <div className="game">
         <Artwork
           img={this.state.currentAlbum.image}
-          blurLevel={this.state.lives * 10}
+          blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
           gameEnd={this.gameEnd()}
           hidden={this.hideArtwork}
         />
