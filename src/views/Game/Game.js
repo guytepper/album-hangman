@@ -149,7 +149,8 @@ class Game extends Component {
       );
     }
 
-    if (this.state.loadingAlbum) {
+    // Display loading only on initial load
+    if (!this.state.currentAlbum.name) {
       return <h1 className="app">Loading..</h1>;
     }
 
