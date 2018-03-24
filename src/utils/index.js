@@ -18,60 +18,6 @@ function isKeyCodeAlphabetical(keyCode) {
 }
 
 /**
- * Create an array of empty underscores according to
- * the album name letters.
- */
-function createUnderscoresArr(name) {
-  const hiddenArray = name.map(letter => {
-    if (isAlphabetical(letter)) {
-      return '_';
-    }
-    // In case the character is non-alphabetical (such as '!'),
-    // use it instead of hiding it.
-    return letter;
-  });
-
-  return hiddenArray;
-}
-
-/**
- * Checks if a letter exists in a word
- */
-function letterInWord(word, letter) {
-  return word.indexOf(letter) > -1;
-}
-
-/**
- * Checks if a letter exists in an array
- */
-function letterInArray(arr, letter) {
-  return arr.indexOf(letter) > -1;
-}
-
-/**
- * Returns the indicies of the letter in the string
- */
-function getIndiciesOfLetter(word, letter) {
-  const indices = [];
-  for (let i = 0; i < word.length; i++) {
-    if (word[i] === letter) {
-      indices.push(i);
-    }
-  }
-
-  return indices;
-}
-
-/**
- * Replaces underscore with the guessed letter,
- * using the indicies of that letter in the word.
- */
-function replaceUnderscores(arr, letter, indicies) {
-  indicies.forEach(index => (arr[index] = letter));
-  return arr;
-}
-
-/**
  * Get a random number between min & max.
  */
 function getRandomInt(min, max) {
@@ -103,14 +49,4 @@ async function getAlbum(username, period = 'overall') {
   }
 }
 
-export {
-  isAlphabetical,
-  isKeyCodeAlphabetical,
-  createUnderscoresArr,
-  replaceUnderscores,
-  letterInWord,
-  letterInArray,
-  getIndiciesOfLetter,
-  getRandomInt,
-  getAlbum
-};
+export { isAlphabetical, isKeyCodeAlphabetical, getRandomInt, getAlbum };
