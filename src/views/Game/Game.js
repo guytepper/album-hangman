@@ -7,7 +7,8 @@ import Word from '../../components/Word';
 import GuessedLetters from '../../components/GuessedLetters';
 import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
-import { getAlbum, isKeyCodeAlphabetical } from '../../utils';
+import { isKeyCodeAlphabetical } from '../../utils';
+import { getAlbum } from '../../api';
 
 import './Game.css';
 import '../../assets/buttons.css';
