@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-import './Game.css';
-import '../../assets/buttons.css';
+import Hangman from 'hangman-game-engine';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
 import GuessedLetters from '../../components/GuessedLetters';
 import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
+import { getAlbum, isKeyCodeAlphabetical } from '../../utils';
 
-import {
-  getAlbum,
-  isKeyCodeAlphabetical,
-  replaceUnderscores,
-  letterInWord,
-  letterInArray,
-  getIndiciesOfLetter
-} from '../../utils';
+import './Game.css';
+import '../../assets/buttons.css';
 
 class Game extends Component {
   state = {
     loadingAlbum: true,
     error: null,
-    guessedLetters: [],
-    lives: 4
+    currentAlbum: {},
+    currentGame: {}
   };
 
   username = this.props.username || this.props.match.params.username;
@@ -50,28 +43,27 @@ class Game extends Component {
 
     try {
       const albumInfo = await getAlbum(this.username, this.period);
+      const currentGame = new Hangman(albumInfo.name);
 
       // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
-      if (albumInfo.hiddenLettersArr.indexOf('_') === -1) {
+      if (currentGame.hiddenWord.indexOf('_') === -1) {
         return this.setNewAlbum();
       }
 
-      this.setState({ loadingAlbum: false, ...albumInfo });
+      this.setState({ currentGame, currentAlbum: albumInfo, loadingAlbum: false });
     } catch (err) {
-      this.setState({ error: `${err}.` });
+      this.setState({ error: err.message });
     }
   }
 
-  handleKeyboardPress = e => {
-    const keyCode = e.charCode || e.which;
+  handleKeyboardPress = event => {
+    const { currentGame } = this.state;
+    const keyCode = event.which;
 
-    // Checks if the game is in active state
-    if (this.gameEnd() === false && this.state.loadingAlbum === false) {
-      // Checks if the pressed key is alphabetical
-      if (isKeyCodeAlphabetical(keyCode)) {
-        const letter = String.fromCharCode(keyCode);
-        this.handleLetterGuess(letter);
-      }
+    if (isKeyCodeAlphabetical(keyCode) && this.isGameActive()) {
+      const letter = String.fromCharCode(keyCode);
+      currentGame.guess(letter);
+      this.forceUpdate();
     }
 
     // Restart game on enter press when the game ends
@@ -80,64 +72,27 @@ class Game extends Component {
     }
   };
 
-  handleLetterGuess = letter => {
-    const { guessedLetters, hiddenLettersArr, albumName: word } = this.state;
+  handleLetterPress = letter => {
+    const { currentGame } = this.state;
 
-    // Check if user had already guessed the letter
-    if (letterInArray(guessedLetters, letter)) {
-      return;
-    } else {
-      // Add the letter to the guessed letters array
-      this.setState({
-        guessedLetters: guessedLetters.concat(letter)
-      });
-      // Check if letter exists in word
-      if (letterInWord(word, letter)) {
-        // Replace the guessed letter in the underscores array
-        const indicies = getIndiciesOfLetter(word, letter);
-        const newHiddenLettersArr = replaceUnderscores(hiddenLettersArr, letter, indicies);
-
-        this.setState({
-          hiddenLettersArr: newHiddenLettersArr
-        });
-      } else {
-        this.setState({
-          lives: this.state.lives - 1
-        });
-      }
+    if (this.isGameActive) {
+      currentGame.guess(letter);
+      this.forceUpdate();
     }
   };
 
-  gameWin() {
-    return this.isAlbumNameGuessed();
-  }
-
-  gameLose() {
-    return this.state.lives === 0;
-  }
-
-  gameEnd() {
-    return this.gameWin() || this.gameLose();
-  }
-
-  isAlbumNameGuessed() {
-    if (this.state.hiddenLettersArr && this.state.hiddenLettersArr.indexOf('_') === -1) {
-      return true;
-    }
-    return false;
-  }
-
   startNewGame = () => {
-    this.setState({
-      guessedLetters: [],
-      lives: 4
-    });
-
     this.setNewAlbum();
   };
 
+  isGameActive = () => {
+    const { currentGame, loadingAlbum } = this.state;
+    return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
+  };
+
   gameEndMessage() {
-    if (this.gameWin()) {
+    const { currentGame } = this.state;
+    if (currentGame.status === 'WON') {
       return (
         <h1 className="game-status-msg">
           You won!{' '}
@@ -148,7 +103,7 @@ class Game extends Component {
       );
     }
 
-    if (this.gameLose()) {
+    if (currentGame.status === 'LOST') {
       return (
         <h1 className="game-status-msg">
           You lost.{' '}
@@ -162,7 +117,7 @@ class Game extends Component {
     return null;
   }
 
-  playAgainBtn() {
+  playAgainBtn = () => {
     if (this.gameEnd()) {
       return (
         <button onClick={this.startNewGame} className="pure-button pure-button-primary">
@@ -171,7 +126,11 @@ class Game extends Component {
       );
     }
     return null;
-  }
+  };
+
+  gameEnd = () => {
+    return this.state.currentGame.status !== 'IN_PROGRESS';
+  };
 
   render() {
     if (this.state.error) {
@@ -190,28 +149,27 @@ class Game extends Component {
       );
     }
 
-    if (!this.state.albumName) {
+    // Display loading only on initial load
+    if (!this.state.currentAlbum.name) {
       return <h1 className="app">Loading..</h1>;
     }
 
     return (
       <div className="game">
         <Artwork
-          img={this.state.albumImg}
-          blurLevel={this.state.lives * 10}
+          img={this.state.currentAlbum.image}
+          blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
           gameEnd={this.gameEnd()}
           hidden={this.hideArtwork}
         />
-        <Word
-          hiddenLetters={this.gameEnd() ? this.state.albumNameArr : this.state.hiddenLettersArr}
-        />
+        <Word hiddenLetters={this.state.currentGame.hiddenWord} />
         <div className="game-stats">
-          <GuessedLetters letters={this.state.guessedLetters} />
-          <Hearts lives={this.state.lives} />
+          <GuessedLetters letters={this.state.currentGame.guessedLetters} />
+          <Hearts lives={4 - this.state.currentGame.failedGuesses} />
         </div>
         {this.gameEndMessage()}
         {this.playAgainBtn()}
-        <Keyboard onPress={this.handleLetterGuess} />
+        <Keyboard onPress={this.handleLetterPress} />
         <Link className="game-change-settings-link" to="/">
           Settings
         </Link>

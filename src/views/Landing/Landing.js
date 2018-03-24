@@ -74,7 +74,7 @@ function Landing(props) {
       </div>
       <div className="game-option">
         <u>Advanced</u>
-        <label className>
+        <label>
           <input
             type="checkbox"
             className="game-option-checkbox"
