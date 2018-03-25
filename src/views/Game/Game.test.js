@@ -2,10 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Game from './Game';
 
+jest.mock('../../api');
+
 it('renders without crashing', () => {
-  // const wrapper = shallow(<Game username="Dobida" period="overall" hideArtwork={false} />);
-  // console.log(wrapper.state());
-  // expect(wrapper.state('username')).toEqual('Dobida');
+  const wrapper = shallow(<Game username="Dobida" period="overall" hideArtwork={false} />);
+  process.nextTick(() => console.log(wrapper.state()));
 });
 
 // it('Hebrew listener renders without crashing', () => {

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getRandomInt } from '../utils';
+
 /**
  * Get album information from the Last.FM API,
  * using the provided user information.
