@@ -6,7 +6,10 @@ jest.mock('../../api');
 
 it('renders without crashing', () => {
   const wrapper = shallow(<Game username="Dobida" period="overall" hideArtwork={false} />);
-  process.nextTick(() => console.log(wrapper.state()));
+  process.nextTick(() => {
+    const { currentAlbum } = wrapper.state();
+    expect(currentAlbum.name).toEqual('Rival Dealer - EP');
+  });
 });
 
 // it('Hebrew listener renders without crashing', () => {
