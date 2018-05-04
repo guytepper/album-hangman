@@ -1,0 +1,37 @@
+{
+  "album": {
+    "name": "Rival Dealer - EP",
+    "playcount": "51",
+    "mbid": "",
+    "url": "https://www.last.fm/music/Burial/Rival+Dealer+-+EP",
+    "artist": {
+      "name": "Burial",
+      "mbid": "b068d41f-855d-4426-9ff7-f79b094441ff",
+      "url": "https://www.last.fm/music/Burial"
+    },
+    "image": [
+      {
+        "#text": "https://lastfm-img2.akamaized.net/i/u/34s/c61d084be8da416cc14f4eef5fb3fb2d.png",
+        "size": "small"
+      },
+      {
+        "#text": "https://lastfm-img2.akamaized.net/i/u/64s/c61d084be8da416cc14f4eef5fb3fb2d.png",
+        "size": "medium"
+      },
+      {
+        "#text": "https://lastfm-img2.akamaized.net/i/u/174s/c61d084be8da416cc14f4eef5fb3fb2d.png",
+        "size": "large"
+      },
+      {
+        "#text":
+          "https://lastfm-img2.akamaized.net/i/u/300x300/c61d084be8da416cc14f4eef5fb3fb2d.png",
+        "size": "extralarge"
+      }
+    ],
+    "@attr": {
+      "rank": "43"
+    }
+  },
+  "name": "Rival Dealer - EP",
+  "image": "https://lastfm-img2.akamaized.net/i/u/300x300/c61d084be8da416cc14f4eef5fb3fb2d.png"
+}
