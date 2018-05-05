@@ -1,3 +1,7 @@
+.landing-header {
+  font-family: Pangolin, -apple-system, BlinkMacSystemFont;
+}
+
 .landing {
   display: flex;
   width: 200px;
