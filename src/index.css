@@ -37,7 +37,7 @@ body {
 }
 
 .hangman-btn {
-  width: 100%;
+  width: 200px;
   font-family: inherit;
   font-size: 100%;
   padding: 0.5em 1em;

@@ -157,13 +157,17 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <Artwork
-          img={this.state.currentAlbum.image}
-          blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
-          gameEnd={this.gameEnd()}
-          hidden={this.hideArtwork}
-        />
-        <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+        <div>
+          <Artwork
+            img={this.state.currentAlbum.image}
+            blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
+            gameEnd={this.gameEnd()}
+            hidden={this.hideArtwork}
+          />
+          <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+        </div>
+        {/*
+
         <div className="game-stats">
           <GuessedLetters letters={this.state.currentGame.guessedLetters} />
           <Hearts lives={4 - this.state.currentGame.failedGuesses} />
@@ -173,7 +177,7 @@ class Game extends Component {
         <Keyboard onPress={this.handleLetterPress} />
         <Link className="game-change-settings-link" to="/">
           Settings
-        </Link>
+        </Link> */}
       </div>
     );
   }
