@@ -11,8 +11,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Ubuntu', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Ubuntu', 'Helvetica Neue', sans-serif;
   text-align: center;
   color: #fff;
   background-color: #58b2ff;
@@ -35,4 +34,33 @@ body {
 .github-icon {
   width: 20px;
   height: 20px;
+}
+
+.hangman-btn {
+  width: 100%;
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0.5em 1em;
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  background-color: #e6e6e6;
+  border: none;
+  border-radius: 2px;
+}
+
+.hangman-btn:hover {
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
+}
+
+.hangman-btn[disabled] {
+  border: none;
+  background-image: none;
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.success-btn {
+  color: #fff;
+  background: rgb(28, 184, 65);
 }

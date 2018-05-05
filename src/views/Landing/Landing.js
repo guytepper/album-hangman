@@ -91,7 +91,7 @@ function Landing(props) {
           </div>
         </div>
         <Link to={`/game/${props.username}/${props.period}`}>
-          <button className="button-success pure-button" disabled={!props.username}>
+          <button className="hangman-btn success-btn" disabled={!props.username}>
             Let's play!&nbsp;
             <span role="img" aria-label="Clown">
               🤡
