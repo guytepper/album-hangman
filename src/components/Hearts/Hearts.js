@@ -14,11 +14,7 @@ function Hearts({ lives }) {
 
   return (
     <div className="hearts-container">
-      <CSSTransitionGroup
-        transitionName="fade"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={450}
-      >
+      <CSSTransitionGroup transitionName="fade" transitionEnterTimeout={500} transitionLeaveTimeout={450}>
         {hearts}
       </CSSTransitionGroup>
     </div>

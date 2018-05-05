@@ -22,14 +22,9 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={props => (
-              <Landing {...props} {...this.state} updateSetting={this.updateSetting} />
-            )}
+            render={props => <Landing {...props} {...this.state} updateSetting={this.updateSetting} />}
           />
-          <Route
-            path="/game/:username/:period?/"
-            render={props => <Game {...props} {...this.state} />}
-          />
+          <Route path="/game/:username/:period?/" render={props => <Game {...props} {...this.state} />} />
         </React.Fragment>
       </Router>
     );
