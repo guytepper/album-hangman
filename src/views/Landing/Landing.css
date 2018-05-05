@@ -30,6 +30,13 @@
   color: #c2c2c2;
 }
 
+.game-options {
+  display: flex;
+  width: 380px;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
 .game-option {
   display: flex;
   flex-direction: column;
