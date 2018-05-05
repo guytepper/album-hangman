@@ -19,14 +19,15 @@
   margin-bottom: 5px;
   border-radius: 4px;
   vertical-align: middle;
-  color: white;
   border: 0;
-  background-color: #4a5867;
+  color: white;
+  font-size: 20px;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #4a5867;
 }
 
 .landing-username::placeholder {
-  color: white;
+  color: #c2c2c2;
 }
 
 .game-option {
