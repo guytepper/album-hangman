@@ -6,7 +6,7 @@ import './Landing.css';
 function Landing(props) {
   return (
     <div>
-      <h1 className="landing-header">Album Hangman1</h1>
+      <h1 className="landing-header">Album Hangman</h1>
       <form className="landing">
         <input
           onChange={e => props.updateSetting('username', e.target.value)}
