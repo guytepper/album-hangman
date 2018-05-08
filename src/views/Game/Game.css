@@ -1,3 +1,16 @@
+.game {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-current-album {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
 .game-stats {
   display: flex;
   flex-direction: column;

@@ -157,7 +157,7 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <div>
+        <div className="game-current-album">
           <Artwork
             img={this.state.currentAlbum.image}
             blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
