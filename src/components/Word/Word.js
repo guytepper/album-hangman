@@ -1,11 +1,23 @@
 import React from 'react';
-
-const wordStyle = {
-  letterSpacing: '5px'
-};
+import { splitArrayWords } from '../../utils';
+import './Word.css';
 
 function Word({ hiddenLetters }) {
-  return <h1 style={wordStyle}>{hiddenLetters}</h1>;
+  const wordsArr = splitArrayWords(hiddenLetters);
+
+  const words = wordsArr.map(word => {
+    return (
+      <div className="word">
+        {[...word].map(letter => (
+          <div className="hidden-word-letter" key={letter}>
+            <span>{letter === '_' ? '' : letter}</span>
+          </div>
+        ))}
+      </div>
+    );
+  });
+
+  return <div>{words}</div>;
 }
 
 export default Word;

@@ -4,9 +4,9 @@ import Hangman from 'hangman-game-engine';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
-import GuessedLetters from '../../components/GuessedLetters';
-import Keyboard from '../../components/Keyboard';
-import Hearts from '../../components/Hearts';
+// import GuessedLetters from '../../components/GuessedLetters';
+// import Keyboard from '../../components/Keyboard';
+// import Hearts from '../../components/Hearts';
 import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbum } from '../../api';
 
