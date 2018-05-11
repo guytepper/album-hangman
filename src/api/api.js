@@ -8,7 +8,7 @@ import { getRandomInt } from '../utils';
 async function getAlbum(username, period = 'overall') {
   const url = `https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`;
   try {
-    const response = await axios.get(url, { timeout: 7500 });
+    const response = await axios.get(url, { timeout: 8500 });
 
     if (response.data.error) throw new Error(response.data.message);
     const albumsArr = response.data.topalbums.album; // array of albums
