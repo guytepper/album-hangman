@@ -1,4 +1,5 @@
 import React from 'react';
+import { generate as generateId } from 'shortid';
 import { splitArrayWords } from '../../utils';
 import './Word.css';
 
@@ -9,7 +10,7 @@ function Word({ hiddenLetters }) {
     return (
       <div className="word">
         {[...word].map(letter => (
-          <div className="hidden-word-letter" key={letter}>
+          <div className="hidden-word-letter" key={generateId()}>
             <span>{letter === '_' ? '' : letter}</span>
           </div>
         ))}
