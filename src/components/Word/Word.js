@@ -8,7 +8,7 @@ function Word({ hiddenLetters }) {
 
   const words = wordsArr.map(word => {
     return (
-      <div className="word">
+      <div className="hidden-word" key={generateId()}>
         {[...word].map(letter => (
           <div className="hidden-word-letter" key={generateId()}>
             <span>{letter === '_' ? '' : letter}</span>
@@ -18,7 +18,7 @@ function Word({ hiddenLetters }) {
     );
   });
 
-  return <div>{words}</div>;
+  return <div className="hidden-album-name">{words}</div>;
 }
 
 export default Word;

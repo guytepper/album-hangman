@@ -8,7 +8,8 @@
 .game-current-album {
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
 .game-stats {
