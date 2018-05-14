@@ -1,8 +1,14 @@
 .game {
-  display: flex;
+  display: grid;
+  grid-template-columns: 10px 100px 250px 850px auto;
+  grid-template-rows: 150px 200px 200px 100px 100px auto;
   height: 100vh;
-  justify-content: center;
-  align-items: center;
+}
+
+/** TODO: Think where to put those styles so it'll make sense to read at the code. **/
+.album-artwork-container {
+  grid-column: 3 / 4;
+  grid-row: 2 / 4;
 }
 
 .game-current-album {

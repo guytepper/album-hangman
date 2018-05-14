@@ -4,9 +4,9 @@ import Hangman from 'hangman-game-engine';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
-// import GuessedLetters from '../../components/GuessedLetters';
+import GuessedLetters from '../../components/GuessedLetters';
 // import Keyboard from '../../components/Keyboard';
-// import Hearts from '../../components/Hearts';
+import Hearts from '../../components/Hearts';
 import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbum } from '../../api';
 
@@ -160,27 +160,27 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <div className="game-current-album">
-          <Artwork
-            img={this.state.currentAlbum.image}
-            blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
-            gameEnd={this.gameEnd()}
-            hidden={this.hideArtwork}
-          />
-          <Word hiddenLetters={this.state.currentGame.hiddenWord} />
-        </div>
-        {/*
-
-        <div className="game-stats">
-          <GuessedLetters letters={this.state.currentGame.guessedLetters} />
-          <Hearts lives={4 - this.state.currentGame.failedGuesses} />
-        </div>
+        {/* <div className="game-current-album"> */}
+        <Artwork
+          img={this.state.currentAlbum.image}
+          blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
+          gameEnd={this.gameEnd()}
+          hidden={this.hideArtwork}
+        />
+        <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+        {/* </div> */}
+        {
+          <div className="game-stats">
+            <GuessedLetters letters={this.state.currentGame.guessedLetters} />
+            <Hearts lives={4 - this.state.currentGame.failedGuesses} />
+          </div> /*
         {this.gameEndMessage()}
         {this.playAgainBtn()}
         <Keyboard onPress={this.handleLetterPress} />
         <Link className="game-change-settings-link" to="/">
           Settings
-        </Link> */}
+        </Link> */
+        }
       </div>
     );
   }
