@@ -1,7 +1,8 @@
 .game {
   display: grid;
-  grid-template-columns: 10px 100px 250px 850px auto;
+  grid-template-columns: 50px 100px 250px 850px auto;
   grid-template-rows: 150px 250px 200px 100px 100px auto;
+  grid-column-gap: 10px;
   height: 100vh;
 }
 
@@ -12,8 +13,9 @@
 }
 
 .hidden-album-name {
-  grid-column: 4 / -1;
+  grid-column: 4 / 5;
   grid-row: 2 / 3;
+  align-self: center;
 }
 
 .game-stats {

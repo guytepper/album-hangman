@@ -1,21 +1,17 @@
 import React from 'react';
-
-const letterStyle = {
-  fontWeight: 'normal',
-  letterSpacing: '3px'
-};
+import './GuessedLetters.css';
 
 function GuessedLetters({ letters }) {
   return (
-    <div>
-      <h3>
-        Guessed Letters:&nbsp;
+    <div className="failed-guesses">
+      <h3 className="failed-guesses__title">Failed Guesses</h3>
+      <div className="failed-guesses__letters">
         {letters.map(letter => (
-          <span key={letter} style={letterStyle} className="guessed-letter">
+          <span key={letter} className="failed-gueeses__letter">
             {letter}
           </span>
         ))}
-      </h3>
+      </div>
     </div>
   );
 }

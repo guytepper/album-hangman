@@ -171,8 +171,8 @@ class Game extends Component {
         {/* </div> */}
         {
           <div className="game-stats">
-            <GuessedLetters letters={this.state.currentGame.guessedLetters} />
             <Hearts lives={4 - this.state.currentGame.failedGuesses} />
+            <GuessedLetters letters={this.state.currentGame.guessedLetters} />
           </div> /*
         {this.gameEndMessage()}
         {this.playAgainBtn()}
