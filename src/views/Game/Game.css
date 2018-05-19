@@ -52,6 +52,15 @@
   align-items: flex-start;
 }
 
+.game-end-message {
+  grid-row: 3/4;
+  grid-column: 3/4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .game-status-msg {
   margin-top: 0;
 }

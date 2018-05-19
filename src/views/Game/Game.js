@@ -174,19 +174,19 @@ class Game extends Component {
           hidden={this.hideArtwork}
         />
         <Word hiddenLetters={this.state.currentGame.hiddenWord} />
-        {/* </div> */}
-        {
-          <div className="game-stats">
-            <Hearts lives={4 - this.state.currentGame.failedGuesses} />
-            <GuessedLetters letters={this.state.currentGame.failedLetters} />
-          </div> /*
-        {this.gameEndMessage()}
-        {this.playAgainBtn()}
+        <div className="game-stats">
+          <Hearts lives={4 - this.state.currentGame.failedGuesses} />
+          <GuessedLetters letters={this.state.currentGame.failedLetters} />
+        </div>
+        <div className="game-end-message">
+          {this.gameEndMessage()}
+          {this.playAgainBtn()}
+        </div>
+        {/*}
         <Keyboard onPress={this.handleLetterPress} />
         <Link className="game-change-settings-link" to="/">
           Settings
-        </Link> */
-        }
+        </Link */}
       </div>
     );
   }
