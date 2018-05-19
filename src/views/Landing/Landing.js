@@ -8,7 +8,7 @@ function Landing(props) {
     <div>
       <h1 className="landing-header">Album Hangman</h1>
       <p>Can you guess your top Last.FM albums?</p>
-      <form className="landing">
+      <form className="landing-form">
         <input
           onChange={e => props.updateSetting('username', e.target.value)}
           value={props.username}

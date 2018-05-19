@@ -3,7 +3,7 @@
   font-family: Pangolin, -apple-system, BlinkMacSystemFont;
 }
 
-.landing {
+.landing-form {
   display: flex;
   width: 200px;
   flex-direction: column;
