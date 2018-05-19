@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../../assets/buttons.css';
+import Button from '../../components/Button';
 import './Landing.css';
 
 function Landing(props) {
@@ -90,14 +89,15 @@ function Landing(props) {
             </label>
           </div>
         </div>
-        <Link to={`/game/${props.username}/${props.period}`}>
-          <button className="hangman-btn success-btn" disabled={!props.username}>
-            Let's play!&nbsp;
-            <span role="img" aria-label="Clown">
-              🤡
-            </span>
-          </button>
-        </Link>
+        <Button
+          onClick={() => props.history.push(`/game/${props.username}/${props.period}`)}
+          disabled={!props.username}
+        >
+          Let's play!{' '}
+          <span role="img" aria-label="Clown">
+            🤡
+          </span>
+        </Button>
       </form>
     </div>
   );

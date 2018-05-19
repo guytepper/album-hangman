@@ -13,7 +13,6 @@ import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbum } from '../../api';
 
 import './Game.css';
-import '../../assets/buttons.css';
 
 class Game extends Component {
   state = {
