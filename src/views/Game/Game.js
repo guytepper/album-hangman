@@ -6,6 +6,7 @@ import ReactLoading from 'react-loading';
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
 import GuessedLetters from '../../components/GuessedLetters';
+import Button from '../../components/Button';
 // import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
 import { isKeyCodeAlphabetical } from '../../utils';
@@ -125,9 +126,9 @@ class Game extends Component {
   playAgainBtn = () => {
     if (this.gameEnd()) {
       return (
-        <button onClick={this.startNewGame} className="pure-button pure-button-primary">
+        <Button onClick={this.startNewGame} loading={this.state.loadingAlbum}>
           Play Again
-        </button>
+        </Button>
       );
     }
     return null;
