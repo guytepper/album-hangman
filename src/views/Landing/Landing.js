@@ -5,7 +5,7 @@ import './Landing.css';
 
 function Landing(props) {
   return (
-    <div>
+    <div className="landing">
       <h1 className="landing-header">Album Hangman</h1>
       <p>Can you guess your top Last.FM albums?</p>
       <form className="landing-form">

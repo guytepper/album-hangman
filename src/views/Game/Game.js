@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Hangman from 'hangman-game-engine';
+import ReactLoading from 'react-loading';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
@@ -155,7 +156,12 @@ class Game extends Component {
 
     // Display loading only on initial load
     if (!this.state.currentAlbum.name) {
-      return <h1 className="app">Loading..</h1>;
+      return (
+        <div className="loading-state">
+          <ReactLoading type="bubbles" height={150} width={150} />
+          <h1 style={{ marginTop: 0 }}>Loading...</h1>
+        </div>
+      );
     }
 
     return (
