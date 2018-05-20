@@ -45,8 +45,13 @@ class Game extends Component {
 
     try {
       const albumInfo = await getAlbum(this.username, this.period);
-      const currentGame = new Hangman(albumInfo.name);
 
+      // Long album names breaks our UI.
+      if (albumInfo.name.length > 30) {
+        return this.setNewAlbum();
+      }
+
+      const currentGame = new Hangman(albumInfo.name);
       // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
       if (currentGame.hiddenWord.indexOf('_') === -1) {
         return this.setNewAlbum();
