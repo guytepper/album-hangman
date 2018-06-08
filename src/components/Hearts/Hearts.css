@@ -1,6 +1,13 @@
 .hearts-container {
   display: flex;
-  height: 25px;
+  flex-direction: column;
+  min-height: 70px;
+}
+
+.hearts-title {
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 100;
 }
 
 .heart {

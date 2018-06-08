@@ -3,8 +3,6 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // E
 import './Hearts.css';
 
 function Hearts({ lives }) {
-  if (lives === 0) return null;
-
   const hearts = [];
 
   // For each live, display an heart icon
@@ -14,13 +12,12 @@ function Hearts({ lives }) {
 
   return (
     <div className="hearts-container">
-      <CSSTransitionGroup
-        transitionName="fade"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={450}
-      >
-        {hearts}
-      </CSSTransitionGroup>
+      <h3 className="hearts-title">Lives</h3>
+      <div>
+        <CSSTransitionGroup transitionName="fade" transitionEnterTimeout={500} transitionLeaveTimeout={450}>
+          {hearts}
+        </CSSTransitionGroup>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,24 @@
+.hidden-album-name {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hidden-word {
+  display: flex;
+  margin: 10px;
+}
+
+.hidden-word-letter {
+  display: flex;
+  width: 70px;
+  height: 80px;
+  margin-right: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: #4a5867;
+  border-radius: 10px;
+}
+.hidden-word-letter span {
+  font-size: 50px;
+}

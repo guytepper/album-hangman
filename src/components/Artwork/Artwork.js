@@ -1,4 +1,5 @@
 import React from 'react';
+import './Artwork.css';
 
 function Artwork({ img, blurLevel, gameEnd, hidden }) {
   if (gameEnd) {
@@ -10,16 +11,11 @@ function Artwork({ img, blurLevel, gameEnd, hidden }) {
     blurLevel = 17;
   }
 
-  const artworkStyle = {
-    margin: '10px auto',
-    width: '250px',
-    height: '250px',
-    backgroundColor: 'grey',
-    filter: `blur(${blurLevel}px)`,
-    transition: 'filter .5s ease-in-out'
-  };
-
-  return <img style={hidden ? { display: 'none' } : artworkStyle} src={img} alt="" draggable={false} />;
+  return (
+    <div className="album-artwork-container">
+      <img className="album-artwork" style={{ filter: `blur(${blurLevel}px)` }} src={img} alt="" draggable={false} />
+    </div>
+  );
 }
 
 export default Artwork;

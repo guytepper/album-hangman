@@ -18,27 +18,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="app">
-          <h1>Album Hangman</h1>
-          <div className="container">
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <Landing {...props} {...this.state} updateSetting={this.updateSetting} />
-              )}
-            />
-            <Route
-              path="/game/:username/:period?/"
-              render={props => <Game {...props} {...this.state} />}
-            />
-          </div>
-          <footer>
-            <a href="https://github.com/guytepper/album-hangman">
-              <img src="/github.svg" alt="View on GitHub" className="github-icon" />
-            </a>
-          </footer>
-        </div>
+        <React.Fragment>
+          <Route
+            exact
+            path="/"
+            render={props => <Landing {...props} {...this.state} updateSetting={this.updateSetting} />}
+          />
+          <Route path="/game/:username/:period?/" render={props => <Game {...props} {...this.state} />} />
+        </React.Fragment>
       </Router>
     );
   }

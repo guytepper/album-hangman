@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "hangman-game-engine": "^0.0.2",
+    "hangman-game-engine": "1.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-loading": "^2.0.2",
     "react-router-dom": "^4.1.1",
-    "react-transition-group": "^1.1.3"
+    "react-transition-group": "^1.1.3",
+    "shortid": "^2.2.8"
   },
   "devDependencies": {
     "axios": "^0.16.1",

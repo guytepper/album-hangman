@@ -1,0 +1,17 @@
+.album-artwork-container {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border: 9px solid white;
+  background-color: grey;
+}
+
+.album-artwork {
+  width: 100%;
+  height: 100%;
+  transition: filter 0.5s ease-in-out;
+}
+
+.hidden {
+  display: none;
+}

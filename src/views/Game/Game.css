@@ -1,7 +1,64 @@
+.game {
+  display: grid;
+  padding: 0 50px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 250px 1fr;
+  height: 100vh;
+}
+
+.album-artwork-container {
+  grid-row: 2 / 3;
+}
+
+.hidden-album-name {
+  grid-row: 3 / -1;
+}
+
+@media (min-width: 768px) {
+  .game {
+    grid-template-columns: 1fr 2.5fr 8.5fr;
+    grid-template-rows: 150px 250px 200px 100px 100px auto;
+    grid-column-gap: 10px;
+  }
+
+  /** TODO: Think where to put those styles so it'll make sense to read at the code. **/
+  .album-artwork-container {
+    grid-column: 2 / 3;
+    grid-row: 2 / 4;
+  }
+
+  .hidden-album-name {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    align-self: center;
+  }
+}
+
+.game-stats {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.game-current-album {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .game-stats {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.game-end-message {
+  grid-row: 3/4;
+  grid-column: 3/4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .game-status-msg {
@@ -13,4 +70,28 @@
   padding: 10px 0;
   margin-bottom: -25px;
   font-size: 14px;
+}
+
+.loading-state {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
 }

@@ -2,8 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Artwork from './Artwork';
 
-const artworkUrl =
-  'https://lastfm-img2.akamaized.net/i/u/300x300/e7de85bfdb014125851c7fec9c105c6e.png';
+const artworkUrl = 'https://lastfm-img2.akamaized.net/i/u/300x300/e7de85bfdb014125851c7fec9c105c6e.png';
 const blurLevel = 3;
 const gameEnd = false;
 

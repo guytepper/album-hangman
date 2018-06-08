@@ -1,4 +1,4 @@
-import { isAlphabetical, isKeyCodeAlphabetical, getRandomInt } from './index';
+import { isAlphabetical, isKeyCodeAlphabetical, getRandomInt, splitArrayWords } from './index';
 
 it('detects if a string is alphabetical', () => {
   const alphabetical = 'A';
@@ -18,4 +18,10 @@ it('gets a random integer', () => {
   let num = getRandomInt(0, 20);
   expect(num).toBeGreaterThanOrEqual(0);
   expect(num).toBeLessThanOrEqual(20);
+});
+
+it('splits an array of words', () => {
+  const words = ['H', 'e', 'y', ' ', 'm', 'a', 'n'];
+  const wordsArr = splitArrayWords(words);
+  expect(wordsArr).toEqual(['Hey', 'man']);
 });

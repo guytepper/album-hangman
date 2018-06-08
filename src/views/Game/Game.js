@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Hangman from 'hangman-game-engine';
+import ReactLoading from 'react-loading';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
 import GuessedLetters from '../../components/GuessedLetters';
-import Keyboard from '../../components/Keyboard';
+import Button from '../../components/Button';
+
+// import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
 import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbum } from '../../api';
-
 import './Game.css';
-import '../../assets/buttons.css';
 
 class Game extends Component {
   state = {
@@ -44,8 +45,13 @@ class Game extends Component {
 
     try {
       const albumInfo = await getAlbum(this.username, this.period);
-      const currentGame = new Hangman(albumInfo.name);
 
+      // Long album names breaks our UI.
+      if (albumInfo.name.length > 30) {
+        return this.setNewAlbum();
+      }
+
+      const currentGame = new Hangman(albumInfo.name);
       // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
       if (currentGame.hiddenWord.indexOf('_') === -1) {
         return this.setNewAlbum();
@@ -64,6 +70,9 @@ class Game extends Component {
     if (isKeyCodeAlphabetical(keyCode) && this.isGameActive()) {
       const letter = String.fromCharCode(keyCode);
       currentGame.guess(letter);
+      if (currentGame.status === 'LOST') {
+        currentGame.revealHiddenWord();
+      }
       this.forceUpdate();
     }
 
@@ -121,9 +130,9 @@ class Game extends Component {
   playAgainBtn = () => {
     if (this.gameEnd()) {
       return (
-        <button onClick={this.startNewGame} className="pure-button pure-button-primary">
+        <Button onClick={this.startNewGame} loading={this.state.loadingAlbum}>
           Play Again
-        </button>
+        </Button>
       );
     }
     return null;
@@ -136,15 +145,15 @@ class Game extends Component {
   render() {
     if (this.state.error) {
       return (
-        <div>
+        <div className="error-container">
           <h1>{this.state.error}</h1>
           <Link to="/">
-            <button className="pure-button-primary pure-button">
+            <Button>
               Try again?{' '}
               <span role="img" aria-label="Ogre">
                 👹
               </span>
-            </button>
+            </Button>
           </Link>
         </div>
       );
@@ -152,11 +161,19 @@ class Game extends Component {
 
     // Display loading only on initial load
     if (!this.state.currentAlbum.name) {
-      return <h1 className="app">Loading..</h1>;
+      return (
+        <div className="loading-state">
+          <ReactLoading type="bubbles" height={150} width={150} />
+          <h1 style={{ marginTop: 0 }}>Loading...</h1>
+        </div>
+      );
     }
 
     return (
       <div className="game">
+                  <Link to="/">
+<img src="/back.svg" alt="" className="back-button"/></Link>
+        {/* <div className="game-current-album"> */}
         <Artwork
           img={this.state.currentAlbum.image}
           blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
@@ -165,15 +182,18 @@ class Game extends Component {
         />
         <Word hiddenLetters={this.state.currentGame.hiddenWord} />
         <div className="game-stats">
-          <GuessedLetters letters={this.state.currentGame.guessedLetters} />
           <Hearts lives={4 - this.state.currentGame.failedGuesses} />
+          <GuessedLetters letters={this.state.currentGame.failedLetters} />
         </div>
-        {this.gameEndMessage()}
-        {this.playAgainBtn()}
+        <div className="game-end-message">
+          {this.gameEndMessage()}
+          {this.playAgainBtn()}
+        </div>
+        {/*}
         <Keyboard onPress={this.handleLetterPress} />
         <Link className="game-change-settings-link" to="/">
           Settings
-        </Link>
+        </Link */}
       </div>
     );
   }

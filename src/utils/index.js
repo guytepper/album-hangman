@@ -22,4 +22,15 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export { isAlphabetical, isKeyCodeAlphabetical, getRandomInt };
+/**
+ * Splits single array of letters to array of words.
+ * @param {array} arr - The words array to be splitted (e.g. ['H', 'i', ' ', 'm', 'a', 'n'].
+ * @param {string} seperator - The string to be used to seperate the array (defaults to an empty string (' ')).
+ * @returns {array} Array of words.
+ */
+function splitArrayWords(arr, seperator = ' ') {
+  const words = arr.join('').split(seperator);
+  return words;
+}
+
+export { isAlphabetical, isKeyCodeAlphabetical, getRandomInt, splitArrayWords };
