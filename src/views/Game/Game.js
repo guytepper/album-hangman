@@ -7,11 +7,11 @@ import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
 import GuessedLetters from '../../components/GuessedLetters';
 import Button from '../../components/Button';
+
 // import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
 import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbum } from '../../api';
-
 import './Game.css';
 
 class Game extends Component {
@@ -171,7 +171,8 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <span>Back</span>
+                  <Link to="/">
+<img src="/back.svg" alt="" className="back-button"/></Link>
         {/* <div className="game-current-album"> */}
         <Artwork
           img={this.state.currentAlbum.image}
