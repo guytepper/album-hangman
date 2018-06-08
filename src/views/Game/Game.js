@@ -145,15 +145,15 @@ class Game extends Component {
   render() {
     if (this.state.error) {
       return (
-        <div>
+        <div className="error-container">
           <h1>{this.state.error}</h1>
           <Link to="/">
-            <button className="pure-button-primary pure-button">
+            <Button>
               Try again?{' '}
               <span role="img" aria-label="Ogre">
                 👹
               </span>
-            </button>
+            </Button>
           </Link>
         </div>
       );
@@ -171,6 +171,7 @@ class Game extends Component {
 
     return (
       <div className="game">
+        <span>Back</span>
         {/* <div className="game-current-album"> */}
         <Artwork
           img={this.state.currentAlbum.image}
