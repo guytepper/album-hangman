@@ -2995,9 +2995,9 @@ handlebars@^4.0.3:
   optionalDependencies:
     uglify-js "^2.6"
 
-hangman-game-engine@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/hangman-game-engine/-/hangman-game-engine-1.1.0.tgz#f2144af213279014f5f3a234ebda1b14ba88aebb"
+hangman-game-engine@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/hangman-game-engine/-/hangman-game-engine-1.1.2.tgz#23a2956a80be30ac5684a08b00dc82ca27b23b55"
 
 har-schema@^1.0.5:
   version "1.0.5"
