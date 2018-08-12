@@ -171,8 +171,9 @@ class Game extends Component {
 
     return (
       <div className="game">
-                  <Link to="/">
-<img src="/back.svg" alt="" className="back-button"/></Link>
+        <Link to="/" className="back-button-link">
+          <img src="/back.svg" alt="" className="back-button" />
+        </Link>
         {/* <div className="game-current-album"> */}
         <Artwork
           img={this.state.currentAlbum.image}
