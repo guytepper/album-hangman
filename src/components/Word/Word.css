@@ -1,11 +1,14 @@
 .hidden-album-name {
   display: flex;
+  max-width: 95%;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .hidden-word {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 10px;
 }
 

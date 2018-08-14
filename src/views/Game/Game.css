@@ -1,6 +1,6 @@
 .game {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
 }
@@ -29,6 +29,7 @@
   flex-direction: column;
   align-items: flex-start;
   align-self: start;
+  padding: 0 30px;
 }
 
 .game-end-message {
