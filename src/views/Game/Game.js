@@ -46,7 +46,7 @@ class Game extends Component {
     try {
       const albumInfo = await getAlbum(this.username, this.period);
 
-      // Long album names breaks our UI.
+      // Long album names breaks the UI.
       if (albumInfo.name.length > 30) {
         return this.setNewAlbum();
       }
@@ -76,7 +76,7 @@ class Game extends Component {
       this.forceUpdate();
     }
 
-    // Restart game on enter press when the game ends
+    // Allow starting a new game when the current game has ended and ENTER key has been pressed.
     if (keyCode === 13 && this.gameEnd()) {
       this.startNewGame();
     }
@@ -100,6 +100,7 @@ class Game extends Component {
     return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
   };
 
+  // TODO: Move to another file.
   gameEndMessage() {
     const { currentGame } = this.state;
     if (currentGame.status === 'WON') {
