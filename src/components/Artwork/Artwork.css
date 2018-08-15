@@ -1,9 +1,17 @@
 .album-artwork-container {
-  width: 250px;
-  height: 250px;
+  width: 130px;
+  height: 130px;
   overflow: hidden;
-  border: 9px solid white;
+  border: 4px solid white;
   background-color: grey;
+}
+
+@media (min-width: 768px) {
+  .album-artwork-container {
+    width: 250px;
+    height: 250px;
+    border: 9px solid white;
+  }
 }
 
 .album-artwork {
