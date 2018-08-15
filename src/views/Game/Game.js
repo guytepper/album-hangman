@@ -8,7 +8,7 @@ import Word from '../../components/Word';
 import GuessedLetters from '../../components/GuessedLetters';
 import Button from '../../components/Button';
 
-// import Keyboard from '../../components/Keyboard';
+import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
 import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbum } from '../../api';
@@ -174,7 +174,6 @@ class Game extends Component {
         <Link to="/" className="back-button-link">
           <img src="/back.svg" alt="" className="back-button" />
         </Link>
-        {/* <div className="game-current-album"> */}
         <Artwork
           img={this.state.currentAlbum.image}
           blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
@@ -190,11 +189,7 @@ class Game extends Component {
           {this.gameEndMessage()}
           {this.playAgainBtn()}
         </div>
-        {/*}
         <Keyboard onPress={this.handleLetterPress} />
-        <Link className="game-change-settings-link" to="/">
-          Settings
-        </Link */}
       </div>
     );
   }
