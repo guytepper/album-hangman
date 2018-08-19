@@ -18,3 +18,10 @@
   background-color: #273c75;
   border-radius: 3px;
 }
+
+@media (min-width: 568px) {
+  .keyboard {
+    width: 425px;
+    margin: 0 auto;
+  }
+}

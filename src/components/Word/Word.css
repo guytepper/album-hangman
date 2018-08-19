@@ -16,9 +16,9 @@
   display: flex;
   width: 35px;
   height: 45px;
-  margin-right: 5px;
   align-items: center;
   justify-content: center;
+  margin-right: 5px;
   background-color: #4a5867;
   border-radius: 10px;
 }
@@ -27,7 +27,7 @@
   font-size: 30px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (min-height: 1024px) {
   .hidden-word-letter {
     width: 70px;
     height: 80px;

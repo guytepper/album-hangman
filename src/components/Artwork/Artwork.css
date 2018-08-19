@@ -2,6 +2,7 @@
   overflow: hidden;
   width: 180px;
   height: 180px;
+  flex-shrink: 0;
   border: 4px solid white;
   margin-bottom: 10px;
   background-color: grey;
@@ -27,6 +28,14 @@
   .album-artwork-container {
     width: 250px;
     height: 250px;
+    border: 6px solid white;
+  }
+}
+
+@media (min-width: 568px) {
+  .album-artwork-container {
+    width: 180px;
+    height: 180px;
     border: 6px solid white;
   }
 }
