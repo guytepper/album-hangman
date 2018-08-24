@@ -12,18 +12,6 @@
   align-items: center;
 }
 
-.back-button-link {
-  margin-bottom: 70px;
-}
-
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-}
-
 .game-current-album {
   display: flex;
   width: 100%;
