@@ -3,14 +3,14 @@
 }
 
 .landing-header {
-  font-size: 57px;
-  font-family: Pangolin, -apple-system, BlinkMacSystemFont;
   margin-bottom: 0;
+  font-family: Pangolin, -apple-system, BlinkMacSystemFont;
+  font-size: 57px;
 }
 
 .landing-form {
   display: flex;
-  width: 200px;
+  width: 300px;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
@@ -18,17 +18,17 @@
 
 .landing-username {
   display: inline-block;
-  width: 310px;
+  width: 100%;
   height: 40px;
   padding: 22px 15px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  vertical-align: middle;
   border: 0;
-  color: white;
-  font-size: 20px;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin-bottom: 10px;
   background-color: #4a5867;
+  border-radius: 4px;
+  color: white;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 20px;
+  vertical-align: middle;
 }
 
 .landing-username::placeholder {
@@ -37,7 +37,7 @@
 
 .game-options {
   display: flex;
-  width: 380px;
+  width: 100%;
   justify-content: space-between;
   margin-bottom: 10px;
 }

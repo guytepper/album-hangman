@@ -1,9 +1,51 @@
 .album-artwork-container {
-  width: 250px;
-  height: 250px;
   overflow: hidden;
-  border: 9px solid white;
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+  border: 4px solid white;
+  margin-bottom: 10px;
   background-color: grey;
+}
+
+@media (min-width: 375px) {
+  .album-artwork-container {
+    width: 220px;
+    height: 220px;
+    border: 6px solid white;
+  }
+}
+
+@media (min-width: 375px) {
+  .album-artwork-container {
+    width: 220px;
+    height: 220px;
+    border: 6px solid white;
+  }
+}
+
+@media (min-width: 410px) {
+  .album-artwork-container {
+    width: 250px;
+    height: 250px;
+    border: 6px solid white;
+  }
+}
+
+@media (min-width: 568px) {
+  .album-artwork-container {
+    width: 180px;
+    height: 180px;
+    border: 6px solid white;
+  }
+}
+
+@media (min-width: 768px) {
+  .album-artwork-container {
+    width: 250px;
+    height: 250px;
+    border: 6px solid white;
+  }
 }
 
 .album-artwork {

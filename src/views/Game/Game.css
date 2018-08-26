@@ -1,64 +1,41 @@
 .game {
-  display: grid;
-  padding: 0 50px;
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px 250px 1fr;
-  height: 100vh;
+  display: flex;
+  min-height: 90vh;
+  flex-direction: column;
+  align-items: center;
 }
 
-.album-artwork-container {
-  grid-row: 2 / 3;
-}
-
-.hidden-album-name {
-  grid-row: 3 / -1;
-}
-
-@media (min-width: 768px) {
-  .game {
-    grid-template-columns: 1fr 2.5fr 8.5fr;
-    grid-template-rows: 150px 250px 200px 100px 100px auto;
-    grid-column-gap: 10px;
-  }
-
-  /** TODO: Think where to put those styles so it'll make sense to read at the code. **/
-  .album-artwork-container {
-    grid-column: 2 / 3;
-    grid-row: 2 / 4;
-  }
-
-  .hidden-album-name {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-    align-self: center;
-  }
-}
-
-.game-stats {
-  grid-column: 2 / 3;
-  grid-row: 3 / 4;
+.game-stage {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .game-current-album {
   display: flex;
   width: 100%;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .game-stats {
   display: flex;
-  flex-direction: column;
+  width: 100%;
   align-items: flex-start;
+  align-self: start;
+  justify-content: space-between;
+  padding: 0 20px;
 }
 
 .game-end-message {
-  grid-row: 3/4;
-  grid-column: 3/4;
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .game-status-msg {
@@ -76,8 +53,8 @@
   display: flex;
   height: 100vh;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .error-container {
@@ -88,10 +65,51 @@
   justify-content: center;
 }
 
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 50px;
-  height: 50px;
+/** Adapt layout for larger screens **/
+@media (min-width: 568px) {
+  .game {
+    flex-flow: row wrap;
+    padding-top: 50px;
+  }
+
+  .game-stage {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .game-stats {
+    justify-content: space-around;
+  }
+
+  .hidden-album-name {
+    /* flex-basis: 220px; */
+  }
+
+  .back-button {
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/** Wide mobile devices on landscape mode **/
+@media (min-width: 568px) and (max-height: 500px) {
+  .hidden-album-name {
+    /* flex-basis: 500px; */
+  }
+}
+
+@media (min-width: 768px) {
+  .game,
+  .game-stage {
+    flex-direction: column;
+  }
+}
+
+/** Tablets on landscape **/
+@media (min-width: 1024px) and (max-height: 768px) {
+  .game-stage {
+    flex-direction: row;
+  }
 }

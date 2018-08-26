@@ -25,6 +25,12 @@ class App extends Component {
             render={props => <Landing {...props} {...this.state} updateSetting={this.updateSetting} />}
           />
           <Route path="/game/:username/:period?/" render={props => <Game {...props} {...this.state} />} />
+          <a
+            href="https://github.com/guytepper/album-hangman"
+            style={{ display: 'flex', justifyContent: 'center', margin: '20px', opacity: 0.5 }}
+          >
+            <img src="/github.svg" alt="GitHub" width="30" height="30" />
+          </a>
         </React.Fragment>
       </Router>
     );

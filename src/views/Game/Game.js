@@ -8,7 +8,7 @@ import Word from '../../components/Word';
 import GuessedLetters from '../../components/GuessedLetters';
 import Button from '../../components/Button';
 
-// import Keyboard from '../../components/Keyboard';
+import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
 import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbum } from '../../api';
@@ -46,7 +46,7 @@ class Game extends Component {
     try {
       const albumInfo = await getAlbum(this.username, this.period);
 
-      // Long album names breaks our UI.
+      // Long album names breaks the UI.
       if (albumInfo.name.length > 30) {
         return this.setNewAlbum();
       }
@@ -76,7 +76,7 @@ class Game extends Component {
       this.forceUpdate();
     }
 
-    // Restart game on enter press when the game ends
+    // Allow starting a new game when the current game has ended and ENTER key has been pressed.
     if (keyCode === 13 && this.gameEnd()) {
       this.startNewGame();
     }
@@ -100,6 +100,7 @@ class Game extends Component {
     return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
   };
 
+  // TODO: Move to another file.
   gameEndMessage() {
     const { currentGame } = this.state;
     if (currentGame.status === 'WON') {
@@ -171,16 +172,18 @@ class Game extends Component {
 
     return (
       <div className="game">
-                  <Link to="/">
-<img src="/back.svg" alt="" className="back-button"/></Link>
-        {/* <div className="game-current-album"> */}
-        <Artwork
-          img={this.state.currentAlbum.image}
-          blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
-          gameEnd={this.gameEnd()}
-          hidden={this.hideArtwork}
-        />
-        <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+        {/* <Link to="/" className="back-button-link">
+          <img src="/back.svg" alt="" className="back-button" />
+        </Link> */}
+        <div className="game-stage">
+          <Artwork
+            img={this.state.currentAlbum.image}
+            blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
+            gameEnd={this.gameEnd()}
+            hidden={this.hideArtwork}
+          />
+          <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+        </div>
         <div className="game-stats">
           <Hearts lives={4 - this.state.currentGame.failedGuesses} />
           <GuessedLetters letters={this.state.currentGame.failedLetters} />
@@ -189,11 +192,7 @@ class Game extends Component {
           {this.gameEndMessage()}
           {this.playAgainBtn()}
         </div>
-        {/*}
         <Keyboard onPress={this.handleLetterPress} />
-        <Link className="game-change-settings-link" to="/">
-          Settings
-        </Link */}
       </div>
     );
   }
