@@ -11,10 +11,17 @@
   min-width: 45px;
   height: 40px;
   flex: 1;
-  padding: 8px 0px;
+  padding: 8px 0;
   border: transparent;
   margin: 2px;
-  color: #fff;
   background-color: #273c75;
   border-radius: 3px;
+  color: #fff;
+}
+
+@media (min-width: 568px) {
+  .keyboard {
+    width: 425px;
+    margin: 0 auto;
+  }
 }

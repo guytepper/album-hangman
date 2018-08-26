@@ -172,16 +172,18 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <Link to="/" className="back-button-link">
+        {/* <Link to="/" className="back-button-link">
           <img src="/back.svg" alt="" className="back-button" />
-        </Link>
-        <Artwork
-          img={this.state.currentAlbum.image}
-          blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
-          gameEnd={this.gameEnd()}
-          hidden={this.hideArtwork}
-        />
-        <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+        </Link> */}
+        <div className="game-stage">
+          <Artwork
+            img={this.state.currentAlbum.image}
+            blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
+            gameEnd={this.gameEnd()}
+            hidden={this.hideArtwork}
+          />
+          <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+        </div>
         <div className="game-stats">
           <Hearts lives={4 - this.state.currentGame.failedGuesses} />
           <GuessedLetters letters={this.state.currentGame.failedLetters} />
