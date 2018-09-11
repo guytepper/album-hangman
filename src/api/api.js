@@ -14,7 +14,7 @@ async function getAlbums(token) {
       }
     });
     const albums = data.items.map(item => item.album);
-    const formattedAlbums = albums.map(album => ({ name: album.name, image: album.images[0] }));
+    const formattedAlbums = albums.map(album => ({ name: album.name, image: album.images[0].url }));
     return formattedAlbums;
   } catch (err) {
     console.log(err);
