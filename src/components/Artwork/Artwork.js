@@ -1,7 +1,7 @@
 import React from 'react';
 import './Artwork.css';
 
-function Artwork({ img, blurLevel, gameEnd, hidden }) {
+function Artwork({ img, blurLevel, gameEnd }) {
   if (gameEnd) {
     blurLevel = 0;
   }

@@ -53,7 +53,3 @@
   height: 100%;
   transition: filter 0.5s ease-in-out;
 }
-
-.hidden {
-  display: none;
-}

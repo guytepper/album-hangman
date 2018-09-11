@@ -24,7 +24,6 @@ class Game extends Component {
 
   username = this.props.username || this.props.match.params.username;
   period = this.props.period || this.props.match.params.period;
-  hideArtwork = this.props.hideArtwork;
 
   componentDidMount() {
     this.startNewGame();
@@ -177,7 +176,6 @@ class Game extends Component {
             img={this.state.currentAlbum.image}
             blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
             gameEnd={this.gameEnd()}
-            hidden={this.hideArtwork}
           />
           <Word hiddenLetters={this.state.currentGame.hiddenWord} />
         </div>
