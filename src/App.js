@@ -24,7 +24,7 @@ class App extends Component {
             path="/"
             render={props => <Landing {...props} {...this.state} updateSetting={this.updateSetting} />}
           />
-          <Route path="/game/:username/:period?/" render={props => <Game {...props} {...this.state} />} />
+          <Route path="/game/" render={props => <Game {...props} {...this.state} />} />
           <a
             href="https://github.com/guytepper/album-hangman"
             style={{ display: 'flex', justifyContent: 'center', margin: '20px', opacity: 0.5 }}

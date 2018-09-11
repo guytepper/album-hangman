@@ -1,29 +1,25 @@
 import axios from 'axios';
-import { getRandomInt } from '../utils';
 
 /**
- * Get album information from the Last.FM API,
- * using the provided user information.
+ * Get the user saved albums.
+ * @param {string} token - The spotify user access token.
+ * @returns {array} Array of the user saved albums, containing objects with the album name & image url.
  */
-async function getAlbum(username, period = 'overall') {
-  const url = `https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`;
+async function getAlbums(token) {
   try {
-    const response = await axios.get(url, { timeout: 8500 });
-
-    if (response.data.error) throw new Error(response.data.message);
-    const albumsArr = response.data.topalbums.album; // array of albums
-    if (albumsArr.length === 0) throw new Error('No albums found for the time period');
-    const album = albumsArr[getRandomInt(0, 50)];
-    const name = album.name;
-    const image = album.image[3]['#text'];
-
-    return { album, name, image };
+    const { data } = await axios.get('https://api.spotify.com/v1/me/albums', {
+      params: { limit: 50 },
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    });
+    const albums = data.items.map(item => item.album);
+    const formattedAlbums = albums.map(album => ({ name: album.name, image: album.images[0].url }));
+    return formattedAlbums;
   } catch (err) {
-    if (err.message.includes('timeout')) {
-      throw new Error('Last.FM is taking too long to respond');
-    }
+    console.log(err);
     throw err;
   }
 }
 
-export { getAlbum };
+export { getAlbums };

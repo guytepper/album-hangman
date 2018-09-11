@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import queryString from 'query-string';
 import { Link } from 'react-router-dom';
 import Hangman from 'hangman-game-engine';
 import ReactLoading from 'react-loading';
@@ -10,8 +11,8 @@ import Button from '../../components/Button';
 
 import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
-import { isKeyCodeAlphabetical } from '../../utils';
-import { getAlbum } from '../../api';
+import { isKeyCodeAlphabetical, getRandomInt } from '../../utils';
+import { getAlbums } from '../../api';
 import './Game.css';
 
 class Game extends Component {
@@ -22,12 +23,12 @@ class Game extends Component {
     currentGame: {}
   };
 
-  username = this.props.username || this.props.match.params.username;
-  period = this.props.period || this.props.match.params.period;
-  hideArtwork = this.props.hideArtwork;
+  albums = [];
 
   componentDidMount() {
-    this.startNewGame();
+    const parsedURL = queryString.parse(this.props.location.hash);
+    this.getAlbumList(parsedURL.access_token);
+
     window.addEventListener('keydown', this.handleKeyboardPress);
     if (window.ga) {
       window.ga('set', 'page');
@@ -40,24 +41,34 @@ class Game extends Component {
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
+  async getAlbumList(token) {
+    try {
+      const albums = await getAlbums(token);
+      this.albums = albums;
+      this.setNewAlbum();
+    } catch (err) {
+      this.setState({ error: err.message });
+    }
+  }
+
   async setNewAlbum() {
     this.setState({ loadingAlbum: true });
+    const album = this.albums[getRandomInt(0, 50)];
 
     try {
-      const albumInfo = await getAlbum(this.username, this.period);
-
       // Long album names breaks the UI.
-      if (albumInfo.name.length > 30) {
+      if (album.name.length > 30) {
         return this.setNewAlbum();
       }
 
-      const currentGame = new Hangman(albumInfo.name);
+      const currentGame = new Hangman(album.name);
+
       // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
       if (currentGame.hiddenWord.indexOf('_') === -1) {
         return this.setNewAlbum();
       }
 
-      this.setState({ currentGame, currentAlbum: albumInfo, loadingAlbum: false });
+      this.setState({ currentGame, currentAlbum: album, loadingAlbum: false });
     } catch (err) {
       this.setState({ error: err.message });
     }
@@ -177,7 +188,6 @@ class Game extends Component {
             img={this.state.currentAlbum.image}
             blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
             gameEnd={this.gameEnd()}
-            hidden={this.hideArtwork}
           />
           <Word hiddenLetters={this.state.currentGame.hiddenWord} />
         </div>
