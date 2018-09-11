@@ -5,7 +5,7 @@ import Game from './Game';
 jest.mock('../../api');
 
 it('renders without crashing', () => {
-  const wrapper = shallow(<Game username="Dobida" period="overall" hideArtwork={false} />);
+  const wrapper = shallow(<Game />);
   process.nextTick(() => {
     const { currentAlbum } = wrapper.state();
     expect(currentAlbum.name).toEqual('Rival Dealer - EP');
