@@ -11,7 +11,7 @@ import Button from '../../components/Button';
 import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
 import { isKeyCodeAlphabetical } from '../../utils';
-import { getAlbum } from '../../api';
+import { getAlbums } from '../../api';
 import './Game.css';
 
 class Game extends Component {
