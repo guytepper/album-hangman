@@ -26,7 +26,6 @@ class Game extends Component {
   albums = [];
 
   componentDidMount() {
-    console.log('hi');
     const parsedURL = queryString.parse(this.props.location.hash);
     this.getAlbumList(parsedURL.access_token);
 
