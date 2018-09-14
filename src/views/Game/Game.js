@@ -186,7 +186,7 @@ class Game extends Component {
         <div className="game-stage">
           <Artwork
             img={this.state.currentAlbum.image}
-            blurLevel={(4 - this.state.currentGame.failedGuesses) * 10}
+            blurLevel={(4 - this.state.currentGame.failedGuesses) * 5}
             gameEnd={this.gameEnd()}
           />
           <Word hiddenLetters={this.state.currentGame.hiddenWord} />

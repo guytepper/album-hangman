@@ -7,8 +7,8 @@ function Artwork({ img, blurLevel, gameEnd }) {
   }
 
   // Make the last guess a bit harder
-  if (blurLevel === 10) {
-    blurLevel = 17;
+  if (blurLevel === 5) {
+    blurLevel = 8;
   }
 
   return (
