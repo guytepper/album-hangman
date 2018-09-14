@@ -1,7 +1,7 @@
 import albumInfo from './albumInfo.json';
 
-function getAlbum(username, period = 'overall') {
+function getAlbums(token) {
   return Promise.resolve(albumInfo);
 }
 
-export { getAlbum };
+export { getAlbums };
