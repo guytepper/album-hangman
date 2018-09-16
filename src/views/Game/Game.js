@@ -53,7 +53,7 @@ class Game extends Component {
 
   async setNewAlbum() {
     this.setState({ loadingAlbum: true });
-    const album = this.albums[getRandomInt(0, this.albums.length)];
+    const album = this.albums[getRandomInt(0, this.albums.length - 1)];
 
     try {
       // Long album names breaks the UI.
