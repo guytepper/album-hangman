@@ -68,7 +68,9 @@ class Game extends Component {
         return this.setNewAlbum();
       }
 
-      this.setState({ currentGame, currentAlbum: album, loadingAlbum: false });
+      this.setState({ currentGame, loadingAlbum: false });
+      // Delay the album update so the blur effect will take place after the artwork changes.
+      setTimeout(() => this.setState({ currentAlbum: album }), 425);
     } catch (err) {
       this.setState({ error: err.message });
     }
