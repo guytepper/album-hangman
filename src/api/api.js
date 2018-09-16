@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import removeDescriptors from 'album-name-normalizer';
 /**
  * Get the user saved albums.
  * @param {string} token - The spotify user access token.
@@ -14,7 +14,7 @@ async function getAlbums(token) {
       }
     });
     const albums = data.items.map(item => item.album);
-    const formattedAlbums = albums.map(album => ({ name: album.name, image: album.images[0].url }));
+    const formattedAlbums = albums.map(album => ({ name: removeDescriptors(album.name), image: album.images[0].url }));
     return formattedAlbums;
   } catch (err) {
     console.log(err);
