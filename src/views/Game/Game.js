@@ -201,7 +201,11 @@ class Game extends Component {
           {this.gameEndMessage()}
           {this.playAgainBtn()}
         </div>
-        <Keyboard onPress={this.handleLetterPress} />
+        <Keyboard
+          onPress={this.handleLetterPress}
+          guessedLetters={this.state.currentGame.guessedLetters}
+          failedLetters={this.state.currentGame.failedLetters}
+        />
       </div>
     );
   }

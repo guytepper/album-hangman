@@ -24,6 +24,16 @@
   cursor: pointer;
 }
 
+.keyboard-btn-fail {
+  color: #ff3838;
+  font-weight: 600;
+}
+
+.keyboard-btn-success {
+  color: greenyellow;
+  font-weight: 600;
+}
+
 @media (min-width: 568px) {
   .keyboard {
     width: 425px;
