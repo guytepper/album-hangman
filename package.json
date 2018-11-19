@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "album-name-normalizer": "^1.0.0",
     "hangman-game-engine": "1.1.3",
+    "query-string": "^6.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-loading": "^2.0.2",

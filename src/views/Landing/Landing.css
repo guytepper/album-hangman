@@ -8,52 +8,31 @@
   font-size: 57px;
 }
 
-.landing-form {
+.spotify-button {
   display: flex;
-  width: 300px;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.landing-username {
-  display: inline-block;
-  width: 100%;
+  width: 185px;
   height: 40px;
-  padding: 22px 15px;
-  border: 0;
-  margin-bottom: 10px;
-  background-color: #4a5867;
-  border-radius: 4px;
-  color: white;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 20px;
-  vertical-align: middle;
-}
-
-.landing-username::placeholder {
-  color: #c2c2c2;
-}
-
-.game-options {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.game-option {
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0;
-}
-
-.game-option label {
-  display: flex;
   align-items: center;
+  padding: 10px 15px 10px 10px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 20px;
+  color: #191919;
+  cursor: pointer;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: box-shadow 0.3s;
 }
 
-.game-option-radio,
-.game-option-checkbox {
-  margin-right: 6px;
+.spotify-button:hover {
+  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.3);
+}
+
+.spotify-button-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  user-select: none;
 }

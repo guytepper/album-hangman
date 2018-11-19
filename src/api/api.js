@@ -1,29 +1,41 @@
 import axios from 'axios';
-import { getRandomInt } from '../utils';
+import removeDescriptors from 'album-name-normalizer';
+
+function getSpotifyAlbums(token, limit, offset) {
+  return axios.get('https://api.spotify.com/v1/me/albums', {
+    params: { limit, offset },
+    headers: {
+      Authorization: 'Bearer ' + token
+    }
+  });
+}
 
 /**
- * Get album information from the Last.FM API,
- * using the provided user information.
+ * Get the user saved albums.
+ * @param {string} token - The spotify user access token.
+ * @returns {array} Array of the user saved albums, containing objects with the album name & image url.
  */
-async function getAlbum(username, period = 'overall') {
-  const url = `https://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=${username}&period=${period}&api_key=3fe5c70aa486800a6cfdb759ccd3e213&format=json`;
+async function getAlbums(token) {
   try {
-    const response = await axios.get(url, { timeout: 8500 });
+    const limit = 50;
+    let promises = [];
 
-    if (response.data.error) throw new Error(response.data.message);
-    const albumsArr = response.data.topalbums.album; // array of albums
-    if (albumsArr.length === 0) throw new Error('No albums found for the time period');
-    const album = albumsArr[getRandomInt(0, 50)];
-    const name = album.name;
-    const image = album.image[3]['#text'];
-
-    return { album, name, image };
-  } catch (err) {
-    if (err.message.includes('timeout')) {
-      throw new Error('Last.FM is taking too long to respond');
+    // Spotify limits each request to 50 albums, so we have to create multiple requests.
+    // We'll take 1000 albums at most.
+    for (let offset = 0; offset < 1000; offset += limit) {
+      promises.push(getSpotifyAlbums(token, limit, offset));
     }
+
+    const results = await Promise.all(promises);
+    const itemsArrays = results.map(result => result.data.items); // Grab all data items from the results
+    const items = itemsArrays.reduce((a, b) => a.concat(b), []); // Flatten the arrays to one array
+    const albums = items.map(item => item.album); // Create new array from the album property of each item
+    const formattedAlbums = albums.map(album => ({ name: removeDescriptors(album.name), image: album.images[0].url }));
+    return formattedAlbums;
+  } catch (err) {
+    console.log(err);
     throw err;
   }
 }
 
-export { getAlbum };
+export { getAlbums };

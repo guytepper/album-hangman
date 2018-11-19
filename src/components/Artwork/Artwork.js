@@ -1,14 +1,14 @@
 import React from 'react';
 import './Artwork.css';
 
-function Artwork({ img, blurLevel, gameEnd, hidden }) {
+function Artwork({ img, blurLevel, gameEnd }) {
   if (gameEnd) {
     blurLevel = 0;
   }
 
   // Make the last guess a bit harder
-  if (blurLevel === 10) {
-    blurLevel = 17;
+  if (blurLevel === 5) {
+    blurLevel = 8;
   }
 
   return (

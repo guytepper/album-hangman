@@ -1,3 +1,3 @@
-import { getAlbum } from './api';
+import { getAlbums } from './api';
 
-export { getAlbum };
+export { getAlbums };
