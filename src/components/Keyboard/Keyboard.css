@@ -14,13 +14,13 @@
   padding: 8px 0;
   border: transparent;
   margin: 2px;
-  background-color: #273c75;
+  background-color: #3d3d3d;
   border-radius: 3px;
   color: #fff;
 }
 
 .keyboard-btn:hover {
-  background-color: #2c6dbf;
+  background-color: #585858;
   cursor: pointer;
 }
 
