@@ -4,7 +4,7 @@ import Game from './Game';
 
 jest.mock('../../api');
 
-it('renders without crashing', () => {
+it.skip('renders without crashing', () => {
   const wrapper = shallow(<Game location={{ hash: 'okay' }} />);
   process.nextTick(() => {
     const { currentAlbum } = wrapper.state();
