@@ -197,11 +197,17 @@ class Game extends Component {
           <Hearts lives={4 - this.state.currentGame.failedGuesses} />
           <GuessedLetters letters={this.state.currentGame.failedLetters} />
         </div>
-        <div className="game-end-message">
-          {this.gameEndMessage()}
-          {this.playAgainBtn()}
-        </div>
-        <Keyboard onPress={this.handleLetterPress} />
+        {this.gameEnd() && (
+          <div className="game-end-message">
+            {this.gameEndMessage()}
+            {this.playAgainBtn()}
+          </div>
+        )}
+        <Keyboard
+          onPress={this.handleLetterPress}
+          guessedLetters={this.state.currentGame.guessedLetters}
+          failedLetters={this.state.currentGame.failedLetters}
+        />
       </div>
     );
   }

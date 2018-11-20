@@ -14,14 +14,42 @@
   padding: 8px 0;
   border: transparent;
   margin: 2px;
-  background-color: #273c75;
+  background-color: #3d3d3d;
   border-radius: 3px;
+  font-size: 14px;
   color: #fff;
+}
+
+.keyboard-btn:hover {
+  background-color: #585858;
+  cursor: pointer;
+}
+
+.keyboard-btn-fail {
+  color: #ff3838;
+  font-weight: 600;
+}
+
+.keyboard-btn-success {
+  color: greenyellow;
+  font-weight: 600;
 }
 
 @media (min-width: 568px) {
   .keyboard {
     width: 425px;
     margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .keyboard {
+    width: 450px;
+  }
+
+  .keyboard-btn {
+    min-width: 51px;
+    height: 49px;
+    font-size: 17px;
   }
 }
