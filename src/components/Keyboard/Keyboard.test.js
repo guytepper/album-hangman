@@ -16,3 +16,11 @@ it('handles button press correctly', () => {
     .simulate('click');
   expect(onPress).toBeCalled();
 });
+
+it('applies button class names correctly', () => {
+  const failButton = wrapper.find('.keyboard-btn').at(0); // 'A'
+  const successButton = wrapper.find('.keyboard-btn').at(2); // 'C'
+
+  expect(failButton.hasClass('keyboard-btn-fail')).toBeTruthy();
+  expect(successButton.hasClass('keyboard-btn-success')).toBeTruthy();
+});
