@@ -16,6 +16,7 @@
   margin: 2px;
   background-color: #3d3d3d;
   border-radius: 3px;
+  font-size: 14px;
   color: #fff;
 }
 
@@ -38,5 +39,17 @@
   .keyboard {
     width: 425px;
     margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .keyboard {
+    width: 450px;
+  }
+
+  .keyboard-btn {
+    min-width: 51px;
+    height: 49px;
+    font-size: 17px;
   }
 }
