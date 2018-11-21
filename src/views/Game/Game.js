@@ -143,7 +143,7 @@ class Game extends Component {
     if (this.gameEnd()) {
       return (
         <Button onClick={this.startNewGame} loading={this.state.loadingAlbum}>
-          Play Again
+          Play Again ⏎
         </Button>
       );
     }
