@@ -18,6 +18,7 @@
   border-radius: 3px;
   font-size: 14px;
   color: #fff;
+  outline: none;
 }
 
 .keyboard-btn:hover {
@@ -25,13 +26,21 @@
   cursor: pointer;
 }
 
+.keyboard-btn-letter {
+  display: block;
+}
+
 .keyboard-btn-fail {
-  color: #ff3838;
   font-weight: 600;
+  animation-name: red-change;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
 }
 
 .keyboard-btn-success {
-  color: greenyellow;
+  animation-name: green-change;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
   font-weight: 600;
 }
 
@@ -51,5 +60,41 @@
     min-width: 51px;
     height: 49px;
     font-size: 17px;
+  }
+}
+
+@keyframes red-change {
+  0% {
+    color: white;
+  }
+
+  40% {
+    color: red;
+  }
+
+  50% {
+    transform: scale(6, 6);
+  }
+
+  100% {
+    color: red;
+  }
+}
+
+@keyframes green-change {
+  0% {
+    color: white;
+  }
+
+  40% {
+    color: greenyellow;
+  }
+
+  50% {
+    transform: scale(6, 6);
+  }
+
+  100% {
+    color: greenyellow;
   }
 }

@@ -77,16 +77,11 @@ class Game extends Component {
   }
 
   handleKeyboardPress = event => {
-    const { currentGame } = this.state;
     const keyCode = event.which;
 
     if (isKeyCodeAlphabetical(keyCode) && this.isGameActive()) {
       const letter = String.fromCharCode(keyCode);
-      currentGame.guess(letter);
-      if (currentGame.status === 'LOST') {
-        currentGame.revealHiddenWord();
-      }
-      this.forceUpdate();
+      this.handleLetterPress(letter);
     }
 
     // Allow starting a new game when the current game has ended and ENTER key has been pressed.
@@ -100,6 +95,9 @@ class Game extends Component {
 
     if (this.isGameActive) {
       currentGame.guess(letter);
+      if (currentGame.status === 'LOST') {
+        currentGame.revealHiddenWord();
+      }
       this.forceUpdate();
     }
   };
