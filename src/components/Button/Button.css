@@ -8,6 +8,7 @@
   background-color: #e6e6e6;
   border: none;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .hangman-btn:hover {
