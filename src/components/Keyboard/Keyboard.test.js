@@ -18,8 +18,8 @@ it('handles button press correctly', () => {
 });
 
 it('applies button class names correctly', () => {
-  const failButton = wrapper.find('.keyboard-btn').at(0); // 'A'
-  const successButton = wrapper.find('.keyboard-btn').at(2); // 'C'
+  const failButton = wrapper.find('.keyboard-btn-letter').at(0); // 'A'
+  const successButton = wrapper.find('.keyboard-btn-letter').at(2); // 'C'
 
   expect(failButton.hasClass('keyboard-btn-fail')).toBeTruthy();
   expect(successButton.hasClass('keyboard-btn-success')).toBeTruthy();
