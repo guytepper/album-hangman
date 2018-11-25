@@ -11,6 +11,7 @@ function Landing(props) {
         <span>Connect with Spotify</span>
       </a>
       <a className="spotify-button" onClick={() => props.selectService('appleMusic')}>
+        <img alt="Apple Music" src="/apple_music.png" className="spotify-button-logo" />
         <span>Connect with Apple Music</span>
       </a>
     </div>
