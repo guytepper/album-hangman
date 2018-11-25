@@ -16,6 +16,8 @@ class App extends Component {
         '_self'
       );
     }
+
+    this.setState({ service });
   };
 
   render() {
