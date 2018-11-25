@@ -26,8 +26,11 @@ class Game extends Component {
   albums = [];
 
   componentDidMount() {
-    const parsedURL = queryString.parse(this.props.location.hash);
-    this.getAlbumList(parsedURL.access_token);
+    if (this.props.service === 'spotify') {
+      const parsedURL = queryString.parse(this.props.location.hash);
+      this.getAlbumList(parsedURL.access_token);
+    } else {
+    }
 
     window.addEventListener('keydown', this.handleKeyboardPress);
     if (window.ga) {
