@@ -10,6 +10,15 @@ function getSpotifyAlbums(token, limit, offset) {
   });
 }
 
+function getAppleMusicAlbums() {
+  const musicKit = window.MusicKit.getInstance();
+  musicKit.authorize().then(() => {
+    musicKit.api.library.albums().then(albums => {
+      console.log(albums);
+    });
+  });
+}
+
 /**
  * Get the user saved albums.
  * @param {string} token - The spotify user access token.
