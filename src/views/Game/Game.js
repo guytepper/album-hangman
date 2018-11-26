@@ -26,10 +26,15 @@ class Game extends Component {
   albums = [];
 
   componentDidMount() {
+    // TODO: Check for authentication
     if (this.props.service === 'spotify') {
       const parsedURL = queryString.parse(this.props.location.hash);
-      this.getAlbumList(parsedURL.access_token);
+      this.getAlbumList('spotify', parsedURL.access_token);
     } else {
+      const musicKit = window.MusicKit.getInstance();
+      musicKit.authorize().then(() => {
+        this.getAlbumList('appleMusic');
+      });
     }
 
     window.addEventListener('keydown', this.handleKeyboardPress);
@@ -44,9 +49,9 @@ class Game extends Component {
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
-  async getAlbumList(token) {
+  async getAlbumList(service, token) {
     try {
-      const albums = await getAlbums(token);
+      const albums = await getAlbums(service, token);
       this.albums = albums;
       this.setNewAlbum();
     } catch (err) {
