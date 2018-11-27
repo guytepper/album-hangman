@@ -25,12 +25,12 @@ class Landing extends Component {
       <div className="landing">
         <h1 className="landing-header">Album Hangman</h1>
         <p>Can you guess your favorite Spotify albums?</p>
-        <a onClick={this.selectSpotify} className="spotify-button">
-          <img alt="Spotify" src="/spotify.svg" className="spotify-button-logo" />
+        <a className="service-login-button" onClick={this.selectSpotify}>
+          <img alt="Spotify" src="/spotify.svg" className="service-button-logo" />
           <span>Connect with Spotify</span>
         </a>
-        <a className="spotify-button" onClick={this.selectAppleMusic}>
-          <img alt="Apple Music" src="/apple_music.png" className="spotify-button-logo" />
+        <a className="service-login-button" onClick={this.selectAppleMusic}>
+          <img alt="Apple Music" src="/apple_music.png" className="service-button-logo" />
           <span>Connect with Apple Music</span>
         </a>
       </div>
