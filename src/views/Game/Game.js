@@ -26,9 +26,11 @@ class Game extends Component {
   albums = [];
 
   componentDidMount() {
-    // TODO: Check for authentication
-    if (this.props.service === 'spotify') {
-      const parsedURL = queryString.parse(this.props.location.hash);
+    const { service, location, history } = this.props;
+    if (service === '') history.push('/');
+    if (service === 'spotify') {
+      // Grab access token from url
+      const parsedURL = queryString.parse(location.hash);
       this.getAlbumList('spotify', parsedURL.access_token);
     } else {
       const musicKit = window.MusicKit.getInstance();
