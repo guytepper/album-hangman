@@ -5,7 +5,7 @@ import Landing from './views/Landing';
 
 class App extends Component {
   state = {
-    service: ''
+    service: 'spotify'
   };
 
   selectService = service => {

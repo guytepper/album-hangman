@@ -27,7 +27,7 @@ class Game extends Component {
 
   componentDidMount() {
     const { service, location, history } = this.props;
-    if (service === '') history.push('/');
+    if (service === 'spotify' && location.hash === '') history.push('/');
     if (service === 'spotify') {
       // Grab access token from url
       const parsedURL = queryString.parse(location.hash);
