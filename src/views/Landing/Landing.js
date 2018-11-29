@@ -13,6 +13,11 @@ class Landing extends Component {
   selectAppleMusic = () => {
     this.props.selectService('appleMusic');
     window.MusicKit.configure({
+      developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
+      app: {
+        name: 'Album Hangman',
+        build: '2018.29.11'
+      }
     });
     const musicKit = window.MusicKit.getInstance();
     musicKit.authorize().then(() => {
