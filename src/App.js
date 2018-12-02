@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import Game from './views/Game';
 import Landing from './views/Landing';
 
 class App extends Component {
   state = {
-    username: '',
-    period: '12month',
-    hideArtwork: false
+    service: 'spotify'
   };
 
-  updateSetting = (prop, val) => {
-    this.setState({ [prop]: val });
+  selectService = service => {
+    this.setState({ service });
   };
 
   render() {
@@ -22,7 +19,7 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={props => <Landing {...props} {...this.state} updateSetting={this.updateSetting} />}
+            render={props => <Landing {...props} {...this.state} selectService={this.selectService} />}
           />
           <Route path="/game/" render={props => <Game {...props} {...this.state} />} />
           <a
