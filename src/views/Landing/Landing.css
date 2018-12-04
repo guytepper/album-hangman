@@ -8,6 +8,16 @@
   font-size: 57px;
 }
 
+.landing-sub {
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.landing-description {
+  margin-top: 2px;
+  margin-bottom: 25px;
+}
+
 .service-login-button {
   display: flex;
   width: 185px;

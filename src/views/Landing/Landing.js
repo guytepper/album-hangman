@@ -29,7 +29,8 @@ class Landing extends Component {
     return (
       <div className="landing">
         <h1 className="landing-header">Album Hangman</h1>
-        <p>Can you guess your favorite Spotify albums?</p>
+        <h2 className="landing-sub">Do you really know your music?</h2>
+        <p className="landing-description">See if you can guess your favourite albums!</p>
         <a className="service-login-button" onClick={this.selectSpotify}>
           <img alt="Spotify" src="/spotify.svg" className="service-button-logo" />
           <span>Connect with Spotify</span>
