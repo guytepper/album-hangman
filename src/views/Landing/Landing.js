@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Landing.css';
 
 let spotifyRedirectURL = 'localhost:3000';
-if (process.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   spotifyRedirectURL = 'album-hangman.com';
 }
 
