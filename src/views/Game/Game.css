@@ -29,7 +29,7 @@
   padding: 0 20px;
 }
 
-.game-end-message {
+/* .game-end-message {
   position: fixed;
   z-index: 2;
   top: 5%;
@@ -45,7 +45,7 @@
 
 .game-status-msg {
   margin-top: 0;
-}
+} */
 
 .game-change-settings-link {
   display: block;

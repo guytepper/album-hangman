@@ -16,8 +16,8 @@
   margin: 2px;
   background-color: #3d3d3d;
   border-radius: 3px;
-  font-size: 14px;
   color: #fff;
+  font-size: 14px;
   outline: none;
 }
 
@@ -31,16 +31,16 @@
 }
 
 .keyboard-btn-fail {
-  font-weight: 600;
-  animation-name: red-change;
   animation-duration: 0.8s;
   animation-fill-mode: forwards;
+  animation-name: red-change;
+  font-weight: 600;
 }
 
 .keyboard-btn-success {
-  animation-name: green-change;
   animation-duration: 0.8s;
   animation-fill-mode: forwards;
+  animation-name: green-change;
   font-weight: 600;
 }
 
