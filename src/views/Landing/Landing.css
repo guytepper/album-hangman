@@ -4,17 +4,27 @@
 
 .landing-header {
   margin-bottom: 0;
-  font-family: Pangolin, -apple-system, BlinkMacSystemFont;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   font-size: 57px;
 }
 
-.spotify-button {
+.landing-sub {
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.landing-description {
+  margin-top: 2px;
+  margin-bottom: 25px;
+}
+
+.service-login-button {
   display: flex;
   width: 185px;
   height: 40px;
   align-items: center;
   padding: 10px 15px 10px 10px;
-  margin: 0 auto;
+  margin: 10px auto;
   background-color: #fff;
   border-radius: 20px;
   color: #191919;
@@ -26,12 +36,11 @@
   transition: box-shadow 0.3s;
 }
 
-.spotify-button:hover {
+.service-login-button:hover {
   box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.3);
 }
 
-.spotify-button-logo {
-  width: 20px;
+.service-button-logo {
   height: 20px;
   margin-right: 10px;
   user-select: none;
