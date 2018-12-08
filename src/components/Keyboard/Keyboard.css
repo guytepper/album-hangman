@@ -1,4 +1,5 @@
 .keyboard {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -42,6 +43,20 @@
   animation-fill-mode: forwards;
   animation-name: green-change;
   font-weight: 600;
+}
+
+.game-end-message {
+  position: absolute;
+  top: 10%;
+  display: flex;
+  width: 80%;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0084ffec;
+  border-radius: 5px;
+  box-shadow: 0 0 20px #0000008a;
 }
 
 @media (min-width: 568px) {

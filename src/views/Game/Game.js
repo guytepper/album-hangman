@@ -121,45 +121,6 @@ class Game extends Component {
     return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
   };
 
-  // TODO: Move to another file.
-  gameEndMessage() {
-    const { currentGame } = this.state;
-    if (currentGame.status === 'WON') {
-      return (
-        <h1 className="game-status-msg">
-          You won!{' '}
-          <span role="img" aria-label="Party Popper">
-            🎉
-          </span>
-        </h1>
-      );
-    }
-
-    if (currentGame.status === 'LOST') {
-      return (
-        <h1 className="game-status-msg">
-          You lost.{' '}
-          <span role="img" aria-label="Sneezing">
-            🤧
-          </span>
-        </h1>
-      );
-    }
-
-    return null;
-  }
-
-  playAgainBtn = () => {
-    if (this.gameEnd()) {
-      return (
-        <Button onClick={this.startNewGame} loading={this.state.loadingAlbum}>
-          Play Again ⏎
-        </Button>
-      );
-    }
-    return null;
-  };
-
   gameEnd = () => {
     return this.state.currentGame.status !== 'IN_PROGRESS';
   };
@@ -205,16 +166,13 @@ class Game extends Component {
           <Hearts lives={4 - this.state.currentGame.failedGuesses} />
           <GuessedLetters letters={this.state.currentGame.failedLetters} />
         </div>
-        {this.gameEnd() && (
-          <div className="game-end-message">
-            {this.gameEndMessage()}
-            {this.playAgainBtn()}
-          </div>
-        )}
         <Keyboard
           onPress={this.handleLetterPress}
           guessedLetters={this.state.currentGame.guessedLetters}
           failedLetters={this.state.currentGame.failedLetters}
+          gameStatus={this.state.currentGame.status}
+          startNewGame={this.startNewGame}
+          loadingAlbum={this.loadingAlbum}
         />
       </div>
     );
