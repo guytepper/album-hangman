@@ -32,4 +32,8 @@
     width: 70px;
     height: 80px;
   }
+
+  .hidden-word-letter span {
+    font-size: 48px;
+  }
 }
