@@ -29,11 +29,17 @@
 
 @media (min-width: 768px) and (min-height: 1024px) {
   .hidden-word-letter {
-    width: 70px;
-    height: 80px;
+    width: 60px;
+    height: 70px;
   }
 
   .hidden-word-letter span {
-    font-size: 48px;
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 1300px) and (min-height: 1024px) {
+  .hidden-word-letter span {
+    font-size: 46px;
   }
 }

@@ -48,6 +48,14 @@
   }
 }
 
+@media (min-width: 1300px) and (min-height: 1080px) {
+  .album-artwork-container {
+    width: 280px;
+    height: 280px;
+    margin-bottom: 20px;
+  }
+}
+
 .album-artwork {
   width: 100%;
   height: 100%;
