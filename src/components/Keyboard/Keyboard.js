@@ -65,10 +65,12 @@ class Keyboard extends React.Component {
   render() {
     return (
       <div className="keyboard">
-        <div className="game-end-message">
-          {gameEndMessage(this.props.gameStatus)}
-          {playAgainBtn(this.props.startNewGame, this.props.loadingAlbum)}
-        </div>
+        {this.props.gameStatus !== 'IN_PROGRESS' && (
+          <div className="game-end-message">
+            {gameEndMessage(this.props.gameStatus)}
+            {playAgainBtn(this.props.startNewGame, this.props.loadingAlbum)}
+          </div>
+        )}
         <div>{letters.map(letter => this.getButton(letter))}</div>
       </div>
     );
