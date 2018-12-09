@@ -48,7 +48,7 @@
   }
 }
 
-@media (min-width: 1300px) and (min-height: 1080px) {
+@media (min-width: 1300px) and (min-height: 1024px) {
   .album-artwork-container {
     width: 280px;
     height: 280px;
