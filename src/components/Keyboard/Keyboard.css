@@ -1,11 +1,14 @@
-.keyboard {
+.keyboard-container {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   padding-top: 15px;
   border-top: 1px solid gainsboro;
   margin-top: 15px;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .keyboard-btn {
