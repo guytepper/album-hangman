@@ -47,14 +47,13 @@
 
 .game-end-message {
   position: absolute;
-  top: 10%;
   display: flex;
-  width: 80%;
-  height: 200px;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #0084ffec;
+  background-color: #00498ded;
   border-radius: 5px;
   box-shadow: 0 0 20px #0000008a;
 }
