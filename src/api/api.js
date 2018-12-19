@@ -20,6 +20,9 @@ function normalizeServiceResponse(service, response) {
     const itemsArrays = response.map(result => result.data.items); // Grab all data items from the response
     const items = itemsArrays.reduce((a, b) => a.concat(b), []); // Flatten the arrays to one array
     const albums = items.map(item => item.album); // Create new array from the album property of each item
+    if (albums.length === 0) {
+      throw new Error('No saved albums has been found.');
+    }
     const formattedAlbums = albums.map(album => ({ name: removeDescriptors(album.name), image: album.images[0].url }));
     return formattedAlbums;
   } else {
