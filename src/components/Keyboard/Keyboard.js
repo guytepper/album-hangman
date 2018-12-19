@@ -1,7 +1,42 @@
 import React from 'react';
+import Button from '../Button';
 import './Keyboard.css';
 
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+function playAgainBtn(startNewGame, loadingAlbum) {
+  return (
+    <Button onClick={startNewGame} loading={loadingAlbum}>
+      Play Again ⏎
+    </Button>
+  );
+}
+
+function gameEndMessage(gameStatus) {
+  if (gameStatus === 'WON') {
+    return (
+      <h1 className="game-status-msg">
+        You won!{' '}
+        <span role="img" aria-label="Party Popper">
+          🎉
+        </span>
+      </h1>
+    );
+  }
+
+  if (gameStatus === 'LOST') {
+    return (
+      <h1 className="game-status-msg">
+        You lost{' '}
+        <span role="img" aria-label="Sneezing">
+          🤧
+        </span>
+      </h1>
+    );
+  }
+
+  return null;
+}
 
 class Keyboard extends React.Component {
   getButton = letter => {
@@ -28,7 +63,17 @@ class Keyboard extends React.Component {
   };
 
   render() {
-    return <div className="keyboard">{letters.map(letter => this.getButton(letter))}</div>;
+    return (
+      <div className="keyboard-container">
+        {this.props.gameStatus !== 'IN_PROGRESS' && (
+          <div className="game-end-message">
+            {gameEndMessage(this.props.gameStatus)}
+            {playAgainBtn(this.props.startNewGame, this.props.loadingAlbum)}
+          </div>
+        )}
+        <div className="keyboard">{letters.map(letter => this.getButton(letter))}</div>
+      </div>
+    );
   }
 }
 
