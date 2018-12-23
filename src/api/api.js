@@ -56,7 +56,7 @@ async function getAlbums(service, token) {
     // Spotify limits each request to 50 albums, so we have to create multiple requests.
     // We'll take 1000 albums at most.
     for (let offset = 0; offset < 1000; offset += limit) {
-      promises.push(getServiceAlbums(limit));
+      promises.push(getServiceAlbums(offset));
     }
 
     const results = await Promise.all(promises);
