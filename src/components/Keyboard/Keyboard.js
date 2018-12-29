@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '../Button';
 import './Keyboard.css';
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const rowA = 'QWERTYUIOP'.split('');
 const rowB = 'ASDFGHJKL'.split('');
 const rowC = 'ZXCVBNM'.split('');
