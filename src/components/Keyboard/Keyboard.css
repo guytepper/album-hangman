@@ -64,14 +64,14 @@
 }
 
 .keyboard-btn-fail {
-  animation-duration: 0.3s;
+  animation-duration: 0.6s;
   animation-fill-mode: forwards;
   animation-name: red-change;
   font-weight: 600;
 }
 
 .keyboard-btn-success {
-  animation-duration: 0.3s;
+  animation-duration: 0.6s;
   animation-fill-mode: forwards;
   animation-name: green-change;
   font-weight: 600;
@@ -96,6 +96,14 @@
     color: white;
   }
 
+  40% {
+    color: red;
+  }
+
+  50% {
+    transform: scale(2, 2);
+  }
+
   100% {
     color: red;
   }
@@ -104,6 +112,14 @@
 @keyframes green-change {
   0% {
     color: white;
+  }
+
+  40% {
+    color: greenyellow;
+  }
+
+  50% {
+    transform: scale(2, 2);
   }
 
   100% {
