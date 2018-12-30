@@ -2,7 +2,9 @@ import React from 'react';
 import Button from '../Button';
 import './Keyboard.css';
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const rowA = 'QWERTYUIOP'.split('');
+const rowB = 'ASDFGHJKL'.split('');
+const rowC = 'ZXCVBNM'.split('');
 
 function playAgainBtn(startNewGame, loadingAlbum) {
   return (
@@ -71,7 +73,11 @@ class Keyboard extends React.Component {
             {playAgainBtn(this.props.startNewGame, this.props.loadingAlbum)}
           </div>
         )}
-        <div className="keyboard">{letters.map(letter => this.getButton(letter))}</div>
+        <div className="keyboard">
+          <div>{rowA.map(letter => this.getButton(letter))}</div>
+          <div>{rowB.map(letter => this.getButton(letter))}</div>
+          <div>{rowC.map(letter => this.getButton(letter))}</div>
+        </div>
       </div>
     );
   }

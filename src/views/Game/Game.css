@@ -55,6 +55,7 @@
   .game-stage {
     flex-direction: row;
     justify-content: space-evenly;
+    padding: 0 40px;
   }
 
   .game-stats {
