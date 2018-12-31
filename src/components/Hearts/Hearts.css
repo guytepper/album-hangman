@@ -41,6 +41,6 @@
   transition: opacity 500ms ease-in;
 }
 
-.fade-leave {
+.fade-exit {
   animation: 500ms zoomOut ease-out;
 }

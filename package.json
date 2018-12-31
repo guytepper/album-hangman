@@ -10,13 +10,13 @@
     "react-dom": "16.7.0",
     "react-loading": "^2.0.2",
     "react-router-dom": "^4.1.1",
-    "react-transition-group": "^1.1.3",
+    "react-transition-group": "2.5.2",
     "shortid": "^2.2.8"
   },
   "devDependencies": {
     "axios": "^0.16.1",
     "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.1.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "react-app-rewire-hot-loader": "^1.0.1",
     "react-app-rewired": "^1.5.2",
     "react-hot-loader": "^4.1.2",

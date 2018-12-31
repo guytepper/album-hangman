@@ -1,5 +1,5 @@
 import React from 'react';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'; // ES6
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './Hearts.css';
 
 function Hearts({ lives }) {
@@ -7,16 +7,18 @@ function Hearts({ lives }) {
 
   // For each live, display an heart icon
   for (let i = 0; i < lives; i++) {
-    hearts.push(<img className="heart" src="/heart.svg" key={i} alt="" />);
+    hearts.push(
+      <CSSTransition classNames="fade" timeout={{ enter: 500, exit: 450 }} key={i}>
+        <img className="heart" src="/heart.svg" alt="" />
+      </CSSTransition>
+    );
   }
 
   return (
     <div className="hearts-container">
       <h3 className="hearts-title">Lives</h3>
       <div>
-        <CSSTransitionGroup transitionName="fade" transitionEnterTimeout={500} transitionLeaveTimeout={450}>
-          {hearts}
-        </CSSTransitionGroup>
+        <TransitionGroup>{hearts}</TransitionGroup>
       </div>
     </div>
   );
