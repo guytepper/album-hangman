@@ -16,7 +16,7 @@
   "devDependencies": {
     "axios": "^0.16.1",
     "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.1.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "react-app-rewire-hot-loader": "^1.0.1",
     "react-app-rewired": "^1.5.2",
     "react-hot-loader": "^4.1.2",
