@@ -10,7 +10,9 @@ class Landing extends Component {
   selectSpotify = () => {
     this.props.selectService('spotify');
     window.open(
-      `https://accounts.spotify.com/authorize?client_id=b50c5fa3329f4d1cb16d82142c82654c&response_type=token&scope=user-library-read&redirect_uri=${spotifyRedirectURL}`,
+      `https://accounts.spotify.com/authorize?client_id=${
+        process.env.REACT_APP_SPOTIFY_ID
+      }&response_type=token&scope=user-library-read&redirect_uri=${spotifyRedirectURL}`,
       '_self'
     );
   };
