@@ -2,6 +2,17 @@
   height: 50px;
 }
 
+.progress-thin {
+  height: 6px;
+}
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .progress-wrap {
   z-index: 0;
   position: relative;
@@ -26,4 +37,11 @@
   font-family: Krungthep;
   font-size: 24px;
   color: #ffffff;
+  position: relative;
+}
+
+.progress-thin-label {
+  font-family: Krungthep;
+  font-size: 16px;
+  color: #000;
 }
