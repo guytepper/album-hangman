@@ -9,6 +9,7 @@
   border: none;
   border-radius: 2px;
   cursor: pointer;
+  font-family: sans-serif;
 }
 
 .hangman-btn:hover {

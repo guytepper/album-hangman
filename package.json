@@ -14,13 +14,19 @@
     "shortid": "^2.2.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@storybook/addon-actions": "^4.1.13",
+    "@storybook/addon-links": "^4.1.13",
+    "@storybook/addons": "^4.1.13",
+    "@storybook/react": "^4.1.13",
     "axios": "^0.16.1",
+    "babel-loader": "^8.0.4",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "react-app-rewire-hot-loader": "^1.0.1",
     "react-app-rewired": "^1.5.2",
     "react-hot-loader": "^4.1.2",
-    "react-scripts": "2.1.1",
+    "react-scripts": "2.1.5",
     "react-test-renderer": "^16.2.0",
     "stylelint": "^8.2.0",
     "stylelint-config-idiomatic-order": "^5.0.0"
@@ -28,7 +34,9 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom"
+    "test": "react-app-rewired test --env=jsdom",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": [
     ">0.2%",
