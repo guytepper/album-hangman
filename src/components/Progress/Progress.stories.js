@@ -4,3 +4,4 @@ import { action } from '@storybook/addon-actions';
 import Progress from './Progress';
 
 storiesOf('Progress', module).add('standard', () => <Progress />);
+storiesOf('Progress', module).add('thin', () => <Progress type="thin" />);
