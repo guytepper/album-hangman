@@ -18,12 +18,12 @@
   height: 180px;
   margin-bottom: 40px;
   background: #000;
-  transform: translateX(-100px) rotate(-4deg);
+  transform: translate3d(0, 0, 0) translateX(-100px) rotate(-4deg);
 }
 
 .landing-moving-albums-image {
   height: 180px;
-  animation: left-to-right 15s infinite;
+  animation: left-to-right 8s infinite;
   animation-fill-mode: backwards;
   animation-timing-function: linear;
   filter: blur(5px);
@@ -124,6 +124,6 @@
   }
 
   100% {
-    transform: translateX(-67.6%);
+    transform: translateX(-60.3%);
   }
 }

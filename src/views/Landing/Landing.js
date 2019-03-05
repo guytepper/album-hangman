@@ -38,7 +38,7 @@ class Landing extends Component {
       <div className="landing">
         <h1 className="landing-header">Do you really know your music?</h1>
         <div className="landing-moving-albums">
-          <img className="landing-moving-albums-image" src="./albums-carousel1.jpg" />
+          <img className="landing-moving-albums-image" src="./albums-carousel2.jpg" />
         </div>
         <div className="landing-game-info">
           <div className="landing-description">
