@@ -16,6 +16,7 @@
   text-align: center;
   text-decoration: none;
   transition: box-shadow 0.3s;
+  user-select: none;
 }
 
 .login-button:hover {
