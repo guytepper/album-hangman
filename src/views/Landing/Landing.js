@@ -46,8 +46,8 @@ class Landing extends Component {
               We all know Hangman. It’s a classic game. But let’s see if you can beat it with your own music taste.
             </p>
             <p>
-              Each round a blurred album artwork from your music library would be displayed: <br />
-              will you be able to guess the name of the album?
+              Each round a blurred album artwork from your music library will be displayed: would you be able to guess
+              the name of the album?
             </p>
           </div>
           <div className="login-buttons">

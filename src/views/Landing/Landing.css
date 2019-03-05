@@ -18,15 +18,15 @@
   height: 180px;
   margin-bottom: 40px;
   background: #000;
-  transform: translate3d(0, 0, 0) translateX(-100px) rotate(-4deg);
+  transform: translateX(-100px) rotate(-4deg);
 }
 
 .landing-moving-albums-image {
   height: 180px;
-  animation: left-to-right 8s infinite;
+  animation: left-to-right 15s infinite;
   animation-fill-mode: backwards;
   animation-timing-function: linear;
-  filter: blur(5px);
+  filter: blur(7px);
   user-select: none;
 }
 
@@ -39,7 +39,7 @@
 .landing-description {
   max-width: 400px;
   padding: 0 50px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -83,8 +83,13 @@
 /** For wide viewports **/
 
 @media (min-width: 667px) {
+  .landing-header {
+    transform: rotate(-2deg);
+  }
+
   .landing-moving-albums {
     margin-bottom: 50px;
+    transform: translateX(-100px) rotate(-2deg);
   }
 
   .landing-description {
