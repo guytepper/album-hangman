@@ -3461,7 +3461,7 @@ cross-spawn@^4.0.2:
     lru-cache "^4.0.1"
     which "^1.2.9"
 
-cross-spawn@^5.0.1, cross-spawn@^5.1.0:
+cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
   dependencies:
@@ -4060,10 +4060,6 @@ dotenv-webpack@^1.5.7:
 dotenv@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.0.0.tgz#24e37c041741c5f4b25324958ebbc34bca965935"
-
-dotenv@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
 
 dotenv@^6.0.0, dotenv@^6.2.0:
   version "6.2.0"
@@ -9082,16 +9078,17 @@ react-app-polyfill@^0.2.1:
     raf "3.4.1"
     whatwg-fetch "3.0.0"
 
-react-app-rewire-hot-loader@^1.0.1:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-app-rewire-hot-loader/-/react-app-rewire-hot-loader-1.0.3.tgz#2d7560046f0e9dc4ece8a470eac250a5ab02dd3c"
+react-app-rewire-hot-loader@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-app-rewire-hot-loader/-/react-app-rewire-hot-loader-2.0.1.tgz#9b47d299dac4d861dafdf18b49c3698d0ff04a52"
 
-react-app-rewired@^1.5.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-1.6.2.tgz#32ce90abc2c4e2b86c71e4e270bd36663b3b1c9a"
+react-app-rewired@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-2.1.0.tgz#8451acbf5e9d3d2252b259d4d531f60845817df4"
   dependencies:
-    cross-spawn "^5.1.0"
-    dotenv "^4.0.0"
+    cross-spawn "^6.0.5"
+    dotenv "^6.2.0"
+    semver "^5.6.0"
 
 react-dev-utils@^6.1.0:
   version "6.1.1"
@@ -9194,9 +9191,9 @@ react-fuzzy@^0.5.2:
     fuse.js "^3.0.1"
     prop-types "^15.5.9"
 
-react-hot-loader@^4.1.2:
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.7.1.tgz#1260b939297859cff35aff61412887a92c9b4275"
+react-hot-loader@4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.7.0.tgz#0ffccb931ce8435cf4a3744d2a3fd32eab1671be"
   dependencies:
     fast-levenshtein "^2.0.6"
     global "^4.3.0"
