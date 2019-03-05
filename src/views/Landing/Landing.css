@@ -3,7 +3,7 @@
 }
 
 .landing-header {
-  margin-bottom: 0;
+  margin-bottom: 10px;
   color: #000;
   font-family: ChicagoFLFRegular, Krungthep, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   font-size: 27px;
@@ -15,12 +15,25 @@
 .landing-moving-albums {
   width: 200%;
   height: 180px;
+  margin-bottom: 40px;
   background: #000;
   transform: translateX(-100px) rotate(-4deg);
 }
 
+.landing-moving-albums-image {
+  height: 180px;
+  filter: blur(7px);
+  animation: left-to-right 15s infinite;
+  animation-fill-mode: backwards;
+  animation-timing-function: linear;
+}
+
+.landing-game-info {
+  display: flex;
+  flex-direction: column;
+}
+
 .landing-description {
-  margin-top: 50px;
   margin-bottom: 25px;
   padding: 0 50px 0 20px;
   line-height: 21px;
@@ -56,4 +69,29 @@
   height: 20px;
   margin-right: 10px;
   user-select: none;
+}
+
+@keyframes left-to-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-67.6%);
+  }
+}
+
+@media (min-width: 667px) {
+  .landing-game-info {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .landing-moving-albums {
+    margin-bottom: 50px;
+  }
+
+  .landing-description {
+    max-width: 400px;
+  }
 }

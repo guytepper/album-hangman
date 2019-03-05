@@ -37,19 +37,23 @@ class Landing extends Component {
     return (
       <div className="landing">
         <h1 className="landing-header">Do you really know your music?</h1>
-        <div className="landing-moving-albums" />
-        <div className="landing-description">
-          <p className="bold-text">
-            We all know Hangman. It’s a classic game. But let’s see if you can beat it with your own music taste.
-          </p>
-          <p>
-            Each round a blurred album artwork from your music library would be displayed: will you be able to guess the
-            name of the album?
-          </p>
+        <div className="landing-moving-albums">
+          <img className="landing-moving-albums-image" src="./albums-carousel1.png" />
         </div>
-        <div>
-          <LoginButton type="Spotify" icon="/spotify.svg" onClick={this.selectSpotify} />
-          <LoginButton type="Apple Music" icon="/apple_music.png" onClick={this.selectAppleMusic} />
+        <div className="landing-game-info">
+          <div className="landing-description">
+            <p className="bold-text">
+              We all know Hangman. It’s a classic game. But let’s see if you can beat it with your own music taste.
+            </p>
+            <p>
+              Each round a blurred album artwork from your music library would be displayed: will you be able to guess
+              the name of the album?
+            </p>
+          </div>
+          <div>
+            <LoginButton type="Spotify" icon="/spotify.svg" onClick={this.selectSpotify} />
+            <LoginButton type="Apple Music" icon="/apple_music.png" onClick={this.selectAppleMusic} />
+          </div>
         </div>
       </div>
     );
