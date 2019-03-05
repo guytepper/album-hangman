@@ -28,8 +28,8 @@
     "react-hot-loader": "^4.1.2",
     "react-scripts": "2.1.5",
     "react-test-renderer": "^16.2.0",
-    "stylelint": "^8.2.0",
-    "stylelint-config-idiomatic-order": "^5.0.0"
+    "stylelint": "9.10.1",
+    "stylelint-config-idiomatic-order": "5.0.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
