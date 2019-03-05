@@ -23,7 +23,7 @@
 
 .landing-moving-albums-image {
   height: 180px;
-  animation: left-to-right 15s infinite;
+  animation: left-to-right 30s infinite;
   animation-fill-mode: backwards;
   animation-timing-function: linear;
   filter: blur(7px);
