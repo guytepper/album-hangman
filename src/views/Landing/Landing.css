@@ -43,34 +43,6 @@
   font-weight: bold;
 }
 
-.service-login-button {
-  display: flex;
-  width: 185px;
-  height: 40px;
-  align-items: center;
-  padding: 10px 15px 10px 10px;
-  margin: 10px auto;
-  background-color: #fff;
-  border-radius: 20px;
-  color: #191919;
-  cursor: pointer;
-  font-family: Helvetica Neue, Helvetica, sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: box-shadow 0.3s;
-}
-
-.service-login-button:hover {
-  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.3);
-}
-
-.service-button-logo {
-  height: 20px;
-  margin-right: 10px;
-  user-select: none;
-}
-
 @keyframes left-to-right {
   0% {
     transform: translateX(0);
