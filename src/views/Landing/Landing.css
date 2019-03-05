@@ -4,13 +4,17 @@
 
 .landing-header {
   margin-bottom: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  font-size: 57px;
+  color: #000;
+  font-family: Krungthep, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  font-size: 30px;
+  transform: rotate(-4deg);
 }
 
-.landing-sub {
-  font-weight: 500;
-  margin-bottom: 0;
+.landing-moving-albums {
+  width: 200%;
+  height: 180px;
+  background: #000;
+  transform: translateX(-100px) rotate(-4deg);
 }
 
 .landing-description {
