@@ -1,3 +1,7 @@
+.landing {
+  overflow: hidden;
+}
+
 .landing-header {
   margin-bottom: 0;
   color: #000;
