@@ -60,7 +60,7 @@ class Landing extends Component {
             Created by <span className="landing-footer-created-name">Guy Tepper</span>
           </span>
           <span>
-            Contribute on{' '}
+            Fork me on{' '}
             <a className="landing-footer-github-link" href="https://github.com/guytepper/album-hangman">
               Github
             </a>
