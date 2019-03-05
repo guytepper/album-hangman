@@ -37,7 +37,6 @@ class Landing extends Component {
       <div className="landing">
         <h1 className="landing-header">Do you really know your music?</h1>
         <div className="landing-moving-albums" />
-        <p className="landing-description">See if you can guess your favourite albums!</p>
         <a className="service-login-button" onClick={this.selectSpotify}>
           <img alt="Spotify" src="/spotify.svg" className="service-button-logo" />
           <span>Connect with Spotify</span>
