@@ -8,6 +8,8 @@
   font-family: Krungthep, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   font-size: 30px;
   transform: rotate(-4deg);
+  padding: 0 20px;
+  text-align: left;
 }
 
 .landing-moving-albums {
