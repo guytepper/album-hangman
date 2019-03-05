@@ -37,14 +37,23 @@ class Landing extends Component {
       <div className="landing">
         <h1 className="landing-header">Do you really know your music?</h1>
         <div className="landing-moving-albums" />
-        <a className="service-login-button" onClick={this.selectSpotify}>
+        <div className="landing-description">
+          <p className="bold-text">
+            We all know Hangman. It’s a classic game. But let’s see if you can beat it with your own music taste.
+          </p>
+          <p>
+            Each round a blurred album artwork from your music library would be displayed: will you be able to guess the
+            name of the album?
+          </p>
+        </div>
+        {/* <a className="service-login-button" onClick={this.selectSpotify}>
           <img alt="Spotify" src="/spotify.svg" className="service-button-logo" />
           <span>Connect with Spotify</span>
         </a>
         <a className="service-login-button" onClick={this.selectAppleMusic}>
           <img alt="Apple Music" src="/apple_music.png" className="service-button-logo" />
           <span>Connect with Apple Music</span>
-        </a>
+        </a> */}
       </div>
     );
   }
