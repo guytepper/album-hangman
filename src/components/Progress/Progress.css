@@ -9,38 +9,38 @@
 .progress-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .progress-wrap {
-  z-index: 0;
   position: relative;
-  width: 300px;
-  background-color: black;
+  z-index: 0;
   display: flex;
-  justify-content: center;
+  width: 300px;
   align-items: center;
+  justify-content: center;
+  background-color: black;
 }
 
 .progress-bar {
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
-  z-index: 1;
   background-color: #41b074;
 }
 
 .progress-label {
+  position: relative;
   z-index: 2;
+  color: #ffffff;
   font-family: Krungthep;
   font-size: 24px;
-  color: #ffffff;
-  position: relative;
 }
 
 .progress-thin-label {
+  color: #000;
   font-family: Krungthep;
   font-size: 16px;
-  color: #000;
 }

@@ -3,8 +3,8 @@
   max-width: 95%;
   flex-wrap: wrap;
   justify-content: center;
-  font-family: sans-serif;
   color: white;
+  font-family: sans-serif;
 }
 
 .hidden-word {
