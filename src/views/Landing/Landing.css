@@ -22,10 +22,15 @@
 
 .landing-moving-albums-image {
   height: 180px;
-  filter: blur(7px);
+  transform: rotate(-1deg);
   animation: left-to-right 15s infinite;
   animation-fill-mode: backwards;
   animation-timing-function: linear;
+  filter: blur(7px);
+}
+
+.landing-moving-albums-image:last-of-type {
+  display: none;
 }
 
 .landing-game-info {
@@ -47,10 +52,13 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-67.6%);
   }
 }
+
+/** For wide viewports **/
 
 @media (min-width: 667px) {
   .landing-game-info {
@@ -65,5 +73,21 @@
 
   .landing-description {
     max-width: 400px;
+  }
+}
+
+/** Tablets **/
+
+@media (min-width: 768px) and (min-height: 740px) {
+  .landing-header {
+    font-size: 36px;
+  }
+
+  .landing-moving-albums {
+    height: 360px;
+  }
+
+  .landing-moving-albums-image:last-of-type {
+    display: block;
   }
 }
