@@ -18,6 +18,7 @@
   height: 180px;
   margin-bottom: 15px;
   background: #000;
+  outline: 1px solid transparent;
   transform: translateX(-100px) rotate(-3deg);
 }
 
