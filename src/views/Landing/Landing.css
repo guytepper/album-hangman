@@ -3,16 +3,17 @@
 }
 
 .landing-header {
+  padding: 0 20px;
   margin-bottom: 10px;
   color: #000;
   font-family: ChicagoFLFRegular, Krungthep, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   font-size: 27px;
   font-weight: normal;
   transform: rotate(-4deg);
-  padding: 0 20px;
 }
 
 .landing-moving-albums {
+  overflow: hidden;
   width: 200%;
   height: 180px;
   margin-bottom: 40px;
@@ -22,31 +23,100 @@
 
 .landing-moving-albums-image {
   height: 180px;
-  transform: rotate(-1deg);
   animation: left-to-right 15s infinite;
   animation-fill-mode: backwards;
   animation-timing-function: linear;
-  filter: blur(7px);
-}
-
-.landing-moving-albums-image:last-of-type {
-  display: none;
+  filter: blur(5px);
 }
 
 .landing-game-info {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .landing-description {
+  max-width: 400px;
+  padding: 0 50px;
   margin-bottom: 25px;
-  padding: 0 50px 0 20px;
-  line-height: 21px;
+  text-align: center;
 }
 
 .bold-text {
   font-weight: bold;
 }
+
+.login-buttons {
+  margin-bottom: 25px;
+}
+
+.landing-footer {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  color: #c0bfbf;
+  font-weight: 300;
+  text-align: center;
+}
+
+.landing-footer-created {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.landing-footer-created-name {
+  font-weight: 400;
+}
+
+.landing-footer-github-link {
+  color: #c0bfbf;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.2s ease-out;
+}
+
+.landing-footer-github-link:hover {
+  color: #8f8f8f;
+}
+
+/** For wide viewports **/
+
+@media (min-width: 667px) {
+  .landing-moving-albums {
+    margin-bottom: 50px;
+  }
+
+  .landing-description {
+    max-width: 520px;
+    padding: 0 90px;
+    font-size: 18px;
+  }
+}
+
+/** Tablets **/
+
+@media (min-width: 768px) and (min-height: 690px) {
+  .landing-header {
+    font-size: 36px;
+  }
+
+  .landing-description {
+    font-size: 19px;
+  }
+
+  .landing-moving-albums {
+    margin-bottom: 70px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-header {
+    margin-left: 20px;
+    font-size: 46px;
+  }
+}
+
+/** Animations **/
 
 @keyframes left-to-right {
   0% {
@@ -55,39 +125,5 @@
 
   100% {
     transform: translateX(-67.6%);
-  }
-}
-
-/** For wide viewports **/
-
-@media (min-width: 667px) {
-  .landing-game-info {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .landing-moving-albums {
-    margin-bottom: 50px;
-  }
-
-  .landing-description {
-    max-width: 400px;
-  }
-}
-
-/** Tablets **/
-
-@media (min-width: 768px) and (min-height: 740px) {
-  .landing-header {
-    font-size: 36px;
-  }
-
-  .landing-moving-albums {
-    height: 360px;
-  }
-
-  .landing-moving-albums-image:last-of-type {
-    display: block;
   }
 }
