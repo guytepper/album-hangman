@@ -1,37 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Game from './views/Game';
 import Landing from './views/Landing';
 
-class App extends Component {
-  state = {
-    service: 'spotify'
-  };
+function App() {
+  const [service, setService] = useState('spotify');
 
-  selectService = service => {
-    this.setState({ service });
-  };
-
-  render() {
-    return (
-      <Router>
-        <React.Fragment>
-          <Route
-            exact
-            path="/"
-            render={props => <Landing {...props} {...this.state} selectService={this.selectService} />}
-          />
-          <Route path="/game/" render={props => <Game {...props} {...this.state} />} />
-          <a
-            href="https://github.com/guytepper/album-hangman"
-            style={{ display: 'flex', justifyContent: 'center', margin: '20px', opacity: 0.5 }}
-          >
-            <img src="/github.svg" alt="GitHub" width="30" height="30" />
-          </a>
-        </React.Fragment>
-      </Router>
-    );
-  }
+  return (
+    <Router>
+      <React.Fragment>
+        <Route exact path="/" render={props => <Landing {...props} selectService={service => setService(service)} />} />
+        <Route path="/game/" render={props => <Game {...props} service={service} />} />
+        <a
+          href="https://github.com/guytepper/album-hangman"
+          style={{ display: 'flex', justifyContent: 'center', margin: '20px', opacity: 0.5 }}
+        >
+          <img src="/github.svg" alt="GitHub" width="30" height="30" />
+        </a>
+      </React.Fragment>
+    </Router>
+  );
 }
 
 export default App;

@@ -1,47 +1,136 @@
 .landing {
-  text-align: center;
+  overflow: hidden;
 }
 
 .landing-header {
-  margin-bottom: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  font-size: 57px;
+  padding: 0 20px;
+  margin-bottom: 10px;
+  color: #000;
+  font-family: ChicagoFLFRegular, Krungthep, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  font-size: 27px;
+  font-weight: normal;
+  transform: rotate(-3deg);
 }
 
-.landing-sub {
-  font-weight: 500;
-  margin-bottom: 0;
+.landing-moving-albums {
+  overflow: hidden;
+  width: 200%;
+  height: 180px;
+  margin-bottom: 15px;
+  background: #000;
+  outline: 1px solid transparent;
+  transform: translateX(-100px) rotate(-3deg);
+}
+
+.landing-moving-albums-image {
+  height: 180px;
+  animation: left-to-right 30s infinite;
+  animation-fill-mode: backwards;
+  animation-timing-function: linear;
+  filter: blur(7px);
+  user-select: none;
+}
+
+.landing-game-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .landing-description {
-  margin-top: 2px;
+  max-width: 400px;
+  padding: 0 50px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.login-buttons {
   margin-bottom: 25px;
 }
 
-.service-login-button {
-  display: flex;
-  width: 185px;
-  height: 40px;
-  align-items: center;
-  padding: 10px 15px 10px 10px;
-  margin: 10px auto;
-  background-color: #fff;
-  border-radius: 20px;
-  color: #191919;
-  cursor: pointer;
-  font-family: Helvetica Neue, Helvetica, sans-serif;
-  font-size: 13px;
-  font-weight: 800;
+.landing-footer {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  color: #c0bfbf;
+  font-weight: 300;
+  text-align: center;
+}
+
+.landing-footer-created {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.landing-footer-created-name {
+  font-weight: 400;
+}
+
+.landing-footer-github-link {
+  color: #c0bfbf;
+  font-weight: 400;
   text-decoration: none;
-  transition: box-shadow 0.3s;
+  transition: color 0.2s ease-out;
 }
 
-.service-login-button:hover {
-  box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.3);
+.landing-footer-github-link:hover {
+  color: #8f8f8f;
 }
 
-.service-button-logo {
-  height: 20px;
-  margin-right: 10px;
-  user-select: none;
+/** For wide viewports **/
+
+@media (min-width: 667px) {
+  .landing-header {
+    transform: rotate(-2deg);
+  }
+
+  .landing-moving-albums {
+    margin-bottom: 50px;
+    transform: translateX(-100px) rotate(-2deg);
+  }
+
+  .landing-description {
+    max-width: 520px;
+    padding: 0 90px;
+    font-size: 18px;
+  }
+}
+
+/** Tablets **/
+
+@media (min-width: 768px) and (min-height: 690px) {
+  .landing-header {
+    font-size: 36px;
+  }
+
+  .landing-description {
+    font-size: 19px;
+  }
+
+  .landing-moving-albums {
+    margin-bottom: 70px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-header {
+    margin-left: 20px;
+    font-size: 46px;
+  }
+}
+
+/** Animations **/
+
+@keyframes left-to-right {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-60.3%);
+  }
 }
