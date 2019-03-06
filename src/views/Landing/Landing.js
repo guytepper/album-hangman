@@ -64,7 +64,7 @@ function Landing(props) {
         </span>
         <span>
           Fork me on{' '}
-          <a className="landing-footer-github-link" href="https://github.com/guytepper/album-hangman">
+          <a className="landing-footer-github-link" target="_blank" href="https://github.com/guytepper/album-hangman">
             Github
           </a>
         </span>
