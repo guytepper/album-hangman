@@ -11,6 +11,8 @@ import Button from '../../components/Button';
 
 import Keyboard from '../../components/Keyboard';
 import Hearts from '../../components/Hearts';
+import ProgressBar from '../../components/Progress';
+
 import { isKeyCodeAlphabetical, getRandomInt } from '../../utils';
 import { getAlbums } from '../../api';
 import './Game.css';
@@ -154,7 +156,11 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <div className="game-stage">
+        <div className="game-top-bar">
+          <Hearts lives={4 - this.state.currentGame.failedGuesses} />
+          <ProgressBar type="thin" total={152} progress={53} style={{ width: ' 10px ' }} />
+        </div>
+        {/* <div className="game-stage">
           <Artwork
             img={this.state.currentAlbum.image}
             blurLevel={(4 - this.state.currentGame.failedGuesses) * 5}
@@ -173,7 +179,7 @@ class Game extends Component {
           gameStatus={this.state.currentGame.status}
           startNewGame={this.startNewGame}
           loadingAlbum={this.loadingAlbum}
-        />
+        /> */}
       </div>
     );
   }

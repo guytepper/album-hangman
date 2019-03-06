@@ -1,8 +1,7 @@
 .hearts-container {
   display: flex;
+  min-width: 90px;
   flex-direction: column;
-  min-width: 120px;
-  min-height: 70px;
 }
 
 .hearts-title {
@@ -12,9 +11,9 @@
 }
 
 .heart {
-  width: 25px;
-  height: 25px;
-  margin: 0 2.5px;
+  width: 15px;
+  height: 15px;
+  margin: 0 1.25px;
 }
 
 @keyframes zoomOut {

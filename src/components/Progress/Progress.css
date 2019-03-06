@@ -17,7 +17,7 @@
   position: relative;
   z-index: 0;
   display: flex;
-  width: 300px;
+  width: 140px;
   align-items: center;
   justify-content: center;
   background-color: black;
@@ -35,12 +35,12 @@
   position: relative;
   z-index: 2;
   color: #ffffff;
-  font-family: Krungthep;
+  font-family: ChicagoFLFRegular, Krungthep, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 24px;
 }
 
 .progress-thin-label {
   color: #000;
-  font-family: Krungthep;
-  font-size: 16px;
+  font-family: ChicagoFLFRegular, Krungthep, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
 }
