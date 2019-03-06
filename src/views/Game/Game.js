@@ -158,7 +158,8 @@ class Game extends Component {
       <div className="game">
         <div className="game-top-bar">
           <Hearts lives={4 - this.state.currentGame.failedGuesses} />
-          <ProgressBar type="thin" total={152} progress={53} style={{ width: ' 10px ' }} />
+          <ProgressBar type="thin" total={152} progress={53} />
+          <img src="/settings.svg" className="game-top-bar-settings-icon" />
         </div>
         {/* <div className="game-stage">
           <Artwork

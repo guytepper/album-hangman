@@ -1,6 +1,6 @@
 .hearts-container {
   display: flex;
-  min-width: 90px;
+  min-width: 70px;
   flex-direction: column;
 }
 
