@@ -174,7 +174,7 @@ class Game extends Component {
           totalAlbums={153}
           albumsProgress={43}
         />
-        {/* <div className="game-stage">
+        <div className="game-stage">
           <Artwork
             img={this.state.currentAlbum.image}
             blurLevel={(4 - this.state.currentGame.failedGuesses) * 5}
@@ -182,10 +182,8 @@ class Game extends Component {
           />
           <Word hiddenLetters={this.state.currentGame.hiddenWord} />
         </div>
-        <div className="game-stats">
-          <Hearts lives={4 - this.state.currentGame.failedGuesses} />
-          <GuessedLetters letters={this.state.currentGame.failedLetters} />
-        </div>
+
+        {/* 
         <Keyboard
           onPress={this.handleLetterPress}
           guessedLetters={this.state.currentGame.guessedLetters}
