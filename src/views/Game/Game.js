@@ -22,7 +22,8 @@ class Game extends Component {
     loadingAlbum: true,
     error: null,
     currentAlbum: {},
-    currentGame: {}
+    currentGame: {},
+    displaySettings: false
   };
 
   albums = [];
@@ -118,6 +119,10 @@ class Game extends Component {
     this.setNewAlbum();
   };
 
+  setSettingsDisplay = displaySettings => {
+    this.setState({ displaySettings });
+  };
+
   isGameActive = () => {
     const { currentGame, loadingAlbum } = this.state;
     return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
@@ -156,9 +161,19 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <div className="overlay" />
-        <SettingsModal className="settings-overlay" />
-        <GameHeader currentGame={this.state.currentGame} totalAlbums={153} albumsProgress={43} />
+        {this.state.displaySettings && (
+          <React.Fragment>
+            <div className="overlay" />
+            <SettingsModal className="settings-overlay" setSettingsDisplay={this.setSettingsDisplay} />
+          </React.Fragment>
+        )}
+
+        <GameHeader
+          setSettingsDisplay={this.setSettingsDisplay}
+          currentGame={this.state.currentGame}
+          totalAlbums={153}
+          albumsProgress={43}
+        />
         {/* <div className="game-stage">
           <Artwork
             img={this.state.currentAlbum.image}

@@ -6,8 +6,8 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #ecf0f1;
-  box-shadow: 0 0 0 7px #000;
+  background-color: rgb(233, 233, 233);
+  box-shadow: 0 0 0 7px rgb(31, 31, 31);
 }
 
 .settings-modal-buttons {
@@ -19,19 +19,19 @@
 }
 
 .settings-modal-credits {
-  color: #8a8a8ae5;
+  color: #6b6b6be5;
   font-family: 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif;
-  font-weight: 300;
 }
 
 .settings-modal-credits-name,
 .settings-modal-credits-github {
   display: block;
+  font-weight: 300;
   text-align: center;
 }
 
 .settings-modal-credits-name {
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .settings-modal-credits-github {

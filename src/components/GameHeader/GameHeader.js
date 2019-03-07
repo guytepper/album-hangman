@@ -8,7 +8,7 @@ function GameHeader(props) {
     <div className="game-top-bar">
       <Hearts lives={4 - props.currentGame.failedGuesses} />
       <ProgressBar type="thin" total={props.totalAlbums} progress={props.albumsProgress} />
-      <div className="game-top-bar-settings-icon">
+      <div className="game-top-bar-settings-icon" onClick={() => props.setSettingsDisplay(true)}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
           <g fill="none" fill-rule="evenodd">
             <circle cx="12.5" cy="12.5" r="12.5" fill="#000" />
