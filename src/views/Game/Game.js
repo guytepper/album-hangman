@@ -155,7 +155,7 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <GameHeader />
+        <GameHeader currentGame={this.state.currentGame} totalAlbums={153} albumsProgress={43} />
         {/* <div className="game-stage">
           <Artwork
             img={this.state.currentAlbum.image}
