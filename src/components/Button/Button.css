@@ -1,43 +1,44 @@
 .hangman-btn {
-  width: 200px;
-  font-family: inherit;
-  font-size: 100%;
-  padding: 0.5em 1em;
-  color: rgba(0, 0, 0, 0.8);
-  text-decoration: none;
-  background-color: #e6e6e6;
+  width: 240px;
+  height: 42px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 2px;
+  border-radius: 25px;
+  color: #fff;
   cursor: pointer;
-  font-family: sans-serif;
-}
-
-.hangman-btn:hover {
-  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));
+  font-family: ChicagoFLFRegular, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 22px;
+  text-decoration: none;
 }
 
 .hangman-btn[disabled] {
   border: none;
   background-image: none;
-  opacity: 0.4;
   cursor: not-allowed;
+  opacity: 0.4;
   pointer-events: none;
 }
 
-.primary-btn {
-  color: #fff;
-  background-color: #0078e7;
+.hangman-btn-warning {
+  background-color: #d94c4c;
 }
 
-.success-btn {
-  color: #fff;
-  background: rgb(28, 184, 65);
+.hangman-btn-warning:hover {
+  background-color: #f05544;
+}
+
+.hangman-btn-success {
+  background: #1abc56;
+}
+
+.hangman-btn-success:hover {
+  background: #23d464;
 }
 
 .button-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .button-loading-wrapper {
