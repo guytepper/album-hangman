@@ -1,6 +1,7 @@
 import React from 'react';
 import Hearts from '../../components/Hearts';
 import ProgressBar from '../../components/Progress';
+import './GameHeader.css';
 
 function GameHeader(props) {
   return (
