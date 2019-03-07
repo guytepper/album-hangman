@@ -7,7 +7,7 @@ function GameHeader(props) {
   return (
     <div className="game-top-bar">
       <Hearts lives={4 - props.currentGame.failedGuesses} />
-      <ProgressBar type="thin" total={152} progress={53} />
+      <ProgressBar type="thin" total={props.totalAlbums} progress={props.albumsProgress} />
       <div className="game-top-bar-settings-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25">
           <g fill="none" fill-rule="evenodd">
