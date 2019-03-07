@@ -6,8 +6,8 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #000;
-  box-shadow: 0 0 0 7px rgba(0, 0, 0, 0.5);
+  background-color: #ecf0f1;
+  box-shadow: 0 0 0 7px #000;
 }
 
 .settings-modal-buttons {
@@ -19,7 +19,7 @@
 }
 
 .settings-modal-credits {
-  color: #fff;
+  color: #8a8a8ae5;
   font-family: 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif;
   font-weight: 300;
 }

@@ -2,9 +2,9 @@ import React from 'react';
 import Button from '../Button';
 import './SettingsModal.css';
 
-function SettingsModal({ img, blurLevel, gameEnd }) {
+function SettingsModal({ className }) {
   return (
-    <div className="settings-modal">
+    <div className={`settings-modal ${className}`}>
       <div className="settings-modal-buttons">
         <Button type="warning">Reset Progress</Button>
         <Button type="warning">Logout</Button>

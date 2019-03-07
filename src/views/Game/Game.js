@@ -11,6 +11,7 @@ import Button from '../../components/Button';
 
 import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
+import SettingsModal from '../../components/SettingsModal';
 
 import { isKeyCodeAlphabetical, getRandomInt } from '../../utils';
 import { getAlbums } from '../../api';
@@ -155,6 +156,8 @@ class Game extends Component {
 
     return (
       <div className="game">
+        <div className="overlay" />
+        <SettingsModal className="settings-overlay" />
         <GameHeader currentGame={this.state.currentGame} totalAlbums={153} albumsProgress={43} />
         {/* <div className="game-stage">
           <Artwork

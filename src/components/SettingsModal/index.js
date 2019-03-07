@@ -1,3 +1,3 @@
-import SettingsModal from './Artwork';
+import SettingsModal from './SettingsModal';
 
 export default SettingsModal;
