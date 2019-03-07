@@ -1,12 +1,13 @@
 .hangman-btn {
-  width: 200px;
-  padding: 0.5em 1em;
+  width: 240px;
+  height: 42px;
+  padding: 8px 16px;
   border: none;
   border-radius: 25px;
   color: #fff;
   cursor: pointer;
   font-family: ChicagoFLFRegular, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 100%;
+  font-size: 22px;
   text-decoration: none;
 }
 
