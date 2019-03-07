@@ -10,8 +10,7 @@ import GuessedLetters from '../../components/GuessedLetters';
 import Button from '../../components/Button';
 
 import Keyboard from '../../components/Keyboard';
-import Hearts from '../../components/Hearts';
-import ProgressBar from '../../components/Progress';
+import GameHeader from '../../components/GameHeader';
 
 import { isKeyCodeAlphabetical, getRandomInt } from '../../utils';
 import { getAlbums } from '../../api';
@@ -156,11 +155,7 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <div className="game-top-bar">
-          <Hearts lives={4 - this.state.currentGame.failedGuesses} />
-          <ProgressBar type="thin" total={152} progress={53} />
-          <img src="/settings.svg" className="game-top-bar-settings-icon" />
-        </div>
+        <GameHeader currentGame={this.state.currentGame} totalAlbums={153} albumsProgress={43} />
         {/* <div className="game-stage">
           <Artwork
             img={this.state.currentAlbum.image}
