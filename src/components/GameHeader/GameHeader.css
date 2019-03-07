@@ -9,8 +9,12 @@
 }
 
 .game-top-bar-settings-icon {
-  height: 32px;
   cursor: pointer;
+}
+
+.game-top-bar-settings-icon svg {
+  width: 30px;
+  height: 30px;
 }
 
 .game-top-bar-settings-icon:hover .settings-icon-gear {
