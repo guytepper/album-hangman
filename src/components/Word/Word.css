@@ -1,6 +1,6 @@
 .hidden-album-name {
   display: flex;
-  max-width: 95%;
+  max-width: 100%;
   flex-wrap: wrap;
   justify-content: center;
   color: white;
