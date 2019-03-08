@@ -166,7 +166,6 @@ class Game extends Component {
             <SettingsModal className="settings-overlay" setSettingsDisplay={this.setSettingsDisplay} />
           </React.Fragment>
         )}
-
         <GameHeader
           setSettingsDisplay={this.setSettingsDisplay}
           currentGame={this.state.currentGame}
@@ -174,23 +173,23 @@ class Game extends Component {
           albumsProgress={43}
         />
         <div className="game-stage">
-          <Artwork
-            img={this.state.currentAlbum.image}
-            blurLevel={(4 - this.state.currentGame.failedGuesses) * 5}
-            gameEnd={this.gameEnd()}
+          <div className="game-stage-album-info">
+            <Artwork
+              img={this.state.currentAlbum.image}
+              blurLevel={(4 - this.state.currentGame.failedGuesses) * 5}
+              gameEnd={this.gameEnd()}
+            />
+            <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+          </div>
+          <Keyboard
+            onPress={this.handleLetterPress}
+            guessedLetters={this.state.currentGame.guessedLetters}
+            failedLetters={this.state.currentGame.failedLetters}
+            gameStatus={this.state.currentGame.status}
+            startNewGame={this.startNewGame}
+            loadingAlbum={this.loadingAlbum}
           />
-          <Word hiddenLetters={this.state.currentGame.hiddenWord} />
         </div>
-
-        {/* 
-        <Keyboard
-          onPress={this.handleLetterPress}
-          guessedLetters={this.state.currentGame.guessedLetters}
-          failedLetters={this.state.currentGame.failedLetters}
-          gameStatus={this.state.currentGame.status}
-          startNewGame={this.startNewGame}
-          loadingAlbum={this.loadingAlbum}
-        /> */}
       </div>
     );
   }
