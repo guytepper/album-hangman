@@ -187,7 +187,6 @@ class Game extends Component {
             failedLetters={this.state.currentGame.failedLetters}
             gameStatus={this.state.currentGame.status}
             startNewGame={this.startNewGame}
-            loadingAlbum={this.loadingAlbum}
           />
         </div>
       </div>
