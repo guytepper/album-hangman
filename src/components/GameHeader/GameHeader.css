@@ -1,4 +1,8 @@
 .game-top-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 9;
+  top: 0;
   display: flex;
   width: 100%;
   height: 50px;
