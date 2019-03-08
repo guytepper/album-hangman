@@ -6,7 +6,6 @@ import ReactLoading from 'react-loading';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
-import GuessedLetters from '../../components/GuessedLetters';
 import Button from '../../components/Button';
 
 import Keyboard from '../../components/Keyboard';
