@@ -2,7 +2,7 @@
   position: relative;
   padding-top: 15px;
   border-top: 1px solid gainsboro;
-  margin: 0 auto;
+  margin: 0 auto 25px;
 }
 
 .keyboard {
@@ -35,7 +35,8 @@
 @media (min-width: 410px) {
   .keyboard-btn {
     min-width: 37px;
-    height: 37px;
+    height: 40px;
+    font-size: 15px;
   }
 }
 
