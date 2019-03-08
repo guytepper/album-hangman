@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Game from './views/Game';
 import Landing from './views/Landing';
 
+window.addEventListener('touchstart', function onFirstTouch() {
+  document.body.classList.add('user-is-touching');
+});
+
 function App() {
   const [service, setService] = useState('spotify');
 

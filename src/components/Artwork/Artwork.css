@@ -26,20 +26,6 @@
   }
 }
 
-@media (min-width: 568px) {
-  .album-artwork-container {
-    width: 180px;
-    height: 180px;
-  }
-}
-
-@media (min-width: 768px) {
-  .album-artwork-container {
-    width: 250px;
-    height: 250px;
-  }
-}
-
 @media (min-width: 1300px) and (min-height: 1024px) {
   .album-artwork-container {
     width: 280px;

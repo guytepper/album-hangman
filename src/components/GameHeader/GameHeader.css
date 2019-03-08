@@ -24,3 +24,15 @@
 .game-top-bar-settings-icon:hover .settings-icon-gear {
   stroke: rgb(207, 207, 207);
 }
+
+@media (min-width: 1024px) {
+  .game-top-bar {
+    height: 80px;
+    padding: 0 25px;
+  }
+
+  .game-top-bar-settings-icon svg {
+    width: 44px;
+    height: 44px;
+  }
+}

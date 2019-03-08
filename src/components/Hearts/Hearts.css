@@ -16,6 +16,16 @@
   margin: 0 1.25px;
 }
 
+@media (min-width: 1024px) {
+  .hearts-container {
+    width: 130px;
+  }
+  .heart {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 @keyframes zoomOut {
   from {
     opacity: 1;

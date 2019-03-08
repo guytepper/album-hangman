@@ -7,7 +7,11 @@ const rowB = 'ASDFGHJKL'.split('');
 const rowC = 'ZXCVBNM'.split('');
 
 function playAgainBtn(startNewGame) {
-  return <Button onClick={startNewGame}>Play Again ⏎</Button>;
+  return (
+    <Button onClick={startNewGame} type="success">
+      Play Again ⏎
+    </Button>
+  );
 }
 
 function gameEndMessage(gameStatus) {

@@ -1,11 +1,3 @@
-.progress {
-  height: 50px;
-}
-
-.progress-thin {
-  height: 6px;
-}
-
 .progress-container {
   display: flex;
   flex-direction: column;
@@ -32,16 +24,45 @@
   background-color: #41b074;
 }
 
+.progress {
+  height: 6px;
+}
+
 .progress-label {
-  position: relative;
-  z-index: 2;
-  color: #ffffff;
-  font-family: ChicagoFLFRegular, Krungthep, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 24px;
+  font-family: ChicagoFLFRegular, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .progress-thin-label {
   color: #000;
-  font-family: ChicagoFLFRegular, Krungthep, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 13px;
+}
+
+.progress-large-label {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .progress-container {
+    margin-right: 82px;
+  }
+
+  .progress-wrap {
+    width: 300px;
+  }
+
+  .progress-large-label {
+    position: relative;
+    z-index: 2;
+    display: block;
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .progress {
+    height: 40px;
+  }
+
+  .progress-thin-label {
+    display: none;
+  }
 }
