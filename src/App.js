@@ -11,12 +11,6 @@ function App() {
       <React.Fragment>
         <Route exact path="/" render={props => <Landing {...props} selectService={service => setService(service)} />} />
         <Route path="/game/" render={props => <Game {...props} service={service} />} />
-        <a
-          href="https://github.com/guytepper/album-hangman"
-          style={{ display: 'flex', justifyContent: 'center', margin: '20px', opacity: 0.5 }}
-        >
-          <img src="/github.svg" alt="GitHub" width="30" height="30" />
-        </a>
       </React.Fragment>
     </Router>
   );
