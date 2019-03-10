@@ -33,4 +33,14 @@ function splitArrayWords(arr, seperator = ' ') {
   return words;
 }
 
-export { isAlphabetical, isKeyCodeAlphabetical, getRandomInt, splitArrayWords };
+/**
+ * Change the array elements position randomly.
+ * @param {array} arr - The array to shuffle.
+ * @returns {array} The shuffled array.
+ */
+function shuffleArray(arr) {
+  const shuffledArr = [...arr].sort(() => Math.random() - 0.5);
+  return shuffledArr;
+}
+
+export { isAlphabetical, isKeyCodeAlphabetical, getRandomInt, splitArrayWords, shuffleArray };
