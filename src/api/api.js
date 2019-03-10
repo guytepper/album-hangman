@@ -15,6 +15,12 @@ function getSpotifyAlbums(token, limit, offset) {
   });
 }
 
+/**
+ * Change the API response to a flat array, containing objects with the album name & artwork image url.
+ * e.g: [{ name: 'The White Album', image: 'urlgoeshere'}]
+ * @param {string} service - Which service is being used - Spotify / Apple Music.
+ * @param {array} response - The api response from the service.
+ */
 function normalizeServiceResponse(service, response) {
   if (service === 'spotify') {
     const itemsArrays = response.map(result => result.data.items); // Grab all data items from the response
@@ -23,14 +29,19 @@ function normalizeServiceResponse(service, response) {
     if (albums.length === 0) {
       throw new Error('No saved albums has been found.');
     }
-    const formattedAlbums = albums.map(album => ({ name: removeDescriptors(album.name), image: album.images[0].url }));
+    const formattedAlbums = albums.map(album => ({
+      name: removeDescriptors(album.name),
+      image: album.images[0].url,
+      guessed: false
+    }));
     return formattedAlbums;
-  } else {
+  } else if (service === 'appleMusic') {
     const items = response.reduce((a, b) => a.concat(b), []); // Flatten the arrays to one array
     const albums = items.map(item => item.attributes); // Create new array from the attributes property of each item
     const formattedAlbums = albums.map(album => ({
       name: removeDescriptors(album.name),
-      image: album.artwork.url.replace('{w}x{h}bb', '476x476bb')
+      image: album.artwork.url.replace('{w}x{h}bb', '476x476bb'),
+      guessed: false
     }));
 
     return formattedAlbums;
@@ -61,7 +72,7 @@ async function getAlbums(service, token) {
 
     const results = await Promise.all(promises);
     const formattedAlbums = normalizeServiceResponse(service, results);
-    return formattedAlbums;
+    console.log(formattedAlbums);
   } catch (err) {
     console.log(err);
     throw err;
