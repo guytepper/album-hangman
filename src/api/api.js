@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { shuffleArray } from '../utils';
 import removeDescriptors from 'album-name-normalizer';
 
 function getAppleMusicAlbums(token, limit, offset) {
@@ -73,6 +74,7 @@ async function getAlbums(service, token) {
     const results = await Promise.all(promises);
     const formattedAlbums = normalizeServiceResponse(service, results);
     console.log(formattedAlbums);
+    return shuffleArray(formattedAlbums);
   } catch (err) {
     console.log(err);
     throw err;
