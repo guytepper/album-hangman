@@ -124,14 +124,9 @@ class Game extends Component {
     if (this.state.error) {
       return (
         <div className="error-container">
-          <h1>{this.state.error}</h1>
+          <h1>An error occured</h1>
           <Link to="/">
-            <Button>
-              Try again?{' '}
-              <span role="img" aria-label="Ogre">
-                👹
-              </span>
-            </Button>
+            <Button type="warning">Try again?</Button>
           </Link>
         </div>
       );
