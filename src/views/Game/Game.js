@@ -23,6 +23,7 @@ class Game extends Component {
     currentAlbum: {},
     currentGame: {},
     displaySettings: false,
+    albums: [],
     pendingAlbums: [],
     guessedAlbums: []
   };
@@ -80,7 +81,7 @@ class Game extends Component {
 
     // Allow starting a new game when the current game has ended and ENTER key has been pressed.
     if (keyCode === 13 && this.gameEnd()) {
-      this.setNewAlbum();
+      this.startNewGame();
     }
   };
 
@@ -94,6 +95,10 @@ class Game extends Component {
       }
       this.forceUpdate();
     }
+  };
+
+  startNewGame = () => {
+    this.setNewAlbum();
   };
 
   setSettingsDisplay = displaySettings => {
@@ -164,7 +169,7 @@ class Game extends Component {
             guessedLetters={this.state.currentGame.guessedLetters}
             failedLetters={this.state.currentGame.failedLetters}
             gameStatus={this.state.currentGame.status}
-            startNewGame={this.setNewAlbum}
+            startNewGame={this.startNewGame}
           />
         </div>
       </div>
