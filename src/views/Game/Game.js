@@ -23,7 +23,7 @@ class Game extends Component {
     currentAlbum: {},
     currentGame: {},
     displaySettings: false,
-    albums: [],
+    totalAlbums: 0,
     pendingAlbums: [],
     guessedAlbums: []
   };
@@ -57,7 +57,7 @@ class Game extends Component {
   async getAlbumList(service, token) {
     try {
       const pendingAlbums = await getAlbums(service, token);
-      this.setState({ pendingAlbums }, () => this.setNewAlbum());
+      this.setState({ pendingAlbums, totalAlbums: pendingAlbums.length }, () => this.setNewAlbum());
     } catch (err) {
       this.setState({ error: err.message });
     }
@@ -65,7 +65,7 @@ class Game extends Component {
 
   async setNewAlbum() {
     this.setState({ loadingAlbum: true });
-    const album = this.state.pendingAlbums[getRandomInt(0, this.state.pendingAlbums.length - 1)];
+    const album = this.state.pendingAlbums[0];
     const currentGame = new Hangman(album.name);
     this.setState({ currentGame, loadingAlbum: false });
     setTimeout(() => this.setState({ currentAlbum: album }), 425);
@@ -98,7 +98,13 @@ class Game extends Component {
   };
 
   startNewGame = () => {
-    this.setNewAlbum();
+    const { pendingAlbums, guessedAlbums, currentGame } = this.state;
+    if (currentGame.status === 'LOST') {
+      pendingAlbums.push(pendingAlbums.shift());
+    } else if (currentGame.status === 'WON') {
+      guessedAlbums.push(pendingAlbums.shift());
+    }
+    this.setState({ guessedAlbums, pendingAlbums }, this.setNewAlbum);
   };
 
   setSettingsDisplay = displaySettings => {
@@ -152,8 +158,8 @@ class Game extends Component {
         <GameHeader
           setSettingsDisplay={this.setSettingsDisplay}
           currentGame={this.state.currentGame}
-          totalAlbums={153}
-          albumsProgress={43}
+          totalAlbums={this.state.totalAlbums}
+          albumsProgress={this.state.guessedAlbums.length}
         />
         <div className="game-stage">
           <div className="game-stage-album-info">
