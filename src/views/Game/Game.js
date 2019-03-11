@@ -12,7 +12,7 @@ import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal';
 
-import { isKeyCodeAlphabetical, getRandomInt } from '../../utils';
+import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbums } from '../../api';
 import './Game.css';
 
