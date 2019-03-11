@@ -22,10 +22,11 @@ class Game extends Component {
     error: null,
     currentAlbum: {},
     currentGame: {},
-    displaySettings: false
+    displaySettings: false,
+    albums: [],
+    pendingAlbums: [],
+    guessedAlbums: []
   };
-
-  albums = [];
 
   componentDidMount() {
     const { service, location, history } = this.props;
@@ -55,9 +56,8 @@ class Game extends Component {
 
   async getAlbumList(service, token) {
     try {
-      const albums = await getAlbums(service, token);
-      this.albums = albums;
-      this.setNewAlbum();
+      const pendingAlbums = await getAlbums(service, token);
+      this.setState({ pendingAlbums }, () => this.setNewAlbum());
     } catch (err) {
       this.setState({ error: err.message });
     }
@@ -65,27 +65,10 @@ class Game extends Component {
 
   async setNewAlbum() {
     this.setState({ loadingAlbum: true });
-    const album = this.albums[getRandomInt(0, this.albums.length - 1)];
-
-    try {
-      // Long album names breaks the UI.
-      if (album.name.length > 30) {
-        return this.setNewAlbum();
-      }
-
-      const currentGame = new Hangman(album.name);
-
-      // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
-      if (currentGame.hiddenWord.indexOf('_') === -1) {
-        return this.setNewAlbum();
-      }
-
-      this.setState({ currentGame, loadingAlbum: false });
-      // Delay the album update so the blur effect will take place after the artwork changes.
-      setTimeout(() => this.setState({ currentAlbum: album }), 425);
-    } catch (err) {
-      this.setState({ error: err.message });
-    }
+    const album = this.state.pendingAlbums[getRandomInt(0, this.state.pendingAlbums.length - 1)];
+    const currentGame = new Hangman(album.name);
+    this.setState({ currentGame, loadingAlbum: false });
+    setTimeout(() => this.setState({ currentAlbum: album }), 425);
   }
 
   handleKeyboardPress = event => {

@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { shuffleArray } from '../utils';
+import { shuffleArray, createConcealArr } from '../utils';
 import removeDescriptors from 'album-name-normalizer';
+import { format } from 'upath';
 
 function getAppleMusicAlbums(token, limit, offset) {
   const musicKit = window.MusicKit.getInstance();
@@ -50,6 +51,18 @@ function normalizeServiceResponse(service, response) {
 }
 
 /**
+ * Filter out albums with long titles (more than 30 characters) / titles
+ * without alphabetical characters.
+ * @param {array} albums - Album objects array.
+ * @returns {array} Albums array without problematic albums.
+ */
+function filterAlbums(albums) {
+  return albums
+    .filter(album => createConcealArr(album.name).indexOf('_') !== -1)
+    .filter(album => album.name.length < 30);
+}
+
+/**
  * Get the user saved albums.
  * @param {string} service - The service being used (Spotify / Apple Music).
  * @param {string} token - The spotify user access token.
@@ -73,8 +86,8 @@ async function getAlbums(service, token) {
 
     const results = await Promise.all(promises);
     const formattedAlbums = normalizeServiceResponse(service, results);
-    console.log(formattedAlbums);
-    return shuffleArray(formattedAlbums);
+    const filteredAlbums = filterAlbums(formattedAlbums);
+    return shuffleArray(filteredAlbums);
   } catch (err) {
     console.log(err);
     throw err;
