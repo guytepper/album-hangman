@@ -12,7 +12,7 @@ import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal';
 
-import { isKeyCodeAlphabetical, getRandomInt } from '../../utils';
+import { isKeyCodeAlphabetical } from '../../utils';
 import { getAlbums } from '../../api';
 import './Game.css';
 
@@ -22,10 +22,11 @@ class Game extends Component {
     error: null,
     currentAlbum: {},
     currentGame: {},
-    displaySettings: false
+    displaySettings: false,
+    totalAlbums: 0,
+    pendingAlbums: [],
+    guessedAlbums: []
   };
-
-  albums = [];
 
   componentDidMount() {
     const { service, location, history } = this.props;
@@ -55,9 +56,8 @@ class Game extends Component {
 
   async getAlbumList(service, token) {
     try {
-      const albums = await getAlbums(service, token);
-      this.albums = albums;
-      this.setNewAlbum();
+      const pendingAlbums = await getAlbums(service, token);
+      this.setState({ pendingAlbums, totalAlbums: pendingAlbums.length }, () => this.setNewAlbum());
     } catch (err) {
       this.setState({ error: err.message });
     }
@@ -65,27 +65,10 @@ class Game extends Component {
 
   async setNewAlbum() {
     this.setState({ loadingAlbum: true });
-    const album = this.albums[getRandomInt(0, this.albums.length - 1)];
-
-    try {
-      // Long album names breaks the UI.
-      if (album.name.length > 30) {
-        return this.setNewAlbum();
-      }
-
-      const currentGame = new Hangman(album.name);
-
-      // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
-      if (currentGame.hiddenWord.indexOf('_') === -1) {
-        return this.setNewAlbum();
-      }
-
-      this.setState({ currentGame, loadingAlbum: false });
-      // Delay the album update so the blur effect will take place after the artwork changes.
-      setTimeout(() => this.setState({ currentAlbum: album }), 425);
-    } catch (err) {
-      this.setState({ error: err.message });
-    }
+    const album = this.state.pendingAlbums[0];
+    const currentGame = new Hangman(album.name);
+    this.setState({ currentGame, loadingAlbum: false });
+    setTimeout(() => this.setState({ currentAlbum: album }), 425);
   }
 
   handleKeyboardPress = event => {
@@ -115,7 +98,13 @@ class Game extends Component {
   };
 
   startNewGame = () => {
-    this.setNewAlbum();
+    const { pendingAlbums, guessedAlbums, currentGame } = this.state;
+    if (currentGame.status === 'LOST') {
+      pendingAlbums.push(pendingAlbums.shift());
+    } else if (currentGame.status === 'WON') {
+      guessedAlbums.push(pendingAlbums.shift());
+    }
+    this.setState({ guessedAlbums, pendingAlbums }, this.setNewAlbum);
   };
 
   setSettingsDisplay = displaySettings => {
@@ -135,14 +124,9 @@ class Game extends Component {
     if (this.state.error) {
       return (
         <div className="error-container">
-          <h1>{this.state.error}</h1>
+          <h1>An error occured</h1>
           <Link to="/">
-            <Button>
-              Try again?{' '}
-              <span role="img" aria-label="Ogre">
-                👹
-              </span>
-            </Button>
+            <Button type="warning">Try again?</Button>
           </Link>
         </div>
       );
@@ -169,8 +153,8 @@ class Game extends Component {
         <GameHeader
           setSettingsDisplay={this.setSettingsDisplay}
           currentGame={this.state.currentGame}
-          totalAlbums={153}
-          albumsProgress={43}
+          totalAlbums={this.state.totalAlbums}
+          albumsProgress={this.state.guessedAlbums.length}
         />
         <div className="game-stage">
           <div className="game-stage-album-info">

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Progress.css';
 
-function Progress({ type, progress, total }) {
+function Progress({ progress, total }) {
   const PERCENT = (progress / total) * 100;
 
   return (

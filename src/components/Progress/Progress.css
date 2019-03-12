@@ -22,6 +22,7 @@
   top: 0;
   left: 0;
   background-color: #41b074;
+  transition: width 0.5s ease-out;
 }
 
 .progress {
