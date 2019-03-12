@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { shuffleArray, createConcealArr } from '../utils';
 import removeDescriptors from 'album-name-normalizer';
-import { format } from 'upath';
 
 function getAppleMusicAlbums(token, limit, offset) {
   const musicKit = window.MusicKit.getInstance();
