@@ -59,6 +59,12 @@ function createConcealArr(word, concealChar = '_') {
  */
 function shuffleArray(arr) {
   const shuffledArr = [...arr].sort(() => Math.random() - 0.5);
+
+  // Make sure the arrays are not indentical
+  if (arr.toString() === shuffledArr.toString()) {
+    return shuffleArray(arr);
+  }
+
   return shuffledArr;
 }
 
