@@ -31,6 +31,12 @@
   user-select: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .landing-moving-albums-image {
+    animation: none;
+  }
+}
+
 .landing-game-info {
   display: flex;
   flex-direction: column;
