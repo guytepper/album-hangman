@@ -58,14 +58,15 @@ function createConcealArr(word, concealChar = '_') {
  * @returns {array} The shuffled array.
  */
 function shuffleArray(arr) {
-  const shuffledArr = [...arr].sort(() => Math.random() - 0.5);
-
-  // Make sure the arrays are not indentical
-  if (arr.toString() === shuffledArr.toString()) {
-    return shuffleArray(arr);
+  const newArr = [...arr];
+  let j, x, i;
+  for (i = newArr.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = newArr[i];
+    newArr[i] = newArr[j];
+    newArr[j] = x;
   }
-
-  return shuffledArr;
+  return newArr;
 }
 
 export { isAlphabetical, isKeyCodeAlphabetical, getRandomInt, splitArrayWords, shuffleArray, createConcealArr };
