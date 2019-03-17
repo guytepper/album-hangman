@@ -16,7 +16,6 @@ function Hearts({ lives }) {
 
   return (
     <div className="hearts-container">
-      <h3 className="hearts-title">Lives</h3>
       <div>
         <TransitionGroup>{hearts}</TransitionGroup>
       </div>

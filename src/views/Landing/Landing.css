@@ -31,6 +31,12 @@
   user-select: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .landing-moving-albums-image {
+    animation: none;
+  }
+}
+
 .landing-game-info {
   display: flex;
   flex-direction: column;
@@ -55,7 +61,7 @@
 .landing-footer {
   width: 100%;
   max-width: 280px;
-  margin: 0 auto;
+  margin: 0 auto 35px;
   color: #c0bfbf;
   font-weight: 300;
   text-align: center;
