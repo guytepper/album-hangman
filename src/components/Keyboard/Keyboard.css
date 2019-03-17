@@ -1,8 +1,16 @@
+/* .keyboard-container {
+  display: none;
+} */
+
+.user-is-touching .keyboard-container {
+  display: block;
+}
+
 .keyboard-container {
   position: relative;
   padding-top: 15px;
   border-top: 1px solid gainsboro;
-  margin: 0 auto;
+  margin: 0 auto 20px;
 }
 
 .keyboard {
@@ -35,7 +43,8 @@
 @media (min-width: 410px) {
   .keyboard-btn {
     min-width: 37px;
-    height: 37px;
+    height: 40px;
+    font-size: 15px;
   }
 }
 
@@ -86,9 +95,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #00498ded;
+  background-color: #2a2b30ed;
   border-radius: 5px;
   box-shadow: 0 0 20px #0000008a;
+  color: #fff;
 }
 
 @keyframes red-change {

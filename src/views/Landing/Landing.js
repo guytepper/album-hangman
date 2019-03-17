@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LoginButton from '../../components/LoginButton';
 import './Landing.css';
 
@@ -37,7 +37,11 @@ function Landing(props) {
     <div className="landing">
       <h1 className="landing-header">Do you really know your music?</h1>
       <div className="landing-moving-albums">
-        <img className="landing-moving-albums-image" src="./albums-carousel2.jpg" />
+        <img
+          className="landing-moving-albums-image"
+          src="./albums-carousel2.jpg"
+          alt="Blurred Album Artworks Carousel"
+        />
       </div>
       <div className="landing-game-info">
         <div className="landing-description">
@@ -64,7 +68,12 @@ function Landing(props) {
         </span>
         <span>
           Fork me on{' '}
-          <a className="landing-footer-github-link" target="_blank" href="https://github.com/guytepper/album-hangman">
+          <a
+            className="landing-footer-github-link"
+            target="_blank"
+            href="https://github.com/guytepper/album-hangman"
+            rel="noopener noreferrer"
+          >
             Github
           </a>
         </span>

@@ -1,16 +1,42 @@
 .game {
+  position: relative;
   display: flex;
-  min-height: 90vh;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+.settings-overlay {
+  position: fixed;
+  z-index: 11;
+  top: 90px;
 }
 
 .game-stage {
   display: flex;
   width: 100%;
+  min-height: calc(100vh - 50px);
   flex-direction: column;
   align-items: center;
+  /* justify-content: space-between; */
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.game-stage-album-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .game-current-album {
@@ -45,52 +71,17 @@
   justify-content: center;
 }
 
-/** Adapt layout for larger screens **/
-@media (min-width: 568px) {
-  .game {
-    flex-flow: row wrap;
-    padding-top: 25px;
-  }
-
-  .game-stage {
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 0 40px;
-  }
-
-  .game-stats {
-    justify-content: space-around;
-  }
-
-  .hidden-album-name {
-    /* flex-basis: 220px; */
-  }
-
-  .back-button {
-    top: 15px;
-    left: 15px;
-    width: 30px;
-    height: 30px;
-  }
-}
-
-@media (min-width: 1300px) {
-  .game {
-    padding-top: 50px;
-  }
-}
-
-/** Wide mobile devices on landscape mode **/
-@media (min-width: 568px) and (max-height: 500px) {
-  .hidden-album-name {
-    /* flex-basis: 500px; */
-  }
-}
-
 @media (min-width: 768px) {
   .game,
   .game-stage {
     flex-direction: column;
+  }
+}
+
+@media (min-width: 1024px) {
+  .game-stage {
+    justify-content: space-evenly;
+    margin-top: 0;
   }
 }
 
