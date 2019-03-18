@@ -12,7 +12,7 @@ import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal';
 
-import { isKeyCodeAlphabetical } from '../../utils';
+import { isKeyCodeAlphabetical, updateSavedAlbums, getSavedAlbums } from '../../utils';
 import { getAlbums } from '../../api';
 import './Game.css';
 
@@ -104,6 +104,8 @@ class Game extends Component {
     } else if (currentGame.status === 'WON') {
       guessedAlbums.push(pendingAlbums.shift());
     }
+    // Update local storage
+    updateSavedAlbums(pendingAlbums, guessedAlbums);
     this.setState({ guessedAlbums, pendingAlbums }, this.setNewAlbum);
   };
 
