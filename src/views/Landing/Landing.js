@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LoginButton from '../../components/LoginButton';
+import { getSavedAlbums } from '../../utils';
 import './Landing.css';
 
 let spotifyRedirectURL = 'http://localhost:3000/game/';
@@ -33,6 +34,12 @@ function selectAppleMusic(selectService, history) {
 }
 
 function Landing(props) {
+  const [hasProgress, setHasProgress] = useState(false);
+  const [pendingAlbums] = getSavedAlbums();
+  if (pendingAlbums.length > 0) {
+    setHasProgress(true);
+  }
+
   return (
     <div className="landing">
       <h1 className="landing-header">Do you really know your music?</h1>
@@ -54,12 +61,18 @@ function Landing(props) {
           </p>
         </div>
         <div className="login-buttons">
-          <LoginButton type="Spotify" icon="/spotify.svg" onClick={() => selectSpotify(props.selectService)} />
-          <LoginButton
-            type="Apple Music"
-            icon="/apple_music.png"
-            onClick={() => selectAppleMusic(props.selectService, props.history)}
-          />
+          {hasProgress ? (
+            <React.Fragment>
+              <LoginButton type="Spotify" icon="/spotify.svg" onClick={() => selectSpotify(props.selectService)} />
+              <LoginButton
+                type="Apple Music"
+                icon="/apple_music.png"
+                onClick={() => selectAppleMusic(props.selectService, props.history)}
+              />
+            </React.Fragment>
+          ) : (
+            <span>HAS PROGRESS!</span>
+          )}
         </div>
       </div>
       <footer className="landing-footer">
