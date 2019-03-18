@@ -69,4 +69,24 @@ function shuffleArray(arr) {
   return newArr;
 }
 
-export { isAlphabetical, isKeyCodeAlphabetical, getRandomInt, splitArrayWords, shuffleArray, createConcealArr };
+function updateSavedAlbums(pendingAlbums, guessedAlbums) {
+  localStorage.setItem('pendingAlbums', JSON.stringify(pendingAlbums));
+  localStorage.setItem('guessedAlbums', JSON.stringify(guessedAlbums));
+}
+
+function getSavedAlbums() {
+  const pendingAlbums = JSON.parse(localStorage.getItem('pendingAlbums'));
+  const guessedAlbums = JSON.parse(localStorage.getItem('guessedAlbums'));
+  return [pendingAlbums, guessedAlbums];
+}
+
+export {
+  isAlphabetical,
+  isKeyCodeAlphabetical,
+  getRandomInt,
+  splitArrayWords,
+  shuffleArray,
+  createConcealArr,
+  updateSavedAlbums,
+  getSavedAlbums
+};
