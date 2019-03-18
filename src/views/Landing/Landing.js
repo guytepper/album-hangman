@@ -17,7 +17,7 @@ function selectSpotify(selectService) {
   );
 }
 
-function selectAppleMusic(selectService) {
+function selectAppleMusic(selectService, history) {
   selectService('appleMusic');
   window.MusicKit.configure({
     developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
@@ -28,7 +28,7 @@ function selectAppleMusic(selectService) {
   });
   const musicKit = window.MusicKit.getInstance();
   musicKit.authorize().then(() => {
-    this.props.history.push('/game/');
+    history.push('/game/');
   });
 }
 
@@ -58,7 +58,7 @@ function Landing(props) {
           <LoginButton
             type="Apple Music"
             icon="/apple_music.png"
-            onClick={() => selectAppleMusic(props.selectService)}
+            onClick={() => selectAppleMusic(props.selectService, props.history)}
           />
         </div>
       </div>
