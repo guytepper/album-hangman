@@ -75,8 +75,14 @@ function updateSavedAlbums(pendingAlbums, guessedAlbums) {
 }
 
 function getSavedAlbums() {
-  const pendingAlbums = JSON.parse(localStorage.getItem('pendingAlbums'));
-  const guessedAlbums = JSON.parse(localStorage.getItem('guessedAlbums'));
+  let pendingAlbums = [];
+  let guessedAlbums = [];
+
+  if (localStorage.getItem('pendingAlbums') !== null && localStorage.getItem('guessedAlbums') !== null) {
+    pendingAlbums = JSON.parse(localStorage.getItem('pendingAlbums'));
+    guessedAlbums = JSON.parse(localStorage.getItem('guessedAlbums'));
+  }
+
   return [pendingAlbums, guessedAlbums];
 }
 
