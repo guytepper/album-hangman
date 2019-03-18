@@ -10,9 +10,9 @@ function GameHeader(props) {
       <ProgressBar type="thin" total={props.totalAlbums} progress={props.albumsProgress} />
       <div className="game-top-bar-settings-icon" onClick={() => props.setSettingsDisplay(true)}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
-          <g fill="none" fill-rule="evenodd">
+          <g fill="none" fillRule="evenodd">
             <circle cx="12.5" cy="12.5" r="12.5" fill="#000" />
-            <g stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)">
+            <g stroke="#FFF" strokeLinecap="round" strokeLinejoin="round" transform="translate(5 5)">
               <circle className="settings-icon-gear" cx="7.721" cy="7.721" r="1.985" />
               <path
                 className="settings-icon-gear"
