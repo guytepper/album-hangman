@@ -29,17 +29,25 @@ class Game extends Component {
   };
 
   componentDidMount() {
-    const { service, location, history } = this.props;
-    if (service === 'spotify' && location.hash === '') history.push('/');
-    if (service === 'spotify') {
-      // Grab access token from url
-      const parsedURL = queryString.parse(location.hash);
-      this.getAlbumList('spotify', parsedURL.access_token);
+    const [pendingAlbums, guessedAlbums] = getSavedAlbums();
+    if (pendingAlbums !== [] && guessedAlbums !== []) {
+      this.setState(
+        { pendingAlbums, guessedAlbums, totalAlbums: pendingAlbums.length + guessedAlbums.length },
+        this.setNewAlbum
+      );
     } else {
-      const musicKit = window.MusicKit.getInstance();
-      musicKit.authorize().then(() => {
-        this.getAlbumList('appleMusic');
-      });
+      const { service, location, history } = this.props;
+      if (service === 'spotify' && location.hash === '') history.push('/');
+      if (service === 'spotify') {
+        // Grab access token from url
+        const parsedURL = queryString.parse(location.hash);
+        this.getAlbumList('spotify', parsedURL.access_token);
+      } else {
+        const musicKit = window.MusicKit.getInstance();
+        musicKit.authorize().then(() => {
+          this.getAlbumList('appleMusic');
+        });
+      }
     }
 
     window.addEventListener('keydown', this.handleKeyboardPress);
