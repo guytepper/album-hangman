@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoginButton from '../../components/LoginButton';
-import { getSavedAlbums } from '../../utils';
+import { getSavedAlbums, deleteSavedAlbums } from '../../utils';
 import './Landing.css';
 
 let spotifyRedirectURL = 'http://localhost:3000/game/';
@@ -69,12 +69,18 @@ function Landing(props) {
               <LoginButton
                 text="Continue Playing"
                 icon="/refresh.svg"
-                onClick={() => selectSpotify(props.selectService)}
+                onClick={() => {
+                  props.selectService('cache');
+                  props.history.push('/game/');
+                }}
               />
               <LoginButton
                 text="Delete Progress"
                 icon="/delete.svg"
-                onClick={() => selectAppleMusic(props.selectService, props.history)}
+                onClick={() => {
+                  deleteSavedAlbums();
+                  setHasProgress(false);
+                }}
               />
             </React.Fragment>
           ) : (
