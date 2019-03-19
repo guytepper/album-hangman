@@ -68,6 +68,7 @@ class Game extends Component {
       const pendingAlbums = await getAlbums(service, token);
       this.setState({ pendingAlbums, totalAlbums: pendingAlbums.length }, () => this.setNewAlbum());
     } catch (err) {
+      console.log(err);
       this.setState({ error: err.message });
     }
   }
@@ -135,7 +136,7 @@ class Game extends Component {
     if (this.state.error) {
       return (
         <div className="error-container">
-          <h1>An error occured</h1>
+          <h1>{this.state.error}</h1>
           <Link to="/">
             <Button type="warning">Try again?</Button>
           </Link>
