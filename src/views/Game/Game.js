@@ -30,7 +30,7 @@ class Game extends Component {
 
   componentDidMount() {
     const [pendingAlbums, guessedAlbums] = getSavedAlbums();
-    if (pendingAlbums !== [] && guessedAlbums !== []) {
+    if (pendingAlbums.length > 0 && guessedAlbums.length > 0) {
       this.setState(
         { pendingAlbums, guessedAlbums, totalAlbums: pendingAlbums.length + guessedAlbums.length },
         this.setNewAlbum
