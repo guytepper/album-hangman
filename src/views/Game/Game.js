@@ -29,7 +29,8 @@ class Game extends Component {
   };
 
   componentDidMount() {
-    const { service, location, history } = this.props;
+    const { location, history } = this.props;
+    const service = localStorage.getItem('service');
 
     switch (service) {
       case 'spotify':

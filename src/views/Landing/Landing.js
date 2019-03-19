@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 function selectSpotify(selectService) {
-  selectService('spotify');
+  localStorage.setItem('service', 'spotify');
   window.open(
     `https://accounts.spotify.com/authorize?client_id=${
       process.env.REACT_APP_SPOTIFY_ID
@@ -19,7 +19,7 @@ function selectSpotify(selectService) {
 }
 
 function selectAppleMusic(selectService, history) {
-  selectService('appleMusic');
+  localStorage.setItem('service', 'appleMusic');
   window.MusicKit.configure({
     developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
     app: {
@@ -36,6 +36,10 @@ function selectAppleMusic(selectService, history) {
 function Landing(props) {
   const [hasProgress, setHasProgress] = useState(false);
   const [pendingAlbums] = getSavedAlbums();
+
+  useEffect(() => {
+    localStorage.setItem('service', 'none');
+  }, []);
 
   useEffect(() => {
     if (pendingAlbums.length > 0) {
@@ -70,7 +74,7 @@ function Landing(props) {
                 text="Continue Playing"
                 icon="/refresh.svg"
                 onClick={() => {
-                  props.selectService('cache');
+                  localStorage.setItem('service', 'cache');
                   props.history.push('/game/');
                 }}
               />
@@ -78,8 +82,10 @@ function Landing(props) {
                 text="Delete Progress"
                 icon="/delete.svg"
                 onClick={() => {
-                  deleteSavedAlbums();
-                  setHasProgress(false);
+                  if (window.confirm('Do you really want to delete your progress?')) {
+                    deleteSavedAlbums();
+                    setHasProgress(false);
+                  }
                 }}
               />
             </React.Fragment>
