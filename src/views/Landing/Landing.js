@@ -68,9 +68,13 @@ function Landing(props) {
             <span>HAS PROGRESS!</span>
           ) : (
             <React.Fragment>
-              <LoginButton type="Spotify" icon="/spotify.svg" onClick={() => selectSpotify(props.selectService)} />
               <LoginButton
-                type="Apple Music"
+                text="Connect with Spotify"
+                icon="/spotify.svg"
+                onClick={() => selectSpotify(props.selectService)}
+              />
+              <LoginButton
+                text="Connect with Apple Music"
                 icon="/apple_music.png"
                 onClick={() => selectAppleMusic(props.selectService, props.history)}
               />
