@@ -65,7 +65,18 @@ function Landing(props) {
         </div>
         <div className="login-buttons">
           {hasProgress ? (
-            <span>HAS PROGRESS!</span>
+            <React.Fragment>
+              <LoginButton
+                text="Continue Playing"
+                icon="/refresh.svg"
+                onClick={() => selectSpotify(props.selectService)}
+              />
+              <LoginButton
+                text="Delete Progress"
+                icon="/delete.svg"
+                onClick={() => selectAppleMusic(props.selectService, props.history)}
+              />
+            </React.Fragment>
           ) : (
             <React.Fragment>
               <LoginButton
