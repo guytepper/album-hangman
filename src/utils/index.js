@@ -86,6 +86,10 @@ function getSavedAlbums() {
   return [pendingAlbums, guessedAlbums];
 }
 
+function deleteSavedAlbums() {
+  localStorage.clear();
+}
+
 export {
   isAlphabetical,
   isKeyCodeAlphabetical,
@@ -94,5 +98,6 @@ export {
   shuffleArray,
   createConcealArr,
   updateSavedAlbums,
-  getSavedAlbums
+  getSavedAlbums,
+  deleteSavedAlbums
 };
