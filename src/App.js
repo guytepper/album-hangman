@@ -8,7 +8,7 @@ window.addEventListener('touchstart', function onFirstTouch() {
 });
 
 function App() {
-  const [service, setService] = useState('spotify');
+  const [service, setService] = useState('none');
 
   return (
     <Router>
