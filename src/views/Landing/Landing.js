@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginButton from '../../components/LoginButton';
 import { getSavedAlbums } from '../../utils';
 import './Landing.css';
@@ -36,9 +36,12 @@ function selectAppleMusic(selectService, history) {
 function Landing(props) {
   const [hasProgress, setHasProgress] = useState(false);
   const [pendingAlbums] = getSavedAlbums();
-  if (pendingAlbums.length > 0) {
-    setHasProgress(true);
-  }
+
+  useEffect(() => {
+    if (pendingAlbums.length > 0) {
+      setHasProgress(true);
+    }
+  });
 
   return (
     <div className="landing">
@@ -62,6 +65,8 @@ function Landing(props) {
         </div>
         <div className="login-buttons">
           {hasProgress ? (
+            <span>HAS PROGRESS!</span>
+          ) : (
             <React.Fragment>
               <LoginButton type="Spotify" icon="/spotify.svg" onClick={() => selectSpotify(props.selectService)} />
               <LoginButton
@@ -70,8 +75,6 @@ function Landing(props) {
                 onClick={() => selectAppleMusic(props.selectService, props.history)}
               />
             </React.Fragment>
-          ) : (
-            <span>HAS PROGRESS!</span>
           )}
         </div>
       </div>
