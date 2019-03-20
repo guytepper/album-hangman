@@ -14,6 +14,11 @@
   width: 15px;
   height: 15px;
   margin: 0 1.25px;
+  fill: #e00000;
+}
+
+.heart-dead {
+  fill: grey;
 }
 
 @media (min-width: 1024px) {
