@@ -15,6 +15,7 @@
   height: 15px;
   margin: 0 1.25px;
   fill: #e00000;
+  transition: fill 0.5s;
 }
 
 .heart-dead {
@@ -25,6 +26,7 @@
   .hearts-container {
     width: 130px;
   }
+
   .heart {
     width: 30px;
     height: 30px;

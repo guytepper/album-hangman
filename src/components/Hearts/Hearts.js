@@ -1,15 +1,13 @@
 import React from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './Hearts.css';
 
 function Hearts({ lives }) {
   const hearts = [];
-  let deadHearts = 4 - lives; // How many dead hearts to display
 
   // For each live, display an heart icon
-  for (let i = 0; i < 4; i++) {
+  for (let i = 4; i > 0; i--) {
     let heartClassName = 'heart';
-    if (lives - i > deadHearts) {
+    if (i <= 4 - lives) {
       heartClassName += ' heart-dead';
     }
     hearts.push(
@@ -24,9 +22,7 @@ function Hearts({ lives }) {
 
   return (
     <div className="hearts-container">
-      <div>
-        <TransitionGroup>{hearts}</TransitionGroup>
-      </div>
+      <div>{hearts}</div>
     </div>
   );
 }
