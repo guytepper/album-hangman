@@ -14,12 +14,19 @@
   width: 15px;
   height: 15px;
   margin: 0 1.25px;
+  fill: #e00000;
+  transition: fill 0.5s;
+}
+
+.heart-grey {
+  fill: grey;
 }
 
 @media (min-width: 1024px) {
   .hearts-container {
     width: 130px;
   }
+
   .heart {
     width: 30px;
     height: 30px;
