@@ -9,7 +9,7 @@ const rowC = 'ZXCVBNM'.split('');
 function playAgainBtn(startNewGame) {
   return (
     <Button onClick={startNewGame} type="success">
-      Play Again ⏎
+      Next Album →
     </Button>
   );
 }
@@ -18,7 +18,7 @@ function gameEndMessage(gameStatus) {
   if (gameStatus === 'WON') {
     return (
       <h1 className="game-status-msg">
-        You won!{' '}
+        Correct!{' '}
         <span role="img" aria-label="Party Popper">
           🎉
         </span>
@@ -29,7 +29,7 @@ function gameEndMessage(gameStatus) {
   if (gameStatus === 'LOST') {
     return (
       <h1 className="game-status-msg">
-        You lost{' '}
+        Failed{' '}
         <span role="img" aria-label="Sneezing">
           🤧
         </span>

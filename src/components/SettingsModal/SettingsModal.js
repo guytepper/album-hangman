@@ -2,11 +2,13 @@ import React from 'react';
 import Button from '../Button';
 import './SettingsModal.css';
 
-function SettingsModal({ className, setSettingsDisplay }) {
+function SettingsModal({ className, setSettingsDisplay, resetProgress }) {
   return (
     <div className={`settings-modal ${className}`}>
       <div className="settings-modal-buttons">
-        <Button type="warning">Reset Progress</Button>
+        <Button type="warning" onClick={resetProgress}>
+          Reset Progress
+        </Button>
         <Button type="warning">Logout</Button>
         <Button type="success" onClick={() => setSettingsDisplay(false)}>
           Close

@@ -90,6 +90,16 @@ function deleteSavedAlbums() {
   localStorage.clear();
 }
 
+function resetProgress() {
+  const pendingAlbums = JSON.parse(localStorage.getItem('pendingAlbums'));
+  const guessedAlbums = JSON.parse(localStorage.getItem('guessedAlbums'));
+  pendingAlbums.concat(guessedAlbums);
+
+  localStorage.clear();
+  localStorage.setItem('pendingAlbums', JSON.stringify(pendingAlbums));
+  localStorage.setItem('guessedAlbums', JSON.stringify([]));
+}
+
 export {
   isAlphabetical,
   isKeyCodeAlphabetical,
@@ -99,5 +109,6 @@ export {
   createConcealArr,
   updateSavedAlbums,
   getSavedAlbums,
-  deleteSavedAlbums
+  deleteSavedAlbums,
+  resetProgress
 };

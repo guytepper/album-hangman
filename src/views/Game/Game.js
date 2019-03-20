@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import { Link } from 'react-router-dom';
 import Hangman from 'hangman-game-engine';
 import ReactLoading from 'react-loading';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
@@ -12,7 +13,7 @@ import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal';
 
-import { isKeyCodeAlphabetical, updateSavedAlbums, getSavedAlbums } from '../../utils';
+import { isKeyCodeAlphabetical, updateSavedAlbums, getSavedAlbums, resetProgress } from '../../utils';
 import { getAlbums } from '../../api';
 import './Game.css';
 
@@ -44,9 +45,7 @@ class Game extends Component {
         });
         break;
       case 'cache':
-        const [pendingAlbums, guessedAlbums] = getSavedAlbums();
-        const totalAlbums = pendingAlbums.length + guessedAlbums.length;
-        this.setState({ pendingAlbums, guessedAlbums, totalAlbums }, this.setNewAlbum);
+        this.loadFromCache();
         break;
       default:
         history.push('/');
@@ -63,6 +62,12 @@ class Game extends Component {
     // Remove event listener on page redirection
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
+
+  loadFromCache = () => {
+    const [pendingAlbums, guessedAlbums] = getSavedAlbums();
+    const totalAlbums = pendingAlbums.length + guessedAlbums.length;
+    this.setState({ pendingAlbums, guessedAlbums, totalAlbums }, this.setNewAlbum);
+  };
 
   async getAlbumList(service, token) {
     try {
@@ -124,6 +129,15 @@ class Game extends Component {
     this.setState({ displaySettings });
   };
 
+  resetGameProgress = () => {
+    if (window.confirm('Are you sure you want to reset your progress?')) {
+      resetProgress();
+      this.loadFromCache();
+      alert('Your progress has been deleted.');
+      this.setState({ displaySettings: false });
+    }
+  };
+
   isGameActive = () => {
     const { currentGame, loadingAlbum } = this.state;
     return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
@@ -134,34 +148,38 @@ class Game extends Component {
   };
 
   render() {
-    if (this.state.error) {
-      return (
-        <div className="error-container">
-          <h1>{this.state.error}</h1>
-          <Link to="/">
-            <Button type="warning">Try again?</Button>
-          </Link>
-        </div>
-      );
-    }
+    let currentComponent = null;
+    let componentKey = 0;
 
-    // Display loading only on initial load
-    if (!this.state.currentAlbum.name) {
-      return (
-        <div className="loading-state">
-          <ReactLoading type="bubbles" height={150} width={150} />
-          <h1 style={{ marginTop: 0 }}>Loading...</h1>
-        </div>
-      );
-    }
+    const ErrorComponent = (
+      <div className="error-container">
+        <h1>{this.state.error}</h1>
+        <Link to="/">
+          <Button type="warning">Try again?</Button>
+        </Link>
+      </div>
+    );
 
-    return (
+    const LoadingComponent = (
+      <div className="loading-state">
+        <ReactLoading type="bubbles" color="black" height={150} width={150} />
+        <h1 style={{ marginTop: 0 }}>Loading...</h1>
+      </div>
+    );
+
+    const GameComponent = (
       <div className="game">
         {this.state.displaySettings && (
-          <React.Fragment>
-            <div className="overlay" />
-            <SettingsModal className="settings-overlay" setSettingsDisplay={this.setSettingsDisplay} />
-          </React.Fragment>
+          <CSSTransition classNames="fade" timeout={300}>
+            <React.Fragment>
+              <div className="overlay" />
+              <SettingsModal
+                className="settings-overlay"
+                setSettingsDisplay={this.setSettingsDisplay}
+                resetProgress={this.resetGameProgress}
+              />
+            </React.Fragment>
+          </CSSTransition>
         )}
         <GameHeader
           setSettingsDisplay={this.setSettingsDisplay}
@@ -187,6 +205,25 @@ class Game extends Component {
           />
         </div>
       </div>
+    );
+
+    if (this.state.error) {
+      currentComponent = ErrorComponent;
+      componentKey = 1;
+    } else if (!this.state.currentAlbum.name) {
+      currentComponent = LoadingComponent;
+      componentKey = 2;
+    } else {
+      currentComponent = GameComponent;
+      componentKey = 3;
+    }
+
+    return (
+      <TransitionGroup>
+        <CSSTransition key={componentKey} classNames="fade" timeout={300}>
+          {currentComponent}
+        </CSSTransition>
+      </TransitionGroup>
     );
   }
 }
