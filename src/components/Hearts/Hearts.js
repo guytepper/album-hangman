@@ -8,7 +8,7 @@ function Hearts({ lives }) {
   for (let i = 4; i > 0; i--) {
     let heartClassName = 'heart';
     if (i <= 4 - lives) {
-      heartClassName += ' heart-dead';
+      heartClassName += ' heart-grey';
     }
     hearts.push(
       <svg className={heartClassName} viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg" key={i}>
