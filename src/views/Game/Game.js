@@ -133,6 +133,7 @@ class Game extends Component {
     if (window.confirm('Are you sure you want to reset your progress?')) {
       resetProgress();
       this.loadFromCache();
+      alert('Your progress has been deleted.');
       this.setState({ displaySettings: false });
     }
   };
