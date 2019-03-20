@@ -84,11 +84,3 @@
     margin-top: 0;
   }
 }
-
-/** Tablets on landscape **/
-
-/* @media (min-width: 1024px) and (max-height: 768px) {
-  .game-stage {
-    flex-direction: row;
-  }
-} */

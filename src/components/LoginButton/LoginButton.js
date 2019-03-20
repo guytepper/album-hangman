@@ -1,11 +1,11 @@
 import React from 'react';
 import './LoginButton.css';
 
-function LoginButton({ type, icon, onClick }) {
+function LoginButton({ text, icon, onClick }) {
   return (
     <button className="login-button" onClick={onClick}>
-      <img alt={type} src={icon} className="login-button-logo" />
-      <span>Connect with {type}</span>
+      <img alt="" src={icon} className="login-button-logo" />
+      <span>{text}</span>
     </button>
   );
 }

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginButton from '../../components/LoginButton';
+import { getSavedAlbums, deleteSavedAlbums } from '../../utils';
 import './Landing.css';
 
 let spotifyRedirectURL = 'http://localhost:3000/game/';
@@ -8,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 function selectSpotify(selectService) {
-  selectService('spotify');
+  localStorage.setItem('service', 'spotify');
   window.open(
     `https://accounts.spotify.com/authorize?client_id=${
       process.env.REACT_APP_SPOTIFY_ID
@@ -17,8 +18,8 @@ function selectSpotify(selectService) {
   );
 }
 
-function selectAppleMusic(selectService) {
-  selectService('appleMusic');
+function selectAppleMusic(selectService, history) {
+  localStorage.setItem('service', 'appleMusic');
   window.MusicKit.configure({
     developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
     app: {
@@ -28,11 +29,24 @@ function selectAppleMusic(selectService) {
   });
   const musicKit = window.MusicKit.getInstance();
   musicKit.authorize().then(() => {
-    this.props.history.push('/game/');
+    history.push('/game/');
   });
 }
 
 function Landing(props) {
+  const [hasProgress, setHasProgress] = useState(false);
+  const [pendingAlbums] = getSavedAlbums();
+
+  useEffect(() => {
+    localStorage.setItem('service', 'none');
+  }, []);
+
+  useEffect(() => {
+    if (pendingAlbums.length > 0) {
+      setHasProgress(true);
+    }
+  });
+
   return (
     <div className="landing">
       <h1 className="landing-header">Do you really know your music?</h1>
@@ -54,12 +68,41 @@ function Landing(props) {
           </p>
         </div>
         <div className="login-buttons">
-          <LoginButton type="Spotify" icon="/spotify.svg" onClick={() => selectSpotify(props.selectService)} />
-          <LoginButton
-            type="Apple Music"
-            icon="/apple_music.png"
-            onClick={() => selectAppleMusic(props.selectService)}
-          />
+          {hasProgress ? (
+            <React.Fragment>
+              <LoginButton
+                text="Continue Playing"
+                icon="/refresh.svg"
+                onClick={() => {
+                  localStorage.setItem('service', 'cache');
+                  props.history.push('/game/');
+                }}
+              />
+              <LoginButton
+                text="Delete Progress"
+                icon="/delete.svg"
+                onClick={() => {
+                  if (window.confirm('Do you really want to delete your progress?')) {
+                    deleteSavedAlbums();
+                    setHasProgress(false);
+                  }
+                }}
+              />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <LoginButton
+                text="Connect with Spotify"
+                icon="/spotify.svg"
+                onClick={() => selectSpotify(props.selectService)}
+              />
+              <LoginButton
+                text="Connect with Apple Music"
+                icon="/apple_music.png"
+                onClick={() => selectAppleMusic(props.selectService, props.history)}
+              />
+            </React.Fragment>
+          )}
         </div>
       </div>
       <footer className="landing-footer">

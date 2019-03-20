@@ -12,7 +12,7 @@ import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal';
 
-import { isKeyCodeAlphabetical } from '../../utils';
+import { isKeyCodeAlphabetical, updateSavedAlbums, getSavedAlbums } from '../../utils';
 import { getAlbums } from '../../api';
 import './Game.css';
 
@@ -29,17 +29,27 @@ class Game extends Component {
   };
 
   componentDidMount() {
-    const { service, location, history } = this.props;
-    if (service === 'spotify' && location.hash === '') history.push('/');
-    if (service === 'spotify') {
-      // Grab access token from url
-      const parsedURL = queryString.parse(location.hash);
-      this.getAlbumList('spotify', parsedURL.access_token);
-    } else {
-      const musicKit = window.MusicKit.getInstance();
-      musicKit.authorize().then(() => {
-        this.getAlbumList('appleMusic');
-      });
+    const { location, history } = this.props;
+    const service = localStorage.getItem('service');
+
+    switch (service) {
+      case 'spotify':
+        const parsedURL = queryString.parse(location.hash);
+        this.getAlbumList('spotify', parsedURL.access_token);
+        break;
+      case 'appleMusic':
+        const musicKit = window.MusicKit.getInstance();
+        musicKit.authorize().then(() => {
+          this.getAlbumList('appleMusic');
+        });
+        break;
+      case 'cache':
+        const [pendingAlbums, guessedAlbums] = getSavedAlbums();
+        const totalAlbums = pendingAlbums.length + guessedAlbums.length;
+        this.setState({ pendingAlbums, guessedAlbums, totalAlbums }, this.setNewAlbum);
+        break;
+      default:
+        history.push('/');
     }
 
     window.addEventListener('keydown', this.handleKeyboardPress);
@@ -59,6 +69,7 @@ class Game extends Component {
       const pendingAlbums = await getAlbums(service, token);
       this.setState({ pendingAlbums, totalAlbums: pendingAlbums.length }, () => this.setNewAlbum());
     } catch (err) {
+      console.log(err);
       this.setState({ error: err.message });
     }
   }
@@ -104,6 +115,8 @@ class Game extends Component {
     } else if (currentGame.status === 'WON') {
       guessedAlbums.push(pendingAlbums.shift());
     }
+    // Update local storage
+    updateSavedAlbums(pendingAlbums, guessedAlbums);
     this.setState({ guessedAlbums, pendingAlbums }, this.setNewAlbum);
   };
 
@@ -124,7 +137,7 @@ class Game extends Component {
     if (this.state.error) {
       return (
         <div className="error-container">
-          <h1>An error occured</h1>
+          <h1>{this.state.error}</h1>
           <Link to="/">
             <Button type="warning">Try again?</Button>
           </Link>

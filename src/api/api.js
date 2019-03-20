@@ -88,7 +88,10 @@ async function getAlbums(service, token) {
     const filteredAlbums = filterAlbums(formattedAlbums);
     return shuffleArray(filteredAlbums);
   } catch (err) {
-    console.log(err);
+    if (err.response.data.error.message) {
+      throw new Error(err.response.data.error.message);
+    }
+
     throw err;
   }
 }

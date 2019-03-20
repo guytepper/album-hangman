@@ -69,4 +69,35 @@ function shuffleArray(arr) {
   return newArr;
 }
 
-export { isAlphabetical, isKeyCodeAlphabetical, getRandomInt, splitArrayWords, shuffleArray, createConcealArr };
+function updateSavedAlbums(pendingAlbums, guessedAlbums) {
+  localStorage.setItem('pendingAlbums', JSON.stringify(pendingAlbums));
+  localStorage.setItem('guessedAlbums', JSON.stringify(guessedAlbums));
+}
+
+function getSavedAlbums() {
+  let pendingAlbums = [];
+  let guessedAlbums = [];
+
+  if (localStorage.getItem('pendingAlbums') !== null && localStorage.getItem('guessedAlbums') !== null) {
+    pendingAlbums = JSON.parse(localStorage.getItem('pendingAlbums'));
+    guessedAlbums = JSON.parse(localStorage.getItem('guessedAlbums'));
+  }
+
+  return [pendingAlbums, guessedAlbums];
+}
+
+function deleteSavedAlbums() {
+  localStorage.clear();
+}
+
+export {
+  isAlphabetical,
+  isKeyCodeAlphabetical,
+  getRandomInt,
+  splitArrayWords,
+  shuffleArray,
+  createConcealArr,
+  updateSavedAlbums,
+  getSavedAlbums,
+  deleteSavedAlbums
+};
