@@ -13,7 +13,7 @@ import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal';
 
-import { isKeyCodeAlphabetical, updateSavedAlbums, getSavedAlbums } from '../../utils';
+import { isKeyCodeAlphabetical, updateSavedAlbums, getSavedAlbums, resetProgress } from '../../utils';
 import { getAlbums } from '../../api';
 import './Game.css';
 
@@ -45,9 +45,7 @@ class Game extends Component {
         });
         break;
       case 'cache':
-        const [pendingAlbums, guessedAlbums] = getSavedAlbums();
-        const totalAlbums = pendingAlbums.length + guessedAlbums.length;
-        this.setState({ pendingAlbums, guessedAlbums, totalAlbums }, this.setNewAlbum);
+        this.loadFromCache();
         break;
       default:
         history.push('/');
@@ -64,6 +62,12 @@ class Game extends Component {
     // Remove event listener on page redirection
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
+
+  loadFromCache = () => {
+    const [pendingAlbums, guessedAlbums] = getSavedAlbums();
+    const totalAlbums = pendingAlbums.length + guessedAlbums.length;
+    this.setState({ pendingAlbums, guessedAlbums, totalAlbums }, this.setNewAlbum);
+  };
 
   async getAlbumList(service, token) {
     try {
@@ -125,6 +129,14 @@ class Game extends Component {
     this.setState({ displaySettings });
   };
 
+  resetGameProgress = () => {
+    if (window.confirm('Are you sure you want to reset your progress?')) {
+      resetProgress();
+      this.loadFromCache();
+      this.setState({ displaySettings: false });
+    }
+  };
+
   isGameActive = () => {
     const { currentGame, loadingAlbum } = this.state;
     return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
@@ -157,10 +169,16 @@ class Game extends Component {
     const GameComponent = (
       <div className="game">
         {this.state.displaySettings && (
-          <React.Fragment>
-            <div className="overlay" />
-            <SettingsModal className="settings-overlay" setSettingsDisplay={this.setSettingsDisplay} />
-          </React.Fragment>
+          <CSSTransition classNames="fade" timeout={300}>
+            <React.Fragment>
+              <div className="overlay" />
+              <SettingsModal
+                className="settings-overlay"
+                setSettingsDisplay={this.setSettingsDisplay}
+                resetProgress={this.resetGameProgress}
+              />
+            </React.Fragment>
+          </CSSTransition>
         )}
         <GameHeader
           setSettingsDisplay={this.setSettingsDisplay}
