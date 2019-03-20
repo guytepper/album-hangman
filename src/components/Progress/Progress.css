@@ -42,6 +42,12 @@
   display: none;
 }
 
+@media (min-width: 360px) {
+  .progress-container {
+    margin-right: 14px;
+  }
+}
+
 @media (min-width: 1024px) {
   .progress-container {
     margin-right: 87px;
