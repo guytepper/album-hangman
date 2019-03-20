@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import { Link } from 'react-router-dom';
 import Hangman from 'hangman-game-engine';
 import ReactLoading from 'react-loading';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
@@ -134,28 +135,26 @@ class Game extends Component {
   };
 
   render() {
-    if (this.state.error) {
-      return (
-        <div className="error-container">
-          <h1>{this.state.error}</h1>
-          <Link to="/">
-            <Button type="warning">Try again?</Button>
-          </Link>
-        </div>
-      );
-    }
+    let currentComponent = null;
+    let componentKey = 0;
 
-    // Display loading only on initial load
-    if (!this.state.currentAlbum.name) {
-      return (
-        <div className="loading-state">
-          <ReactLoading type="bubbles" height={150} width={150} />
-          <h1 style={{ marginTop: 0 }}>Loading...</h1>
-        </div>
-      );
-    }
+    const ErrorComponent = (
+      <div className="error-container">
+        <h1>{this.state.error}</h1>
+        <Link to="/">
+          <Button type="warning">Try again?</Button>
+        </Link>
+      </div>
+    );
 
-    return (
+    const LoadingComponent = (
+      <div className="loading-state">
+        <ReactLoading type="bubbles" color="black" height={150} width={150} />
+        <h1 style={{ marginTop: 0 }}>Loading...</h1>
+      </div>
+    );
+
+    const GameComponent = (
       <div className="game">
         {this.state.displaySettings && (
           <React.Fragment>
@@ -187,6 +186,25 @@ class Game extends Component {
           />
         </div>
       </div>
+    );
+
+    if (this.state.error) {
+      currentComponent = ErrorComponent;
+      componentKey = 1;
+    } else if (!this.state.currentAlbum.name) {
+      currentComponent = LoadingComponent;
+      componentKey = 2;
+    } else {
+      currentComponent = GameComponent;
+      componentKey = 3;
+    }
+
+    return (
+      <TransitionGroup>
+        <CSSTransition key={componentKey} classNames="fade" timeout={300}>
+          {currentComponent}
+        </CSSTransition>
+      </TransitionGroup>
     );
   }
 }
