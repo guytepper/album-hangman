@@ -93,6 +93,18 @@
   color: #fff;
 }
 
+.game-status-msg {
+  margin: 0 0 5px;
+  font-family: ChicagoFLFRegular, -apple-system, BlinkMacSystemFont, sans-serif;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .game-status-msg {
+    margin: 20px 0;
+  }
+}
+
 @keyframes red-change {
   0% {
     color: white;
