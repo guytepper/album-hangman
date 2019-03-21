@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import queryString from 'query-string';
 import { Link } from 'react-router-dom';
 import Hangman from 'hangman-game-engine';
 import ReactLoading from 'react-loading';
@@ -13,43 +12,20 @@ import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal';
 
-import { isKeyCodeAlphabetical, updateSavedAlbums, getSavedAlbums, resetProgress } from '../../utils';
-import { getAlbums } from '../../api';
+import { isKeyCodeAlphabetical } from '../../utils';
+import withAlbumsData from '../../api/albumData';
 import './Game.css';
 
 class Game extends Component {
   state = {
-    loadingAlbum: true,
     error: null,
-    currentAlbum: {},
     currentGame: {},
-    displaySettings: false,
-    totalAlbums: 0,
-    pendingAlbums: [],
-    guessedAlbums: []
+    currentAlbum: {},
+    displaySettings: false
   };
 
   componentDidMount() {
-    const { location, history } = this.props;
-    const service = localStorage.getItem('service');
-
-    switch (service) {
-      case 'spotify':
-        const parsedURL = queryString.parse(location.hash);
-        this.getAlbumList('spotify', parsedURL.access_token);
-        break;
-      case 'appleMusic':
-        const musicKit = window.MusicKit.getInstance();
-        musicKit.authorize().then(() => {
-          this.getAlbumList('appleMusic');
-        });
-        break;
-      case 'cache':
-        this.loadFromCache();
-        break;
-      default:
-        history.push('/');
-    }
+    this.setNewAlbum();
 
     window.addEventListener('keydown', this.handleKeyboardPress);
     if (window.ga) {
@@ -63,27 +39,10 @@ class Game extends Component {
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
-  loadFromCache = () => {
-    const [pendingAlbums, guessedAlbums] = getSavedAlbums();
-    const totalAlbums = pendingAlbums.length + guessedAlbums.length;
-    this.setState({ pendingAlbums, guessedAlbums, totalAlbums }, this.setNewAlbum);
-  };
-
-  async getAlbumList(service, token) {
-    try {
-      const pendingAlbums = await getAlbums(service, token);
-      this.setState({ pendingAlbums, totalAlbums: pendingAlbums.length }, () => this.setNewAlbum());
-    } catch (err) {
-      console.log(err);
-      this.setState({ error: err.message });
-    }
-  }
-
   async setNewAlbum() {
-    this.setState({ loadingAlbum: true });
-    const album = this.state.pendingAlbums[0];
+    const album = this.props.nextAlbum;
     const currentGame = new Hangman(album.name);
-    this.setState({ currentGame, loadingAlbum: false });
+    this.setState({ currentGame });
     setTimeout(() => this.setState({ currentAlbum: album }), 425);
   }
 
@@ -114,15 +73,14 @@ class Game extends Component {
   };
 
   startNewGame = () => {
-    const { pendingAlbums, guessedAlbums, currentGame } = this.state;
+    const { currentGame } = this.state;
     if (currentGame.status === 'LOST') {
-      pendingAlbums.push(pendingAlbums.shift());
+      this.props.moveFirstAlbumToEnd();
     } else if (currentGame.status === 'WON') {
-      guessedAlbums.push(pendingAlbums.shift());
+      this.props.moveAlbumToGuessedArray();
     }
-    // Update local storage
-    updateSavedAlbums(pendingAlbums, guessedAlbums);
-    this.setState({ guessedAlbums, pendingAlbums }, this.setNewAlbum);
+
+    this.setNewAlbum();
   };
 
   setSettingsDisplay = displaySettings => {
@@ -131,8 +89,7 @@ class Game extends Component {
 
   resetGameProgress = () => {
     if (window.confirm('Are you sure you want to reset your progress?')) {
-      resetProgress();
-      this.loadFromCache();
+      this.props.resetGuessedAlbums();
       alert('Your progress has been deleted.');
       this.setState({ displaySettings: false });
     }
@@ -184,8 +141,8 @@ class Game extends Component {
         <GameHeader
           setSettingsDisplay={this.setSettingsDisplay}
           currentGame={this.state.currentGame}
-          totalAlbums={this.state.totalAlbums}
-          albumsProgress={this.state.guessedAlbums.length}
+          totalAlbums={this.props.totalAlbums}
+          albumsProgress={this.props.progress}
         />
         <div className="game-stage">
           <div className="game-stage-album-info">
@@ -206,11 +163,11 @@ class Game extends Component {
         </div>
       </div>
     );
-
+    console.log(this.state);
     if (this.state.error) {
       currentComponent = ErrorComponent;
       componentKey = 1;
-    } else if (!this.state.currentAlbum.name) {
+    } else if (this.state.currentAlbum === {}) {
       currentComponent = LoadingComponent;
       componentKey = 2;
     } else {
@@ -228,4 +185,4 @@ class Game extends Component {
   }
 }
 
-export default Game;
+export default withAlbumsData(Game);
