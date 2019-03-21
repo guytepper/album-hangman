@@ -19,14 +19,13 @@ import './Game.css';
 class Game extends Component {
   state = {
     error: null,
-    currentGame: {},
-    currentAlbum: {},
+    currentGame: new Hangman(this.props.nextAlbum.name),
+    currentAlbum: this.props.nextAlbum,
     displaySettings: false
   };
 
   componentDidMount() {
-    this.setNewAlbum();
-
+    console.log('hi?');
     window.addEventListener('keydown', this.handleKeyboardPress);
     if (window.ga) {
       window.ga('set', 'page');
@@ -41,6 +40,7 @@ class Game extends Component {
 
   async setNewAlbum() {
     const album = this.props.nextAlbum;
+    console.log(this.props.nextAlbum);
     const currentGame = new Hangman(album.name);
     this.setState({ currentGame });
     setTimeout(() => this.setState({ currentAlbum: album }), 425);
@@ -48,6 +48,7 @@ class Game extends Component {
 
   handleKeyboardPress = event => {
     const keyCode = event.which;
+    console.log(this.isGameActive());
 
     if (isKeyCodeAlphabetical(keyCode) && this.isGameActive()) {
       const letter = String.fromCharCode(keyCode);
@@ -96,8 +97,7 @@ class Game extends Component {
   };
 
   isGameActive = () => {
-    const { currentGame, loadingAlbum } = this.state;
-    return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
+    return this.state.currentGame.status === 'IN_PROGRESS';
   };
 
   gameEnd = () => {
@@ -163,18 +163,20 @@ class Game extends Component {
         </div>
       </div>
     );
-    console.log(this.state);
+    console.log(this.state.currentAlbum === {});
     if (this.state.error) {
       currentComponent = ErrorComponent;
       componentKey = 1;
-    } else if (this.state.currentAlbum === {}) {
+    } else if (this.state.currentAlbum.name === undefined) {
       currentComponent = LoadingComponent;
       componentKey = 2;
     } else {
+      console.log('123');
       currentComponent = GameComponent;
       componentKey = 3;
     }
 
+    // MOVE TRANSITION GROUP TO ALBUM DATA ?
     return (
       <TransitionGroup>
         <CSSTransition key={componentKey} classNames="fade" timeout={300}>

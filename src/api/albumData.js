@@ -1,5 +1,6 @@
 import React from 'react';
 import queryString from 'query-string';
+import ReactLoading from 'react-loading';
 import { getAlbums } from './api';
 import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../utils';
 
@@ -77,13 +78,36 @@ function withAlbumData(Component) {
     };
 
     render() {
-      const { pendingAlbums, guessedAlbums, loading, totalAlbums } = this.state;
+      const { pendingAlbums, guessedAlbums, totalAlbums, loading, error } = this.state;
+
+      if (error) {
+        return (
+          <div className="error-container">
+            <h1>{this.state.error}</h1>
+            <Link to="/">
+              <Button type="warning">Try again?</Button>
+            </Link>
+          </div>
+        );
+      }
+
+      if (loading) {
+        return (
+          <div className="loading-state">
+            <ReactLoading type="bubbles" color="black" height={150} width={150} />
+            <h1 style={{ marginTop: 0 }}>Loading...</h1>
+          </div>
+        );
+      }
+
       return (
         <Component
-          loading={loading}
           nextAlbum={pendingAlbums[0]}
           totalAlbums={totalAlbums}
           progress={guessedAlbums.length}
+          moveFirstAlbumToEnd={this.moveFirstAlbumToEnd}
+          moveAlbumToGuessedArray={this.moveAlbumToGuessedArray}
+          resetGuessedAlbums={this.resetGuessedAlbums}
         />
       );
     }
