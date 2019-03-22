@@ -79,26 +79,6 @@ function withAlbumData(Component) {
     render() {
       const { pendingAlbums, guessedAlbums, totalAlbums, loading, error } = this.state;
 
-      if (error) {
-        return (
-          <div className="error-container">
-            <h1>{this.state.error}</h1>
-            <Link to="/">
-              <Button type="warning">Try again?</Button>
-            </Link>
-          </div>
-        );
-      }
-
-      if (loading) {
-        return (
-          <div className="loading-state">
-            <ReactLoading type="bubbles" color="black" height={150} width={150} />
-            <h1 style={{ marginTop: 0 }}>Loading...</h1>
-          </div>
-        );
-      }
-
       return (
         <Component
           nextAlbum={pendingAlbums[0]}

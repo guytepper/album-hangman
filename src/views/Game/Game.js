@@ -103,18 +103,6 @@ class Game extends Component {
   };
 
   render() {
-    let currentComponent = null;
-    let componentKey = 0;
-
-    const ErrorComponent = (
-      <div className="error-container">
-        <h1>{this.state.error}</h1>
-        <Link to="/">
-          <Button type="warning">Try again?</Button>
-        </Link>
-      </div>
-    );
-
     let currentComponent = LoadingComponent;
     let componentKey = 1;
 
