@@ -15,7 +15,12 @@ function withAlbumData(Component) {
 
     componentDidMount() {
       const { location, history } = this.props;
-      const service = localStorage.getItem('service');
+      let service = localStorage.getItem('service');
+
+      // The user might have another serivce saved in his localStorage although they already have progress.
+      if (service !== 'cache' && getSavedAlbums()[0].length > 0) {
+        service = 'cache';
+      }
 
       switch (service) {
         case 'spotify':
