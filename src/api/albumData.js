@@ -6,6 +6,7 @@ import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../utils';
 function withAlbumData(Component) {
   return class albumData extends React.Component {
     state = {
+      error: null,
       loading: true,
       totalAlbums: 0,
       pendingAlbums: [],
@@ -47,7 +48,7 @@ function withAlbumData(Component) {
         const nextAlbum = pendingAlbums[0];
         this.setState({ pendingAlbums, nextAlbum, totalAlbums: pendingAlbums.length, loading: false });
       } catch (err) {
-        throw new Error(err.message);
+        this.setState({ error: err.message });
       }
     }
 
@@ -87,6 +88,8 @@ function withAlbumData(Component) {
           moveFirstAlbumToEnd={this.moveFirstAlbumToEnd}
           moveAlbumToGuessedArray={this.moveAlbumToGuessedArray}
           resetGuessedAlbums={this.resetGuessedAlbums}
+          error={error}
+          loading={loading}
         />
       );
     }

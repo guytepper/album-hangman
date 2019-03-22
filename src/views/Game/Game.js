@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Hangman from 'hangman-game-engine';
-import ReactLoading from 'react-loading';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import LoadingComponent from '../Loading';
 import ErrorComponent from '../Error';
 
 import Artwork from '../../components/Artwork';
@@ -16,14 +16,12 @@ import './Game.css';
 
 class Game extends Component {
   state = {
-    error: null,
-    currentGame: new Hangman(this.props.nextAlbum.name),
-    currentAlbum: this.props.nextAlbum,
+    currentGame: {},
+    currentAlbum: {},
     displaySettings: false
   };
 
   componentDidMount() {
-    console.log('hi?');
     window.addEventListener('keydown', this.handleKeyboardPress);
     if (window.ga) {
       window.ga('set', 'page');
@@ -36,9 +34,14 @@ class Game extends Component {
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.loading !== prevProps.loading) {
+      this.setNewAlbum();
+    }
+  }
+
   async setNewAlbum() {
     const album = this.props.nextAlbum;
-    console.log(this.props.nextAlbum);
     const currentGame = new Hangman(album.name);
     this.setState({ currentGame });
     setTimeout(() => this.setState({ currentAlbum: album }), 425);
@@ -46,7 +49,6 @@ class Game extends Component {
 
   handleKeyboardPress = event => {
     const keyCode = event.which;
-    console.log(this.isGameActive());
 
     if (isKeyCodeAlphabetical(keyCode) && this.isGameActive()) {
       const letter = String.fromCharCode(keyCode);
@@ -109,16 +111,14 @@ class Game extends Component {
     const GameComponent = (
       <div className="game">
         {this.state.displaySettings && (
-          <CSSTransition classNames="fade" timeout={300}>
-            <React.Fragment>
-              <div className="overlay" />
-              <SettingsModal
-                className="settings-overlay"
-                setSettingsDisplay={this.setSettingsDisplay}
-                resetProgress={this.resetGameProgress}
-              />
-            </React.Fragment>
-          </CSSTransition>
+          <React.Fragment>
+            <div className="overlay" />
+            <SettingsModal
+              className="settings-overlay"
+              setSettingsDisplay={this.setSettingsDisplay}
+              resetProgress={this.resetGameProgress}
+            />
+          </React.Fragment>
         )}
         <GameHeader
           setSettingsDisplay={this.setSettingsDisplay}
@@ -145,22 +145,17 @@ class Game extends Component {
         </div>
       </div>
     );
-    console.log(this.state.currentAlbum === {});
-    if (this.state.error) {
-      currentComponent = ErrorComponent;
-      componentKey = 1;
-    } else if (this.state.currentAlbum.name === undefined) {
-      currentComponent = LoadingComponent;
+
     if (this.props.error) {
       currentComponent = <ErrorComponent message={this.props.error} />;
       componentKey = 2;
-    } else {
-      console.log('123');
+    } else if (this.state.currentAlbum.name) {
       currentComponent = GameComponent;
       componentKey = 3;
     }
 
-    // MOVE TRANSITION GROUP TO ALBUM DATA ?
+    console.log(currentComponent);
+
     return (
       <TransitionGroup>
         <CSSTransition key={componentKey} classNames="fade" timeout={300}>
