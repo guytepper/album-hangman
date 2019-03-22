@@ -76,7 +76,7 @@ class Game extends Component {
   startNewGame = () => {
     const { currentGame } = this.state;
     if (currentGame.status === 'LOST') {
-      this.props.moveFirstAlbumToEnd();
+      this.props.moveFirstAlbumToArrayEnd();
     } else if (currentGame.status === 'WON') {
       this.props.moveAlbumToGuessedArray();
     }
