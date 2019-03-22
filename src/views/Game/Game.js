@@ -154,8 +154,6 @@ class Game extends Component {
       componentKey = 3;
     }
 
-    console.log(currentComponent);
-
     return (
       <TransitionGroup>
         <CSSTransition key={componentKey} classNames="fade" timeout={300}>
