@@ -115,12 +115,8 @@ class Game extends Component {
       </div>
     );
 
-    const LoadingComponent = (
-      <div className="loading-state">
-        <ReactLoading type="bubbles" color="black" height={150} width={150} />
-        <h1 style={{ marginTop: 0 }}>Loading...</h1>
-      </div>
-    );
+    let currentComponent = LoadingComponent;
+    let componentKey = 1;
 
     const GameComponent = (
       <div className="game">

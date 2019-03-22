@@ -1,6 +1,5 @@
 import React from 'react';
 import queryString from 'query-string';
-import ReactLoading from 'react-loading';
 import { getAlbums } from './api';
 import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../utils';
 
