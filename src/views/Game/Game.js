@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Hangman from 'hangman-game-engine';
 import ReactLoading from 'react-loading';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import ErrorComponent from '../Error';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
-import Button from '../../components/Button';
-
 import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal';
@@ -169,6 +167,8 @@ class Game extends Component {
       componentKey = 1;
     } else if (this.state.currentAlbum.name === undefined) {
       currentComponent = LoadingComponent;
+    if (this.props.error) {
+      currentComponent = <ErrorComponent message={this.props.error} />;
       componentKey = 2;
     } else {
       console.log('123');
