@@ -57,7 +57,7 @@ function withAlbumData(Component) {
       }
     }
 
-    moveFirstAlbumToEnd = () => {
+    moveFirstAlbumToArrayEnd = () => {
       const { pendingAlbums, guessedAlbums } = this.state;
       const newPending = [...pendingAlbums];
       newPending.push(newPending.shift());
@@ -90,8 +90,8 @@ function withAlbumData(Component) {
           nextAlbum={pendingAlbums[0]}
           totalAlbums={totalAlbums}
           progress={guessedAlbums.length}
-          moveFirstAlbumToEnd={this.moveFirstAlbumToEnd}
-          moveAlbumToGuessedArray={this.moveAlbumToGuessedArray}
+          moveFirstAlbumToArrayEnd={this.moveFirstAlbumToArrayEnd}
+          moveAlbumToGuessedArray={this.moveFirstAlbumToArrayEnd}
           resetGuessedAlbums={this.resetGuessedAlbums}
           error={error}
           loading={loading}
