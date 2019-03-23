@@ -91,7 +91,7 @@ function withAlbumData(Component) {
           totalAlbums={totalAlbums}
           progress={guessedAlbums.length}
           moveFirstAlbumToArrayEnd={this.moveFirstAlbumToArrayEnd}
-          moveAlbumToGuessedArray={this.moveFirstAlbumToArrayEnd}
+          moveAlbumToGuessedArray={this.moveAlbumToGuessedArray}
           resetGuessedAlbums={this.resetGuessedAlbums}
           error={error}
           loading={loading}
