@@ -8,7 +8,8 @@ import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
 import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
-import SettingsModal from '../../components/SettingsModal';
+import Modal from '../../components/Modal';
+import Button from '../../components/Button';
 
 import { isKeyCodeAlphabetical } from '../../utils';
 import withAlbumsData from '../../api/albumData';
@@ -113,11 +114,21 @@ class Game extends Component {
         {this.state.displaySettings && (
           <React.Fragment>
             <div className="overlay" />
-            <SettingsModal
-              className="settings-overlay"
-              setSettingsDisplay={this.setSettingsDisplay}
-              resetProgress={this.resetGameProgress}
-            />
+            <Modal className="settings-overlay">
+              <div className="settings-modal-buttons">
+                <Button type="warning" onClick={this.resetGameProgress}>
+                  Reset Progress
+                </Button>
+                <Button type="warning">Logout</Button>
+                <Button type="success" onClick={() => this.setSettingsDisplay(false)}>
+                  Close
+                </Button>
+              </div>
+              <div className="settings-modal-credits">
+                <span className="settings-modal-credits-name">Created by Guy Tepper</span>
+                <span className="settings-modal-credits-github">Fork on Github</span>
+              </div>
+            </Modal>
           </React.Fragment>
         )}
         <GameHeader
