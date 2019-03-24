@@ -11,6 +11,13 @@
   margin: 0;
 }
 
+.end-modal-buttons {
+  display: flex;
+  height: stretch;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .end-modal-facebook-btn,
 .end-modal-twitter-btn {
   font-size: 19px;

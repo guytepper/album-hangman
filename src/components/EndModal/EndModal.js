@@ -11,7 +11,7 @@ function EndModal() {
         <p>Congratulations, you sure do know your music.</p>
         <p>Now go on and brag to your friends!</p>
       </div>
-      <div>
+      <div className="end-modal-buttons">
         <Button type="primary" className="end-modal-facebook-btn">
           Share on Facebook
         </Button>
