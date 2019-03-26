@@ -35,5 +35,15 @@
 }
 
 .settings-modal-credits-github {
-  font-weight: 100;
+  font-weight: 200;
+}
+
+.settings-modal-credits-github a {
+  color: #6b6b6be5;
+  text-decoration: none;
+  transition: color 0.2s ease-out;
+}
+
+.settings-modal-credits-github a:hover {
+  color: #a1a1a1;
 }
