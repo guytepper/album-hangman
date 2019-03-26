@@ -3,19 +3,8 @@ import Modal from '../Modal';
 import Button from '../Button';
 import './EndModal.css';
 
-const tweetLink = `https://twitter.com/intent/tweet?text=Apparently%20I%20do%20know%20my%20music.%20What%20about%20you?&url=https://album-hangman.com`;
-
-const facebookLink = `https://www.facebook.com/dialog/share?
-app_id=265726350983437&
-display=popup&
-href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&
-picture=http://fbrell.com/f8.jpg&
-title=I know my music!&
-caption=Reference%20Documentation&
-description=Dialogs%20provide%20a%20simple,%20consistent%20interface%20for%20applications%20to%20interact%20with%20users.&
-message=Facebook%20Dialogs%20are%20so%20easy!&
-redirect_uri=https://album-hangman.com`;
-
+const twitterLink = `https://twitter.com/intent/tweet?text=Apparently%20I%20do%20know%20my%20music.%20What%20about%20you?&url=https://album-hangman.com`;
+const facebookLink = `https://www.facebook.com/sharer/sharer.php?u=https%3A//me.com`;
 function EndModal() {
   return (
     <Modal className="end-modal">
@@ -32,7 +21,7 @@ function EndModal() {
           type="info"
           className="end-modal-twitter-btn"
           onClick={() =>
-            window.open(tweetLink, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
+            window.open(twitterLink, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
           }
         >
           Share on Twitter
