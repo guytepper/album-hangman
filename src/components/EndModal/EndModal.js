@@ -3,6 +3,17 @@ import Modal from '../Modal';
 import Button from '../Button';
 import './EndModal.css';
 
+const facebookLink = `https://www.facebook.com/dialog/share?
+app_id=265726350983437&
+display=popup&
+href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&
+picture=http://fbrell.com/f8.jpg&
+title=I know my music!&
+caption=Reference%20Documentation&
+description=Dialogs%20provide%20a%20simple,%20consistent%20interface%20for%20applications%20to%20interact%20with%20users.&
+message=Facebook%20Dialogs%20are%20so%20easy!&
+redirect_uri=https://album-hangman.com`;
+
 function EndModal() {
   return (
     <Modal className="end-modal">
