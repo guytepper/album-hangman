@@ -110,7 +110,7 @@ function Landing(props) {
           Created by <span className="landing-footer-created-name">Guy Tepper</span>
         </span>
         <span>
-          Fork me on{' '}
+          Fork on{' '}
           <a
             className="landing-footer-github-link"
             target="_blank"
