@@ -19,6 +19,22 @@
   pointer-events: none;
 }
 
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-loading-wrapper {
+  width: 20px;
+  height: 20px;
+  margin-left: -20px;
+}
+
+.button-text-wrapper {
+  margin-left: 10px;
+}
+
 .hangman-btn-warning {
   background-color: #d94c4c;
 }
@@ -35,18 +51,18 @@
   background: #23d464;
 }
 
-.button-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hangman-btn-primary {
+  background: #496cb4;
 }
 
-.button-loading-wrapper {
-  width: 20px;
-  height: 20px;
-  margin-left: -20px;
+.hangman-btn-primary:hover {
+  background: #5879b9;
 }
 
-.button-text-wrapper {
-  margin-left: 10px;
+.hangman-btn-info {
+  background: #38a1f3;
+}
+
+.hangman-btn-info:hover {
+  background: rgb(77, 173, 247);
 }

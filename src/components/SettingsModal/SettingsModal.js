@@ -1,12 +1,12 @@
 import React from 'react';
+import Modal from '../Modal';
 import Button from '../Button';
-import './SettingsModal.css';
 
-function SettingsModal({ className, setSettingsDisplay, resetProgress }) {
+function SettingsModal({ resetGameProgress, setSettingsDisplay }) {
   return (
-    <div className={`settings-modal ${className}`}>
+    <Modal>
       <div className="settings-modal-buttons">
-        <Button type="warning" onClick={resetProgress}>
+        <Button type="warning" onClick={resetGameProgress}>
           Reset Progress
         </Button>
         <Button type="warning">Logout</Button>
@@ -18,7 +18,7 @@ function SettingsModal({ className, setSettingsDisplay, resetProgress }) {
         <span className="settings-modal-credits-name">Created by Guy Tepper</span>
         <span className="settings-modal-credits-github">Fork on Github</span>
       </div>
-    </div>
+    </Modal>
   );
 }
 

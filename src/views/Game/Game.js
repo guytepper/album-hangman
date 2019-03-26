@@ -8,7 +8,8 @@ import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
 import Keyboard from '../../components/Keyboard';
 import GameHeader from '../../components/GameHeader';
-import SettingsModal from '../../components/SettingsModal';
+import SettingsModal from '../../components/SettingsModal/SettingsModal';
+import EndModal from '../../components/EndModal';
 
 import { isKeyCodeAlphabetical } from '../../utils';
 import withAlbumsData from '../../api/albumData';
@@ -113,11 +114,13 @@ class Game extends Component {
         {this.state.displaySettings && (
           <React.Fragment>
             <div className="overlay" />
-            <SettingsModal
-              className="settings-overlay"
-              setSettingsDisplay={this.setSettingsDisplay}
-              resetProgress={this.resetGameProgress}
-            />
+            <SettingsModal resetGameProgress={this.resetGameProgress} setSettingsDisplay={this.setSettingsDisplay} />
+          </React.Fragment>
+        )}
+        {this.props.progress === this.props.totalAlbums && (
+          <React.Fragment>
+            <div className="overlay" />
+            <EndModal playAgain={() => this.props.resetGuessedAlbums()} />
           </React.Fragment>
         )}
         <GameHeader
