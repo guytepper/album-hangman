@@ -16,12 +16,6 @@
   background-color: rgba(0, 0, 0, 0.76);
 }
 
-.settings-overlay {
-  position: fixed;
-  z-index: 11;
-  top: 90px;
-}
-
 .game-stage {
   display: flex;
   width: 100%;

@@ -1,4 +1,7 @@
 .modal {
+  position: fixed;
+  z-index: 11;
+  top: 90px;
   display: flex;
   width: 290px;
   height: 280px;

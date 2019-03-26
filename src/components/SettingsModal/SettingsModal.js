@@ -4,7 +4,7 @@ import Button from '../Button';
 
 function SettingsModal({ resetGameProgress, setSettingsDisplay }) {
   return (
-    <Modal className="settings-overlay">
+    <Modal>
       <div className="settings-modal-buttons">
         <Button type="warning" onClick={resetGameProgress}>
           Reset Progress

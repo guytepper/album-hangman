@@ -7,7 +7,7 @@ const twitterLink = `https://twitter.com/intent/tweet?text=Apparently%20I%20do%2
 const facebookLink = `https://www.facebook.com/sharer/sharer.php?u=https://album-hangman.com`;
 const popupSettings = `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=555`;
 
-function EndModal() {
+function EndModal(props) {
   return (
     <Modal className="end-modal">
       <h1 className="end-modal-title">YOU DID IT!</h1>
@@ -30,7 +30,9 @@ function EndModal() {
         >
           Share on Twitter
         </Button>
-        <Button type="success">Play Again</Button>
+        <Button type="success" onClick={() => props.playAgain()}>
+          Play Again
+        </Button>
       </div>
     </Modal>
   );
