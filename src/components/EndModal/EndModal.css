@@ -1,0 +1,24 @@
+.end-modal {
+  height: 360px;
+  background-color: #e84118;
+  box-shadow: 0 0 0 7px #c23616;
+  color: white;
+  font-family: ChicagoFLFRegular, -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: center;
+}
+
+.end-modal-title {
+  margin: 0;
+}
+
+.end-modal-buttons {
+  display: flex;
+  height: stretch;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.end-modal-facebook-btn,
+.end-modal-twitter-btn {
+  font-size: 19px;
+}

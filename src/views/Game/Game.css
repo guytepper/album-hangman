@@ -16,19 +16,13 @@
   background-color: rgba(0, 0, 0, 0.76);
 }
 
-.settings-overlay {
-  position: fixed;
-  z-index: 11;
-  top: 90px;
-}
-
 .game-stage {
   display: flex;
   width: 100%;
   min-height: calc(100vh - 50px);
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-between; */
+  /* justify-content: space-evenly; */
   margin-top: 20px;
   margin-bottom: 20px;
 }
