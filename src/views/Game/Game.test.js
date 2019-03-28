@@ -25,7 +25,7 @@ it('renders new album correctly', () => {
   expect(wrapper.find('.game-stage')).toHaveLength(1);
 });
 
-it('handles letter press correctly', () => {
+it('handles key press correctly', () => {
   // Mock the global event listener
   const map = {};
   window.addEventListener = jest.fn((event, cb) => {
