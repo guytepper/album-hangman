@@ -43,3 +43,16 @@ it('handles key press correctly', () => {
 
   expect(wrapper.state().currentGame.hiddenWord).toContain('T');
 });
+
+it('handles letter press correctly', () => {
+  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+
+  jest.useFakeTimers();
+  wrapper.setProps({ loading: false, nextAlbum: album });
+  jest.runAllTimers();
+  wrapper.update();
+
+  console.log(wrapper.find('.keyboard-btn')[4]);
+  console.log('hi');
+  // expect(wrapper.state().currentGame.hiddenWord).toContain('T');
+});
