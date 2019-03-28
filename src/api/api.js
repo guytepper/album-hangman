@@ -32,8 +32,7 @@ function normalizeServiceResponse(service, response) {
     }
     const formattedAlbums = albums.map(album => ({
       name: removeDescriptors(album.name),
-      image: album.images[0].url,
-      guessed: false
+      image: album.images[0].url
     }));
     return formattedAlbums;
   } else if (service === 'appleMusic') {
@@ -41,8 +40,7 @@ function normalizeServiceResponse(service, response) {
     const albums = items.map(item => item.attributes); // Create new array from the attributes property of each item
     const formattedAlbums = albums.map(album => ({
       name: removeDescriptors(album.name),
-      image: album.artwork.url.replace('{w}x{h}bb', '476x476bb'),
-      guessed: false
+      image: album.artwork.url.replace('{w}x{h}bb', '476x476bb')
     }));
 
     return formattedAlbums;
