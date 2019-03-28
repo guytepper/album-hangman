@@ -1,17 +1,24 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Game from './Game';
+import { mount } from 'enzyme';
+import { Game } from './Game';
 
-jest.mock('../../api');
+const album = {
+  name: 'Tidal',
+  image: 'https://i.scdn.co/image/51364027ac7cc159f317daa8c64aae36f74e6fb8'
+};
 
-it.skip('renders without crashing', done => {
-  const wrapper = shallow(<Game service={'spotify'} location={{ hash: 'okay' }} history={[]} />);
+it('renders new album correctly', done => {
+  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+
+  jest.useFakeTimers();
+  wrapper.setProps({ loading: false, nextAlbum: album });
+  jest.runAllTimers();
+
   process.nextTick(() => {
-    const { currentAlbum } = wrapper.state();
-    expect(currentAlbum).toMatchObject({
-      name: expect.any(String),
-      image: expect.any(String)
-    });
+    // Enzyme not noticing changes caused by external circumstances (setState inside a timeout)
+    wrapper.update();
+    expect(wrapper.state().currentAlbum).toEqual(album);
+    expect(wrapper.find('.game-stage')).toHaveLength(1);
     done();
   });
 });
