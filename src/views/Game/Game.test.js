@@ -12,20 +12,17 @@ it('renders loading component', () => {
   expect(wrapper.text('Loading...')).toBeTruthy();
 });
 
-it('renders new album correctly', done => {
+it('renders new album correctly', () => {
   const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
 
   jest.useFakeTimers();
   wrapper.setProps({ loading: false, nextAlbum: album });
   jest.runAllTimers();
 
-  process.nextTick(() => {
-    // Enzyme not noticing changes caused by external circumstances (setState inside a timeout)
-    wrapper.update();
-    expect(wrapper.state().currentAlbum).toEqual(album);
-    expect(wrapper.find('.game-stage')).toHaveLength(1);
-    done();
-  });
+  // Enzyme not noticing changes caused by external circumstances (setState inside a timeout)
+  wrapper.update();
+  expect(wrapper.state().currentAlbum).toEqual(album);
+  expect(wrapper.find('.game-stage')).toHaveLength(1);
 });
 
 it('handles letter press correctly', () => {
