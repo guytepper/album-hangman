@@ -27,3 +27,22 @@ it('renders new album correctly', done => {
     done();
   });
 });
+
+it('handles letter press correctly', () => {
+  // Mock the global event listener
+  const map = {};
+  window.addEventListener = jest.fn((event, cb) => {
+    map[event] = cb;
+  });
+
+  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+
+  jest.useFakeTimers();
+  wrapper.setProps({ loading: false, nextAlbum: album });
+  jest.runAllTimers();
+
+  // Click the 't' key
+  map.keydown({ which: 84 });
+
+  expect(wrapper.state().currentGame.hiddenWord).toContain('T');
+});
