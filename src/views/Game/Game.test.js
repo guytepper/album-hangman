@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Game } from './Game';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const album = {
   name: 'Tidal',
@@ -60,7 +61,16 @@ it('handles letter press correctly', () => {
   expect(wrapper.state().currentGame.hiddenWord).toContain('T');
 });
 
-it('displays error component correctly', () => {});
+it('displays error component correctly', () => {
+  // Wrapping in
+  const wrapper = mount(
+    <Router>
+      <Game error={'Session token has expired'} />
+    </Router>
+  );
+
+  expect(wrapper.exists('.error-container')).toBeTruthy();
+});
 
 it('resets game progress successfuly', () => {});
 
