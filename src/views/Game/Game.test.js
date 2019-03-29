@@ -52,7 +52,10 @@ it('handles letter press correctly', () => {
   jest.runAllTimers();
   wrapper.update();
 
-  console.log(wrapper.find('.keyboard-btn')[4]);
-  console.log('hi');
-  // expect(wrapper.state().currentGame.hiddenWord).toContain('T');
+  wrapper
+    .find('.keyboard-btn')
+    .at(4)
+    .simulate('click');
+
+  expect(wrapper.state().currentGame.hiddenWord).toContain('T');
 });
