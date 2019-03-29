@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Game } from './Game';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { process } from 'ipaddr.js';
 
 const album = {
   name: 'Tidal',
@@ -72,6 +73,9 @@ it('displays error component correctly', () => {
   expect(wrapper.exists('.error-container')).toBeTruthy();
 });
 
-it('resets game progress successfuly', () => {});
+it('calls reset game progress method successfuly', () => {
+  window.confirm = jest.fn(() => true);
+  window.alert = jest.fn();
+  const fn = jest.fn();
 
 it('displays settings modal on gear icon click', () => {});
