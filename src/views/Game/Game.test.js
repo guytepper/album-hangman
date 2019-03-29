@@ -59,3 +59,9 @@ it('handles letter press correctly', () => {
 
   expect(wrapper.state().currentGame.hiddenWord).toContain('T');
 });
+
+it('displays error component correctly', () => {});
+
+it('resets game progress successfuly', () => {});
+
+it('displays settings modal on gear icon click', () => {});
