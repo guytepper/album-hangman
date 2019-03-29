@@ -6,10 +6,10 @@ const rowA = 'QWERTYUIOP'.split('');
 const rowB = 'ASDFGHJKL'.split('');
 const rowC = 'ZXCVBNM'.split('');
 
-function playAgainBtn(startNewGame, loadingAlbum) {
+function playAgainBtn(startNewGame) {
   return (
-    <Button onClick={startNewGame} loading={loadingAlbum}>
-      Play Again ⏎
+    <Button onClick={startNewGame} type="success">
+      Next Album →
     </Button>
   );
 }
@@ -18,7 +18,7 @@ function gameEndMessage(gameStatus) {
   if (gameStatus === 'WON') {
     return (
       <h1 className="game-status-msg">
-        You won!{' '}
+        Correct!{' '}
         <span role="img" aria-label="Party Popper">
           🎉
         </span>
@@ -29,7 +29,7 @@ function gameEndMessage(gameStatus) {
   if (gameStatus === 'LOST') {
     return (
       <h1 className="game-status-msg">
-        You lost{' '}
+        Failed{' '}
         <span role="img" aria-label="Sneezing">
           🤧
         </span>
@@ -70,7 +70,7 @@ class Keyboard extends React.Component {
         {this.props.gameStatus !== 'IN_PROGRESS' && (
           <div className="game-end-message">
             {gameEndMessage(this.props.gameStatus)}
-            {playAgainBtn(this.props.startNewGame, this.props.loadingAlbum)}
+            {playAgainBtn(this.props.startNewGame)}
           </div>
         )}
         <div className="keyboard">

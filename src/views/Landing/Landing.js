@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import LoginButton from '../../components/LoginButton';
+import { getSavedAlbums, deleteSavedAlbums } from '../../utils';
 import './Landing.css';
 
 let spotifyRedirectURL = 'http://localhost:3000/game/';
@@ -6,49 +8,121 @@ if (process.env.NODE_ENV === 'production') {
   spotifyRedirectURL = 'https://album-hangman.com/game/';
 }
 
-class Landing extends Component {
-  selectSpotify = () => {
-    this.props.selectService('spotify');
-    window.open(
-      `https://accounts.spotify.com/authorize?client_id=${
-        process.env.REACT_APP_SPOTIFY_ID
-      }&response_type=token&scope=user-library-read&redirect_uri=${spotifyRedirectURL}`,
-      '_self'
-    );
-  };
+function selectSpotify(selectService) {
+  localStorage.setItem('service', 'spotify');
+  window.open(
+    `https://accounts.spotify.com/authorize?client_id=${
+      process.env.REACT_APP_SPOTIFY_ID
+    }&response_type=token&scope=user-library-read&redirect_uri=${spotifyRedirectURL}`,
+    '_self'
+  );
+}
 
-  selectAppleMusic = () => {
-    this.props.selectService('appleMusic');
-    window.MusicKit.configure({
-      developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
-      app: {
-        name: 'Album Hangman',
-        build: '2018.29.11'
-      }
-    });
-    const musicKit = window.MusicKit.getInstance();
-    musicKit.authorize().then(() => {
-      this.props.history.push('/game/');
-    });
-  };
+function selectAppleMusic(selectService, history) {
+  localStorage.setItem('service', 'appleMusic');
+  window.MusicKit.configure({
+    developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
+    app: {
+      name: 'Album Hangman',
+      build: '2018.29.11'
+    }
+  });
+  const musicKit = window.MusicKit.getInstance();
+  musicKit.authorize().then(() => {
+    history.push('/game/');
+  });
+}
 
-  render() {
-    return (
-      <div className="landing">
-        <h1 className="landing-header">Album Hangman</h1>
-        <h2 className="landing-sub">Do you really know your music?</h2>
-        <p className="landing-description">See if you can guess your favourite albums!</p>
-        <a className="service-login-button" onClick={this.selectSpotify}>
-          <img alt="Spotify" src="/spotify.svg" className="service-button-logo" />
-          <span>Connect with Spotify</span>
-        </a>
-        <a className="service-login-button" onClick={this.selectAppleMusic}>
-          <img alt="Apple Music" src="/apple_music.png" className="service-button-logo" />
-          <span>Connect with Apple Music</span>
-        </a>
+function Landing(props) {
+  const [hasProgress, setHasProgress] = useState(false);
+  const [pendingAlbums] = getSavedAlbums();
+
+  useEffect(() => {
+    localStorage.setItem('service', 'none');
+  }, []);
+
+  useEffect(() => {
+    if (pendingAlbums.length > 0) {
+      setHasProgress(true);
+    }
+  });
+
+  return (
+    <div className="landing">
+      <h1 className="landing-header">Do you really know your music?</h1>
+      <div className="landing-moving-albums">
+        <img
+          className="landing-moving-albums-image"
+          src="./albums-carousel2.jpg"
+          alt="Blurred Album Artworks Carousel"
+        />
       </div>
-    );
-  }
+      <div className="landing-game-info">
+        <div className="landing-description">
+          <p className="bold-text">
+            We all know Hangman. It’s a classic game. But let’s see if you can beat it with your own music taste.
+          </p>
+          <p>
+            Each round a blurred album artwork from your music library will be displayed: would you be able to guess the
+            name of the album?
+          </p>
+        </div>
+        <div className="login-buttons">
+          {hasProgress ? (
+            <React.Fragment>
+              <LoginButton
+                text="Continue Playing"
+                icon="/refresh.svg"
+                onClick={() => {
+                  localStorage.setItem('service', 'cache');
+                  props.history.push('/game/');
+                }}
+              />
+              <LoginButton
+                text="Delete Progress"
+                icon="/delete.svg"
+                onClick={() => {
+                  if (window.confirm('Do you really want to delete your progress?')) {
+                    deleteSavedAlbums();
+                    setHasProgress(false);
+                  }
+                }}
+              />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <LoginButton
+                text="Connect with Spotify"
+                icon="/spotify.svg"
+                onClick={() => selectSpotify(props.selectService)}
+              />
+              <LoginButton
+                text="Connect with Apple Music"
+                icon="/apple_music.png"
+                onClick={() => selectAppleMusic(props.selectService, props.history)}
+              />
+            </React.Fragment>
+          )}
+        </div>
+      </div>
+      <footer className="landing-footer">
+        <span className="landing-footer-created">
+          Created by <span className="landing-footer-created-name">Guy Tepper</span>
+        </span>
+        <span>
+          Fork on{' '}
+          <a
+            className="landing-footer-github-link"
+            target="_blank"
+            href="https://github.com/guytepper/album-hangman"
+            rel="noopener noreferrer"
+          >
+            Github
+          </a>
+        </span>
+      </footer>
+    </div>
+  );
 }
 
 export default Landing;

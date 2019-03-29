@@ -2,7 +2,7 @@
   position: relative;
   padding-top: 15px;
   border-top: 1px solid gainsboro;
-  margin: 0 auto;
+  margin: 0 auto 20px;
 }
 
 .keyboard {
@@ -25,6 +25,13 @@
   outline: none;
 }
 
+@media (min-width: 360px) {
+  .keyboard-btn {
+    width: 29px;
+    height: 34px;
+  }
+}
+
 @media (min-width: 375px) {
   .keyboard-btn {
     min-width: 33px;
@@ -35,7 +42,8 @@
 @media (min-width: 410px) {
   .keyboard-btn {
     min-width: 37px;
-    height: 37px;
+    height: 40px;
+    font-size: 15px;
   }
 }
 
@@ -86,9 +94,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #00498ded;
+  background-color: #2a2b30ed;
   border-radius: 5px;
   box-shadow: 0 0 20px #0000008a;
+  color: #fff;
+}
+
+.game-status-msg {
+  margin: 0 0 5px;
+  font-family: ChicagoFLFRegular, -apple-system, BlinkMacSystemFont, sans-serif;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .game-status-msg {
+    margin: 20px 0;
+  }
 }
 
 @keyframes red-change {

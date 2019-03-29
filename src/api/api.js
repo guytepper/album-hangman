@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { shuffleArray, createConcealArr } from '../utils';
 import removeDescriptors from 'album-name-normalizer';
 
 function getAppleMusicAlbums(token, limit, offset) {
@@ -15,6 +16,12 @@ function getSpotifyAlbums(token, limit, offset) {
   });
 }
 
+/**
+ * Change the API response to a flat array, containing objects with the album name & artwork image url.
+ * e.g: [{ name: 'The White Album', image: 'urlgoeshere'}]
+ * @param {string} service - Which service is being used - Spotify / Apple Music.
+ * @param {array} response - The api response from the service.
+ */
 function normalizeServiceResponse(service, response) {
   if (service === 'spotify') {
     const itemsArrays = response.map(result => result.data.items); // Grab all data items from the response
@@ -23,9 +30,12 @@ function normalizeServiceResponse(service, response) {
     if (albums.length === 0) {
       throw new Error('No saved albums has been found.');
     }
-    const formattedAlbums = albums.map(album => ({ name: removeDescriptors(album.name), image: album.images[0].url }));
+    const formattedAlbums = albums.map(album => ({
+      name: removeDescriptors(album.name),
+      image: album.images[0].url
+    }));
     return formattedAlbums;
-  } else {
+  } else if (service === 'appleMusic') {
     const items = response.reduce((a, b) => a.concat(b), []); // Flatten the arrays to one array
     const albums = items.map(item => item.attributes); // Create new array from the attributes property of each item
     const formattedAlbums = albums.map(album => ({
@@ -35,6 +45,18 @@ function normalizeServiceResponse(service, response) {
 
     return formattedAlbums;
   }
+}
+
+/**
+ * Filter out albums with long titles (more than 30 characters) / titles
+ * without alphabetical characters.
+ * @param {array} albums - Album objects array.
+ * @returns {array} Albums array without problematic albums.
+ */
+function filterAlbums(albums) {
+  return albums
+    .filter(album => createConcealArr(album.name).indexOf('_') !== -1)
+    .filter(album => album.name.length < 30);
 }
 
 /**
@@ -61,9 +83,13 @@ async function getAlbums(service, token) {
 
     const results = await Promise.all(promises);
     const formattedAlbums = normalizeServiceResponse(service, results);
-    return formattedAlbums;
+    const filteredAlbums = filterAlbums(formattedAlbums);
+    return shuffleArray(filteredAlbums);
   } catch (err) {
-    console.log(err);
+    if (err.response.data.error.message) {
+      throw new Error(err.response.data.error.message);
+    }
+
     throw err;
   }
 }

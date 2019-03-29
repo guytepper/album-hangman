@@ -1,23 +1,16 @@
-.progress {
-  height: 50px;
-}
-
-.progress-thin {
-  height: 6px;
-}
-
 .progress-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-right: 7px;
 }
 
 .progress-wrap {
   position: relative;
   z-index: 0;
   display: flex;
-  width: 300px;
+  width: 140px;
   align-items: center;
   justify-content: center;
   background-color: black;
@@ -29,18 +22,54 @@
   top: 0;
   left: 0;
   background-color: #41b074;
+  transition: width 0.5s ease-out;
+}
+
+.progress {
+  height: 6px;
 }
 
 .progress-label {
-  position: relative;
-  z-index: 2;
-  color: #ffffff;
-  font-family: Krungthep;
-  font-size: 24px;
+  font-family: ChicagoFLFRegular, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .progress-thin-label {
   color: #000;
-  font-family: Krungthep;
-  font-size: 16px;
+  font-size: 13px;
+}
+
+.progress-large-label {
+  display: none;
+}
+
+@media (min-width: 360px) {
+  .progress-container {
+    margin-right: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .progress-container {
+    margin-right: 87px;
+  }
+
+  .progress-wrap {
+    width: 300px;
+  }
+
+  .progress-large-label {
+    position: relative;
+    z-index: 2;
+    display: block;
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .progress {
+    height: 40px;
+  }
+
+  .progress-thin-label {
+    display: none;
+  }
 }

@@ -1,44 +1,28 @@
 import React, { Component } from 'react';
-import queryString from 'query-string';
-import { Link } from 'react-router-dom';
 import Hangman from 'hangman-game-engine';
-import ReactLoading from 'react-loading';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import LoadingComponent from '../Loading';
+import ErrorComponent from '../Error';
 
 import Artwork from '../../components/Artwork';
 import Word from '../../components/Word';
-import GuessedLetters from '../../components/GuessedLetters';
-import Button from '../../components/Button';
-
 import Keyboard from '../../components/Keyboard';
-import Hearts from '../../components/Hearts';
-import { isKeyCodeAlphabetical, getRandomInt } from '../../utils';
-import { getAlbums } from '../../api';
+import GameHeader from '../../components/GameHeader';
+import SettingsModal from '../../components/SettingsModal/SettingsModal';
+import EndModal from '../../components/EndModal';
+
+import { isKeyCodeAlphabetical } from '../../utils';
+import withAlbumsData from '../../api/albumData';
 import './Game.css';
 
 class Game extends Component {
   state = {
-    loadingAlbum: true,
-    error: null,
+    currentGame: {},
     currentAlbum: {},
-    currentGame: {}
+    displaySettings: false
   };
 
-  albums = [];
-
   componentDidMount() {
-    const { service, location, history } = this.props;
-    if (service === 'spotify' && location.hash === '') history.push('/');
-    if (service === 'spotify') {
-      // Grab access token from url
-      const parsedURL = queryString.parse(location.hash);
-      this.getAlbumList('spotify', parsedURL.access_token);
-    } else {
-      const musicKit = window.MusicKit.getInstance();
-      musicKit.authorize().then(() => {
-        this.getAlbumList('appleMusic');
-      });
-    }
-
     window.addEventListener('keydown', this.handleKeyboardPress);
     if (window.ga) {
       window.ga('set', 'page');
@@ -51,39 +35,17 @@ class Game extends Component {
     window.removeEventListener('keydown', this.handleKeyboardPress);
   }
 
-  async getAlbumList(service, token) {
-    try {
-      const albums = await getAlbums(service, token);
-      this.albums = albums;
+  componentDidUpdate(prevProps) {
+    if (this.props.loading !== prevProps.loading) {
       this.setNewAlbum();
-    } catch (err) {
-      this.setState({ error: err.message });
     }
   }
 
   async setNewAlbum() {
-    this.setState({ loadingAlbum: true });
-    const album = this.albums[getRandomInt(0, this.albums.length - 1)];
-
-    try {
-      // Long album names breaks the UI.
-      if (album.name.length > 30) {
-        return this.setNewAlbum();
-      }
-
-      const currentGame = new Hangman(album.name);
-
-      // If an album name does not contain alphabetical letters (e.g. only numbers), reload a new album.
-      if (currentGame.hiddenWord.indexOf('_') === -1) {
-        return this.setNewAlbum();
-      }
-
-      this.setState({ currentGame, loadingAlbum: false });
-      // Delay the album update so the blur effect will take place after the artwork changes.
-      setTimeout(() => this.setState({ currentAlbum: album }), 425);
-    } catch (err) {
-      this.setState({ error: err.message });
-    }
+    const album = this.props.nextAlbum;
+    const currentGame = new Hangman(album.name);
+    this.setState({ currentGame });
+    setTimeout(() => this.setState({ currentAlbum: album }), 425);
   }
 
   handleKeyboardPress = event => {
@@ -113,12 +75,30 @@ class Game extends Component {
   };
 
   startNewGame = () => {
+    const { currentGame } = this.state;
+    if (currentGame.status === 'LOST') {
+      this.props.moveFirstAlbumToArrayEnd();
+    } else if (currentGame.status === 'WON') {
+      this.props.moveAlbumToGuessedArray();
+    }
+
     this.setNewAlbum();
   };
 
+  setSettingsDisplay = displaySettings => {
+    this.setState({ displaySettings });
+  };
+
+  resetGameProgress = () => {
+    if (window.confirm('Are you sure you want to reset your progress?')) {
+      this.props.resetGuessedAlbums();
+      alert('Your progress has been deleted.');
+      this.setState({ displaySettings: false });
+    }
+  };
+
   isGameActive = () => {
-    const { currentGame, loadingAlbum } = this.state;
-    return currentGame.status === 'IN_PROGRESS' && loadingAlbum === false;
+    return this.state.currentGame.status === 'IN_PROGRESS';
   };
 
   gameEnd = () => {
@@ -126,57 +106,66 @@ class Game extends Component {
   };
 
   render() {
-    if (this.state.error) {
-      return (
-        <div className="error-container">
-          <h1>{this.state.error}</h1>
-          <Link to="/">
-            <Button>
-              Try again?{' '}
-              <span role="img" aria-label="Ogre">
-                👹
-              </span>
-            </Button>
-          </Link>
-        </div>
-      );
-    }
+    let currentComponent = LoadingComponent;
+    let componentKey = 1;
 
-    // Display loading only on initial load
-    if (!this.state.currentAlbum.name) {
-      return (
-        <div className="loading-state">
-          <ReactLoading type="bubbles" height={150} width={150} />
-          <h1 style={{ marginTop: 0 }}>Loading...</h1>
+    const GameComponent = (
+      <div className="game">
+        {this.state.displaySettings && (
+          <React.Fragment>
+            <div className="overlay" />
+            <SettingsModal resetGameProgress={this.resetGameProgress} setSettingsDisplay={this.setSettingsDisplay} />
+          </React.Fragment>
+        )}
+        {this.props.progress === this.props.totalAlbums && (
+          <React.Fragment>
+            <div className="overlay" />
+            <EndModal playAgain={() => this.props.resetGuessedAlbums()} />
+          </React.Fragment>
+        )}
+        <GameHeader
+          setSettingsDisplay={this.setSettingsDisplay}
+          currentGame={this.state.currentGame}
+          totalAlbums={this.props.totalAlbums}
+          albumsProgress={this.props.progress}
+        />
+        <div className="game-stage">
+          <div className="game-stage-album-info">
+            <Artwork
+              img={this.state.currentAlbum.image}
+              blurLevel={(4 - this.state.currentGame.failedGuesses) * 5}
+              gameEnd={this.gameEnd()}
+            />
+            <Word hiddenLetters={this.state.currentGame.hiddenWord} />
+          </div>
+          <Keyboard
+            onPress={this.handleLetterPress}
+            guessedLetters={this.state.currentGame.guessedLetters}
+            failedLetters={this.state.currentGame.failedLetters}
+            gameStatus={this.state.currentGame.status}
+            startNewGame={this.startNewGame}
+          />
         </div>
-      );
+      </div>
+    );
+
+    if (this.props.error) {
+      currentComponent = <ErrorComponent message={this.props.error} />;
+      componentKey = 2;
+    } else if (this.state.currentAlbum.name) {
+      currentComponent = GameComponent;
+      componentKey = 3;
     }
 
     return (
-      <div className="game">
-        <div className="game-stage">
-          <Artwork
-            img={this.state.currentAlbum.image}
-            blurLevel={(4 - this.state.currentGame.failedGuesses) * 5}
-            gameEnd={this.gameEnd()}
-          />
-          <Word hiddenLetters={this.state.currentGame.hiddenWord} />
-        </div>
-        <div className="game-stats">
-          <Hearts lives={4 - this.state.currentGame.failedGuesses} />
-          <GuessedLetters letters={this.state.currentGame.failedLetters} />
-        </div>
-        <Keyboard
-          onPress={this.handleLetterPress}
-          guessedLetters={this.state.currentGame.guessedLetters}
-          failedLetters={this.state.currentGame.failedLetters}
-          gameStatus={this.state.currentGame.status}
-          startNewGame={this.startNewGame}
-          loadingAlbum={this.loadingAlbum}
-        />
-      </div>
+      <TransitionGroup>
+        <CSSTransition key={componentKey} classNames="fade" timeout={300}>
+          {currentComponent}
+        </CSSTransition>
+      </TransitionGroup>
     );
   }
 }
 
-export default Game;
+export { Game };
+export default withAlbumsData(Game);
