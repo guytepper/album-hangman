@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Game } from './Game';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { process } from 'ipaddr.js';
 
 const album = {
   name: 'Tidal',
@@ -78,4 +77,21 @@ it('calls reset game progress method successfuly', () => {
   window.alert = jest.fn();
   const fn = jest.fn();
 
-it('displays settings modal on gear icon click', () => {});
+  const wrapper = mount(<Game resetGuessedAlbums={fn} loading={false} totalAlbums={100} progress={5} />);
+  wrapper.instance().resetGameProgress();
+  expect(fn).toBeCalled();
+});
+
+it('displays settings modal on gear icon click', () => {
+  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+
+  jest.useFakeTimers();
+  wrapper.setProps({ loading: false, nextAlbum: album });
+  jest.runAllTimers();
+  wrapper.update();
+
+  wrapper.find('.game-top-bar-settings-icon').simulate('click');
+
+  expect(wrapper.exists('.modal')).toBeTruthy();
+  expect(wrapper.state().displaySettings).toBeTruthy();
+});
