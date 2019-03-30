@@ -41,6 +41,8 @@ it('handles key press correctly', () => {
     map[event] = cb;
   });
 
+  // Mocking the event listener on beforeAll make issues with this test, so instead we'll mount the component
+  // and mock the event listener here.
   const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
 
   jest.useFakeTimers();
