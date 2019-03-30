@@ -35,7 +35,6 @@ it('renders new album correctly', () => {
 });
 
 it('handles key press correctly', () => {
-  // Mock the global event listener
   const map = {};
   window.addEventListener = jest.fn((event, cb) => {
     map[event] = cb;
@@ -44,14 +43,12 @@ it('handles key press correctly', () => {
   // Mocking the event listener on beforeAll make issues with this test, so instead we'll mount the component
   // and mock the event listener here.
   const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
-
   jest.useFakeTimers();
   wrapper.setProps({ loading: false, nextAlbum: album });
   jest.runAllTimers();
 
   // Click the 't' key
   map.keydown({ which: 84 });
-
   expect(wrapper.state().currentGame.hiddenWord).toContain('T');
 });
 
@@ -86,15 +83,8 @@ it('calls reset game progress method successfuly', () => {
 });
 
 it('displays settings modal on gear icon click', () => {
-  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+  mainWrapper.find('.game-top-bar-settings-icon').simulate('click');
 
-  jest.useFakeTimers();
-  wrapper.setProps({ loading: false, nextAlbum: album });
-  jest.runAllTimers();
-  wrapper.update();
-
-  wrapper.find('.game-top-bar-settings-icon').simulate('click');
-
-  expect(wrapper.exists('.modal')).toBeTruthy();
-  expect(wrapper.state().displaySettings).toBeTruthy();
+  expect(mainWrapper.exists('.modal')).toBeTruthy();
+  expect(mainWrapper.state().displaySettings).toBeTruthy();
 });
