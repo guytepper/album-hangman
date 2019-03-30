@@ -30,16 +30,8 @@ it('renders loading component', () => {
 });
 
 it('renders new album correctly', () => {
-  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
-
-  jest.useFakeTimers();
-  wrapper.setProps({ loading: false, nextAlbum: album });
-  jest.runAllTimers();
-
-  // Enzyme not noticing changes caused by external circumstances (setState inside a timeout)
-  wrapper.update();
-  expect(wrapper.state().currentAlbum).toEqual(album);
-  expect(wrapper.find('.game-stage')).toHaveLength(1);
+  expect(mainWrapper.state().currentAlbum).toEqual(album);
+  expect(mainWrapper.find('.game-stage')).toHaveLength(1);
 });
 
 it('handles key press correctly', () => {
@@ -62,19 +54,12 @@ it('handles key press correctly', () => {
 });
 
 it('handles letter press correctly', () => {
-  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
-
-  jest.useFakeTimers();
-  wrapper.setProps({ loading: false, nextAlbum: album });
-  jest.runAllTimers();
-  wrapper.update();
-
-  wrapper
+  mainWrapper
     .find('.keyboard-btn')
     .at(4)
     .simulate('click');
 
-  expect(wrapper.state().currentGame.hiddenWord).toContain('T');
+  expect(mainWrapper.state().currentGame.hiddenWord).toContain('T');
 });
 
 it('displays error component correctly', () => {
