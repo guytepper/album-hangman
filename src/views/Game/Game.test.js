@@ -8,6 +8,22 @@ const album = {
   image: 'https://i.scdn.co/image/51364027ac7cc159f317daa8c64aae36f74e6fb8'
 };
 
+let mainWrapper = null;
+
+beforeAll(() => {
+  mainWrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+  jest.useFakeTimers();
+  mainWrapper.setProps({ loading: false, nextAlbum: album });
+  jest.runAllTimers();
+
+  // Enzyme not noticing changes caused by external circumstances (setState inside a timeout)
+  mainWrapper.update();
+});
+
+beforeEach(() => {
+  mainWrapper.instance().setNewAlbum();
+});
+
 it('renders loading component', () => {
   const wrapper = mount(<Game loading={true} />);
   expect(wrapper.text('Loading...')).toBeTruthy();
