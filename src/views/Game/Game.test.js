@@ -88,3 +88,13 @@ it('displays settings modal on gear icon click', () => {
   expect(mainWrapper.exists('.modal')).toBeTruthy();
   expect(mainWrapper.state().displaySettings).toBeTruthy();
 });
+
+it('displays end modal on game end', () => {
+  const wrapper = mount(<Game totalAlbums={100} progress={100} loading={true} />);
+  jest.useFakeTimers();
+  wrapper.setProps({ loading: false, nextAlbum: album });
+  jest.runAllTimers();
+  wrapper.update();
+
+  expect(wrapper.exists('.end-modal')).toBeTruthy();
+});
