@@ -93,10 +93,10 @@ function deleteSavedAlbums() {
 function resetProgress() {
   const pendingAlbums = JSON.parse(localStorage.getItem('pendingAlbums'));
   const guessedAlbums = JSON.parse(localStorage.getItem('guessedAlbums'));
-  pendingAlbums.concat(guessedAlbums);
+  const allAlbums = pendingAlbums.concat(guessedAlbums);
 
   localStorage.clear();
-  localStorage.setItem('pendingAlbums', JSON.stringify(pendingAlbums));
+  localStorage.setItem('pendingAlbums', JSON.stringify(allAlbums));
   localStorage.setItem('guessedAlbums', JSON.stringify([]));
 }
 
