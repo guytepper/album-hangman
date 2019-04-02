@@ -91,18 +91,21 @@ it('displays settings modal on gear icon click', () => {
 
 it('starts new game method calls correct methods', () => {
   const setNewAlbumMock = jest.fn();
-  wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+  jest.useFakeTimers();
+  wrapper.setProps({ loading: false, nextAlbum: album });
+  jest.runAllTimers();
+  wrapper.update();
 
   wrapper.instance().setNewAlbum = setNewAlbumMock;
-  wrapper.update();
   wrapper.instance().handleLetterPress('T');
   wrapper.instance().handleLetterPress('i');
   wrapper.instance().handleLetterPress('d');
   wrapper.instance().handleLetterPress('a');
   wrapper.instance().handleLetterPress('l');
 
-  expect(setNewAlbumMock).toBeCalled();
   console.log(wrapper.state());
+  expect(setNewAlbumMock).toBeCalledTimes(1);
 });
 
 it('displays end modal on game end', () => {
