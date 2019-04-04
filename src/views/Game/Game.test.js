@@ -101,6 +101,22 @@ it('shows success message', () => {
   expect(mainWrapper.text('Correct!')).toBeTruthy();
 });
 
+it('reveals album name on game lose', () => {
+  mainWrapper.state().currentGame.revealHiddenWord = jest.fn();
+  mainWrapper.instance().handleLetterPress('f');
+  mainWrapper.instance().handleLetterPress('o');
+  mainWrapper.instance().handleLetterPress('e');
+  mainWrapper.instance().handleLetterPress('q');
+
+  expect(mainWrapper.state().currentGame.revealHiddenWord).toBeCalled();
+  expect(
+    mainWrapper
+      .find('.hidden-word-letter')
+      .at(0)
+      .text()
+  ).toEqual('T'); // 'Reveals the T letter of Tidal
+});
+
 it('starts new game on enter click', () => {
   const map = {};
   window.addEventListener = jest.fn((event, cb) => {
