@@ -10,7 +10,6 @@ function SettingsModal({ resetGameProgress, setSettingsDisplay }) {
         <Button type="warning" onClick={resetGameProgress}>
           Reset Progress
         </Button>
-        <Button type="warning">Logout</Button>
         <Button type="success" onClick={() => setSettingsDisplay(false)}>
           Close
         </Button>
