@@ -32,6 +32,13 @@ const guessAlbumCorrectly = wrapper => {
   wrapper.instance().handleLetterPress('l');
 };
 
+const guessAlbumWrong = wrapper => {
+  wrapper.instance().handleLetterPress('f');
+  wrapper.instance().handleLetterPress('o');
+  wrapper.instance().handleLetterPress('e');
+  wrapper.instance().handleLetterPress('q');
+};
+
 it('renders loading component', () => {
   const wrapper = mount(<Game loading={true} />);
   expect(wrapper.text('Loading...')).toBeTruthy();
@@ -107,10 +114,7 @@ it('shows success message', () => {
 
 it('reveals album name on game lose', () => {
   mainWrapper.state().currentGame.revealHiddenWord = jest.fn();
-  mainWrapper.instance().handleLetterPress('f');
-  mainWrapper.instance().handleLetterPress('o');
-  mainWrapper.instance().handleLetterPress('e');
-  mainWrapper.instance().handleLetterPress('q');
+  guessAlbumWrong(mainWrapper);
 
   expect(mainWrapper.state().currentGame.revealHiddenWord).toBeCalled();
   expect(
