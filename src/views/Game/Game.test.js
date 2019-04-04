@@ -24,6 +24,14 @@ beforeEach(() => {
   mainWrapper.instance().setNewAlbum();
 });
 
+const guessAlbumCorrectly = wrapper => {
+  wrapper.instance().handleLetterPress('T');
+  wrapper.instance().handleLetterPress('i');
+  wrapper.instance().handleLetterPress('d');
+  wrapper.instance().handleLetterPress('a');
+  wrapper.instance().handleLetterPress('l');
+};
+
 it('renders loading component', () => {
   const wrapper = mount(<Game loading={true} />);
   expect(wrapper.text('Loading...')).toBeTruthy();
@@ -90,11 +98,7 @@ it('displays settings modal on gear icon click', () => {
 });
 
 it('shows success message', () => {
-  mainWrapper.instance().handleLetterPress('T');
-  mainWrapper.instance().handleLetterPress('i');
-  mainWrapper.instance().handleLetterPress('d');
-  mainWrapper.instance().handleLetterPress('a');
-  mainWrapper.instance().handleLetterPress('l');
+  guessAlbumCorrectly(mainWrapper);
   mainWrapper.update();
 
   expect(mainWrapper.exists('.game-status-msg')).toBeTruthy();
@@ -117,7 +121,22 @@ it('reveals album name on game lose', () => {
   ).toEqual('T'); // 'Reveals the T letter of Tidal
 });
 
-it('starts new game on enter click', () => {
+it.skip('calls correct new game methods after game lose', () => {
+  const wrapper = mount(
+    <Game loading={true} totalAlbums={100} progress={0} moveFirstAlbumToArrayEnd={jest.fn()} error={null} />
+  );
+
+  jest.useFakeTimers();
+  wrapper.setProps({ loading: false, nextAlbum: album });
+  jest.runAllTimers();
+
+  guessAlbumCorrectly(wrapper);
+  wrapper.update();
+
+  wrapper.instance().setNewAlbum = jest.fn();
+});
+
+it('calls correct new game methods after game win', () => {
   const map = {};
   window.addEventListener = jest.fn((event, cb) => {
     map[event] = cb;
@@ -133,11 +152,7 @@ it('starts new game on enter click', () => {
 
   wrapper.instance().setNewAlbum = jest.fn();
 
-  wrapper.instance().handleLetterPress('T');
-  wrapper.instance().handleLetterPress('i');
-  wrapper.instance().handleLetterPress('d');
-  wrapper.instance().handleLetterPress('a');
-  wrapper.instance().handleLetterPress('l');
+  guessAlbumCorrectly(wrapper);
   wrapper.update();
 
   map.keydown({ which: 13 }); // Clicks the enter key to start a new round
