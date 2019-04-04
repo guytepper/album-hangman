@@ -1,3 +1,8 @@
+.settings-modal-text {
+  text-align: center;
+  color: #636363e5;
+}
+
 .settings-modal-buttons {
   display: flex;
   height: 60%;
