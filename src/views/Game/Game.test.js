@@ -89,9 +89,28 @@ it('displays settings modal on gear icon click', () => {
   expect(mainWrapper.state().displaySettings).toBeTruthy();
 });
 
-it('starts new game method calls correct methods', () => {
-  const setNewAlbumMock = jest.fn();
-  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+it('shows success message', () => {
+  mainWrapper.instance().handleLetterPress('T');
+  mainWrapper.instance().handleLetterPress('i');
+  mainWrapper.instance().handleLetterPress('d');
+  mainWrapper.instance().handleLetterPress('a');
+  mainWrapper.instance().handleLetterPress('l');
+  mainWrapper.update();
+
+  expect(mainWrapper.exists('.game-status-msg')).toBeTruthy();
+  expect(mainWrapper.text('Correct!')).toBeTruthy();
+});
+
+it('starts new game on enter click', () => {
+  const map = {};
+  window.addEventListener = jest.fn((event, cb) => {
+    map[event] = cb;
+  });
+
+  const wrapper = mount(
+    <Game loading={true} totalAlbums={100} progress={0} moveAlbumToGuessedArray={jest.fn()} error={null} />
+  );
+
   jest.useFakeTimers();
   wrapper.setProps({ loading: false, nextAlbum: album });
   jest.runAllTimers();
