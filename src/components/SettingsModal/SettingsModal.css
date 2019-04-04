@@ -1,0 +1,60 @@
+.settings-modal {
+  height: 320px;
+}
+
+.settings-modal-text {
+  color: #636363e5;
+  font-size: 15px;
+  text-align: center;
+}
+
+@media (min-width: 1280px) {
+  /* Temp fix - because desktop browsers currently doesn't support the Web Share API,
+     the share button won't be displayed which will cause an large whitespace in the modal. */
+  .settings-modal {
+    height: 280px;
+  }
+
+  .settings-modal-text {
+    font-size: 17px;
+  }
+}
+
+.settings-modal-buttons {
+  display: flex;
+  height: 60%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.settings-modal-credits {
+  color: #6b6b6be5;
+  font-family: 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif;
+  font-size: 14px;
+}
+
+.settings-modal-credits-name,
+.settings-modal-credits-github {
+  display: block;
+  font-weight: 300;
+  text-align: center;
+}
+
+.settings-modal-credits-name {
+  margin-bottom: 5px;
+}
+
+.settings-modal-credits-github {
+  color: #585858e5;
+}
+
+.settings-modal-credits-github a {
+  color: rgba(56, 56, 56, 0.898);
+  text-decoration: none;
+  transition: color 0.2s ease-out;
+}
+
+.settings-modal-credits-github a:hover {
+  color: #445c62;
+}
