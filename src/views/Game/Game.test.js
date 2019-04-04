@@ -125,7 +125,7 @@ it('reveals album name on game lose', () => {
   ).toEqual('T'); // 'Reveals the T letter of Tidal
 });
 
-it.skip('calls correct new game methods after game lose', () => {
+it('calls correct new game methods after game lose', () => {
   const wrapper = mount(
     <Game loading={true} totalAlbums={100} progress={0} moveFirstAlbumToArrayEnd={jest.fn()} error={null} />
   );
@@ -134,10 +134,17 @@ it.skip('calls correct new game methods after game lose', () => {
   wrapper.setProps({ loading: false, nextAlbum: album });
   jest.runAllTimers();
 
-  guessAlbumCorrectly(wrapper);
+  guessAlbumWrong(wrapper);
   wrapper.update();
 
   wrapper.instance().setNewAlbum = jest.fn();
+  wrapper
+    .find('.button-wrapper')
+    .at(0)
+    .simulate('click'); // Click 'Next Album' button
+
+  expect(wrapper.prop('moveFirstAlbumToArrayEnd')).toBeCalled();
+  expect(wrapper.instance().setNewAlbum).toBeCalled();
 });
 
 it('calls correct new game methods after game win', () => {
