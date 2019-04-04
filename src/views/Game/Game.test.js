@@ -136,8 +136,8 @@ it('calls correct new game methods after game lose', () => {
 
   guessAlbumWrong(wrapper);
   wrapper.update();
-
   wrapper.instance().setNewAlbum = jest.fn();
+
   wrapper
     .find('.button-wrapper')
     .at(0)
@@ -184,4 +184,19 @@ it('displays end modal on game end', () => {
     .at(0)
     .simulate('click'); // Clicks Play Again button
   expect(wrapper.prop('resetGuessedAlbums')).toBeCalled(); // Resets game progress
+});
+
+it('removes keydown listener on unmount', () => {
+  const map = {};
+  window.addEventListener = jest.fn((event, cb) => {
+    map[event] = cb;
+  });
+  window.removeEventListener = jest.fn((event, cb) => {
+    delete map[event];
+  });
+
+  const wrapper = mount(<Game loading={true} totalAlbums={100} progress={0} nextAlbum={null} error={null} />);
+  expect(typeof map.keydown).toEqual('function');
+  wrapper.unmount();
+  expect('keydown' in map).toBeFalsy();
 });
