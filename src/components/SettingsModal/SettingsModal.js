@@ -6,6 +6,10 @@ import './SettingsModal.css';
 function SettingsModal({ resetGameProgress, setSettingsDisplay }) {
   return (
     <Modal>
+    <Modal className="settings-modal">
+      <span className="settings-modal-text">
+        Your progress is being saved - you'll be able to continue playing later if you'll close the window.
+      </span>
       <div className="settings-modal-buttons">
         <Button type="warning" onClick={resetGameProgress}>
           Reset Progress
