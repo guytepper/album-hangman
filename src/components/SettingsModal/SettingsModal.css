@@ -2,17 +2,22 @@
   height: 320px;
 }
 
+.settings-modal-text {
+  color: #636363e5;
+  font-size: 15px;
+  text-align: center;
+}
+
 @media (min-width: 1280px) {
   /* Temp fix - because desktop browsers currently doesn't support the Web Share API,
      the share button won't be displayed which will cause an large whitespace in the modal. */
   .settings-modal {
     height: 280px;
   }
-}
 
-.settings-modal-text {
-  color: #636363e5;
-  text-align: center;
+  .settings-modal-text {
+    font-size: 17px;
+  }
 }
 
 .settings-modal-buttons {
