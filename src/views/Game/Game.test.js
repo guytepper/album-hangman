@@ -146,11 +146,16 @@ it('starts new game on enter click', () => {
 });
 
 it('displays end modal on game end', () => {
-  const wrapper = mount(<Game totalAlbums={100} progress={100} loading={true} />);
+  const wrapper = mount(<Game totalAlbums={100} progress={100} loading={true} resetGuessedAlbums={jest.fn()} />);
   jest.useFakeTimers();
   wrapper.setProps({ loading: false, nextAlbum: album });
   jest.runAllTimers();
   wrapper.update();
 
   expect(wrapper.exists('.end-modal')).toBeTruthy();
+  wrapper
+    .find('.hangman-btn-success')
+    .at(0)
+    .simulate('click'); // Clicks Play Again button
+  expect(wrapper.prop('resetGuessedAlbums')).toBeCalled(); // Resets game progress
 });
