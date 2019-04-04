@@ -25,12 +25,6 @@
   justify-content: center;
 }
 
-.button-loading-wrapper {
-  width: 20px;
-  height: 20px;
-  margin-left: -20px;
-}
-
 .button-text-wrapper {
   margin-left: 10px;
 }
