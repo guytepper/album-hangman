@@ -95,17 +95,19 @@ it('starts new game method calls correct methods', () => {
   jest.useFakeTimers();
   wrapper.setProps({ loading: false, nextAlbum: album });
   jest.runAllTimers();
-  wrapper.update();
 
-  wrapper.instance().setNewAlbum = setNewAlbumMock;
+  wrapper.instance().setNewAlbum = jest.fn();
+
   wrapper.instance().handleLetterPress('T');
   wrapper.instance().handleLetterPress('i');
   wrapper.instance().handleLetterPress('d');
   wrapper.instance().handleLetterPress('a');
   wrapper.instance().handleLetterPress('l');
+  wrapper.update();
 
-  console.log(wrapper.state());
-  expect(setNewAlbumMock).toBeCalledTimes(1);
+  map.keydown({ which: 13 }); // Clicks the enter key to start a new round
+  expect(wrapper.prop('moveAlbumToGuessedArray')).toBeCalled();
+  expect(wrapper.instance().setNewAlbum).toBeCalled();
 });
 
 it('displays end modal on game end', () => {
