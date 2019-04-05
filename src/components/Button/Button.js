@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import './Button.css';
 
-let btnTypeClassName = '';
 export default function Button(props) {
   const classes = classNames('hangman-btn', { [`hangman-btn-${props.type}`]: props.type }, props.className);
 
