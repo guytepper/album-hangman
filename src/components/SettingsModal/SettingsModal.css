@@ -1,5 +1,9 @@
-.settings-modal {
+.settings-modal-long {
   height: 320px;
+}
+
+.settings-modal-short {
+  height: 280px;
 }
 
 .settings-modal-text {
@@ -9,12 +13,6 @@
 }
 
 @media (min-width: 1280px) {
-  /* Temp fix - because desktop browsers currently doesn't support the Web Share API,
-     the share button won't be displayed which will cause an large whitespace in the modal. */
-  .settings-modal {
-    height: 280px;
-  }
-
   .settings-modal-text {
     font-size: 17px;
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import Modal from '../Modal';
 import Button from '../Button';
 import './SettingsModal.css';
@@ -15,8 +16,13 @@ if (window.navigator.share) {
 }
 
 function SettingsModal({ resetGameProgress, setSettingsDisplay }) {
+  const classes = classNames({
+    'settings-modal-long': displayShareBtn,
+    'settings-modal-short': !displayShareBtn
+  });
+
   return (
-    <Modal className="settings-modal">
+    <Modal className={classes}>
       <span className="settings-modal-text">
         Your progress is being saved - you'll be able to continue playing if you close the window.
       </span>
