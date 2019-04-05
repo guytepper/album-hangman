@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import './Hearts.css';
 
 function Hearts({ lives }) {
@@ -7,9 +8,11 @@ function Hearts({ lives }) {
   // For each live, display an heart icon
   for (let i = 4; i > 0; i--) {
     let heartClassName = 'heart';
+
     if (i <= 4 - lives) {
-      heartClassName += ' heart-grey';
+      heartClassName = classNames('heart', 'heart-grey');
     }
+
     hearts.push(
       <svg className={heartClassName} viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg" key={i}>
         <path
