@@ -1,0 +1,29 @@
+.error-container {
+  display: flex;
+  height: 80vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: center;
+}
+
+.error-message {
+  width: 300px;
+}
+
+.error-detail {
+  width: 260px;
+  margin-bottom: 20px;
+  font-weight: 100;
+}
+
+@media (min-width: 768px) {
+  .error-message {
+    width: initial;
+  }
+
+  .error-detail {
+    width: 350px;
+  }
+}
