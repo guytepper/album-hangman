@@ -1,8 +1,11 @@
 import React from 'react';
+import classNames from 'classnames';
 import './Modal.css';
 
 function Modal({ className, children }) {
-  return <div className={`modal ${className}`}>{children}</div>;
+  const classes = classNames('modal', className);
+
+  return <div className={classes}>{children}</div>;
 }
 
 export default Modal;
