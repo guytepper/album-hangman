@@ -56,7 +56,8 @@ function normalizeServiceResponse(service, response) {
 function filterAlbums(albums) {
   return albums
     .filter(album => createConcealArr(album.name).indexOf('_') !== -1)
-    .filter(album => album.name.length < 30);
+    .filter(album => album.name.length < 30)
+    .filter(album => !album.name.includes('Greatest Hits'));
 }
 
 /**
@@ -95,4 +96,6 @@ async function getAlbums(service, token) {
   }
 }
 
-export { getAlbums };
+const privateMethods = { filterAlbums };
+
+export { getAlbums, privateMethods };
