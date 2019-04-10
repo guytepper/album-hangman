@@ -3,8 +3,8 @@ import queryString from 'query-string';
 import { getAlbums } from './api';
 import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../utils';
 
-function withAlbumData(Component) {
-  return class albumData extends React.Component {
+function withAlbumsData(Component) {
+  return class withAlbumsData extends React.Component {
     state = {
       error: null,
       loading: true,
@@ -101,4 +101,4 @@ function withAlbumData(Component) {
   };
 }
 
-export default withAlbumData;
+export default withAlbumsData;
