@@ -12,7 +12,7 @@ import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import EndModal from '../../components/EndModal';
 
 import { isKeyCodeAlphabetical } from '../../utils';
-import withAlbumsData from '../../api/withAlbumsData';
+import withAlbumsData from '../../api/withAlbumData';
 import './Game.css';
 
 class Game extends Component {
