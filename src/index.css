@@ -14,3 +14,11 @@ body {
   background-color: #fff;
   font-family: 'Helvetica Neue', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Ubuntu', sans-serif;
 }
+
+@font-face {
+  font-display: swap;
+  font-family: 'ChicagoFLF';
+  font-style: normal;
+  font-weight: normal;
+  src: local('ChicagoFLF'), url('/fonts/ChicagoFLF.woff2') format('woff2'), url('/fonts/ChicagoFLF.woff') format('woff');
+}
