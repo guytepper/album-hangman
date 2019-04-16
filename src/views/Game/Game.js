@@ -82,7 +82,9 @@ class Game extends Component {
       this.props.moveAlbumToGuessedArray();
     }
 
-    this.setNewAlbum();
+    if (this.props.progress !== this.props.totalAlbums) {
+      this.setNewAlbum();
+    }
   };
 
   setSettingsDisplay = displaySettings => {
