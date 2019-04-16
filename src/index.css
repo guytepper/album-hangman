@@ -20,5 +20,9 @@ body {
   font-family: 'ChicagoFLF';
   font-style: normal;
   font-weight: normal;
-  src: local('ChicagoFLF'), url('/fonts/ChicagoFLF.woff2') format('woff2'), url('/fonts/ChicagoFLF.woff') format('woff');
+  src:
+    local('Krungthep'),
+    local('ChicagoFLF'),
+    url('/fonts/ChicagoFLF.woff2') format('woff2'),
+    url('/fonts/ChicagoFLF.woff') format('woff');
 }
