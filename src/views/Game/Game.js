@@ -120,7 +120,12 @@ class Game extends Component {
         {this.props.progress === this.props.totalAlbums && (
           <React.Fragment>
             <div className="overlay" />
-            <EndModal playAgain={() => this.props.resetGuessedAlbums()} />
+            <EndModal
+              playAgain={async () => {
+                await this.props.resetGuessedAlbums();
+                this.setNewAlbum();
+              }}
+            />
           </React.Fragment>
         )}
         <GameHeader
