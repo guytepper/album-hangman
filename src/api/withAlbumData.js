@@ -41,10 +41,16 @@ function withAlbumData(Component) {
       }
     }
 
+    /**
+     * Returns a promise that resolves after all albums has been loaded
+     * from cache and the state has been updated.
+     */
     loadFromCache = () => {
-      const [pendingAlbums, guessedAlbums] = getSavedAlbums();
-      const totalAlbums = pendingAlbums.length + guessedAlbums.length;
-      this.setState({ pendingAlbums, guessedAlbums, totalAlbums, loading: false }, this.setNewAlbum);
+      return new Promise(resolve => {
+        const [pendingAlbums, guessedAlbums] = getSavedAlbums();
+        const totalAlbums = pendingAlbums.length + guessedAlbums.length;
+        this.setState({ pendingAlbums, guessedAlbums, totalAlbums, loading: false }, resolve());
+      });
     };
 
     async getAlbumList(service, token) {
@@ -77,9 +83,14 @@ function withAlbumData(Component) {
       this.setState({ pendingAlbums: newPending, guessedAlbums: newGuessed });
     };
 
-    resetGuessedAlbums = () => {
-      resetProgress();
-      this.loadFromCache();
+    resetGuessedAlbums = async () => {
+      try {
+        resetProgress();
+        await this.loadFromCache();
+        return true;
+      } catch (error) {
+        throw error;
+      }
     };
 
     render() {
