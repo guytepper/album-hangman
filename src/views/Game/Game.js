@@ -74,16 +74,20 @@ class Game extends Component {
     }
   };
 
-  startNewGame = () => {
-    const { currentGame } = this.state;
-    if (currentGame.status === 'LOST') {
-      this.props.moveFirstAlbumToArrayEnd();
-    } else if (currentGame.status === 'WON') {
-      this.props.moveAlbumToGuessedArray();
-    }
+  startNewGame = async () => {
+    try {
+      const { currentGame } = this.state;
+      if (currentGame.status === 'LOST') {
+        await this.props.moveFirstAlbumToArrayEnd();
+      } else if (currentGame.status === 'WON') {
+        await this.props.moveAlbumToGuessedArray();
+      }
 
-    if (this.props.progress !== this.props.totalAlbums) {
-      this.setNewAlbum();
+      if (this.props.progress !== this.props.totalAlbums) {
+        this.setNewAlbum();
+      }
+    } catch (error) {
+      throw error;
     }
   };
 

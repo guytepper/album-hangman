@@ -64,23 +64,27 @@ function withAlbumData(Component) {
     }
 
     moveFirstAlbumToArrayEnd = () => {
-      const { pendingAlbums, guessedAlbums } = this.state;
-      const newPending = [...pendingAlbums];
-      newPending.push(newPending.shift());
+      return new Promise(resolve => {
+        const { pendingAlbums, guessedAlbums } = this.state;
+        const newPending = [...pendingAlbums];
+        newPending.push(newPending.shift());
 
-      updateSavedAlbums(newPending, guessedAlbums);
-      this.setState({ pendingAlbums: newPending });
+        updateSavedAlbums(newPending, guessedAlbums);
+        this.setState({ pendingAlbums: newPending }, resolve());
+      });
     };
 
     moveAlbumToGuessedArray = () => {
-      const { pendingAlbums, guessedAlbums } = this.state;
-      // Will large arrays cloning cause a performance issue?..
-      const newPending = [...pendingAlbums];
-      const newGuessed = [...guessedAlbums];
-      newGuessed.push(newPending.shift());
+      return new Promise(resolve => {
+        const { pendingAlbums, guessedAlbums } = this.state;
+        // Will large arrays cloning cause a performance issue?..
+        const newPending = [...pendingAlbums];
+        const newGuessed = [...guessedAlbums];
+        newGuessed.push(newPending.shift());
 
-      updateSavedAlbums(newPending, newGuessed);
-      this.setState({ pendingAlbums: newPending, guessedAlbums: newGuessed });
+        updateSavedAlbums(newPending, newGuessed);
+        this.setState({ pendingAlbums: newPending, guessedAlbums: newGuessed }, resolve());
+      });
     };
 
     resetGuessedAlbums = async () => {
