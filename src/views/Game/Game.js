@@ -85,7 +85,9 @@ class Game extends Component {
 
       if (this.props.progress !== this.props.totalAlbums) {
         this.setNewAlbum();
+        return true;
       }
+      return false;
     } catch (error) {
       throw error;
     }
