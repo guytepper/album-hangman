@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
-import { getAlbums } from './api';
-import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../utils';
+import { getAlbums } from '../api';
+import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../../utils';
 
 function withAlbumData(Component) {
   return class withAlbumData extends React.Component {
@@ -41,10 +41,16 @@ function withAlbumData(Component) {
       }
     }
 
+    /**
+     * Returns a promise that resolves after all albums has been loaded
+     * from cache and the state has been updated.
+     */
     loadFromCache = () => {
-      const [pendingAlbums, guessedAlbums] = getSavedAlbums();
-      const totalAlbums = pendingAlbums.length + guessedAlbums.length;
-      this.setState({ pendingAlbums, guessedAlbums, totalAlbums, loading: false }, this.setNewAlbum);
+      return new Promise(resolve => {
+        const [pendingAlbums, guessedAlbums] = getSavedAlbums();
+        const totalAlbums = pendingAlbums.length + guessedAlbums.length;
+        this.setState({ pendingAlbums, guessedAlbums, totalAlbums, loading: false }, resolve());
+      });
     };
 
     async getAlbumList(service, token) {
@@ -58,28 +64,37 @@ function withAlbumData(Component) {
     }
 
     moveFirstAlbumToArrayEnd = () => {
-      const { pendingAlbums, guessedAlbums } = this.state;
-      const newPending = [...pendingAlbums];
-      newPending.push(newPending.shift());
+      return new Promise(resolve => {
+        const { pendingAlbums, guessedAlbums } = this.state;
+        const newPending = [...pendingAlbums];
+        newPending.push(newPending.shift());
 
-      updateSavedAlbums(newPending, guessedAlbums);
-      this.setState({ pendingAlbums: newPending });
+        updateSavedAlbums(newPending, guessedAlbums);
+        this.setState({ pendingAlbums: newPending }, resolve());
+      });
     };
 
     moveAlbumToGuessedArray = () => {
-      const { pendingAlbums, guessedAlbums } = this.state;
-      // Will large arrays cloning cause a performance issue?..
-      const newPending = [...pendingAlbums];
-      const newGuessed = [...guessedAlbums];
-      newGuessed.push(newPending.shift());
+      return new Promise(resolve => {
+        const { pendingAlbums, guessedAlbums } = this.state;
+        // Will large arrays cloning cause a performance issue?..
+        const newPending = [...pendingAlbums];
+        const newGuessed = [...guessedAlbums];
+        newGuessed.push(newPending.shift());
 
-      updateSavedAlbums(newPending, newGuessed);
-      this.setState({ pendingAlbums: newPending, guessedAlbums: newGuessed });
+        updateSavedAlbums(newPending, newGuessed);
+        this.setState({ pendingAlbums: newPending, guessedAlbums: newGuessed }, resolve());
+      });
     };
 
-    resetGuessedAlbums = () => {
-      resetProgress();
-      this.loadFromCache();
+    resetGuessedAlbums = async () => {
+      try {
+        resetProgress();
+        await this.loadFromCache();
+        return true;
+      } catch (error) {
+        throw error;
+      }
     };
 
     render() {

@@ -74,15 +74,23 @@ class Game extends Component {
     }
   };
 
-  startNewGame = () => {
-    const { currentGame } = this.state;
-    if (currentGame.status === 'LOST') {
-      this.props.moveFirstAlbumToArrayEnd();
-    } else if (currentGame.status === 'WON') {
-      this.props.moveAlbumToGuessedArray();
-    }
+  startNewGame = async () => {
+    try {
+      const { currentGame } = this.state;
+      if (currentGame.status === 'LOST') {
+        await this.props.moveFirstAlbumToArrayEnd();
+      } else if (currentGame.status === 'WON') {
+        await this.props.moveAlbumToGuessedArray();
+      }
 
-    this.setNewAlbum();
+      if (this.props.progress !== this.props.totalAlbums) {
+        this.setNewAlbum();
+        return true;
+      }
+      return false;
+    } catch (error) {
+      throw error;
+    }
   };
 
   setSettingsDisplay = displaySettings => {
@@ -120,7 +128,12 @@ class Game extends Component {
         {this.props.progress === this.props.totalAlbums && (
           <React.Fragment>
             <div className="overlay" />
-            <EndModal playAgain={() => this.props.resetGuessedAlbums()} />
+            <EndModal
+              playAgain={async () => {
+                await this.props.resetGuessedAlbums();
+                this.setNewAlbum();
+              }}
+            />
           </React.Fragment>
         )}
         <GameHeader
