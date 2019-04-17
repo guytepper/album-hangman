@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
-import { getAlbums } from './api';
-import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../utils';
+import { getAlbums } from '../api';
+import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../../utils';
 
 function withAlbumData(Component) {
   return class withAlbumData extends React.Component {
