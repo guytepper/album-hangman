@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import LoginButton from '../../components/LoginButton';
 import { getSavedAlbums, deleteSavedAlbums } from '../../utils';
 import './Landing.css';
@@ -34,6 +34,7 @@ function selectAppleMusic(selectService, history) {
 }
 
 function Landing(props) {
+  const imageElm = useRef(null);
   const [hasProgress, setHasProgress] = useState(false);
   const [pendingAlbums] = getSavedAlbums();
 
@@ -47,15 +48,22 @@ function Landing(props) {
     }
   });
 
+  /* Safari (both iOS & OS X) doesn't display the image correctly on initial launch. 
+     Loading the image using JavaScript fixes the issue. */
+  useEffect(() => {
+    const albumsImage = new Image();
+    albumsImage.onload = function() {
+      imageElm.current.src = albumsImage.src;
+      imageElm.current.className = 'landing-moving-albums-image';
+    };
+    albumsImage.src = './albums-carousel2.jpg';
+  }, []);
+
   return (
     <div className="landing">
       <h1 className="landing-header">Do you really know your music?</h1>
       <div className="landing-moving-albums">
-        <img
-          className="landing-moving-albums-image"
-          src="./albums-carousel2.jpg"
-          alt="Blurred Album Artworks Carousel"
-        />
+        <img ref={imageElm} alt="Blurred Album Artworks Carousel" />
       </div>
       <div className="landing-game-info">
         <div className="landing-description">
