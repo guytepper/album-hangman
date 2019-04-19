@@ -40,10 +40,20 @@ function SettingsModal({ resetGameProgress, setSettingsDisplay }) {
         </Button>
       </div>
       <div className="settings-modal-credits">
-        <span className="settings-modal-credits-name">Created by Guy Tepper</span>
+        <span className="settings-modal-credits-name">
+          Created by{' '}
+          <a className="settings-modal-credits-link" href="mailto:guytepper@gmail.com">
+            Guy Tepper
+          </a>
+        </span>
         <span className="settings-modal-credits-github">
           Fork on{' '}
-          <a target="_blank" href="https://github.com/guytepper/album-hangman" rel="noopener noreferrer">
+          <a
+            href="https://github.com/guytepper/album-hangman"
+            className="settings-modal-credits-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Github
           </a>
         </span>

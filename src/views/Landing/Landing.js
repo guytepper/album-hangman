@@ -115,7 +115,10 @@ function Landing(props) {
       </div>
       <footer className="landing-footer">
         <span className="landing-footer-created">
-          Created by <span className="landing-footer-created-name">Guy Tepper</span>
+          Created by{' '}
+          <a className="landing-footer-github-link" href="mailto:guytepper@gmail.com">
+            Guy Tepper
+          </a>
         </span>
         <span>
           Fork on{' '}

@@ -47,12 +47,12 @@
   color: #585858e5;
 }
 
-.settings-modal-credits-github a {
+.settings-modal-credits-link {
   color: rgba(56, 56, 56, 0.898);
   text-decoration: none;
   transition: color 0.2s ease-out;
 }
 
-.settings-modal-credits-github a:hover {
+.settings-modal-credits-link:hover {
   color: #445c62;
 }
