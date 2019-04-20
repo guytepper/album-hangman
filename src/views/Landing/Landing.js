@@ -56,7 +56,7 @@ function Landing(props) {
       imageElm.current.src = albumsImage.src;
       imageElm.current.className = 'landing-moving-albums-image';
     };
-    albumsImage.src = './albums-carousel2.jpg';
+    albumsImage.src = './albums-carousel.jpg';
   }, []);
 
   return (
