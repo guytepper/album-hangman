@@ -1,0 +1,19 @@
+{
+  "name": "Album Hangman",
+  "icons": [
+    {
+      "src": "/favicons/favicon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/favicons/favicon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/?utm_source=a2hs",
+  "background_color": "#fff",
+  "display": "standalone",
+  "theme_color": "#F1F3F4"
+}
