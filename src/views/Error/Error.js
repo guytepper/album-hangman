@@ -7,9 +7,11 @@ const errorDetail = 'Spotify is providing only albums you saved in full - not in
 
 function Error({ message }) {
   let showDetail = false;
+
   if (message === 'No saved albums has been found.') {
     showDetail = true;
   }
+
   return (
     <div className="error-container">
       <h1 className="error-message">{message}</h1>
