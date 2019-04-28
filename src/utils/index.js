@@ -88,6 +88,10 @@ function getSavedAlbums() {
 
 function deleteSavedAlbums() {
   localStorage.clear();
+  window.ga('send', 'event', {
+    eventCategory: 'Landing Action',
+    eventAction: 'Delete Albums'
+  });
 }
 
 function resetProgress() {
@@ -98,6 +102,10 @@ function resetProgress() {
   localStorage.clear();
   localStorage.setItem('pendingAlbums', JSON.stringify(allAlbums));
   localStorage.setItem('guessedAlbums', JSON.stringify([]));
+  window.ga('send', 'event', {
+    eventCategory: 'Game Action',
+    eventAction: 'Reset Progress'
+  });
 }
 
 export {
