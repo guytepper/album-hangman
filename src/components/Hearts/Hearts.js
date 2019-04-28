@@ -5,7 +5,7 @@ import './Hearts.css';
 function Hearts({ lives }) {
   const hearts = [];
 
-  // For each live, display an heart icon
+  // For each turn, display an heart icon
   for (let i = 4; i > 0; i--) {
     let heartClassName = 'heart';
 
