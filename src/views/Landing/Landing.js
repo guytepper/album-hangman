@@ -3,36 +3,6 @@ import LoginButton from '../../components/LoginButton';
 import { getSavedAlbums, deleteSavedAlbums } from '../../utils';
 import './Landing.css';
 
-let spotifyRedirectURL = 'http://localhost:3000/game/';
-if (process.env.NODE_ENV === 'production') {
-  spotifyRedirectURL = 'https://album-hangman.com/game/';
-}
-
-function selectSpotify(selectService) {
-  localStorage.setItem('service', 'spotify');
-  window.open(
-    `https://accounts.spotify.com/authorize?client_id=${
-      process.env.REACT_APP_SPOTIFY_ID
-    }&response_type=token&scope=user-library-read&redirect_uri=${spotifyRedirectURL}`,
-    '_self'
-  );
-}
-
-function selectAppleMusic(selectService, history) {
-  localStorage.setItem('service', 'appleMusic');
-  window.MusicKit.configure({
-    developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
-    app: {
-      name: 'Album Hangman',
-      build: '2018.29.11'
-    }
-  });
-  const musicKit = window.MusicKit.getInstance();
-  musicKit.authorize().then(() => {
-    history.push('/game/');
-  });
-}
-
 function Landing(props) {
   const imageElm = useRef(null);
   const [hasProgress, setHasProgress] = useState(false);
@@ -102,12 +72,35 @@ function Landing(props) {
               <LoginButton
                 text="Connect with Spotify"
                 icon="/spotify.svg"
-                onClick={() => selectSpotify(props.selectService)}
+                onClick={() => {
+                  localStorage.setItem('service', 'spotify');
+                  window.open(
+                    `https://accounts.spotify.com/authorize?client_id=${
+                      process.env.REACT_APP_SPOTIFY_ID
+                    }&response_type=token&scope=user-library-read&redirect_uri=${
+                      process.env.REACT_APP_GAME_REDIRECT_URL
+                    }`,
+                    '_self'
+                  );
+                }}
               />
               <LoginButton
                 text="Connect with Apple Music"
                 icon="/apple_music.png"
-                onClick={() => selectAppleMusic(props.selectService, props.history)}
+                onClick={() => {
+                  localStorage.setItem('service', 'appleMusic');
+                  window.MusicKit.configure({
+                    developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
+                    app: {
+                      name: 'Album Hangman',
+                      build: '2018.29.11'
+                    }
+                  });
+                  const musicKit = window.MusicKit.getInstance();
+                  musicKit.authorize().then(() => {
+                    history.push('/game/');
+                  });
+                }}
               />
             </React.Fragment>
           )}

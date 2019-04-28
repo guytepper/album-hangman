@@ -17,7 +17,7 @@ Hangman game for music lovers, using the Spotify & Apple Music APIs.
 6. In the next dialog - _"Are you developing a commercial integration?"_ - Press **No**.
 7. Tick all the checkboxes in the final dialog, and press **Submit**.
 8. Press **Edit Settings** and add `http://localhost:3000/game/` to the **Redirect URIs** section and press **Save**.
-9. Copy the **Client ID** and paste it to `.env.local` file, to the `REACT_APP_SPOTIFY_ID` variable.
+9. Copy the **Client ID** and paste it to `.env.local` file, to the `REACT_APP_SPOTIFY_ID` variable, and Change `REACT_APP_GAME_REDIRECT_URL` to `http://localhost:3000/game/`.
 10. Run `yarn start` to start the dev server.
 
 ---
