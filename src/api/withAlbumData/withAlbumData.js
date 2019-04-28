@@ -35,6 +35,11 @@ function withAlbumData(Component) {
           break;
         case 'cache':
           this.loadFromCache();
+          window.ga('send', 'event', {
+            eventCategory: 'Game Action',
+            eventAction: 'Progress',
+            eventLabel: 'Loaded from Cache'
+          });
           break;
         default:
           history.push('/');
