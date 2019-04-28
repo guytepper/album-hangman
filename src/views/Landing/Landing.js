@@ -98,7 +98,7 @@ function Landing(props) {
                   });
                   const musicKit = window.MusicKit.getInstance();
                   musicKit.authorize().then(() => {
-                    history.push('/game/');
+                    props.history.push('/game/');
                   });
                 }}
               />
