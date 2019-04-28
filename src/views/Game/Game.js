@@ -80,15 +80,15 @@ class Game extends Component {
       if (currentGame.status === 'LOST') {
         window.ga('send', 'event', {
           eventCategory: 'Game Action',
-          eventAction: 'Guess',
-          eventLabel: 'Wrong Guess'
+          eventAction: 'Round End',
+          eventLabel: 'Lose'
         });
         await this.props.moveFirstAlbumToArrayEnd();
       } else if (currentGame.status === 'WON') {
         window.ga('send', 'event', {
           eventCategory: 'Game Action',
-          eventAction: 'Guess',
-          eventLabel: 'Correct Guess'
+          eventAction: 'Round End',
+          eventLabel: 'Win'
         });
         await this.props.moveAlbumToGuessedArray();
       }
