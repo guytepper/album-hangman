@@ -70,7 +70,14 @@ class Game extends Component {
       if (currentGame.status === 'LOST') {
         currentGame.revealHiddenWord();
       }
+
       this.forceUpdate();
+
+      // TODO: Add wrong / correct guess.
+      window.ga('send', 'event', {
+        eventCategory: 'Game Action',
+        eventAction: 'Guess'
+      });
     }
   };
 
