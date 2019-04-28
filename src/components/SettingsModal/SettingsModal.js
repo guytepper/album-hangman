@@ -31,7 +31,17 @@ function SettingsModal({ resetGameProgress, setSettingsDisplay }) {
           Reset Progress
         </Button>
         {displayShareBtn && (
-          <Button type="info" onClick={() => navigator.share(shareInfo)}>
+          <Button
+            type="info"
+            onClick={() => {
+              navigator.share(shareInfo).then(() => {
+                window.ga('send', 'event', {
+                  eventCategory: 'Game Action',
+                  eventAction: 'Share'
+                });
+              });
+            }}
+          >
             Share
           </Button>
         )}
