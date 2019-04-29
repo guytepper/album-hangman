@@ -4,14 +4,13 @@ import LoginButton from '../../components/LoginButton';
 import { getSavedAlbums, deleteSavedAlbums } from '../../utils';
 import './Landing.css';
 
-ReactGA.pageview('/');
-
 function Landing(props) {
   const imageElm = useRef(null);
   const [hasProgress, setHasProgress] = useState(false);
   const [pendingAlbums] = getSavedAlbums();
 
   useEffect(() => {
+    ReactGA.pageview('/');
     localStorage.setItem('service', 'none');
   }, []);
 
