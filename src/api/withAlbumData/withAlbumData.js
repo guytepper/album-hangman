@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Sentry from '@sentry/browser';
 import ReactGA from 'react-ga';
 import queryString from 'query-string';
 import { getAlbums } from '../api';
@@ -45,6 +46,13 @@ function withAlbumData(Component) {
         default:
           history.push('/');
       }
+    }
+
+    componentDidCatch(error, errorInfo) {
+      Sentry.withScope(scope => {
+        scope.setExtras(errorInfo);
+        Sentry.captureException(error);
+      });
     }
 
     /**
