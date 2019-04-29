@@ -70,9 +70,6 @@ class Game extends Component {
       }
 
       this.forceUpdate();
-
-      // TODO: Add wrong / correct guess.
-      ReactGA.event({ category: 'Game Action', action: 'Guess' });
     }
   };
 
