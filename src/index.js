@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga';
 import './index.css';
 import App from './App';
 import { AppContainer } from 'react-hot-loader';
+
+ReactGA.initialize('UA-18040964-8');
 
 const render = Component => {
   ReactDOM.render(

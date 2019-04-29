@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import Hangman from 'hangman-game-engine';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import LoadingComponent from '../Loading';
@@ -24,10 +25,7 @@ class Game extends Component {
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyboardPress);
-    if (window.ga) {
-      window.ga('set', 'page');
-      window.ga('send', 'pageview', window.location.pathname);
-    }
+    ReactGA.pageview('/game/');
   }
 
   componentWillUnmount() {
@@ -74,10 +72,7 @@ class Game extends Component {
       this.forceUpdate();
 
       // TODO: Add wrong / correct guess.
-      window.ga('send', 'event', {
-        eventCategory: 'Game Action',
-        eventAction: 'Guess'
-      });
+      ReactGA.event({ category: 'Game Action', action: 'Guess' });
     }
   };
 
@@ -85,18 +80,10 @@ class Game extends Component {
     try {
       const { currentGame } = this.state;
       if (currentGame.status === 'LOST') {
-        window.ga('send', 'event', {
-          eventCategory: 'Game Action',
-          eventAction: 'Round End',
-          eventLabel: 'Lose'
-        });
+        ReactGA.event({ category: 'Game Action', action: 'Round End', label: 'Lose' });
         await this.props.moveFirstAlbumToArrayEnd();
       } else if (currentGame.status === 'WON') {
-        window.ga('send', 'event', {
-          eventCategory: 'Game Action',
-          eventAction: 'Round End',
-          eventLabel: 'Win'
-        });
+        ReactGA.event({ category: 'Game Action', action: 'Round End', label: 'Win' });
         await this.props.moveAlbumToGuessedArray();
       }
 
