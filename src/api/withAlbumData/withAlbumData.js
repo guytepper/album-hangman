@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import queryString from 'query-string';
 import { getAlbums } from '../api';
 import { getSavedAlbums, updateSavedAlbums, resetProgress } from '../../utils';
@@ -35,6 +36,11 @@ function withAlbumData(Component) {
           break;
         case 'cache':
           this.loadFromCache();
+          ReactGA.event({
+            category: 'Game Action',
+            action: 'Progress',
+            label: 'Loaded from Cache'
+          });
           break;
         default:
           history.push('/');

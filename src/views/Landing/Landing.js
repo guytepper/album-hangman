@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactGA from 'react-ga';
 import LoginButton from '../../components/LoginButton';
 import { getSavedAlbums, deleteSavedAlbums } from '../../utils';
 import './Landing.css';
@@ -9,6 +10,7 @@ function Landing(props) {
   const [pendingAlbums] = getSavedAlbums();
 
   useEffect(() => {
+    ReactGA.pageview('/');
     localStorage.setItem('service', 'none');
   }, []);
 
@@ -18,7 +20,7 @@ function Landing(props) {
     }
   });
 
-  /* Safari (both iOS & OS X) doesn't display the image correctly on initial launch. 
+  /* Safari (both iOS & OS X) doesn't display the image correctly on initial launch.
      Loading the image using JavaScript fixes the issue. */
   useEffect(() => {
     const albumsImage = new Image();

@@ -1,3 +1,5 @@
+import ReactGA from 'react-ga';
+
 /**
  * Check if a string is an alphabetical character
  */
@@ -88,6 +90,7 @@ function getSavedAlbums() {
 
 function deleteSavedAlbums() {
   localStorage.clear();
+  ReactGA.event({ category: 'Landing Action', action: 'Delete Albums' });
 }
 
 function resetProgress() {
@@ -98,6 +101,7 @@ function resetProgress() {
   localStorage.clear();
   localStorage.setItem('pendingAlbums', JSON.stringify(allAlbums));
   localStorage.setItem('guessedAlbums', JSON.stringify([]));
+  ReactGA.event({ category: 'Game Action', action: 'Reset Progress' });
 }
 
 export {

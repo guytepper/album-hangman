@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import classNames from 'classnames';
 import Modal from '../Modal';
 import Button from '../Button';
@@ -31,7 +32,12 @@ function SettingsModal({ resetGameProgress, setSettingsDisplay }) {
           Reset Progress
         </Button>
         {displayShareBtn && (
-          <Button type="info" onClick={() => navigator.share(shareInfo)}>
+          <Button
+            type="info"
+            onClick={() => {
+              navigator.share(shareInfo).then(() => ReactGA.event({ category: 'Game Action', action: 'Share' }));
+            }}
+          >
             Share
           </Button>
         )}

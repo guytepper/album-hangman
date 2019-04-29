@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import Hangman from 'hangman-game-engine';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import LoadingComponent from '../Loading';
@@ -24,10 +25,7 @@ class Game extends Component {
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyboardPress);
-    if (window.ga) {
-      window.ga('set', 'page');
-      window.ga('send', 'pageview', window.location.pathname);
-    }
+    ReactGA.pageview('/game/');
   }
 
   componentWillUnmount() {
@@ -70,6 +68,7 @@ class Game extends Component {
       if (currentGame.status === 'LOST') {
         currentGame.revealHiddenWord();
       }
+
       this.forceUpdate();
     }
   };
@@ -78,8 +77,10 @@ class Game extends Component {
     try {
       const { currentGame } = this.state;
       if (currentGame.status === 'LOST') {
+        ReactGA.event({ category: 'Game Action', action: 'Round End', label: 'Lose' });
         await this.props.moveFirstAlbumToArrayEnd();
       } else if (currentGame.status === 'WON') {
+        ReactGA.event({ category: 'Game Action', action: 'Round End', label: 'Win' });
         await this.props.moveAlbumToGuessedArray();
       }
 
