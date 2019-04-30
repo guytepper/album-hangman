@@ -50,7 +50,7 @@ class Game extends Component {
     const { key } = event;
 
     if (isAlphabetical(key) && this.isGameActive()) {
-      this.handleLetterPress(key);
+      this.handleLetterPress(key.toUpperCase());
     }
 
     // Allow starting a new game when the current game has ended and ENTER key has been pressed.
