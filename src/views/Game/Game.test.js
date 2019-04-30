@@ -63,8 +63,11 @@ it('handles key press correctly', () => {
   jest.runAllTimers();
 
   // Click the 't' key
-  map.keydown({ which: 84 });
+  map.keydown({ key: 't' });
   expect(wrapper.state().currentGame.hiddenWord).toContain('T');
+  // Wrongs guess
+  map.keydown({ key: 'c' });
+  expect(wrapper.state().currentGame.failedLetters).toContain('C');
 });
 
 it('handles letter press correctly', () => {

@@ -12,7 +12,7 @@ import GameHeader from '../../components/GameHeader';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import EndModal from '../../components/EndModal';
 
-import { isKeyCodeAlphabetical } from '../../utils';
+import { isAlphabetical } from '../../utils';
 import withAlbumsData from '../../api/withAlbumData';
 import './Game.css';
 
@@ -47,15 +47,14 @@ class Game extends Component {
   }
 
   handleKeyboardPress = event => {
-    const keyCode = event.which;
+    const { key } = event;
 
-    if (isKeyCodeAlphabetical(keyCode) && this.isGameActive()) {
-      const letter = String.fromCharCode(keyCode);
-      this.handleLetterPress(letter);
+    if (isAlphabetical(key) && this.isGameActive()) {
+      this.handleLetterPress(key.toUpperCase());
     }
 
     // Allow starting a new game when the current game has ended and ENTER key has been pressed.
-    if (keyCode === 13 && this.gameEnd()) {
+    if (key === 'Enter' && this.gameEnd()) {
       this.startNewGame();
     }
   };
