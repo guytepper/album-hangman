@@ -11,13 +11,6 @@ function isAlphabetical(str) {
 }
 
 /**
- * Checks if the pressed key is alphabetical
- */
-function isKeyCodeAlphabetical(keyCode) {
-  return (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122);
-}
-
-/**
  * Get a random number between min & max.
  */
 function getRandomInt(min, max) {
@@ -106,7 +99,6 @@ function resetProgress() {
 
 export {
   isAlphabetical,
-  isKeyCodeAlphabetical,
   getRandomInt,
   splitArrayWords,
   shuffleArray,
