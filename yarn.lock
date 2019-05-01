@@ -1746,8 +1746,8 @@ ajv@^6.0.1, ajv@^6.1.0, ajv@^6.5.3, ajv@^6.5.5, ajv@^6.9.1:
     uri-js "^4.2.2"
 
 album-name-normalizer@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/album-name-normalizer/-/album-name-normalizer-1.0.0.tgz#b68714d1eb7710fdb1ca9616e299258721217dce"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/album-name-normalizer/-/album-name-normalizer-1.0.1.tgz#769f9c026c5dd19241fc0461f6e5af3f5ca77250"
 
 alphanum-sort@^1.0.0:
   version "1.0.2"
