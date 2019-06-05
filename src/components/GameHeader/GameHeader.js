@@ -26,4 +26,4 @@ function GameHeader(props) {
   );
 }
 
-export default GameHeader;
+export default React.memo(GameHeader);

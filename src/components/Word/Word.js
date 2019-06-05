@@ -21,4 +21,4 @@ function Word({ hiddenLetters }) {
   return <div className="hidden-album-name">{words}</div>;
 }
 
-export default Word;
+export default React.memo(Word);

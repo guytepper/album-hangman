@@ -19,4 +19,4 @@ function Progress({ progress, total }) {
   );
 }
 
-export default Progress;
+export default React.memo(Progress);

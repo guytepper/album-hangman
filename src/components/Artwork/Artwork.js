@@ -18,4 +18,4 @@ function Artwork({ img, blurLevel, gameEnd }) {
   );
 }
 
-export default Artwork;
+export default React.memo(Artwork);

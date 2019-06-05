@@ -30,4 +30,4 @@ function Hearts({ lives }) {
   );
 }
 
-export default Hearts;
+export default React.memo(Hearts);

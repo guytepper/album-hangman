@@ -40,7 +40,7 @@ function gameEndMessage(gameStatus) {
   return null;
 }
 
-class Keyboard extends React.Component {
+class Keyboard extends React.PureComponent {
   getButton = letter => {
     return (
       <button key={letter} onClick={() => this.handlePress(letter)} className="keyboard-btn">
@@ -65,6 +65,7 @@ class Keyboard extends React.Component {
   };
 
   render() {
+    console.log(';)))');
     return (
       <div className="keyboard-container">
         {this.props.gameStatus !== 'IN_PROGRESS' && (
