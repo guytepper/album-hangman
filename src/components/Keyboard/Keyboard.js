@@ -65,7 +65,6 @@ class Keyboard extends React.PureComponent {
   };
 
   render() {
-    console.log(';)))');
     return (
       <div className="keyboard-container">
         {this.props.gameStatus !== 'IN_PROGRESS' && (
