@@ -205,3 +205,10 @@ it('removes keydown listener on unmount', () => {
   wrapper.unmount();
   expect('keydown' in map).toBeFalsy();
 });
+
+it('displays dying heart on failed guess', () => {
+  // Wrong guess
+  mainWrapper.instance().handleLetterPress('b');
+  console.log(mainWrapper.find('.heart-grey').length);
+  expect(mainWrapper.find('.heart-grey')).toHaveLength(1);
+});
