@@ -6,7 +6,7 @@ import './GameHeader.css';
 function GameHeader(props) {
   return (
     <div className="game-top-bar">
-      <Hearts lives={4 - props.currentGame.failedGuesses} />
+      <Hearts lives={4 - props.failedGuesses} />
       <ProgressBar type="thin" total={props.totalAlbums} progress={props.albumsProgress} />
       <div className="game-top-bar-settings-icon" onClick={() => props.setSettingsDisplay(true)}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
