@@ -209,6 +209,6 @@ it('removes keydown listener on unmount', () => {
 it('displays dying heart on failed guess', () => {
   // Wrong guess
   mainWrapper.instance().handleLetterPress('b');
-  console.log(mainWrapper.find('.heart-grey').length);
+  mainWrapper.update();
   expect(mainWrapper.find('.heart-grey')).toHaveLength(1);
 });
