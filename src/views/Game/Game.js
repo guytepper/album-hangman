@@ -138,7 +138,7 @@ class Game extends Component {
         )}
         <GameHeader
           setSettingsDisplay={this.setSettingsDisplay}
-          currentGame={this.state.currentGame}
+          failedGuesses={this.state.currentGame.failedGuesses}
           totalAlbums={this.props.totalAlbums}
           albumsProgress={this.props.progress}
         />
