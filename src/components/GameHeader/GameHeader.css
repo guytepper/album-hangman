@@ -24,7 +24,10 @@
   stroke: rgb(207, 207, 207);
 }
 
-/* Change game top bar to use grid layout instead of flex, which will improve it's layout accuracy. */
+/* Change game top bar to use grid layout instead of flex, if the browser supports it.
+   This will increase it's layout accuracy.
+*/
+
 @supports (display: grid) {
   .game-top-bar {
     display: grid;
