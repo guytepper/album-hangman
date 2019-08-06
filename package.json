@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@sentry/browser": "^5.1.1",
+    "@sentry/browser": "5.5.0",
     "album-name-normalizer": "^1.0.0",
     "classnames": "^2.2.6",
     "hangman-game-engine": "1.1.3",
