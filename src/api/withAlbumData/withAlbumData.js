@@ -50,7 +50,10 @@ function withAlbumData(Component) {
 
     componentDidCatch(error, errorInfo) {
       Sentry.withScope(scope => {
-        scope.setExtras(errorInfo);
+        scope.setExtras({
+          errorInfo,
+          state: this.state
+        });
         Sentry.captureException(error);
       });
     }
