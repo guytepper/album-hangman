@@ -87,22 +87,23 @@ function Landing(props) {
                 }}
               />
               <LoginButton
+                style={{ cursor: 'not-allowed', filter: 'opacity(0.3)' }}
                 text="Connect with Apple Music"
                 icon="/apple_music.png"
-                onClick={() => {
-                  localStorage.setItem('service', 'appleMusic');
-                  window.MusicKit.configure({
-                    developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
-                    app: {
-                      name: 'Album Hangman',
-                      build: '2018.29.11'
-                    }
-                  });
-                  const musicKit = window.MusicKit.getInstance();
-                  musicKit.authorize().then(() => {
-                    props.history.push('/game/');
-                  });
-                }}
+                // onClick={() => {
+                //   localStorage.setItem('service', 'appleMusic');
+                //   window.MusicKit.configure({
+                //     developerToken: process.env.REACT_APP_MUSICKIT_TOKEN,
+                //     app: {
+                //       name: 'Album Hangman',
+                //       build: '2018.29.11'
+                //     }
+                //   });
+                //   const musicKit = window.MusicKit.getInstance();
+                //   musicKit.authorize().then(() => {
+                //     props.history.push('/game/');
+                //   });
+                // }}
               />
             </React.Fragment>
           )}
