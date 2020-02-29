@@ -18,7 +18,7 @@ function Landing(props) {
     if (pendingAlbums.length > 0) {
       setHasProgress(true);
     }
-  });
+  }, [pendingAlbums.length]);
 
   /* Safari (both iOS & OS X) doesn't display the image correctly on initial launch.
      Loading the image using JavaScript fixes the issue. */
